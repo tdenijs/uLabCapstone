@@ -58,7 +58,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [React.js](https://facebook.github.io/react/) - UI framework used
+* [React.js](https://facebook.github.io/react/) - UI framework
 * [Redux.js](http://redux.js.org/) - State Management
 * [Node.js](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 * [Express.js](http://expressjs.com/) - Web framework for Node.js
@@ -83,7 +83,6 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 ## Sponsors and Mentors
 
 Samuel Sennott, (uLab) samuel.sennott@gmail.com 954-980-5778
-Pete Bataillon, peter26@pdx.edu  (uLab RA) (402) 578-8869
 Juan Fernandez, juan@7apps.com (7/Apps) (407)342-1202
 
 

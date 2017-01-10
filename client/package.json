@@ -4,8 +4,8 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "devDependencies": {
-    "enzyme": "^2.4.1",
-    "react-addons-test-utils": "^15.4.0",
+    "enzyme": "^2.7.0",
+    "react-addons-test-utils": "^15.4.1",
     "react-scripts": "0.8.4"
   },
   "dependencies": {

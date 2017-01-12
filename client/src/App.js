@@ -6,6 +6,29 @@ import Word from './components/Word.js';
 
 
 class App extends Component {
+    constructor(props) {
+        super(props)
+
+        this.grid = this.grid.bind(this);
+
+    }
+
+    grid() {
+        return (
+            <div id="grid">
+                <div id="coreVocabulary">
+                    <div id="type" >
+                        <div id="wordButton" style={{ margin: "auto", width: "100px", border: "solid", color: "blue" }}>
+                            <Word />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        );
+    }
+
+
   render() {
     return (
       <div className="App">
@@ -19,15 +42,7 @@ class App extends Component {
         <p className="App-intro">
           You can find the API server at localhost:3001.
         </p>
-          <div id="grid">
-              <div id="coreVocabulary">
-                  <div id="type" >
-                      <div id="wordButton" style={{ margin: "auto", width: "100px", border: "solid", color: "blue" }}>
-                          <Word />
-                      </div>
-                  </div>
-              </div>
-          </div>
+          {this.grid()}
 
       </div>
     );

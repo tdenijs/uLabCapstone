@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
+import SpeechBar from './components/SpeechBar.js';
 
 class App extends Component {
   render() {
@@ -17,8 +18,11 @@ class App extends Component {
         <p className="App-intro">
           You can find the API server at localhost:3001.
         </p>
+
+        <SpeechBar />
       </div>
-    );
+
+  );
   }
 }
 

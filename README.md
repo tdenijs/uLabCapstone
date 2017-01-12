@@ -47,6 +47,7 @@ You can view the client server at `localhost:3000` and the API server at `localh
 Below is the directory structure. Everything in the client folder is the front-end UI from create-react-app. The additional files outside of the client folder are the back-end REST API Server. The client and the API server have their own `package.json` file where they define their specific dependencies, therefore they can be broken apart and ran as separate apps.
 ```
 |_client
+    |-__test__
     |-public
     |-src
     |-package.json

@@ -7,11 +7,11 @@ class SpeechBar extends Component {
 
         this.messageString = this.messageString.bind(this);
         this.speakMessage = this.speakMessage.bind(this);
-        this.handleBackSpace = this.handleBackSpace.bind(this);
         this.handleClear = this.handleClear.bind(this);
+        this.handleBackSpace = this.handleBackSpace.bind(this);
 
         this.state = {
-            message: ['I', 'Love', 'you'], // array: message appearing in the message window
+            message: ['I', 'Love', 'You'], // array: message appearing in the message window
         }
     }
 
@@ -41,22 +41,14 @@ class SpeechBar extends Component {
     handleBackSpace(e) {
         e.preventDefault();
 
-        // var updateMsg = this.state.message.pop();
-        // this.setState({ message: updateMsg });
+        // this.setState({
+        //     message: this.state.message.pop()
+        // });
 
-
-        // if(this.state.message.length >= 0) {
-        //     debugger
-        //     var newMessage = this.state.message.pop()
-        //     this.setState({message: newMessage});
-        //     console.log('after backspace ' + this.state.message);
-        // }
-
-        this.setState(state => {
-            this.state.message.pop();
-            return {items: this.state.message};
-        })
-
+        let last = this.state.message.length - 1;
+        this.setState({
+            message: this.state.message.filter((_, i) => i !== last)
+        });
     }
 
 
@@ -69,13 +61,11 @@ class SpeechBar extends Component {
 
     render() {
 
-        var text = this.messageString()
-
         return (
             <div id="speechBar" style={{ margin: "auto", border: "solid", color: "green" }}>
                 <button onClick={this.speakMessage} > Play </button>
-                <div id="messageWindow">{ text } </div>
-                <button > BackSpace</button>
+                <div id="messageWindow">{ this.messageString() } </div>
+                <button onClick={this.handleBackSpace}> BackSpace</button>
                 <button onClick={this.handleClear} >Clear</button>
             </div>
 

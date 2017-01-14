@@ -5,7 +5,7 @@ class SettingsBar extends Component {
 
         return (
             <div>
-                <select name="languageDropDown" defaultValue={this.props.selectedLanguage} onChange={this.props.updateLanguage} >
+                <select defaultValue={this.props.selectedLanguage} onChange={this.props.updateLanguage} >
                     <option value="English">English</option>
                     <option value="Spanish">Spanish</option>
                     <option value="French">French</option>

@@ -57,7 +57,7 @@ class App extends Component {
                     You can find the API server at localhost:3001.
                 </p>
                 <SpeechBar />
-                <button onClick={this.settingsToggle}>Settings</button>
+                <button className="settingsButton" onClick={this.settingsToggle}>Settings</button>
                 <div>
                     {
                         this.state.settingsBarVisible

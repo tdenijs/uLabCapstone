@@ -8,7 +8,6 @@ class SpeechBar extends Component {
         this.messageString = this.messageString.bind(this);
         this.speakMessage = this.speakMessage.bind(this);
         this.handleClear = this.handleClear.bind(this);
-        this.handleBackSpace = this.handleBackSpace.bind(this);
 
         this.state = {
             message: ['I', 'Love', 'You'], // array: message appearing in the message window
@@ -37,22 +36,6 @@ class SpeechBar extends Component {
     }
 
 
-
-    handleBackSpace(e) {
-        e.preventDefault();
-
-        // this.setState({
-        //     message: this.state.message.pop()
-        // });
-
-        let last = this.state.message.length - 1;
-        this.setState({
-            message: this.state.message.filter((_, i) => i !== last)
-        });
-    }
-
-
-
     handleClear() {
         this.setState({message: ""});
     }
@@ -65,7 +48,7 @@ class SpeechBar extends Component {
             <div id="speechBar" style={{ margin: "auto", border: "solid", color: "green" }}>
                 <button onClick={this.speakMessage} > Play </button>
                 <div id="messageWindow">{ this.messageString() } </div>
-                <button onClick={this.handleBackSpace}> BackSpace</button>
+                <button> BackSpace</button>
                 <button onClick={this.handleClear} >Clear</button>
             </div>
 

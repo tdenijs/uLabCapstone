@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import SpeechBar from './components/SpeechBar.js';
 import Word from './components/Word.js';
+import SettingsBar from './components/SettingsBar';
 
 
 class App extends Component {
@@ -11,7 +12,12 @@ class App extends Component {
         super(props)
 
         this.grid = this.grid.bind(this);
+        this.settingsToggle = this.settingsToggle.bind(this);
 
+        this.state = {
+            selectedLanguage: "English",
+            settingsBarVisible: false
+        }
     }
 
     grid() {
@@ -29,26 +35,42 @@ class App extends Component {
         );
     }
 
+    updateLanguage(e) {
+        this.setState({selectedLanguage: e.target.value});
+    }
 
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p className="App-intro">
-          You can find the API server at localhost:3001.
-        </p>
-          <SpeechBar />
-          {this.grid()}
-      </div>
+    settingsToggle() {
+        this.setState({settingsBarVisible: !(this.state.settingsBarVisible)});
+    }
 
-  );
-  }
+    render() {
+        return (
+            <div className="App">
+                <div className="App-header">
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <h2>Welcome to React</h2>
+                </div>
+                <p className="App-intro">
+                    To get started, edit <code>src/App.js</code> and save to reload.
+                </p>
+                <p className="App-intro">
+                    You can find the API server at localhost:3001.
+                </p>
+                <SpeechBar />
+                <button className="settingsButton" onClick={this.settingsToggle}>Settings</button>
+                <div>
+                    {
+                        this.state.settingsBarVisible
+                            ? <SettingsBar selectedLanguage={this.state.selectedLanguage} updateLanguage={this.updateLanguage.bind(this)} />
+                            : null
+                    }
+                </div>
+                <p> Global Language: {this.state.selectedLanguage} </p>
+                {this.grid()}
+            </div>
+
+        );
+    }
 }
 
 export default App;

@@ -10,7 +10,7 @@ class SpeechBar extends Component {
         this.handleClear = this.handleClear.bind(this);
 
         this.state = {
-            message: ['I', 'Love', 'You'], // array: message appearing in the message window
+            message: ['I', 'love', 'you'], // array: message appearing in the message window
         }
     }
 
@@ -18,7 +18,7 @@ class SpeechBar extends Component {
 
     //reduces the message array into one string (improves interpretation of speech)
     messageString() {
-        if(this.state.message.length > 1)
+        if(this.state.message.length >= 1)
             return this.state.message.join(' ');
     }
 
@@ -29,7 +29,9 @@ class SpeechBar extends Component {
 
         var msg = new SpeechSynthesisUtterance();
 
-        if (this.state.message !== '') { msg.text = this.messageString(); }
+        console.log(this.state.message);
+
+        if (this.state.message.length >= 1) { msg.text = this.messageString(); }
         else { msg.text= "The message window is empty." }
 
         window.speechSynthesis.speak(msg);
@@ -37,7 +39,7 @@ class SpeechBar extends Component {
 
 
     handleClear() {
-        this.setState({message: ""});
+        this.setState({message: []});
     }
 
 

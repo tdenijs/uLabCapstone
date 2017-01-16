@@ -8,15 +8,23 @@ it('SettingsBar renders without crashing', () => {
 
 describe("Test suite for mounted SettingsBar", () => {
     let bar;
-    let onUpdate;
+    let onChange;
+    let onClick;
 
     beforeEach(() => {
-        onUpdate = jest.fn();
-        bar = mount(<SettingsBar selectedLanguage="English" updateLanguage={onUpdate} />);
+        onChange = jest.fn();
+        onClick = jest.fn();
+        bar = mount(<SettingsBar selectedLanguage="English" updateLanguage={onChange}
+                    settingsLocked={false} lockToggle={onClick}/>);
     });
 
     it('SettingsBar calls updateLanguage function when the drop down menu changes', () => {
         bar.find('select').simulate('change');
-        expect(onUpdate).toBeCalled();
+        expect(onChange).toBeCalled();
+    });
+
+    it('SettingsBar calls lockToggle function when the lock checkbox is clicked', () => {
+        bar.find('input').simulate('click');
+        expect(onClick).toBeCalled();
     });
 });

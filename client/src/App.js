@@ -61,9 +61,11 @@ class App extends Component {
         return (
             <div className="App">
                 <SpeechBar />
-                <button className="settingsButton" onClick={this.settingsToggle}>Settings</button>
-                <div>{settingsBar}</div>
-                <p> Global Language: {this.state.selectedLanguage} </p>
+                <div id="settings" style={{ margin: "auto", border: "solid", color: "red" }}>
+                    <button className="settingsButton" onClick={this.settingsToggle}>Settings</button>
+                    <div>{settingsBar}</div>
+                    <p> Global Language: {this.state.selectedLanguage} </p>
+                </div>
                 {this.grid()}
             </div>
 

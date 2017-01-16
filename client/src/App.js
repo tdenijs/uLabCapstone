@@ -13,7 +13,6 @@ class App extends Component {
 
         this.grid = this.grid.bind(this);
         this.settingsToggle = this.settingsToggle.bind(this);
-        this.resizeButton = this.resizeButton.bind(this);
 
         this.state = {
             selectedLanguage: "English",
@@ -53,6 +52,7 @@ class App extends Component {
         this.setState({settingsLocked: !(this.state.settingsLocked)});
     }
 
+    // Callback function passed to the SettingsBar to update the App's buttonSize state variable
     resizeButton(e) {
         this.setState({buttonSize: e.target.value});
     }
@@ -71,7 +71,7 @@ class App extends Component {
                 <div id="settings" style={{ margin: "auto", border: "solid", color: "red" }}>
                     <button className="settingsButton" onClick={this.settingsToggle}>Settings</button>
                     <div>{settingsBar}</div>
-                    <p> Button Size: {this.state.buttonSize} </p>
+                    <p> Global Button Size: {this.state.buttonSize} </p>
                     <p> Global Language: {this.state.selectedLanguage} </p>
                 </div>
                 {this.grid()}

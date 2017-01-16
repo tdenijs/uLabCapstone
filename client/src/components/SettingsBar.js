@@ -10,22 +10,26 @@ class SettingsBar extends Component {
 
         return (
             <div>
-                <select defaultValue={this.props.selectedLanguage} onChange={this.props.updateLanguage}
-                        disabled={disabled}>
-                    <option value="English">English</option>
-                    <option value="Spanish">Spanish</option>
-                    <option value="French">French</option>
-                    <option value="German">German</option>
-                </select>
                 <p>
                     <input type="checkbox" id="lockCheck" onChange={this.props.lockToggle} checked={checked}/>
                     Lock Settings
                 </p>
-                <p>
+                <form>
+                    <label>Language: </label>
+                    <select defaultValue={this.props.selectedLanguage} onChange={this.props.updateLanguage}
+                            disabled={disabled}>
+                        <option value="English">English</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="French">French</option>
+                        <option value="German">German</option>
+                    </select>
+                </form>
+                <form>
+                    <label>Button Size</label>
+                    <output>{this.props.buttonSize}</output>
                     <input type="range" value={this.props.buttonSize} onChange={this.props.resizeButton}
                            min="0" max="10" disabled={disabled} style={{margin: "auto", width: "200px"}}/>
-                    Button Size
-                </p>
+                </form>
             </div>
         );
     }

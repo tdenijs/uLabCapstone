@@ -21,6 +21,11 @@ class SettingsBar extends Component {
                     <input type="checkbox" id="lockCheck" onChange={this.props.lockToggle} checked={checked}/>
                     Lock Settings
                 </p>
+                <p>
+                    <input type="range" value={this.props.buttonSize} onChange={this.props.resizeButton}
+                           min="0" max="10" disabled={disabled} style={{margin: "auto", width: "200px"}}/>
+                    Button Size
+                </p>
             </div>
         );
     }
@@ -29,6 +34,7 @@ class SettingsBar extends Component {
 SettingsBar.propTypes = {
     updateLanguage: React.PropTypes.func,
     lockToggle: React.PropTypes.func,
+    resizeButton: React.PropTypes.func,
 };
 
 export default SettingsBar;

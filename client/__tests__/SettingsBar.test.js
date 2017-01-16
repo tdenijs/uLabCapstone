@@ -13,7 +13,8 @@ describe("Test suite for mounted SettingsBar", () => {
     beforeEach(() => {
         onChange = jest.fn();
         bar = mount(<SettingsBar selectedLanguage="English" updateLanguage={onChange}
-                    settingsLocked={false} lockToggle={onChange}/>);
+                    settingsLocked={false} lockToggle={onChange}
+                    buttonSize="5" resizeButton={onChange}/>);
     });
 
     it('SettingsBar calls updateLanguage function when the drop down menu changes', () => {
@@ -22,7 +23,12 @@ describe("Test suite for mounted SettingsBar", () => {
     });
 
     it('SettingsBar calls lockToggle function when the lock checkbox is clicked', () => {
-        bar.find('input').simulate('change');
+        bar.find('input').first().simulate('change');
+        expect(onChange).toBeCalled();
+    });
+
+    it('SettingsBar calls reSize function when the button size slider is changed', () => {
+        bar.find('input').at(1).simulate('change');
         expect(onChange).toBeCalled();
     });
 });

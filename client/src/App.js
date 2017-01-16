@@ -13,11 +13,13 @@ class App extends Component {
 
         this.grid = this.grid.bind(this);
         this.settingsToggle = this.settingsToggle.bind(this);
+        this.resizeButton = this.resizeButton.bind(this);
 
         this.state = {
             selectedLanguage: "English",
             settingsBarVisible: false,
-            settingsLocked: false
+            settingsLocked: false,
+            buttonSize: "5"
         }
     }
 
@@ -51,11 +53,16 @@ class App extends Component {
         this.setState({settingsLocked: !(this.state.settingsLocked)});
     }
 
+    resizeButton(e) {
+        this.setState({buttonSize: e.target.value});
+    }
+
     render() {
         // Render the SettingsBar only if the settingsBarVisible state variable is true
         let settingsBar = this.state.settingsBarVisible
             ? <SettingsBar selectedLanguage={this.state.selectedLanguage} updateLanguage={this.updateLanguage.bind(this)}
-                           settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle.bind(this)} />
+                           settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle.bind(this)}
+                           buttonSize={this.state.buttonSize} resizeButton={this.resizeButton.bind(this)}/>
             : null;
 
         return (
@@ -64,6 +71,7 @@ class App extends Component {
                 <div id="settings" style={{ margin: "auto", border: "solid", color: "red" }}>
                     <button className="settingsButton" onClick={this.settingsToggle}>Settings</button>
                     <div>{settingsBar}</div>
+                    <p> Button Size: {this.state.buttonSize} </p>
                     <p> Global Language: {this.state.selectedLanguage} </p>
                 </div>
                 {this.grid()}

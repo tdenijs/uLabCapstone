@@ -21,6 +21,10 @@ describe('Test suite for mounted App', () => {
     expect(app.state().settingsBarVisible).toEqual(false);
   });
 
+  it('SettingsBar is initially unlocked', () => {
+    expect(app.state().settingsLocked).toEqual(false);
+  });
+
   it('Settings button shows SettingsBar when clicked', () => {
     const settingsButton = app.find('.settingsButton').first();
     settingsButton.simulate('click');
@@ -30,5 +34,23 @@ describe('Test suite for mounted App', () => {
   it('SpeechBar is visible', () => {
     const speechBar = app.find('SpeechBar').first();
     expect(speechBar).toBeDefined();
+  });
+
+  it('SettingsBar remains locked after opening then locking then closing and reopening', () => {
+    // Open the SettingsBar
+    const settingsButton = app.find('.settingsButton').first();
+    settingsButton.simulate('click');
+
+    // Check the checkbox
+    const lockCheck = app.find('#lockCheck').first();
+    lockCheck.simulate('change');
+
+    expect(app.state().settingsLocked).toEqual(true);
+
+    // Close the SettingsBar and reopen it
+    settingsButton.simulate('click');
+    settingsButton.simulate('click');
+
+    expect(app.state().settingsLocked).toEqual(true);
   });
 });

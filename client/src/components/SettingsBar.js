@@ -3,10 +3,10 @@ import React, {Component} from 'react';
 class SettingsBar extends Component {
     render() {
         // Disable the dropdown menu if the settingsLocked prop is true
-        let disabled = this.props.settingsLocked ? 'disabled' : null;
+        let disabled = this.props.settingsLocked ? 'disabled' : '';
 
         // Check the checkbox if the settingsLocked prop is true
-        let checked = this.props.settingsLocked ? 'checked' : null;
+        let checked = this.props.settingsLocked ? 'checked' : '';
 
         return (
             <div>
@@ -18,7 +18,7 @@ class SettingsBar extends Component {
                     <option value="German">German</option>
                 </select>
                 <p>
-                    <input type="checkbox" onClick={this.props.lockToggle} checked={checked}/>
+                    <input type="checkbox" id="lockCheck" onChange={this.props.lockToggle} checked={checked}/>
                     Lock Settings
                 </p>
             </div>

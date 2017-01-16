@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { Navbar, Jumbotron, Button } from 'react-bootstrap';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import SpeechBar from './components/SpeechBar.js';
 import Word from './components/Word.js';
@@ -9,14 +9,15 @@ import SettingsBar from './components/SettingsBar';
 
 class App extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.grid = this.grid.bind(this);
         this.settingsToggle = this.settingsToggle.bind(this);
 
         this.state = {
             selectedLanguage: "English",
-            settingsBarVisible: false
+            settingsBarVisible: false,
+            settingsLocked: false
         }
     }
 
@@ -35,36 +36,33 @@ class App extends Component {
         );
     }
 
+    // Callback function passed to the SettingsBar to update the App's selectedLanguage state variable
     updateLanguage(e) {
         this.setState({selectedLanguage: e.target.value});
     }
 
+    // Toggles the settingsBarVisible state variable when the settingsButton is clicked
     settingsToggle() {
         this.setState({settingsBarVisible: !(this.state.settingsBarVisible)});
     }
 
+    // Callback function passed to the SettingsBar to update the App's settingsLocked state variable
+    lockToggle() {
+        this.setState({settingsLocked: !(this.state.settingsLocked)});
+    }
+
     render() {
+        // Render the SettingsBar only if the settingsBarVisible state variable is true
+        let settingsBar = this.state.settingsBarVisible
+            ? <SettingsBar selectedLanguage={this.state.selectedLanguage} updateLanguage={this.updateLanguage.bind(this)}
+                           settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle.bind(this)} />
+            : null;
+
         return (
             <div className="App">
-                <div className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h2>Welcome to React</h2>
-                </div>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
-                <p className="App-intro">
-                    You can find the API server at localhost:3001.
-                </p>
                 <SpeechBar />
                 <button className="settingsButton" onClick={this.settingsToggle}>Settings</button>
-                <div>
-                    {
-                        this.state.settingsBarVisible
-                            ? <SettingsBar selectedLanguage={this.state.selectedLanguage} updateLanguage={this.updateLanguage.bind(this)} />
-                            : null
-                    }
-                </div>
+                <div>{settingsBar}</div>
                 <p> Global Language: {this.state.selectedLanguage} </p>
                 {this.grid()}
             </div>

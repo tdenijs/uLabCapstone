@@ -16,7 +16,9 @@ class App extends Component {
 
         this.state = {
             selectedLanguage: "English",
-            settingsBarVisible: false
+            settingsBarVisible: false,
+            wordtext: "Love",
+            wordsymbol: "Symbol"
         }
     }
 
@@ -26,7 +28,7 @@ class App extends Component {
                 <div id="coreVocabulary">
                     <div id="type" >
                         <div id="wordButton" style={{ margin: "auto", width: "100px", border: "solid", color: "blue" }}>
-                            <Word />
+                            <Word wordtext={this.state.wordtext} wordsymbol={this.state.wordsymbol}/>
                         </div>
                     </div>
                 </div>

@@ -98,8 +98,66 @@ INSERT INTO ListWords (word_id, list_id)
    ((SELECT W.word_id from Words W WHERE word = 'Off'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
    ((SELECT W.word_id from Words W WHERE word = 'When'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
    ((SELECT W.word_id from Words W WHERE word = 'Where'), (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
-   ((SELECT W.word_id from Words W WHERE word = 'Who'), (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
-   ((SELECT W.word_id from Words W WHERE word = 'Why'), (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb'));
+   ((SELECT W.word_id from Words W WHERE word = 'Who'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
+   ((SELECT W.word_id from Words W WHERE word = 'Why'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb'));
+
+-- add title for adverb list
+INSERT INTO Lists (list_title)
+  VALUES ('Exclamation');  
+
+-- add adverb list to core vocabulary grid
+INSERT INTO GridLists (grid_id, list_id)
+  VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'Core Vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'Exclamation'));
+  
+-- add words for adverb list
+INSERT INTO Words (word)
+  VALUES ('Uh oh');
+
+-- add words to adverbs list
+INSERT INTO ListWords (word_id, list_id)
+  VALUES 
+   ((SELECT W.word_id from Words W WHERE word = 'Uh oh'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'Exclamation'));
+
+   
+-- add title for adverb list
+INSERT INTO Lists (list_title)
+  VALUES ('Noun');  
+
+-- add adverb list to core vocabulary grid
+INSERT INTO GridLists (grid_id, list_id)
+  VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'Core Vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'Noun'));
+  
+-- add words for adverb list
+INSERT INTO Words (word)
+  VALUES ('Color'),('Word');
+
+-- add words to adverbs list
+INSERT INTO ListWords (word_id, list_id)
+  VALUES 
+   ((SELECT W.word_id from Words W WHERE word = 'Color'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'Noun')),
+   ((SELECT W.word_id from Words W WHERE word = 'Word'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'Noun'));
+   
+   
+-- add title for preposition list
+INSERT INTO Lists (list_title)
+  VALUES ('Preposition');  
+
+-- add adverb list to core vocabulary grid
+INSERT INTO GridLists (grid_id, list_id)
+  VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'Core Vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'Preposition'));
+  
+-- add words for adverb list
+INSERT INTO Words (word)
+  VALUES ('In'),('On'),('Out');
+
+INSERT INTO ListWords (word_id, list_id)
+  VALUES 
+   ((SELECT W.word_id from Words W WHERE word = 'In'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'Preposition')),
+   ((SELECT W.word_id from Words W WHERE word = 'On'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'Preposition')),
+   ((SELECT W.word_id from Words W WHERE word = 'Out'), (SELECT L.list_id from Lists L WHERE L.list_title = 'Preposition'));
+
+
+   
 
 
 

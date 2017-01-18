@@ -1,8 +1,14 @@
-
+/**
+ * sql file to initialize the ulabdb
+ * version 1
+ * christopher monk
+ *
+**/
+ 
 DROP DATABASE IF EXISTS ulabdb;
 CREATE DATABASE ulabdb;
 
-/* Connect to Database */
+/* Connect to database */
 \c ulabdb
 
 /* Create tables */
@@ -68,6 +74,32 @@ INSERT INTO ListWords (word_id, list_id)
    ((SELECT W.word_id from Words W WHERE word = 'Sad'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'Adjective')),
    ((SELECT W.word_id from Words W WHERE word = 'Scary'), (SELECT L.list_id from Lists L WHERE L.list_title = 'Adjective')),
    ((SELECT W.word_id from Words W WHERE word = 'Silly'), (SELECT L.list_id from Lists L WHERE L.list_title = 'Adjective'));
+
+
+-- add title for adverb list
+INSERT INTO Lists (list_title)
+  VALUES ('Adverb');  
+
+-- add adverb list to core vocabulary grid
+INSERT INTO GridLists (grid_id, list_id)
+  VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'Core Vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'Adverb'));
+  
+-- add words for adverb list
+INSERT INTO Words (word)
+  VALUES ('Here'),('How'),('More'),('Not'), ('Off'),('When'),('Where'),('Who'), ('Why');
+
+-- add words to adverbs list
+INSERT INTO ListWords (word_id, list_id)
+  VALUES 
+   ((SELECT W.word_id from Words W WHERE word = 'Here'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
+   ((SELECT W.word_id from Words W WHERE word = 'How'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
+   ((SELECT W.word_id from Words W WHERE word = 'More'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
+   ((SELECT W.word_id from Words W WHERE word = 'Not'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
+   ((SELECT W.word_id from Words W WHERE word = 'Off'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
+   ((SELECT W.word_id from Words W WHERE word = 'When'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
+   ((SELECT W.word_id from Words W WHERE word = 'Where'), (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
+   ((SELECT W.word_id from Words W WHERE word = 'Who'), (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb')),
+   ((SELECT W.word_id from Words W WHERE word = 'Why'), (SELECT L.list_id from Lists L WHERE L.list_title = 'Adverb'));
 
 
 

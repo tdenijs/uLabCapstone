@@ -18,7 +18,9 @@ class App extends Component {
             selectedLanguage: "English",
             settingsBarVisible: false,
             settingsLocked: false,
-            buttonSize: "5"
+            buttonSize: "5",
+            wordtext: "Love",
+            wordsymbol: "Symbol"
         }
     }
 
@@ -28,7 +30,7 @@ class App extends Component {
                 <div id="coreVocabulary">
                     <div id="type" >
                         <div id="wordButton" style={{ margin: "auto", width: "100px", border: "solid", color: "blue" }}>
-                            <Word />
+                            <Word wordtext={this.state.wordtext} wordsymbol={this.state.wordsymbol}/>
                         </div>
                     </div>
                 </div>

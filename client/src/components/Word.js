@@ -5,18 +5,27 @@ class Word extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-            text: "Love",
-            symbol: "Symbol"
-        }
+        this.speak = this.speak.bind(this);
+        this.clicked = this.clicked.bind(this);
+
     }
 
+    speak (){
+      var word = new SpeechSynthesisUtterance(this.props.wordtext);
+      window.speechSynthesis.speak(word);
+    }
+
+    clicked (){
+        alert("this is just a test");
+    }
     render() {
        return (
            <div>
-               {this.state.symbol}
+               <div>
+                  {this.props.wordsymbol}
+               </div>
                 <br/>
-                {this.state.text}
+                <button onClick={this.speak}>{this.props.wordtext}</button>
             </div>
        );
     }

@@ -22,9 +22,8 @@ class App extends Component {
             settingsLocked: false,
             buttonSize: "5",
             wordtext: "Love",
-            wordsymbol: "Symbol"
-            speechBarMessage: ['I', 'love', 'you'], // array: message appearing in the SpeechBar message window
-
+            wordsymbol: "Symbol",
+            speechBarMessage: ['I', 'love', 'unicorns', 'and', 'chocolate'], // array: message appearing in the SpeechBar message window
         }
     }
 
@@ -45,7 +44,7 @@ class App extends Component {
 
     // Callback function passed to the SpeechBar clear the speechBarMessage when the clear button is clicked
     handleClearMessage() {
-      this.setState({message: []});
+      this.setState({speechBarMessage: []});
     }
 
     // Callback function passed to the SettingsBar to update the App's selectedLanguage state variable
@@ -78,7 +77,10 @@ class App extends Component {
 
         return (
             <div className="App">
-                <SpeechBar message={this.state.speechBarMessage}/>
+                <SpeechBar
+                    message={this.state.speechBarMessage}
+                    handleClearMessage={this.handleClearMessage.bind(this)}/>
+
                 <div id="settings" style={{ margin: "auto", border: "solid", color: "red" }}>
                     <button className="settingsButton" onClick={this.settingsToggle}>Settings</button>
                     <div>{settingsBar}</div>

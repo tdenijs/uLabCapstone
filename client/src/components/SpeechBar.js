@@ -7,7 +7,6 @@ class SpeechBar extends Component {
 
         this.messageString = this.messageString.bind(this);
         this.speakMessage = this.speakMessage.bind(this);
-
     }
 
 
@@ -35,8 +34,6 @@ class SpeechBar extends Component {
 
 
 
-
-
     render() {
 
         return (
@@ -44,11 +41,17 @@ class SpeechBar extends Component {
                 <button onClick={this.speakMessage} > Play </button>
                 <div id="messageWindow">{ this.messageString() } </div>
                 <button> BackSpace</button>
-                <button onClick={this.handleClear} >Clear</button>
+                <button onClick={this.props.handleClearMessage} >Clear</button>
             </div>
 
         );
     }
 }
+
+
+SpeechBar.propTypes = {
+  handleClearMessage: React.PropTypes.func,
+};
+
 
 export default SpeechBar;

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Word extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
 
         this.speak = this.speak.bind(this);
         this.clicked = this.clicked.bind(this);
@@ -13,6 +13,7 @@ class Word extends Component {
     speak (){
       var word = new SpeechSynthesisUtterance(this.props.wordtext);
       window.speechSynthesis.speak(word);
+        this.props.add(this.props.word);
     }
 
     clicked (){
@@ -31,5 +32,9 @@ class Word extends Component {
     }
 
 }
+
+Word.propTypes = {
+    add: React.PropTypes.func,
+};
 
 export default Word;

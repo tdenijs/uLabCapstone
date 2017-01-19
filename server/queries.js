@@ -4,10 +4,13 @@ const options = {
   promiseLib: promise
 };
 
+//============================================
+// Setup DB connection
+//============================================
+
 const pgp = require('pg-promise')(options);
-const username = " ";
-const password = " ";
-const connectionString = 'postgres://' + username + ':' + password + '@localhost:5432/ulabdb';
+const dbc = require('./.dbconfig-sample');
+const connectionString = 'postgres://' + dbc.user + ':' + dbc.password + '@' + dbc.hostname + ':' + dbc.port +'/' + dbc.dbname;
 const db = pgp(connectionString);
 
 //============================================

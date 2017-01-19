@@ -6,19 +6,17 @@ class Word extends Component {
         super(props);
 
         this.speak = this.speak.bind(this);
-        this.clicked = this.clicked.bind(this);
 
     }
 
     speak (){
-      var word = new SpeechSynthesisUtterance(this.props.text);
-      window.speechSynthesis.speak(word);
+        var word = new SpeechSynthesisUtterance(this.props.text);
+        window.speechSynthesis.speak(word);
+
+        // Add word to speech window
         this.props.add(this.props.text);
     }
 
-    clicked (){
-        alert("this is just a test");
-    }
     render() {
        return (
            <div style={{ margin: "auto", width: "100px", border: "solid", color: "purple" }}>

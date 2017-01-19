@@ -15,6 +15,10 @@ class App extends Component {
         this.grid = this.grid.bind(this);
         this.settingsToggle = this.settingsToggle.bind(this);
         this.handleClearMessage = this.handleClearMessage.bind(this);
+        this.updateLanguage = this.updateLanguage.bind(this);
+        this.lockToggle = this.lockToggle.bind(this);
+        this.resizeButton = this.resizeButton.bind(this);
+        this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
 
 
       this.state = {
@@ -88,9 +92,9 @@ class App extends Component {
     render() {
         // Render the SettingsBar only if the settingsBarVisible state variable is true
         let settingsBar = this.state.settingsBarVisible
-            ? <SettingsBar selectedLanguage={this.state.selectedLanguage} updateLanguage={this.updateLanguage.bind(this)}
-                           settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle.bind(this)}
-                           buttonSize={this.state.buttonSize} resizeButton={this.resizeButton.bind(this)}/>
+            ? <SettingsBar selectedLanguage={this.state.selectedLanguage} updateLanguage={this.updateLanguage}
+                           settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
+                           buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}/>
             : null;
 
         return (
@@ -105,7 +109,7 @@ class App extends Component {
                     <p> Global Button Size: {this.state.buttonSize} </p>
                     <p> Global Language: {this.state.selectedLanguage} </p>
                 </div>
-                <Grid words={this.state.wordArray} add={this.addWordToSpeechBar.bind(this)}/>
+                <Grid words={this.state.wordArray} add={this.addWordToSpeechBar}/>
             </div>
 
         );

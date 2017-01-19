@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import Word from './Word'
 
 class Column extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div style={{ margin: "auto", border: "solid", width: "300px", color: "pink" }}>

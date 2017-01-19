@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import Column from './Column'
 
 class Grid extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return(
             <div style={{ margin: "auto", border: "solid", color: "blue" }}>

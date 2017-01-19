@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import Column from './Column'
 
+import React, {Component} from 'react';
+import Column from './Column'
+
 class Grid extends Component {
     render() {
         return(

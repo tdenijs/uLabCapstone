@@ -8,11 +8,13 @@ class Column extends Component {
 
     render() {
         return (
-            <div style={{ margin: "auto", border: "solid", color: "pink" }}>
+            <div style={{ margin: "auto", border: "solid", width: "300px", color: "pink" }}>
                 {
-                    this.props.words.map((id, word, symbol) =>
-                        <Word key={id} wordText={word} wordSymbol={symbol} add={this.props.add}/>
-                    )
+                    this.props.words.map(({id, word, symbol}) => {
+                        return (
+                            <Word key={id} text={word} symbol={symbol} add={this.props.add}/>
+                        );
+                    })
                 }
             </div>
         );

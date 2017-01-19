@@ -8,7 +8,7 @@ class Grid extends Component {
 
     render() {
         return(
-            <div style={{ margin: "auto", border: "solid", color: "purple" }}>
+            <div style={{ margin: "auto", border: "solid", color: "blue" }}>
                 <Column words={this.props.words} add={this.props.add}/>
             </div>
         );

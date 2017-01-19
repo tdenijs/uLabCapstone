@@ -78,7 +78,7 @@ class App extends Component {
     // Callback function passed to the Word Component to add a word to the speechBarMessage
     addWordToSpeechBar(word) {
         this.setState({
-            wordArray: [
+            speechBarMessage: [
                 ...this.state.speechBarMessage,
                 word
             ]

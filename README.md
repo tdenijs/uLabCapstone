@@ -79,10 +79,15 @@ psql -U <username> -f server/ulabdb.sql
 ```
 For our team the username should be postgres.
 
-Define your username and password in `server/server.js` for Postgres.
+Set your values for connecting to the database in `.dbcondig-sample` for Postgres.
 ```js
-const username = "";
-const password = "";
+const dbconfig = {
+  hostname: "localhost",
+  port    : "5432",
+  dbname  :"ulabdb",
+  user    : "",
+  password: ""
+}
 ```
 
 

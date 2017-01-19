@@ -11,9 +11,9 @@ class Word extends Component {
     }
 
     speak (){
-      var word = new SpeechSynthesisUtterance(this.props.wordtext);
+      var word = new SpeechSynthesisUtterance(this.props.text);
       window.speechSynthesis.speak(word);
-        this.props.add(this.props.word);
+        this.props.add(this.props.text);
     }
 
     clicked (){
@@ -21,12 +21,12 @@ class Word extends Component {
     }
     render() {
        return (
-           <div>
+           <div style={{ margin: "auto", width: "100px", border: "solid", color: "purple" }}>
                <div>
-                  {this.props.wordsymbol}
+                  {this.props.symbol}
                </div>
                 <br/>
-                <button onClick={this.speak}>{this.props.wordtext}</button>
+                <button onClick={this.speak}>{this.props.text}</button>
             </div>
        );
     }

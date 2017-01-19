@@ -22,9 +22,9 @@
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "babel-node server.js",
+    "server": "babel-node ./server/server.js",
     "client": "babel-node ./client/start-client.js",
-    "api": "nodemon server.js",
+    "api": "nodemon ./server/server.js",
     "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1"
   },
   "devDependencies": {

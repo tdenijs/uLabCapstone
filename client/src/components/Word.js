@@ -9,14 +9,14 @@ class Word extends Component {
     }
 
     speak (){
-        // Add text of the Word to speechBar
+        // Add word to speech window
         this.props.add(this.props.text);
 
         // Speak the text of the Word
         var spokenWord = new SpeechSynthesisUtterance(this.props.text);
         window.speechSynthesis.speak(spokenWord);
     }
-
+    
     render() {
         return (
             <div className="Word" style={{ margin: "auto", width: "100px", border: "solid", color: "blue" }}>

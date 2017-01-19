@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import SpeechBar from './components/SpeechBar.js';
-import Word from './components/Word.js';
 import SettingsBar from './components/SettingsBar';
 import Grid from './components/Grid';
 

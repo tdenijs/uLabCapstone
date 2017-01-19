@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import Word from './Word'
 
-import React, {Component} from 'react';
-import Word from './Word'
-
 class Column extends Component {
     render() {
         return (

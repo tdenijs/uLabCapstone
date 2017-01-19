@@ -2,13 +2,9 @@ import React, {Component} from 'react';
 import Word from './Word'
 
 class Column extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
-            <div style={{ margin: "auto", border: "solid", width: "300px", color: "pink" }}>
+            <div>
                 {
                     this.props.words.map(({id, word, symbol}) => {
                         return (
@@ -24,6 +20,10 @@ class Column extends Component {
 Column.propTypes = {
     words: React.PropTypes.array,
     add: React.PropTypes.func,
+};
+
+Column.defaultProps = {
+    words: []
 };
 
 export default Column;

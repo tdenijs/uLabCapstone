@@ -12,9 +12,12 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.grid = this.grid.bind(this);
         this.settingsToggle = this.settingsToggle.bind(this);
         this.handleClearMessage = this.handleClearMessage.bind(this);
+        this.updateLanguage = this.updateLanguage.bind(this);
+        this.lockToggle = this.lockToggle.bind(this);
+        this.resizeButton = this.resizeButton.bind(this);
+        this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
         this.handleBackButton = this.handleBackButton.bind(this);
 
 
@@ -23,8 +26,6 @@ class App extends Component {
             settingsBarVisible: false,
             settingsLocked: false,
             buttonSize: "5",
-            wordtext: "Love",
-            wordsymbol: "Symbol",
             wordArray: [
                 {id: 1, word: "I", symbol: "I Symbol"},
                 {id: 2, word: "love", symbol: "love Symbol"},
@@ -34,21 +35,6 @@ class App extends Component {
             ],
             speechBarMessage: ['I', 'love', 'unicorns', 'and', 'chocolate'], // array: message appearing in the SpeechBar message window
         }
-    }
-
-    grid() {
-        return (
-            <div id="grid">
-                <div id="coreVocabulary">
-                    <div id="type" >
-                        <div id="wordButton" style={{ margin: "auto", width: "100px", border: "solid", color: "blue" }}>
-                            <Word wordtext={this.state.wordtext} wordsymbol={this.state.wordsymbol}/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        );
     }
 
     // Callback function passed to the SpeechBar back button removed last item in message
@@ -99,17 +85,17 @@ class App extends Component {
     render() {
         // Render the SettingsBar only if the settingsBarVisible state variable is true
         let settingsBar = this.state.settingsBarVisible
-            ? <SettingsBar selectedLanguage={this.state.selectedLanguage} updateLanguage={this.updateLanguage.bind(this)}
-                           settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle.bind(this)}
-                           buttonSize={this.state.buttonSize} resizeButton={this.resizeButton.bind(this)}/>
+            ? <SettingsBar selectedLanguage={this.state.selectedLanguage} updateLanguage={this.updateLanguage}
+                           settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
+                           buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}/>
             : null;
 
         return (
             <div className="App">
                 <SpeechBar
                     message={this.state.speechBarMessage}
-                    handleClearMessage={this.handleClearMessage.bind(this)}
-                    handleBackButton={this.handleBackButton.bind(this)}
+                    handleClearMessage={this.handleClearMessage}
+                    handleBackButton={this.handleBackButton}
                 />
 
                 <div id="settings" style={{ margin: "auto", border: "solid", color: "red" }}>
@@ -118,7 +104,7 @@ class App extends Component {
                     <p> Global Button Size: {this.state.buttonSize} </p>
                     <p> Global Language: {this.state.selectedLanguage} </p>
                 </div>
-                <Grid words={this.state.wordArray} add={this.addWordToSpeechBar.bind(this)}/>
+                <Grid words={this.state.wordArray} add={this.addWordToSpeechBar}/>
             </div>
 
         );

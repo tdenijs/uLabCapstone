@@ -11,12 +11,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 #### Prerequisites
 
-Make sure you have Node installed (v6.9.2 or later)
+Make sure you have **Node** installed (v6.9.2 or later)
 
 ```
 node -v
 ```
-If you do not have Node installed yous should do that now.
+If you do not have Node installed you should do that now.
+
+You also need **PostgreSQL** v9.3.15 installed to use a local version of the DB
 
 #### Install Dependencies
 
@@ -31,7 +33,7 @@ npm install
 ```
 #### Starting the servers
 
-To start the client and API Server (note: the client server will auto-restart when changes are made but the API server will not)
+To start the client and API Server run the following from the root directory. You can also use this command in the client directory to just run the UI. (note: the client server will auto-restart when changes are made but the API server will not)
 ```
 npm start
 ```
@@ -52,14 +54,37 @@ Below is the directory structure. Everything in the client folder is the front-e
     |-src
     |-package.json
     |-start-client.js
+|_server
+    |-queries.js
+    |-server.js
+    |-ulabdb.sql
 |_package.json
-|_server.js
+
+... and a few other things
 
 ```
 
 ## Client-API communication
 
  [This](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/) tutorial was followed to create and connect the API server. Requests from the client are proxied to the API server. There is some info at [this point](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#the-apps-react-components) of the tutorial about making calls to the API from the client
+
+## Using a DB in development
+
+The `ulabdb.sql` file can be used to create a local database for development.
+
+Create a local database by running the following from the root directory.
+```
+psql -U <username> -f server/ulabdb.sql
+
+```
+For our team the username should be postgres.
+
+Define your username and password in `server/server.js` for Postgres.
+```js
+const username = "";
+const password = "";
+```
+
 
 <!---## Testing
 

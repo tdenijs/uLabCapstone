@@ -29,8 +29,9 @@ if (process.env.NODE_ENV === 'production') {
 // Routes
 //===============================================
 
-router.get('/api/words', db.getAllWords);
+router.get('/words', db.getAllWords);
 
+app.use('/api', router);
 /*
 app.get('/', function(req, res) {
   res.send('Welcome to the API Server!')

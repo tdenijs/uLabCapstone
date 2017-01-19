@@ -55,6 +55,7 @@ Below is the directory structure. Everything in the client folder is the front-e
     |-package.json
     |-start-client.js
 |_server
+    |-.dbconfig-sample.js
     |-queries.js
     |-server.js
     |-ulabdb.sql

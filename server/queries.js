@@ -9,7 +9,7 @@ const options = {
 //============================================
 
 const pgp = require('pg-promise')(options);
-const dbc = require('./.dbconfig-sample');
+const dbc = require('./.dbconfig');
 const connectionString = 'postgres://' + dbc.user + ':' + dbc.password + '@' + dbc.hostname + ':' + dbc.port +'/' + dbc.dbname;
 const db = pgp(connectionString);
 

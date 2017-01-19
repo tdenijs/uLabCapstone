@@ -14,6 +14,7 @@ class App extends Component {
         this.grid = this.grid.bind(this);
         this.settingsToggle = this.settingsToggle.bind(this);
         this.handleClearMessage = this.handleClearMessage.bind(this);
+        this.handleBackButton = this.handleBackButton.bind(this);
 
 
       this.state = {
@@ -41,6 +42,16 @@ class App extends Component {
 
         );
     }
+
+    // Callback function passed to the SpeechBar back button removed last item in message
+    handleBackButton() {
+      if(this.state.speechBarMessage !== [] ) {
+        this.state.speechBarMessage.splice(this.state.speechBarMessage.length - 1, 1);
+        this.setState({speechBarMessage: this.state.speechBarMessage});
+        console.log(this.state.speechBarMessage)
+      }
+    }
+
 
     // Callback function passed to the SpeechBar clear the speechBarMessage when the clear button is clicked
     handleClearMessage() {
@@ -79,7 +90,9 @@ class App extends Component {
             <div className="App">
                 <SpeechBar
                     message={this.state.speechBarMessage}
-                    handleClearMessage={this.handleClearMessage.bind(this)}/>
+                    handleClearMessage={this.handleClearMessage.bind(this)}
+                    handleBackButton={this.handleBackButton.bind(this)}
+                />
 
                 <div id="settings" style={{ margin: "auto", border: "solid", color: "red" }}>
                     <button className="settingsButton" onClick={this.settingsToggle}>Settings</button>

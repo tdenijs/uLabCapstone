@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 // import logo from './logo.svg';
 import './App.css';
 import SpeechBar from './components/SpeechBar.js';
@@ -81,11 +81,15 @@ class App extends Component {
                     message={this.state.speechBarMessage}
                     handleClearMessage={this.handleClearMessage.bind(this)}/>
 
-                <div id="settings" style={{ margin: "auto", border: "solid", color: "red" }}>
-                    <button className="settingsButton" onClick={this.settingsToggle}>Settings</button>
-                    <div>{settingsBar}</div>
-                    <p> Global Button Size: {this.state.buttonSize} </p>
-                    <p> Global Language: {this.state.selectedLanguage} </p>
+                <div id="settings" style={{ margin: "auto"}}>
+                     <p>   
+			<button className="settingsButton" onClick={this.settingsToggle}>Settings</button>
+		     </p>
+		     <p>
+                    	<div>{settingsBar}</div>
+                    	<p> Global Button Size: {this.state.buttonSize} </p>
+                    	<p> Global Language: {this.state.selectedLanguage} </p>
+		     </p>
                 </div>
                 {this.grid()}
             </div>

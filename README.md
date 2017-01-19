@@ -80,7 +80,7 @@ psql -U <username> -f server/ulabdb.sql
 ```
 For our team the username should be postgres.
 
-Set your values for connecting to the database in `.dbcondig-sample` for Postgres.
+Copy `.dbconfig-sample.js` and save it as `.dbconfig.js`. This file will be ignored so that your credentials will not be pushed to the repo. Set your values for connecting to the database in `.dbconfig.js` for Postgres.
 ```js
 const dbconfig = {
   hostname: "localhost",

@@ -5,8 +5,8 @@ const options = {
 };
 
 const pgp = require('pg-promise')(options);
-const username = "postgres";
-const password = "portland";
+const username = " ";
+const password = " ";
 const connectionString = 'postgres://' + username + ':' + password + '@localhost:5432/ulabdb';
 const db = pgp(connectionString);
 

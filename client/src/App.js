@@ -5,6 +5,7 @@ import './App.css';
 import SpeechBar from './components/SpeechBar.js';
 import Word from './components/Word.js';
 import SettingsBar from './components/SettingsBar';
+import Grid from './components/Grid';
 
 
 class App extends Component {
@@ -23,6 +24,13 @@ class App extends Component {
             buttonSize: "5",
             wordtext: "Love",
             wordsymbol: "Symbol",
+            wordArray: [
+                {id: 1, word: "I", symbol: "I Symbol"},
+                {id: 2, word: "love", symbol: "love Symbol"},
+                {id: 3, word: "unicorns", symbol: "unicorns Symbol"},
+                {id: 4, word: "and", symbol: "and Symbol"},
+                {id: 5, word: "chocolate", symbol: "chocolate Symbol"}
+            ],
             speechBarMessage: ['I', 'love', 'unicorns', 'and', 'chocolate'], // array: message appearing in the SpeechBar message window
         }
     }
@@ -67,6 +75,16 @@ class App extends Component {
         this.setState({buttonSize: e.target.value});
     }
 
+    // Callback function passed to the Word Component to add a word to the speechBarMessage
+    addWordToSpeechBar(word) {
+        this.setState({
+            wordArray: [
+                ...this.state.speechBarMessage,
+                word
+            ]
+        });
+    }
+
     render() {
         // Render the SettingsBar only if the settingsBarVisible state variable is true
         let settingsBar = this.state.settingsBarVisible
@@ -87,7 +105,7 @@ class App extends Component {
                     <p> Global Button Size: {this.state.buttonSize} </p>
                     <p> Global Language: {this.state.selectedLanguage} </p>
                 </div>
-                {this.grid()}
+                <Grid words={this.state.wordArray} add={this.addWordToSpeechBar.bind(this)}/>
             </div>
 
         );

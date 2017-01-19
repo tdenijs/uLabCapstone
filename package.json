@@ -13,18 +13,20 @@
     "babel-core": "6.14.0",
     "babel-preset-es2015": "6.14.0",
     "babel-preset-stage-0": "6.5.0",
+    "bluebird": "^3.3.4",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "4.13.3",
     "fs": "0.0.2",
     "multer": "^1.2.1",
+    "pg-promise": "^3.2.3",
     "sql.js": "^0.3.2"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "babel-node server.js",
+    "server": "babel-node ./server/server.js",
     "client": "babel-node ./client/start-client.js",
-    "api": "nodemon server.js",
+    "api": "nodemon ./server/server.js",
     "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1"
   },
   "devDependencies": {

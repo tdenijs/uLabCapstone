@@ -37,14 +37,14 @@ class SpeechBar extends Component {
     render() {
 
         return (
-            <div id="speechBar">
-		<ButtonGroup>
+          <div id="speechBar">
+            <ButtonGroup>
                     <button onClick={this.speakMessage} > Play </button>
                     <span id="messageWindow" style={{border: "solid", color:"black"}}>{ this.messageString() }</span>
-                    <button>BackSpace</button>
+                    <button onClick={this.props.handleBackButton}>BackSpace</button>
                     <button onClick={this.props.handleClearMessage}>Clear</button>
-		</ButtonGroup>
-            </div>
+            </ButtonGroup
+          </div>
         );
     }
 }
@@ -52,6 +52,7 @@ class SpeechBar extends Component {
 
 SpeechBar.propTypes = {
   handleClearMessage: React.PropTypes.func,
+  handleBackButton: React.PropTypes.func,
 };
 
 

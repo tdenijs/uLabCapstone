@@ -53,4 +53,22 @@ describe('Test suite for mounted App', () => {
 
     expect(app.state().settingsLocked).toEqual(true);
   });
+
+  it('Clear button results in empty speechBarMessage', () => {
+    const clearButton = app.find('button').at(2);
+    clearButton.simulate('click');
+    expect(app.state().speechBarMessage).toEqual([]);
+  });
+
+  // // SpeechSynthesisUtterance breaks this
+  // it('Clicking on a word adds its text to the SpeechBar', () => {
+  //   // Clear the window
+  //   const clearButton = app.find('button').at(2);
+  //   clearButton.simulate('click');
+  //
+  //   // Click a word button
+  //   const wordButton = app.find('.WordButton').first();
+  //   wordButton.simulate('click');
+  //   expect(app.state().speechBarMessage).toContain("I");
+  // });
 });

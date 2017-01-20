@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import SpeechBar from './components/SpeechBar.js';
-import Word from './components/Word.js';
 import SettingsBar from './components/SettingsBar';
 import Grid from './components/Grid';
 
@@ -12,7 +11,6 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.grid = this.grid.bind(this);
         this.settingsToggle = this.settingsToggle.bind(this);
         this.handleClearMessage = this.handleClearMessage.bind(this);
         this.updateLanguage = this.updateLanguage.bind(this);
@@ -26,8 +24,6 @@ class App extends Component {
             settingsBarVisible: false,
             settingsLocked: false,
             buttonSize: "5",
-            wordtext: "Love",
-            wordsymbol: "Symbol",
             wordArray: [
                 {id: 1, word: "I", symbol: "I Symbol"},
                 {id: 2, word: "love", symbol: "love Symbol"},
@@ -37,21 +33,6 @@ class App extends Component {
             ],
             speechBarMessage: ['I', 'love', 'unicorns', 'and', 'chocolate'], // array: message appearing in the SpeechBar message window
         }
-    }
-
-    grid() {
-        return (
-            <div id="grid">
-                <div id="coreVocabulary">
-                    <div id="type" >
-                        <div id="wordButton" style={{ margin: "auto", width: "100px", border: "solid", color: "blue" }}>
-                            <Word wordtext={this.state.wordtext} wordsymbol={this.state.wordsymbol}/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        );
     }
 
     // Callback function passed to the SpeechBar clear the speechBarMessage when the clear button is clicked
@@ -80,11 +61,11 @@ class App extends Component {
     }
 
     // Callback function passed to the Word Component to add a word to the speechBarMessage
-    addWordToSpeechBar(word) {
+    addWordToSpeechBar(text) {
         this.setState({
             speechBarMessage: [
                 ...this.state.speechBarMessage,
-                word
+                text
             ]
         });
     }

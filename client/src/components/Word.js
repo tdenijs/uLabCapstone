@@ -9,7 +9,7 @@ class Word extends Component {
     }
 
     speak (){
-        // Add word to speech window
+        // Add text of the Word to speechBar
         this.props.add(this.props.text);
 
         // Speak the text of the Word

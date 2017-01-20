@@ -45,7 +45,6 @@ class App extends Component {
       }
     }
 
-
     // Callback function passed to the SpeechBar clear the speechBarMessage when the clear button is clicked
     handleClearMessage() {
       this.setState({speechBarMessage: []});
@@ -72,11 +71,11 @@ class App extends Component {
     }
 
     // Callback function passed to the Word Component to add a word to the speechBarMessage
-    addWordToSpeechBar(word) {
+    addWordToSpeechBar(text) {
         this.setState({
             speechBarMessage: [
                 ...this.state.speechBarMessage,
-                word
+                text
             ]
         });
     }

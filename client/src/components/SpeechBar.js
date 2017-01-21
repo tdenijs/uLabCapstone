@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { ButtonGroup, Row, Col } from 'react-bootstrap';
+import { ButtonGroup } from 'react-bootstrap';
 
 class SpeechBar extends Component {
     constructor(props) {

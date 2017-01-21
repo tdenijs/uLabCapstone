@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+// import { Row, Col } from 'react-bootstrap';
 // import logo from './logo.svg';
 import './App.css';
 import SpeechBar from './components/SpeechBar.js';

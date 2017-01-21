@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { ButtonGroup, Row, Col } from 'react-bootstrap';
+import { ButtonGroup } from 'react-bootstrap';
 
 class SpeechBar extends Component {
     constructor(props) {
@@ -43,7 +43,7 @@ class SpeechBar extends Component {
                     <span id="messageWindow" style={{border: "solid", color:"black"}}>{ this.messageString() }</span>
                     <button onClick={this.props.handleBackButton}>BackSpace</button>
                     <button onClick={this.props.handleClearMessage}>Clear</button>
-            </ButtonGroup
+            </ButtonGroup>
           </div>
         );
     }

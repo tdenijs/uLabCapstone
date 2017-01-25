@@ -1,0 +1,16 @@
+# dependencies
+node_modules
+
+# database connection
+.dbconfig.js
+
+# testing
+coverage
+
+# production
+client/build
+
+# misc
+.DS_Store
+.env
+npm-debug.log

@@ -104,7 +104,6 @@ const dbconfig = {
  Give an example
  ```
 
-
  ## Deployment
 
  Add additional notes about how to deploy this on a live system -->
@@ -125,11 +124,12 @@ const dbconfig = {
 * **Carson Volker** - *GitHub Repo Admin/Back-End Developer*
 * **Anton Zipper** - *Front-End Developer*
 
-## Sponsors and Mentors
+## Sponsors
 
 * **Samuel Sennott** - (uLab) samuel.sennott@gmail.com 954-980-5778
 * **Juan Fernandez** - (7/Apps) juan@7apps.com  (407)342-1202
 * [Jason Brown](http://browniefed.com/) - browniefed@gmail.com
+
 
 ## License
 

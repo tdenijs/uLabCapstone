@@ -97,14 +97,12 @@ class App extends Component {
                 />
 
                 <div id="settings" style={{ margin: "auto"}}>
-                     <p>   
-			<button className="settingsButton" onClick={this.settingsToggle}>Settings</button>
-		     </p>
-		     <p>
-                    	<div>{settingsBar}</div>
+                    <button id="settingsButton" onClick={this.settingsToggle}>Settings</button>
+                    <br/>
+                    <br/>
+                    <div>{settingsBar}</div>
                     	<p> Global Button Size: {this.state.buttonSize} </p>
                     	<p> Global Language: {this.state.selectedLanguage} </p>
-		     </p>
                 </div>
                 <Grid words={this.state.wordArray} add={this.addWordToSpeechBar}/>
             </div>

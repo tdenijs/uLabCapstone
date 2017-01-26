@@ -4,7 +4,7 @@ import Word from './Word'
 class Column extends Component {
     render() {
         return (
-            <div>
+            <div className="column">
                 {
                     this.props.words.map(({id, word, symbol}) => {
                         return (

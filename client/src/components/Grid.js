@@ -4,7 +4,7 @@ import Column from './Column'
 class Grid extends Component {
     render() {
         return(
-            <div>
+            <div id="grid">
                 <Column words={this.props.words} add={this.props.add}/>
             </div>
         );

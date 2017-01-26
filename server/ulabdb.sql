@@ -31,7 +31,8 @@ CREATE TABLE GridLists (
 CREATE TABLE Symbols (
   symbol_id SERIAL PRIMARY KEY,
   symbol_name VARCHAR,
-  symbol_path VARCHAR
+  symbol_path VARCHAR,
+  symbol_text VARCHAR
 );
 
 CREATE TABLE Words (
@@ -50,8 +51,8 @@ CREATE TABLE ListWords (
 
 -- add title for core-vocabulary grid
 INSERT INTO Grids(grid_title)
-  VALUES ('Core Vocabulary');
-
+  VALUES ('Core Vocabulary');  
+  
 -- add title for adjective list
 INSERT INTO Lists (list_title)
   VALUES ('Adjective');  
@@ -59,10 +60,23 @@ INSERT INTO Lists (list_title)
 -- add adjective list to core vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
   VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'Core Vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'Adjective'));
-  
+
+-- add symbols for adjectives 
+INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
+  VALUES ('Bad','img/bad.png','Bad Symbol'),      ('Funny','',''), 
+         ('Good','img/good.png','Good Symbol'),   ('Happy','img/happy.png','Happy Symbol'), 
+		 ('Sad','img/sad.png','Sad Symbol'),      ('Scary','img/scary.png','Scary Symbol'),
+		 ('Silly','img/silly.png','Silly Symbol');
+
 -- add words for adjective list
-INSERT INTO Words (word)
-  VALUES ('Bad'),('Funny'),('Good'),('Happy'), ('Sad'),('Scary'),('Silly');
+INSERT INTO Words (word, symbol_id)
+  VALUES ('Bad',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Bad')),
+         ('Funny', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Funny')),
+		 ('Good',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Good')),
+		 ('Happy', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Happy')), 
+		 ('Sad',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Sad')),
+		 ('Scary', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Scary')),
+		 ('Silly', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Silly'));
 
 -- add words to adjective list
 INSERT INTO ListWords (word_id, list_id)

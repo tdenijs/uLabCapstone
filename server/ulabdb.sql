@@ -138,10 +138,14 @@ INSERT INTO Lists (list_title)
 -- add adverb list to core vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
   VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'Core Vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'Exclamation'));
-  
+
+-- add symbols for exclamation
+INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
+  VALUES ('Uh Oh','img/uhoh.png','Uh Oh Symbol');   
+
 -- add words for exclamation list
-INSERT INTO Words (word)
-  VALUES ('Uh oh');
+INSERT INTO Words (word, symbol_id)
+  VALUES ('Uh Oh',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Uh Oh')),
 
 -- add words to exclamation list
 INSERT INTO ListWords (word_id, list_id)

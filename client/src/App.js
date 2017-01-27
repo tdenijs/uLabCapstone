@@ -27,11 +27,13 @@ class App extends Component {
                 {id: 1, word: "I", src: "img/I.png", alt:"I image"},
                 {id: 2, word: "see", src: "img/see.png", alt:"see image"},
                 {id: 3, word: "happy", src: "img/happy.png", alt:"happy image"},
-                {id: 4, word: "scary", src: "img/scary.png", alt:"scary image"},
-                {id: 5, word: "colors", src: "img/colors.png", alt:"colors image"}
+                {id: 4, word: "colors", src: "img/colors.png", alt:"scary image"},
+                {id: 5, word: "scary", src: "img/scary.png", alt:"colors image"}
             ],
 
-            speechBarMessage: ['I', 'see', 'colors', 'happy', 'scary' ], // array: message appearing in the SpeechBar message window
+            speechBarMessage: ['I', 'see', 'happy', 'colors', 'scary' ], // array: message appearing in the SpeechBar message window
+            messageImgs: ["img/I.png", "img/see.png", "img/happy.png", "img/colors.png", "img/scary.png", ]
+
         }
     }
 
@@ -93,6 +95,7 @@ class App extends Component {
             <div className="App">
                 <SpeechBar
                     message={this.state.speechBarMessage}
+                    messageImgs={this.state.messageImgs}
                     handleClearMessage={this.handleClearMessage}
                     handleBackButton={this.handleBackButton}/>
 

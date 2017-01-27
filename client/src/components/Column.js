@@ -8,7 +8,7 @@ class Column extends Component {
                 {
                     this.props.words.map(({id, word, src, alt}) => {
                         return (
-                            <Word key={id} text={word} src={src} alt={alt}add={this.props.add}/>
+                            <Word key={id} text={word} src={src} alt={alt} add={this.props.add}/>
                         );
                     })
                 }

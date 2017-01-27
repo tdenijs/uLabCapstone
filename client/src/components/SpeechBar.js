@@ -39,10 +39,10 @@ class SpeechBar extends Component {
         return (
           <div id="speechBar">
             <ButtonGroup>
-                    <button onClick={this.speakMessage} > Play </button>
+                    <button id="playButton" onClick={this.speakMessage} > Play </button>
                     <span id="messageWindow" style={{border: "solid", color:"black"}}>{ this.messageString() }</span>
-                    <button onClick={this.props.handleBackButton}>BackSpace</button>
-                    <button onClick={this.props.handleClearMessage}>Clear</button>
+                    <button id="backspaceButton" onClick={this.props.handleBackButton}>BackSpace</button>
+                    <button id="clearButton" onClick={this.props.handleClearMessage}>Clear</button>
             </ButtonGroup>
           </div>
         );

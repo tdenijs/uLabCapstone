@@ -20,7 +20,7 @@ class Word extends Component {
     render() {
         return (
             <div className="Word" style={{ margin: "auto", width: "100px", border: "solid", color: "blue" }}>
-                <div>
+                <div className="WordSymbol">
                     {this.props.symbol}
                 </div>
                 <br/>

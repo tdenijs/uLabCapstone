@@ -16,15 +16,14 @@ class Word extends Component {
         var spokenWord = new SpeechSynthesisUtterance(this.props.text);
         window.speechSynthesis.speak(spokenWord);
     }
-    
+
     render() {
         return (
-            <div className="Word" style={{ margin: "auto", width: "100px", border: "solid", color: "blue" }}>
+            <div className="Word" onClick={this.speak}>
                 <div className="WordSymbol">
-                    {this.props.symbol}
+                  <img src={this.props.src} alt={this.props.alt} />
                 </div>
-                <br/>
-                <button className="WordButton" onClick={this.speak}>{this.props.text}</button>
+                <div className="WordText">{this.props.text}</div>
             </div>
         );
     }

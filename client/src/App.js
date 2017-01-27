@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import { Row, Col } from 'react-bootstrap';
-// import logo from './logo.svg';
 import './App.css';
 import SpeechBar from './components/SpeechBar.js';
 import SettingsBar from './components/SettingsBar';
@@ -27,20 +25,13 @@ class App extends Component {
             buttonSize: "5",
             wordArray: [
                 {id: 1, word: "I", src: "img/I.png", alt:"I image"},
-                {id: 2, word: "colors", src: "img/colors.png", alt:"colors image"},
+                {id: 2, word: "see", src: "img/see.png", alt:"see image"},
                 {id: 3, word: "happy", src: "img/happy.png", alt:"happy image"},
                 {id: 4, word: "scary", src: "img/scary.png", alt:"scary image"},
-                {id: 5, word: "see", src: "img/see.png", alt:"see image"}
+                {id: 5, word: "colors", src: "img/colors.png", alt:"colors image"}
             ],
 
-            // wordArray: [
-            //   {id: 1, word: "I", src: "../public/img/I.png"},
-            //   {id: 2, word: "love", symbol: "love Symbol"},
-            //   {id: 3, word: "unicorns", symbol: "unicorns Symbol"},
-            //   {id: 4, word: "and", symbol: "and Symbol"},
-            //   {id: 5, word: "chocolate", symbol: "chocolate Symbol"}
-            // ],
-            speechBarMessage: ['I', 'colors', 'happy', 'scary', 'see'], // array: message appearing in the SpeechBar message window
+            speechBarMessage: ['I', 'see', 'colors', 'happy', 'scary' ], // array: message appearing in the SpeechBar message window
         }
     }
 

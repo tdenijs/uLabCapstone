@@ -6,9 +6,9 @@ class Column extends Component {
         return (
             <div className="Column">
                 {
-                    this.props.words.map(({id, word, src}) => {
+                    this.props.words.map(({id, word, src, alt}) => {
                         return (
-                            <Word key={id} text={word} src={src} add={this.props.add}/>
+                            <Word key={id} text={word} src={src} alt={alt}add={this.props.add}/>
                         );
                     })
                 }

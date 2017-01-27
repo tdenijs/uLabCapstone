@@ -26,13 +26,21 @@ class App extends Component {
             settingsLocked: false,
             buttonSize: "5",
             wordArray: [
-                {id: 1, word: "I", symbol: "I Symbol"},
-                {id: 2, word: "love", symbol: "love Symbol"},
-                {id: 3, word: "unicorns", symbol: "unicorns Symbol"},
-                {id: 4, word: "and", symbol: "and Symbol"},
-                {id: 5, word: "chocolate", symbol: "chocolate Symbol"}
+                {id: 1, word: "I", src: "img/I.png", alt:"I image"},
+                {id: 2, word: "colors", src: "img/colors.png", alt:"colors image"},
+                {id: 3, word: "happy", src: "img/happy.png", alt:"happy image"},
+                {id: 4, word: "scary", src: "img/scary.png", alt:"scary image"},
+                {id: 5, word: "see", src: "img/see.png", alt:"see image"}
             ],
-            speechBarMessage: ['I', 'love', 'unicorns', 'and', 'chocolate'], // array: message appearing in the SpeechBar message window
+
+            // wordArray: [
+            //   {id: 1, word: "I", src: "../public/img/I.png"},
+            //   {id: 2, word: "love", symbol: "love Symbol"},
+            //   {id: 3, word: "unicorns", symbol: "unicorns Symbol"},
+            //   {id: 4, word: "and", symbol: "and Symbol"},
+            //   {id: 5, word: "chocolate", symbol: "chocolate Symbol"}
+            // ],
+            speechBarMessage: ['I', 'colors', 'happy', 'scary', 'see'], // array: message appearing in the SpeechBar message window
         }
     }
 
@@ -70,6 +78,7 @@ class App extends Component {
         this.setState({buttonSize: e.target.value});
     }
 
+
     // Callback function passed to the Word Component to add a word to the speechBarMessage
     addWordToSpeechBar(text) {
         this.setState({
@@ -79,6 +88,7 @@ class App extends Component {
             ]
         });
     }
+
 
     render() {
         // Render the SettingsBar only if the settingsBarVisible state variable is true

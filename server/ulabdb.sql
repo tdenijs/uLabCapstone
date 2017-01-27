@@ -1,6 +1,6 @@
 /**
  * sql file to initialize the ulabdb
- * version 1
+ * version 1.1
  * christopher monk
  *
 **/
@@ -97,11 +97,27 @@ INSERT INTO Lists (list_title)
 -- add adverb list to core vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
   VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'Core Vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'Adverb'));
-  
--- add words for adverb list
-INSERT INTO Words (word)
-  VALUES ('Here'),('How'),('More'),('Not'), ('Off'),('When'),('Where'),('Who'), ('Why');
 
+-- add symbols for adverbs 
+INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
+  VALUES ('Here','img/here.png','Here Symbol'),   ('How','img/how.png','How Symbol'), 
+         ('More','img/more.png','More Symbol'),   ('Not','img/not.png','Not Symbol'), 
+		 ('Off','img/off.png','Off Symbol'),      ('When','img/when.png','When Symbol'),
+		 ('Where','img/where.png','Where Symbol'),('Who','img/who.png','Who Symbol'),
+		 ('Why','img/why.png','Why Symbol');
+
+-- add words for adverbs list
+INSERT INTO Words (word, symbol_id)
+  VALUES ('Here',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Here')),
+         ('How',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'How')),
+		 ('More',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'More')),
+		 ('Not',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Not')), 
+		 ('Off',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Off')),
+		 ('When',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'When')),
+		 ('Where', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Where')),
+		 ('Who',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Who')),
+		 ('Why',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'Why'));
+ 
 -- add words to adverbs list
 INSERT INTO ListWords (word_id, list_id)
   VALUES 

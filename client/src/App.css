@@ -23,3 +23,17 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+/*   Word  Component  */
+.Word {
+  margin: auto;
+  width: 100px;
+  border: solid;
+  color: blueviolet;
+}
+
+.Word img {
+  max-width: 100%;
+  height: auto;
+}

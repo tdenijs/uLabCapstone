@@ -38,7 +38,6 @@ class App extends Component {
         {id: 4, word: "colors", src: "img/colors.png", alt: "scary image"},
         {id: 5, word: "scary", src: "img/scary.png", alt: "colors image"}
       ],
-
     }
   }
 

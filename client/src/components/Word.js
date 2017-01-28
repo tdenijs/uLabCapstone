@@ -17,7 +17,7 @@ class Word extends Component {
       alt: this.props.alt
     };
 
-      this.props.add(word);
+    this.props.add(word);
 
     // this.props.add(this.props.text);
 
@@ -36,6 +36,7 @@ class Word extends Component {
       </div>
     );
   }
+
 
 }
 

@@ -1,57 +1,82 @@
 import React, {Component} from 'react';
-import { ButtonGroup } from 'react-bootstrap';
+import {ButtonGroup} from 'react-bootstrap';
+import Word from './Word'
 
 class SpeechBar extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.messageString = this.messageString.bind(this);
-        this.speakMessage = this.speakMessage.bind(this);
+    this.messageString = this.messageString.bind(this);
+    this.speakMessage = this.speakMessage.bind(this);
+    this.renderMessageWindow = this.renderMessageWindow.bind(this);
+  }
+
+
+  //reduces the message array into one string (improves interpretation of speech)
+  messageString() {
+    if (this.props.message.length >= 1) {
+      var text = ""
+      for (let item of this.props.message) {
+        text += item.word + " ";
+      }
+    }
+    return text;
+    // return this.props.message.join(' ');
+  }
+
+
+  speakMessage(e) {
+    e.preventDefault();
+
+    var msg = new SpeechSynthesisUtterance();
+
+    console.log(this.messageString());
+
+    if (this.props.message.length >= 1) {
+      msg.text = this.messageString();
+    }
+    else {
+      msg.text = "The message window is empty."
     }
 
+    window.speechSynthesis.speak(msg);
+  }
 
 
-    //reduces the message array into one string (improves interpretation of speech)
-    messageString() {
-        if(this.props.message.length >= 1)
-            return this.props.message.join(' ');
-    }
+  renderMessageWindow() {   // trying to output the images
+    return (
+      <div className="MessageWindow" >
+        {
+          this.props.message.map(({id, word, src, alt}) => {
+              return ( <Word key={id} text={word} src={src} alt={alt}/> );
+            }
+          )}
+      </div>
+    )
+  }
 
 
+  render() {
 
-    speakMessage(e) {
-        e.preventDefault();
+    return (
+      <div id="speechBar">
+        <ButtonGroup>
+          <button id="playButton" onClick={this.speakMessage}> Play</button>
 
-        var msg = new SpeechSynthesisUtterance();
+          {this.renderMessageWindow()}
 
-        console.log(this.props.message);
-
-        if (this.props.message.length >= 1) { msg.text = this.messageString(); }
-        else { msg.text= "The message window is empty." }
-
-        window.speechSynthesis.speak(msg);
-    }
-
-
-
-    render() {
-
-        return (
-          <div id="speechBar">
-            <ButtonGroup>
-                    <button id="playButton" onClick={this.speakMessage} > Play </button>
-                    <span id="messageWindow" style={{border: "solid", color:"black"}}>{ this.messageString() }</span>
-                    <button id="backspaceButton" onClick={this.props.handleBackButton}>BackSpace</button>
-                    <button id="clearButton" onClick={this.props.handleClearMessage}>Clear</button>
-            </ButtonGroup>
-          </div>
-        );
-    }
+          <button id="backspaceButton" onClick={this.props.handleBackButton}>BackSpace</button>
+          <button id="clearButton" onClick={this.props.handleClearMessageButton}>Clear</button>
+        </ButtonGroup>
+      </div>
+    );
+  }
 }
 
 
 SpeechBar.propTypes = {
-  handleClearMessage: React.PropTypes.func,
+  message: React.PropTypes.array,
+  handleClearMessageButton: React.PropTypes.func,
   handleBackButton: React.PropTypes.func,
 };
 

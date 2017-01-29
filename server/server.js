@@ -34,6 +34,7 @@ app.get('/', function(req, res) {
   res.send('Welcome to the API Server!')
 });
 router.get('/words', db.getAllWords);
+router.get('/lists/:title', db.getAllWordsByListName)
 // ....add more routes here ....
 
 //===============================================

@@ -48,7 +48,7 @@ class SpeechBar extends Component {
       <div className="MessageWindow" >
         {
           this.props.message.map(({id, word, src, alt}) => {
-              return ( <Word key={id} text={word} src={src} alt={alt}/> );
+              return ( <Word key={id} id={id} text={word} src={src} alt={alt}/> );
             }
           )}
       </div>

@@ -11,7 +11,7 @@ class Word extends Component {
   speak() {
     // Add text of the Word to speechBar
     var word = {
-      id: this.props.key,
+      id: this.props.id,
       word: this.props.text,
       src: this.props.src,
       alt: this.props.alt

@@ -3,6 +3,7 @@ import './App.css';
 import SpeechBar from './components/SpeechBar.js';
 import SettingsBar from './components/SettingsBar';
 import Grid from './components/Grid';
+import _ from 'lodash';
 
 
 class App extends Component {
@@ -17,30 +18,29 @@ class App extends Component {
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
 
-
     this.state = {
       selectedLanguage: "English",
       settingsBarVisible: false,
       settingsLocked: false,
       buttonSize: "5",
+        idCounter: 0,
       wordArray: [
-        {id: 1, word: "I", src: "img/I.png", alt: "I image"},
-        {id: 2, word: "see", src: "img/see.png", alt: "see image"},
-        {id: 3, word: "happy", src: "img/happy.png", alt: "happy image"},
-        {id: 4, word: "colors", src: "img/colors.png", alt: "scary image"},
-        {id: 5, word: "scary", src: "img/scary.png", alt: "colors image"}
+        {id: _.uniqueId(), word: "I", src: "img/I.png", alt: "I image"},
+        {id: _.uniqueId(), word: "see", src: "img/see.png", alt: "see image"},
+        {id: _.uniqueId(), word: "happy", src: "img/happy.png", alt: "happy image"},
+        {id: _.uniqueId(), word: "colors", src: "img/colors.png", alt: "scary image"},
+        {id: _.uniqueId(), word: "scary", src: "img/scary.png", alt: "colors image"}
       ],
 
       messageArray: [
-        {id: 1, word: "I", src: "img/I.png", alt: "I image"},
-        {id: 2, word: "see", src: "img/see.png", alt: "see image"},
-        {id: 3, word: "happy", src: "img/happy.png", alt: "happy image"},
-        {id: 4, word: "colors", src: "img/colors.png", alt: "scary image"},
-        {id: 5, word: "scary", src: "img/scary.png", alt: "colors image"}
+        {id: _.uniqueId(), word: "I", src: "img/I.png", alt: "I image"},
+        {id: _.uniqueId(), word: "see", src: "img/see.png", alt: "see image"},
+        {id: _.uniqueId(), word: "happy", src: "img/happy.png", alt: "happy image"},
+        {id: _.uniqueId(), word: "colors", src: "img/colors.png", alt: "scary image"},
+        {id: _.uniqueId(), word: "scary", src: "img/scary.png", alt: "colors image"}
       ],
     }
   }
-
 
   // Callback function passed to the SpeechBar back button removed last item in message
   handleBackButton() {
@@ -84,12 +84,19 @@ class App extends Component {
 
   // Callback function passed to the Word Component to add a word to the speechBarMessage
   addWordToSpeechBar(word) {
-    console.log("add word: ", word);
+    let newWord = {
+        id: _.uniqueId(),
+        word: word.word,
+        src: word.src,
+        alt: word.alt
+    };
+
+    console.log("add word: ", newWord);
 
     this.setState({
       messageArray: [
         ...this.state.messageArray,
-        word
+        newWord
       ]
     });
 
@@ -103,7 +110,6 @@ class App extends Component {
 
 
   }
-
 
   render() {
 

@@ -27,11 +27,12 @@
     "server": "babel-node ./server/server.js",
     "client": "babel-node ./client/start-client.js",
     "api": "nodemon ./server/server.js",
-    "test":"newman run server/Tests/uLab.postman_collection.json -e server/Tests/Development.postman_environment.json -n 7 -d server/Tests/list_titles.json",
+    "test": "newman run server/Tests/uLab.postman_collection.json -e server/Tests/Development.postman_environment.json -n 7 -d server/Tests/list_titles.json",
     "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1"
   },
   "devDependencies": {
     "concurrently": "^3.1.0",
+    "newman": "^3.4.2",
     "nodemon": "^1.11.0"
   }
 }

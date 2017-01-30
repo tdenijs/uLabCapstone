@@ -11,7 +11,7 @@ class App extends Component {
     super(props);
 
     this.settingsToggle = this.settingsToggle.bind(this);
-    this.handleClearMessageButton = this.handleClearMessageButton.bind(this);
+    this.handleClearMessage = this.handleClearMessage.bind(this);
     this.updateLanguage = this.updateLanguage.bind(this);
     this.lockToggle = this.lockToggle.bind(this);
     this.resizeButton = this.resizeButton.bind(this);
@@ -53,7 +53,7 @@ class App extends Component {
 
 
   // Callback function passed to the SpeechBar clear the speechBarMessage when the clear button is clicked
-  handleClearMessageButton() {
+  handleClearMessage() {
     this.setState({messageArray: []});
   }
 
@@ -99,16 +99,6 @@ class App extends Component {
         newWord
       ]
     });
-
-
-    // this.setState({
-    //   speechBarMessage: [
-    //     ...this.state.speechBarMessage,
-    //     text
-    //   ]
-    // });
-
-
   }
 
   render() {
@@ -124,7 +114,7 @@ class App extends Component {
       <div className="App">
         <SpeechBar
           message={this.state.messageArray}
-          handleClearMessageButton={this.handleClearMessageButton}
+          handleClearMessage={this.handleClearMessage}
           handleBackButton={this.handleBackButton}/>
 
         <div id="settings" style={{margin: "auto"}}>

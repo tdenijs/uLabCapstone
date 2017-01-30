@@ -21,7 +21,6 @@ class SpeechBar extends Component {
       }
     }
     return text;
-    // return this.props.message.join(' ');
   }
 
 
@@ -43,7 +42,7 @@ class SpeechBar extends Component {
   }
 
 
-  renderMessageWindow() {   // trying to output the images
+  renderMessageWindow() {
     return (
       <div className="MessageWindow" >
         {
@@ -62,11 +61,9 @@ class SpeechBar extends Component {
       <div id="speechBar">
         <ButtonGroup>
           <button id="playButton" onClick={this.speakMessage}> Play</button>
-
           {this.renderMessageWindow()}
-
           <button id="backspaceButton" onClick={this.props.handleBackButton}>BackSpace</button>
-          <button id="clearButton" onClick={this.props.handleClearMessageButton}>Clear</button>
+          <button id="clearButton" onClick={this.props.handleClearMessage}>Clear</button>
         </ButtonGroup>
       </div>
     );
@@ -76,7 +73,7 @@ class SpeechBar extends Component {
 
 SpeechBar.propTypes = {
   message: React.PropTypes.array,
-  handleClearMessageButton: React.PropTypes.func,
+  handleClearMessage: React.PropTypes.func,
   handleBackButton: React.PropTypes.func,
 };
 

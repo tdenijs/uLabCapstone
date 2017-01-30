@@ -1,0 +1,74 @@
+{
+	"id": "f3a86699-e4fd-c579-fd4a-dede09a6aa14",
+	"name": "uLab",
+	"description": "This collection contains all API requests fo rth uLab Infinity CS capstone project.",
+	"order": [],
+	"folders": [
+		{
+			"id": "ecbdbabf-5ab0-f391-e441-e99c7e8fa063",
+			"name": "GET requests",
+			"description": "Contains all GET request endpoints",
+			"order": [
+				"0f42d4ca-082d-4a5f-a5de-ddb45b63a116",
+				"7c4c1b0c-64d3-6b3e-d1c3-c73a67e61b45"
+			],
+			"owner": "1475136"
+		},
+		{
+			"id": "5ca524d8-80f2-c536-7b1c-974679383466",
+			"name": "POST requests",
+			"description": "Contains all POST request endpoints.",
+			"order": [],
+			"owner": "1475136"
+		},
+		{
+			"id": "86b7e52c-29b3-3b48-7678-d8297a98a2d3",
+			"name": "PUT requeests",
+			"description": "Contains all PUT requeest endpoints.",
+			"order": [],
+			"owner": "1475136"
+		}
+	],
+	"timestamp": 1485537239022,
+	"owner": "1475136",
+	"public": false,
+	"requests": [
+		{
+			"id": "0f42d4ca-082d-4a5f-a5de-ddb45b63a116",
+			"headers": "",
+			"url": "{{url}}/words",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": "try{\n    tests[\"Body contains word_id\"] = responseBody.has(\"word_id\");\n    tests[\"Body contains word\"] = responseBody.has(\"word\");\n    tests[\"Status code is 200\"] = responseCode.code === 200;\n} catch (e) {}\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1485732154047,
+			"name": "{{url}}/words",
+			"description": "retrieves all words",
+			"collectionId": "f3a86699-e4fd-c579-fd4a-dede09a6aa14",
+			"responses": []
+		},
+		{
+			"id": "7c4c1b0c-64d3-6b3e-d1c3-c73a67e61b45",
+			"headers": "",
+			"url": "{{url}}/lists/{{title}}",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": "try{\n    tests[\"Body conatains list_id\"] = responseBody.has(\"list_id\");\n    tests[\"Body conatains list_title\"] = responseBody.has(\"list_title\");\n    tests[\"Body conatains word_id\"] = responseBody.has(\"word_id\");\n    tests[\"Body conatains word\"] = responseBody.has(\"word\");\n    tests[\"Body conatains symbol_id\"] = responseBody.has(\"symbol_id\");\n    tests[\"Body conatains symbol_path\"] = responseBody.has(\"symbol_path\");\n    tests[\"Body conatains symbol_text\"] = responseBody.has(\"symbol_text\");\n    tests[\"Status code is 200\"] = responseCode.code === 200;\n} catch (e) {}",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1485732069219,
+			"name": "{{url}}/lists/{{list_title}}",
+			"description": "retrieves all words in a list by list title",
+			"collectionId": "f3a86699-e4fd-c579-fd4a-dede09a6aa14",
+			"responses": []
+		}
+	]
+}

@@ -57,7 +57,7 @@ describe('Test suite for mounted App', () => {
   it('Clear button results in empty speechBarMessage', () => {
     const clearButton = app.find('#clearButton').first();
     clearButton.simulate('click');
-    expect(app.state().speechBarMessage).toEqual([]);
+    expect(app.state().messageArray).toEqual([]);
   });
 
   // // SpeechSynthesisUtterance breaks this

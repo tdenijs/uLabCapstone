@@ -25,6 +25,22 @@
 }
 
 
+/*   SpeechBar  Component  */
+.MessageWindow {
+  border: solid;
+  color: black;
+  height: 80px;
+}
+
+.MessageWindow .Word {  /* word component inside of the message window */
+  margin: auto;
+  width: 50px;
+  border: none;
+  color: #3a33d1;
+  float: left;
+}
+
+
 /*   Word  Component  */
 .Word {
   margin: auto;

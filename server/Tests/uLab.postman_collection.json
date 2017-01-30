@@ -54,7 +54,7 @@
 		{
 			"id": "7c4c1b0c-64d3-6b3e-d1c3-c73a67e61b45",
 			"headers": "",
-			"url": "{{url}}/lists/{{title}}",
+			"url": "{{url}}/lists/title/{{title}}",
 			"preRequestScript": null,
 			"pathVariables": {},
 			"method": "GET",
@@ -65,7 +65,7 @@
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"time": 1485732069219,
-			"name": "{{url}}/lists/{{list_title}}",
+			"name": "{{url}}/lists/title/{{list_title}}",
 			"description": "retrieves all words in a list by list title",
 			"collectionId": "f3a86699-e4fd-c579-fd4a-dede09a6aa14",
 			"responses": []

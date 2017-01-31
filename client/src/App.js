@@ -4,6 +4,7 @@ import SpeechBar from './components/SpeechBar.js';
 import SettingsBar from './components/SettingsBar';
 import Grid from './components/Grid';
 import _ from 'lodash';
+import $ from 'jquery';
 
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
     this.resizeButton = this.resizeButton.bind(this);
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
+    this.getWords = this.getWords.bind(this);
 
     this.state = {
       selectedLanguage: "English",
@@ -25,21 +27,34 @@ class App extends Component {
       buttonSize: "5",
         idCounter: 0,
       wordArray: [
-        {id: _.uniqueId(), word: "I", src: "img/I.png", alt: "I image"},
-        {id: _.uniqueId(), word: "see", src: "img/see.png", alt: "see image"},
-        {id: _.uniqueId(), word: "happy", src: "img/happy.png", alt: "happy image"},
-        {id: _.uniqueId(), word: "colors", src: "img/colors.png", alt: "scary image"},
-        {id: _.uniqueId(), word: "scary", src: "img/scary.png", alt: "colors image"}
+        // {id: _.uniqueId(), word: "I", src: "img/I.png", alt: "I image"},
+        // {id: _.uniqueId(), word: "see", src: "img/see.png", alt: "see image"},
+        // {id: _.uniqueId(), word: "happy", src: "img/happy.png", alt: "happy image"},
+        // {id: _.uniqueId(), word: "colors", src: "img/colors.png", alt: "scary image"},
+        // {id: _.uniqueId(), word: "scary", src: "img/scary.png", alt: "colors image"}
       ],
-
       messageArray: [
-        {id: _.uniqueId(), word: "I", src: "img/I.png", alt: "I image"},
-        {id: _.uniqueId(), word: "see", src: "img/see.png", alt: "see image"},
-        {id: _.uniqueId(), word: "happy", src: "img/happy.png", alt: "happy image"},
-        {id: _.uniqueId(), word: "colors", src: "img/colors.png", alt: "scary image"},
-        {id: _.uniqueId(), word: "scary", src: "img/scary.png", alt: "colors image"}
+        // {id: _.uniqueId(), word: "I", src: "img/I.png", alt: "I image"},
+        // {id: _.uniqueId(), word: "see", src: "img/see.png", alt: "see image"},
+        // {id: _.uniqueId(), word: "happy", src: "img/happy.png", alt: "happy image"},
+        // {id: _.uniqueId(), word: "colors", src: "img/colors.png", alt: "scary image"},
+        // {id: _.uniqueId(), word: "scary", src: "img/scary.png", alt: "colors image"}
       ],
     }
+  }
+
+  componentDidMount() {
+    this.getWords();
+  }
+
+  getWords() {
+    let wordsJSON = $.getJSON('http://localhost:3001/api/words')
+        .then((data) => {
+          this.setState({ person: data.results });
+        });
+    let words = JSON.parse(wordsJSON);
+    console.log(words);
+    this.setState({wordArray: words});
   }
 
   // Callback function passed to the SpeechBar back button removed last item in message

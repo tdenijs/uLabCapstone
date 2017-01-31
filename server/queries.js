@@ -18,7 +18,7 @@ const db = pgp(connectionString);
 //============================================
 
 function getAllWords(req, res, next) {
-  db.any('select * from words')
+  db.any('select w.word_id, w.word, s.symbol_path, s.symbol_text from words w inner join symbols s on w.symbol_id = s.symbol_id')
     .then(function (data) {
       if (data.length > 0) {
       res.status(200)

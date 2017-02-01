@@ -19,27 +19,16 @@ class App extends Component {
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
     this.getWords = this.getWords.bind(this);
+    this.appendToCols = this.appendToCols.bind(this);
 
     this.state = {
       selectedLanguage: "English",
       settingsBarVisible: false,
       settingsLocked: false,
       buttonSize: "5",
-        idCounter: 0,
-      wordArrays: [
-        // {id: _.uniqueId(), word: "I", src: "img/I.png", alt: "I image"},
-        // {id: _.uniqueId(), word: "see", src: "img/see.png", alt: "see image"},
-        // {id: _.uniqueId(), word: "happy", src: "img/happy.png", alt: "happy image"},
-        // {id: _.uniqueId(), word: "colors", src: "img/colors.png", alt: "scary image"},
-        // {id: _.uniqueId(), word: "scary", src: "img/scary.png", alt: "colors image"}
-      ],
-      messageArray: [
-        // {id: _.uniqueId(), word: "I", src: "img/I.png", alt: "I image"},
-        // {id: _.uniqueId(), word: "see", src: "img/see.png", alt: "see image"},
-        // {id: _.uniqueId(), word: "happy", src: "img/happy.png", alt: "happy image"},
-        // {id: _.uniqueId(), word: "colors", src: "img/colors.png", alt: "scary image"},
-        // {id: _.uniqueId(), word: "scary", src: "img/scary.png", alt: "colors image"}
-      ],
+      idCounter: 0,
+      colArray: [],
+      messageArray: [],
     }
   }
 
@@ -47,77 +36,41 @@ class App extends Component {
     this.getWords();
   }
 
+  // Initializes wordArrays with JSON data from API call
   getWords() {
-    $.getJSON('http://localhost:3001/api/lists/title/adjective')
-        .then((data) => {
-          this.setState({ wordArrays: [
-            ...this.state.wordArrays,
-            {
-              title: 'Adjectives',
+    let nextCol;
+    let titles = ['adjective', 'adverb', 'exclamation', 'noun', 'preposition', 'pronoun', 'verb'];
+
+    // titles.map((title) => {
+    //   return(
+    //     $.getJSON('http://localhost:3001/api/lists/title/' + title)
+    //         .then((data) => {
+    //           nextCol = {
+    //             title: title,
+    //             words: data
+    //           };
+    //           this.setState(this.appendToCols(nextCol));
+    //         })
+    //   );
+    // });
+
+    titles.forEach((title) => {
+      $.getJSON('http://localhost:3001/api/lists/title/' + title)
+          .then((data) => {
+            nextCol = {
+              title: title,
               words: data
-            }
-          ]});
-        });
-    $.getJSON('http://localhost:3001/api/lists/title/adverb')
-        .then((data) => {
-          this.setState({ wordArrays: [
-            ...this.state.wordArrays,
-            {
-              title: 'Adverbs',
-              words: data
-            }
-          ]});
-        });
-    $.getJSON('http://localhost:3001/api/lists/title/exclamation')
-        .then((data) => {
-          this.setState({ wordArrays: [
-            ...this.state.wordArrays,
-            {
-              title: 'Exclamations',
-              words: data
-            }
-          ]});
-        });
-    $.getJSON('http://localhost:3001/api/lists/title/noun')
-        .then((data) => {
-          this.setState({ wordArrays: [
-            ...this.state.wordArrays,
-            {
-              title: 'Nouns',
-              words: data
-            }
-          ]});
-        });
-    $.getJSON('http://localhost:3001/api/lists/title/pronoun')
-        .then((data) => {
-          this.setState({ wordArrays: [
-            ...this.state.wordArrays,
-            {
-              title: 'Pronouns',
-              words: data
-            }
-          ]});
-        });
-    $.getJSON('http://localhost:3001/api/lists/title/preposition')
-        .then((data) => {
-          this.setState({ wordArrays: [
-            ...this.state.wordArrays,
-            {
-              title: 'Prepositions',
-              words: data
-            }
-          ]});
-        });
-    $.getJSON('http://localhost:3001/api/lists/title/verb')
-        .then((data) => {
-          this.setState({ wordArrays: [
-            ...this.state.wordArrays,
-            {
-              title: 'Verbs',
-              words: data
-            }
-          ]});
-        });
+            };
+            this.setState(this.appendToCols(nextCol));
+          });
+    });
+  }
+
+  // Updates the colArray with the next column
+  appendToCols(nextCol) {
+    return ((prevState) => {
+      return { ...prevState, colArray: [...prevState.colArray, nextCol]}
+    });
   }
 
   // Callback function passed to the SpeechBar back button removed last item in message
@@ -204,7 +157,7 @@ class App extends Component {
           <p> Global Language: {this.state.selectedLanguage} </p>
         </div>
 
-        <Grid cols={this.state.wordArrays} add={this.addWordToSpeechBar}/>
+        <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}/>
 
       </div>
 

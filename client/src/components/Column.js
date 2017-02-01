@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import Word from './Word'
+import _ from 'lodash';
 
 class Column extends Component {
   render() {
     return (
       <div className="Column">
         {
-          this.props.words.map(({id, word, src, alt}) => {
+          this.props.words.map(({id, word, symbol_path, alt}) => {
             return (
-              <Word key={id} id={id} text={word} src={src} alt={alt} add={this.props.add}/>
+              <Word key={_.uniqueId()} id={id} text={word} src={symbol_path} alt={alt} add={this.props.add}/>
             );
           })
         }

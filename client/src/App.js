@@ -26,7 +26,7 @@ class App extends Component {
       settingsLocked: false,
       buttonSize: "5",
         idCounter: 0,
-      wordArray: [
+      wordArrays: [
         // {id: _.uniqueId(), word: "I", src: "img/I.png", alt: "I image"},
         // {id: _.uniqueId(), word: "see", src: "img/see.png", alt: "see image"},
         // {id: _.uniqueId(), word: "happy", src: "img/happy.png", alt: "happy image"},
@@ -48,12 +48,76 @@ class App extends Component {
   }
 
   getWords() {
-    let words = $.getJSON('http://localhost:3001/api/words')
+    $.getJSON('http://localhost:3001/api/lists/title/adjective')
         .then((data) => {
-          this.setState({ wordArray: data });
+          this.setState({ wordArrays: [
+            ...this.state.wordArrays,
+            {
+              title: 'Adjectives',
+              words: data
+            }
+          ]});
         });
-    // let words = JSON.parse(wordsJSON);
-    console.log(words);
+    $.getJSON('http://localhost:3001/api/lists/title/adverb')
+        .then((data) => {
+          this.setState({ wordArrays: [
+            ...this.state.wordArrays,
+            {
+              title: 'Adverbs',
+              words: data
+            }
+          ]});
+        });
+    $.getJSON('http://localhost:3001/api/lists/title/exclamation')
+        .then((data) => {
+          this.setState({ wordArrays: [
+            ...this.state.wordArrays,
+            {
+              title: 'Exclamations',
+              words: data
+            }
+          ]});
+        });
+    $.getJSON('http://localhost:3001/api/lists/title/noun')
+        .then((data) => {
+          this.setState({ wordArrays: [
+            ...this.state.wordArrays,
+            {
+              title: 'Nouns',
+              words: data
+            }
+          ]});
+        });
+    $.getJSON('http://localhost:3001/api/lists/title/pronoun')
+        .then((data) => {
+          this.setState({ wordArrays: [
+            ...this.state.wordArrays,
+            {
+              title: 'Pronouns',
+              words: data
+            }
+          ]});
+        });
+    $.getJSON('http://localhost:3001/api/lists/title/preposition')
+        .then((data) => {
+          this.setState({ wordArrays: [
+            ...this.state.wordArrays,
+            {
+              title: 'Prepositions',
+              words: data
+            }
+          ]});
+        });
+    $.getJSON('http://localhost:3001/api/lists/title/verb')
+        .then((data) => {
+          this.setState({ wordArrays: [
+            ...this.state.wordArrays,
+            {
+              title: 'Verbs',
+              words: data
+            }
+          ]});
+        });
   }
 
   // Callback function passed to the SpeechBar back button removed last item in message
@@ -140,7 +204,7 @@ class App extends Component {
           <p> Global Language: {this.state.selectedLanguage} </p>
         </div>
 
-        <Grid words={this.state.wordArray} add={this.addWordToSpeechBar}/>
+        <Grid cols={this.state.wordArrays} add={this.addWordToSpeechBar}/>
 
       </div>
 

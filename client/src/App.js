@@ -48,13 +48,12 @@ class App extends Component {
   }
 
   getWords() {
-    let wordsJSON = $.getJSON('http://localhost:3001/api/words')
+    let words = $.getJSON('http://localhost:3001/api/words')
         .then((data) => {
-          this.setState({ person: data.results });
+          this.setState({ wordArray: data });
         });
-    let words = JSON.parse(wordsJSON);
+    // let words = JSON.parse(wordsJSON);
     console.log(words);
-    this.setState({wordArray: words});
   }
 
   // Callback function passed to the SpeechBar back button removed last item in message

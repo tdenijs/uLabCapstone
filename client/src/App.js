@@ -4,6 +4,7 @@ import SpeechBar from './components/SpeechBar.js';
 import SettingsBar from './components/SettingsBar';
 import Grid from './components/Grid';
 import _ from 'lodash';
+import $ from 'jquery';
 
 
 class App extends Component {
@@ -17,29 +18,59 @@ class App extends Component {
     this.resizeButton = this.resizeButton.bind(this);
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
+    this.getWords = this.getWords.bind(this);
+    this.appendToCols = this.appendToCols.bind(this);
 
     this.state = {
       selectedLanguage: "English",
       settingsBarVisible: false,
       settingsLocked: false,
       buttonSize: "5",
-        idCounter: 0,
-      wordArray: [
-        {id: _.uniqueId(), word: "I", src: "img/I.png", alt: "I image"},
-        {id: _.uniqueId(), word: "see", src: "img/see.png", alt: "see image"},
-        {id: _.uniqueId(), word: "happy", src: "img/happy.png", alt: "happy image"},
-        {id: _.uniqueId(), word: "colors", src: "img/colors.png", alt: "scary image"},
-        {id: _.uniqueId(), word: "scary", src: "img/scary.png", alt: "colors image"}
-      ],
-
-      messageArray: [
-        {id: _.uniqueId(), word: "I", src: "img/I.png", alt: "I image"},
-        {id: _.uniqueId(), word: "see", src: "img/see.png", alt: "see image"},
-        {id: _.uniqueId(), word: "happy", src: "img/happy.png", alt: "happy image"},
-        {id: _.uniqueId(), word: "colors", src: "img/colors.png", alt: "scary image"},
-        {id: _.uniqueId(), word: "scary", src: "img/scary.png", alt: "colors image"}
-      ],
+      idCounter: 0,
+      colArray: [],
+      messageArray: [],
     }
+  }
+
+  componentDidMount() {
+    this.getWords();
+  }
+
+  // Initializes wordArrays with JSON data from API call
+  getWords() {
+    let nextCol;
+    let titles = ['adjective', 'adverb', 'exclamation', 'noun', 'preposition', 'pronoun', 'verb'];
+
+    // titles.map((title) => {
+    //   return(
+    //     $.getJSON('http://localhost:3001/api/lists/title/' + title)
+    //         .then((data) => {
+    //           nextCol = {
+    //             title: title,
+    //             words: data
+    //           };
+    //           this.setState(this.appendToCols(nextCol));
+    //         })
+    //   );
+    // });
+
+    titles.forEach((title) => {
+      $.getJSON('http://localhost:3001/api/lists/title/' + title)
+          .then((data) => {
+            nextCol = {
+              title: title,
+              words: data
+            };
+            this.setState(this.appendToCols(nextCol));
+          });
+    });
+  }
+
+  // Updates the colArray with the next column
+  appendToCols(nextCol) {
+    return ((prevState) => {
+      return { ...prevState, colArray: [...prevState.colArray, nextCol]}
+    });
   }
 
   // Callback function passed to the SpeechBar back button removed last item in message
@@ -126,7 +157,7 @@ class App extends Component {
           <p> Global Language: {this.state.selectedLanguage} </p>
         </div>
 
-        <Grid words={this.state.wordArray} add={this.addWordToSpeechBar}/>
+        <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}/>
 
       </div>
 

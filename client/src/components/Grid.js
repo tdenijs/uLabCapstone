@@ -1,23 +1,31 @@
 import React, {Component} from 'react';
 import Column from './Column'
+import _ from 'lodash';
 
 class Grid extends Component {
     render() {
+        // Make sure the cols are in the right order
+        let sortedCols = _.sortBy(this.props.cols, 'title');
+
         return(
             <div id="grid">
-                <Column words={this.props.words} add={this.props.add}/>
+                {
+                    sortedCols.map(({title, words}) => {
+                        return (<Column key={_.uniqueId()} title={title} words={words} add={this.props.add}/>);
+                    })
+                }
             </div>
         );
     }
 }
 
 Grid.propTypes = {
-    words: React.PropTypes.array,
+    cols: React.PropTypes.array,
     add: React.PropTypes.func,
 };
 
 Grid.defaultProps = {
-    words: [],
+    cols: [],
 };
 
 export default Grid;

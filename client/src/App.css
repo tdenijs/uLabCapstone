@@ -24,6 +24,12 @@
   to { transform: rotate(360deg); }
 }
 
+/*  Column Component  */
+.Column {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align:top;
+}
 
 /*   SpeechBar  Component  */
 .MessageWindow {

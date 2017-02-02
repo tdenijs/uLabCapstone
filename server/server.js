@@ -39,7 +39,6 @@ router.get('/lists/title/:title', db.getAllWordsByListName);
 router.get('/lists/id/:id', db.getAllWordsByListId);
 router.get('/grids/title/:title/words', db.getAllGridWordsByGridName)
 
-
 // ....add more routes here ....
 
 //===============================================

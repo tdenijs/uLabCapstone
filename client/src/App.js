@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import './App.css';
+import './css/App.css';
+import './css/SpeechBar.css';
+import './css/SettingsBar.css';
 import SpeechBar from './components/SpeechBar.js';
 import SettingsBar from './components/SettingsBar';
 import Grid from './components/Grid';

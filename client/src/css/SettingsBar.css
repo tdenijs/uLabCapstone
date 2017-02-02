@@ -1,0 +1,8 @@
+/*  Column Component  */
+
+#settingsBar {
+  min-height: 80px;
+  margin-bottom: 5px;
+  background-color: lightgrey;
+  padding: 10px;
+}

@@ -1,31 +1,5 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-/*  Column Component  */
-.Column {
-  display: inline-block;
-  margin-right: 10px;
-  vertical-align: top;
-}
-
 /*   SpeechBar  Component  */
+
 #speechBar {
   min-height: 80px;
   margin-bottom: 5px;
@@ -50,7 +24,6 @@
   min-width: 70%;
   float: left;
   margin-left:5px;
-
 }
 
 .MessageWindow .Word { /* word component inside of the message window */
@@ -59,17 +32,4 @@
   border: none;
   color: #3a33d1;
   float: left;
-}
-
-/*   Word  Component  */
-.Word {
-  margin: auto;
-  width: 100px;
-  border: solid;
-  color: blueviolet;
-}
-
-.Word img {
-  max-width: 100%;
-  height: auto;
 }

@@ -28,16 +28,29 @@
 /*   SpeechBar  Component  */
 #speechBar {
   min-height: 80px;
-  border-bottom: 1px solid red;
   margin-bottom: 5px;
+  background-color: #1c4962;
+  padding: 10px;
+}
+
+#playButton, #backspaceButton, #clearButton, #settingsButton{
+  min-height: 80px;
+  min-width: 5%;
+  font-size:1.7em;
+}
+
+#settingsButton{
+  float: right;
 }
 
 .MessageWindow {
-  border: solid;
-  color: black;
-  height: 80px;
-  min-width: 50%;
+  border: 1px solid black;
+  background-color: white;
+  min-height: 80px;
+  min-width: 70%;
   float: left;
+  margin-left:5px;
+
 }
 
 .MessageWindow .Word { /* word component inside of the message window */

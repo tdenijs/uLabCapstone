@@ -143,15 +143,16 @@ class App extends Component {
 
     return (
       <div className="App">
+
         <SpeechBar
           message={this.state.messageArray}
           handleClearMessage={this.handleClearMessage}
-          handleBackButton={this.handleBackButton}/>
+          handleBackButton={this.handleBackButton}
+          settingsToggle={this.settingsToggle}
+        />
 
         <div id="settings" style={{margin: "auto"}}>
-          <button id="settingsButton" onClick={this.settingsToggle}>Settings</button>
-          <br/>
-          <br/>
+
           {settingsBar}
           <p> Global Button Size: {this.state.buttonSize} </p>
           <p> Global Language: {this.state.selectedLanguage} </p>

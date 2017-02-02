@@ -68,11 +68,11 @@ class SpeechBar extends Component {
         <ButtonToolbar bsSize={this.state.btnSize}>
           <Button id="playButton" onClick={this.speakMessage}><Glyphicon glyph="glyphicon glyphicon-play" aria-label="Play Button"/> </Button>
           {this.renderMessageWindow()}
-
           <Button id="backspaceButton" onClick={this.props.handleBackButton}><Glyphicon glyph="glyphicon glyphicon-step-backward" aria-label="Backspace Button"/> </Button>
           <Button id="clearButton" onClick={this.props.handleClearMessage}><Glyphicon glyph="glyphicon glyphicon-remove-sign" aria-label="Clear Message Button"/> </Button>
-        </ButtonToolbar>
+          <Button id="settingsButton" onClick={this.props.settingsToggle}><Glyphicon glyph="glyphicon glyphicon-cog" aria-label="Open Settings Button"/> </Button>
 
+        </ButtonToolbar>
       </div>
     );
   }
@@ -83,6 +83,7 @@ SpeechBar.propTypes = {
   message: React.PropTypes.array,
   handleClearMessage: React.PropTypes.func,
   handleBackButton: React.PropTypes.func,
+  settingsToggle: React.PropTypes.func,
 };
 
 

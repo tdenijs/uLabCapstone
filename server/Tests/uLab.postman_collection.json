@@ -10,7 +10,8 @@
 			"description": "Contains all GET request endpoints",
 			"order": [
 				"0f42d4ca-082d-4a5f-a5de-ddb45b63a116",
-				"7c4c1b0c-64d3-6b3e-d1c3-c73a67e61b45"
+				"7c4c1b0c-64d3-6b3e-d1c3-c73a67e61b45",
+				"6831eef5-eade-a9be-f18c-4adbf5737754"
 			],
 			"owner": "1475136"
 		},
@@ -52,6 +53,24 @@
 			"responses": []
 		},
 		{
+			"id": "6831eef5-eade-a9be-f18c-4adbf5737754",
+			"headers": "",
+			"url": "{{url}}/lists/id/{{list_id}}",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": "try{\n    tests[\"Body conatains word_id\"] = responseBody.has(\"word_id\");\n    tests[\"Body conatains word\"] = responseBody.has(\"word\");\n    tests[\"Body conatains symbol_path\"] = responseBody.has(\"symbol_path\");\n    tests[\"Body conatains symbol_text\"] = responseBody.has(\"symbol_text\");\n    tests[\"Status code is 200\"] = responseCode.code === 200;\n} catch (e) {}",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1485827998662,
+			"name": "{{url}}/lists/id/{{list_id}}",
+			"description": "Returns all words for a list by list_id",
+			"collectionId": "f3a86699-e4fd-c579-fd4a-dede09a6aa14",
+			"responses": []
+		},
+		{
 			"id": "7c4c1b0c-64d3-6b3e-d1c3-c73a67e61b45",
 			"headers": "",
 			"url": "{{url}}/lists/title/{{title}}",
@@ -64,7 +83,7 @@
 			"tests": "try{\n    tests[\"Body conatains list_id\"] = responseBody.has(\"list_id\");\n    tests[\"Body conatains list_title\"] = responseBody.has(\"list_title\");\n    tests[\"Body conatains word_id\"] = responseBody.has(\"word_id\");\n    tests[\"Body conatains word\"] = responseBody.has(\"word\");\n    tests[\"Body conatains symbol_id\"] = responseBody.has(\"symbol_id\");\n    tests[\"Body conatains symbol_path\"] = responseBody.has(\"symbol_path\");\n    tests[\"Body conatains symbol_text\"] = responseBody.has(\"symbol_text\");\n    tests[\"Status code is 200\"] = responseCode.code === 200;\n} catch (e) {}",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1485732069219,
+			"time": 1485827821840,
 			"name": "{{url}}/lists/title/{{list_title}}",
 			"description": "retrieves all words in a list by list title",
 			"collectionId": "f3a86699-e4fd-c579-fd4a-dede09a6aa14",

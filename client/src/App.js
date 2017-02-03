@@ -13,7 +13,7 @@ class App extends Component {
 
     this.settingsToggle = this.settingsToggle.bind(this);
     this.handleClearMessage = this.handleClearMessage.bind(this);
-    this.updateLanguage = this.updateLanguage.bind(this);
+    this.updateVoice = this.updateVoice.bind(this);
     this.lockToggle = this.lockToggle.bind(this);
     this.resizeButton = this.resizeButton.bind(this);
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
@@ -22,7 +22,7 @@ class App extends Component {
     this.appendToCols = this.appendToCols.bind(this);
 
     this.state = {
-      selectedLanguage: "English",
+      selectedVoice: "Default",
       settingsBarVisible: false,
       settingsLocked: false,
       buttonSize: "5",
@@ -89,9 +89,9 @@ class App extends Component {
   }
 
 
-  // Callback function passed to the SettingsBar to update the App's selectedLanguage state variable
-  updateLanguage(e) {
-    this.setState({selectedLanguage: e.target.value});
+  // Callback function passed to the SettingsBar to update the App's selectedVoice state variable
+  updateVoice(e) {
+    this.setState({selectedVoice: e.target.value});
   }
 
 
@@ -134,9 +134,10 @@ class App extends Component {
 
   render() {
 
+    speechSynthesis.getVoices();
     // Render the SettingsBar only if the settingsBarVisible state variable is true
     let settingsBar = this.state.settingsBarVisible
-      ? <SettingsBar selectedLanguage={this.state.selectedLanguage} updateLanguage={this.updateLanguage}
+      ? <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
                      settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
                      buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}/>
       : null;
@@ -146,6 +147,7 @@ class App extends Component {
         <SpeechBar
           message={this.state.messageArray}
           handleClearMessage={this.handleClearMessage}
+	  selectedVoice={this.state.selectedVoice}
           handleBackButton={this.handleBackButton}/>
 
         <div id="settings" style={{margin: "auto"}}>
@@ -154,7 +156,7 @@ class App extends Component {
           <br/>
           {settingsBar}
           <p> Global Button Size: {this.state.buttonSize} </p>
-          <p> Global Language: {this.state.selectedLanguage} </p>
+          <p> Global Voice: {this.state.selectedVoice} </p>
         </div>
 
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}/>

@@ -40,6 +40,8 @@ class SettingsBar extends Component {
             Lock Settings
           </Col>
         </Row>
+
+
       </div>
     );
   }

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -18,26 +19,3 @@
   font-size: large;
 }
 
-
-/*  Column Component  */
-.Column {
-  display: inline-block;
-  margin-right: 10px;
-  vertical-align: top;
-}
-
-
-
-
-/*   Word  Component  */
-.Word {
-  margin: auto;
-  width: 100px;
-  border: solid;
-  color: blueviolet;
-}
-
-.Word img {
-  max-width: 100%;
-  height: auto;
-}

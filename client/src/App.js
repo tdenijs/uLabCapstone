@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './css/App.css';
 import './css/SpeechBar.css';
 import './css/SettingsBar.css';
+import './css/font-color.css';
+import './css/Grid-Column-Word.css';
 import SpeechBar from './components/SpeechBar.js';
 import SettingsBar from './components/SettingsBar';
 import Grid from './components/Grid';
@@ -58,20 +60,20 @@ class App extends Component {
 
     titles.forEach((title) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
-          .then((data) => {
-            nextCol = {
-              title: title,
-              words: data
-            };
-            this.setState(this.appendToCols(nextCol));
-          });
+        .then((data) => {
+          nextCol = {
+            title: title,
+            words: data
+          };
+          this.setState(this.appendToCols(nextCol));
+        });
     });
   }
 
   // Updates the colArray with the next column
   appendToCols(nextCol) {
     return ((prevState) => {
-      return { ...prevState, colArray: [...prevState.colArray, nextCol]}
+      return {...prevState, colArray: [...prevState.colArray, nextCol]}
     });
   }
 
@@ -118,10 +120,10 @@ class App extends Component {
   // Callback function passed to the Word Component to add a word to the speechBarMessage
   addWordToSpeechBar(word) {
     let newWord = {
-        id: _.uniqueId(),
-        word: word.word,
-        src: word.src,
-        alt: word.alt
+      id: _.uniqueId(),
+      word: word.word,
+      src: word.src,
+      alt: word.alt
     };
 
     console.log("add word: ", newWord);
@@ -145,23 +147,17 @@ class App extends Component {
 
     return (
       <div className="App">
-
         <SpeechBar
           message={this.state.messageArray}
           handleClearMessage={this.handleClearMessage}
           handleBackButton={this.handleBackButton}
-          settingsToggle={this.settingsToggle}
-        />
-
+          settingsToggle={this.settingsToggle}/>
         <div id="settings" style={{margin: "auto"}}>
-
           {settingsBar}
           <p> Global Button Size: {this.state.buttonSize} </p>
           <p> Global Language: {this.state.selectedLanguage} </p>
         </div>
-
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}/>
-
       </div>
 
     );

@@ -1,0 +1,63 @@
+:root {
+  --border-color: #C0B19B;
+}
+
+/*  App  */
+
+.App {
+  background-color: #F5f5fa;
+  font-family: 'Lato', sans-serif;
+}
+
+
+/*  SpeechBar  */
+
+#speechBar {
+  background-color: #DBE7A4;
+}
+
+
+.MessageWindow {
+  border: 2px solid var(--border-color);
+  background-color: white;
+}
+
+.MessageWindow .Word { /* word component inside of the message window */
+  color: #3a33d1;
+}
+
+
+/*  SettingsBar  */
+
+#settingsBar {
+  background-color: #F6E58F;
+}
+
+
+/*  GRID  */
+
+
+.Column {
+  background-color: #fff;
+  border: 2px solid var(--border-color);
+}
+
+#columnTitle {
+  font-size: 1.5em;
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  border-bottom: 3px solid var(--border-color);
+}
+
+
+
+/*   Word  Component  */
+.Word {
+  color: #000;
+
+  border-bottom: 1px solid var(--border-color);
+
+}
+
+

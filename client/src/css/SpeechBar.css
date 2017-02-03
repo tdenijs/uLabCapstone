@@ -2,9 +2,8 @@
 
 #speechBar {
   min-height: 80px;
-  margin-bottom: 5px;
-  background-color: #1c4962;
   padding: 10px;
+  margin-bottom: 0px;
 }
 
 #playButton, #backspaceButton, #clearButton, #settingsButton{
@@ -18,8 +17,6 @@
 }
 
 .MessageWindow {
-  border: 1px solid black;
-  background-color: white;
   min-height: 80px;
   min-width: 70%;
   float: left;
@@ -30,6 +27,5 @@
   margin: auto;
   width: 50px;
   border: none;
-  color: #3a33d1;
   float: left;
 }

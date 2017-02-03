@@ -1,0 +1,40 @@
+
+
+/*  Column Component  */
+.Column {
+  display: inline-block;
+  vertical-align: top;
+
+  /*adds shadow to the columns*/
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#columnTitle {
+  padding: 5px 10px ;
+}
+
+
+/*   Word  Component  */
+.Word {
+  margin: auto;
+  width: 100px;
+  min-height: 50px;
+
+  /*use flexbox to center img &  word text*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.Word img {
+  max-width: 100%;
+  height: auto;
+}
+
+.WordText {
+  padding-top: 5px;
+  font-size: 1.2em;
+
+
+}

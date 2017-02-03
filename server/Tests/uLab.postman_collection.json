@@ -1,0 +1,96 @@
+{
+	"id": "74832961-2719-1881-7087-77f801b363de",
+	"name": "uLab",
+	"description": "This collection contains all API requests fo rth uLab Infinity CS capstone project.",
+	"order": [],
+	"folders": [
+		{
+			"id": "ded7451d-eea5-6dc9-9fef-e69b43f5fc63",
+			"name": "GET requests",
+			"description": "Contains all GET request endpoints",
+			"order": [
+				"2d39def8-1c88-33f2-31d3-2cf3d94834f8",
+				"24f3b825-a75e-332e-290b-872a5463742e",
+				"9666eb1c-805d-2d35-3c77-e90ac5cc1dce"
+			],
+			"owner": 0
+		},
+		{
+			"id": "7e1a8372-f154-d0b3-9692-2ef2eea86638",
+			"name": "POST requests",
+			"description": "Contains all POST request endpoints.",
+			"order": [],
+			"owner": 0
+		},
+		{
+			"id": "4c921a70-be58-1f35-25da-264c2773b684",
+			"name": "PUT requeests",
+			"description": "Contains all PUT requeest endpoints.",
+			"order": [],
+			"owner": 0
+		}
+	],
+	"timestamp": 1485537239022,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "24f3b825-a75e-332e-290b-872a5463742e",
+			"headers": "",
+			"url": "{{url}}/lists/title/{{title}}",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": "try{\n    tests[\"Body conatains list_id\"] = responseBody.has(\"list_id\");\n    tests[\"Body conatains list_title\"] = responseBody.has(\"list_title\");\n    tests[\"Body conatains word_id\"] = responseBody.has(\"word_id\");\n    tests[\"Body conatains word\"] = responseBody.has(\"word\");\n    tests[\"Body conatains symbol_id\"] = responseBody.has(\"symbol_id\");\n    tests[\"Body conatains symbol_path\"] = responseBody.has(\"symbol_path\");\n    tests[\"Body conatains symbol_text\"] = responseBody.has(\"symbol_text\");\n    tests[\"Status code is 200\"] = responseCode.code === 200;\n} catch (e) {}",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1485732069219,
+			"name": "{{url}}/lists/title/{{list_title}}",
+			"description": "retrieves all words in a list by list title",
+			"collectionId": "74832961-2719-1881-7087-77f801b363de",
+			"responses": [],
+			"folder": "ded7451d-eea5-6dc9-9fef-e69b43f5fc63"
+		},
+		{
+			"id": "2d39def8-1c88-33f2-31d3-2cf3d94834f8",
+			"headers": "",
+			"url": "{{url}}/words",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": "try{\n    tests[\"Body contains word_id\"] = responseBody.has(\"word_id\");\n    tests[\"Body contains word\"] = responseBody.has(\"word\");\n    tests[\"Status code is 200\"] = responseCode.code === 200;\n} catch (e) {}\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1485732154047,
+			"name": "{{url}}/words",
+			"description": "retrieves all words",
+			"collectionId": "74832961-2719-1881-7087-77f801b363de",
+			"responses": [],
+			"folder": "ded7451d-eea5-6dc9-9fef-e69b43f5fc63"
+		},
+		{
+			"id": "9666eb1c-805d-2d35-3c77-e90ac5cc1dce",
+			"headers": "",
+			"url": "{{url}}/grids/title/{{grid_title}}/words",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": "try{\n    tests[\"Body conatains grid_id\"] = responseBody.has(\"grid_id\");\n    tests[\"Body conatains grid_title\"] = responseBody.has(\"grid_title\");\n    tests[\"Body conatains list_id\"] = responseBody.has(\"list_id\");\n    tests[\"Body conatains list_title\"] = responseBody.has(\"list_title\");\n    tests[\"Body conatains word_id\"] = responseBody.has(\"word_id\");\n    tests[\"Body conatains word\"] = responseBody.has(\"word\");\n    tests[\"Body conatains symbol_id\"] = responseBody.has(\"symbol_id\");\n    tests[\"Body conatains symbol_path\"] = responseBody.has(\"symbol_path\");\n    tests[\"Body conatains symbol_text\"] = responseBody.has(\"symbol_text\");\n    tests[\"Status code is 200\"] = responseCode.code === 200;\n} catch (e) {}",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1486093770277,
+			"name": "{{url}}/grids/title/{{grid_title}}/words",
+			"description": "",
+			"collectionId": "74832961-2719-1881-7087-77f801b363de",
+			"responses": []
+		}
+	]
+}

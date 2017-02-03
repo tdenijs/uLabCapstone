@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./queries')
+const db = require('./queries');
 const app = express();
+const cors = require('cors');
 //const fs = require('fs');
 
 //==========================================================
@@ -18,7 +19,7 @@ const app = express();
 const cookieParser = require('cookie-parser');
 
 app.use(cookieParser());
-
+app.use(cors());
 app.set('port', (process.env.PORT || 3001));
 
 // Express only serves static assets in production
@@ -34,6 +35,10 @@ app.get('/', function(req, res) {
   res.send('Welcome to the API Server!')
 });
 router.get('/words', db.getAllWords);
+router.get('/lists/title/:title', db.getAllWordsByListName);
+router.get('/lists/id/:id', db.getAllWordsByListId);
+router.get('/grids/title/:grid_title/words', db.getAllWordsByGridName)
+
 // ....add more routes here ....
 
 //===============================================

@@ -55,6 +55,7 @@ Below is the directory structure. Everything in the client folder is the front-e
     |-package.json
     |-start-client.js
 |_server
+    |-Tests
     |-.dbconfig-sample.js
     |-queries.js
     |-server.js
@@ -92,19 +93,29 @@ const dbconfig = {
 ```
 
 
-<!---## Testing
+## Testing
 
- Explain how to run the tests for this system
+ This section describes what tests are available and how to run them.
 
- #### Break down into end to end tests
+#### Running Client tests
 
- Explain what these tests test and why
+ No information for running tests for the client has been added
+
+#### Running API test
+
+ API testing is ran with [newman](https://www.npmjs.com/package/newman), which executes tests written in [Postman](https://www.getpostman.com/). All testing files exported from Postman are in  the `server/Tests` folder. Data files used to assert variables should be placed in this folder.
+
+ Update the `"test"` script in `package.json` to use the desired variable data file and set the desired number of iterations.
 
  ```
- Give an example
+  "test": "newman run <collectionFile> -e <environmentFile> -n <numIterations> -d <variableDataFile>",
  ```
 
- ## Deployment
+ We currently only have one collection and one environment set up so those are already filled in for the script.
+
+ Run `npm run api` to start the API server then in a new session run `npm run test` to execute the tests.
+
+<!--- ## Deployment
 
  Add additional notes about how to deploy this on a live system -->
 

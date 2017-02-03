@@ -26,7 +26,7 @@ describe('Test suite for mounted App', () => {
   });
 
   it('Settings button shows SettingsBar when clicked', () => {
-    const settingsButton = app.find('.settingsButton').first();
+    const settingsButton = app.find('#settingsButton').first();
     settingsButton.simulate('click');
     expect(app.state().settingsBarVisible).toEqual(true);
   });
@@ -38,7 +38,7 @@ describe('Test suite for mounted App', () => {
 
   it('SettingsBar remains locked after opening then locking then closing and reopening', () => {
     // Open the SettingsBar
-    const settingsButton = app.find('.settingsButton').first();
+    const settingsButton = app.find('#settingsButton').first();
     settingsButton.simulate('click');
 
     // Check the checkbox
@@ -55,9 +55,9 @@ describe('Test suite for mounted App', () => {
   });
 
   it('Clear button results in empty speechBarMessage', () => {
-    const clearButton = app.find('button').at(2);
+    const clearButton = app.find('#clearButton').first();
     clearButton.simulate('click');
-    expect(app.state().speechBarMessage).toEqual([]);
+    expect(app.state().messageArray).toEqual([]);
   });
 
   // // SpeechSynthesisUtterance breaks this

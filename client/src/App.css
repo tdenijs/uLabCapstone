@@ -23,3 +23,39 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/*  Column Component  */
+.Column {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align:top;
+}
+
+/*   SpeechBar  Component  */
+.MessageWindow {
+  border: solid;
+  color: black;
+  height: 80px;
+}
+
+.MessageWindow .Word {  /* word component inside of the message window */
+  margin: auto;
+  width: 50px;
+  border: none;
+  color: #3a33d1;
+  float: left;
+}
+
+
+/*   Word  Component  */
+.Word {
+  margin: auto;
+  width: 100px;
+  border: solid;
+  color: blueviolet;
+}
+
+.Word img {
+  max-width: 100%;
+  height: auto;
+}

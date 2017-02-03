@@ -14,11 +14,11 @@ describe("Test suite for mounted SpeechBar", () => {
 
     beforeEach(() => {
         onChange = jest.fn();
-        bar = mount(<SpeechBar message="" handleClearMessage={onChange}/>);
+        bar = mount(<SpeechBar message={[]} handleClearMessage={onChange}/>);
     });
 
     it('SpeechBar calls handleClearMessage function when the clear button is clicked', () => {
-        bar.find('button').at(2).simulate('click');
+        bar.find('#clearButton').first().simulate('click');
         expect(onChange).toBeCalled();
     });
 });

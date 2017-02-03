@@ -1,5 +1,11 @@
 :root {
-  --border-color: #C0B19B;
+  --border-color: #DEE3e6;
+
+  --yellow: #f6e58f;
+  --brown: #C0B19B;
+  --light-green: #55af55;
+  --light-blue: #53bddc;
+  --dark-navy: #262B35;
 }
 
 /*  App  */
@@ -13,12 +19,12 @@
 /*  SpeechBar  */
 
 #speechBar {
-  background-color: #DBE7A4;
+  background-color: var(--dark-navy);
 }
 
 
 .MessageWindow {
-  border: 2px solid var(--border-color);
+  border: 0px solid var(--border-color);
   background-color: white;
 }
 
@@ -30,7 +36,7 @@
 /*  SettingsBar  */
 
 #settingsBar {
-  background-color: #F6E58F;
+  background-color: var(--light-blue);
 }
 
 
@@ -48,6 +54,7 @@
   font-weight: 900;
   font-style: italic;
   border-bottom: 3px solid var(--border-color);
+
 }
 
 

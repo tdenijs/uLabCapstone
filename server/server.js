@@ -37,7 +37,7 @@ app.get('/', function(req, res) {
 router.get('/words', db.getAllWords);
 router.get('/lists/title/:title', db.getAllWordsByListName);
 router.get('/lists/id/:id', db.getAllWordsByListId);
-router.get('/grids/title/:title/words', db.getAllWordsByGridName)
+router.get('/grids/title/:grid_title/words', db.getAllWordsByGridName)
 
 // ....add more routes here ....
 

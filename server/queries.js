@@ -86,7 +86,7 @@ function getAllWordsByListId(req, res, next) {
 
 // Returns all lists, words, symbols for grid by grid name
 function getAllWordsByGridName (req, res, next) {
-  var gTitle = req.params.title;
+  var gTitle = req.params.grid_title;
   db.any("select g.grid_id, g.grid_title, l.list_id, l.list_title, w.word_id, w.word, s.symbol_id, s.symbol_name, s.symbol_path, s.symbol_text "
        + "from grids g inner join gridlists gl on g.grid_id=gl.grid_id "
        + "inner join lists l on l.list_id=gl.list_id "

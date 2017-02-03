@@ -13,6 +13,8 @@ class SettingsBar extends Component {
 
     return (
       <div id="settingsBar">
+        <p> Global Button Size: {this.props.buttonSize} </p>
+        <p> Global Language: {this.props.selectedLanguage} </p>
         <Row>
           <Col xs={12} md={4}>
             <form id="langForm">

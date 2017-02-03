@@ -154,8 +154,7 @@ class App extends Component {
           settingsToggle={this.settingsToggle}/>
         <div id="settings" style={{margin: "auto"}}>
           {settingsBar}
-          <p> Global Button Size: {this.state.buttonSize} </p>
-          <p> Global Language: {this.state.selectedLanguage} </p>
+
         </div>
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}/>
       </div>

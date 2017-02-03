@@ -1,0 +1,7 @@
+/*  SettingsBar Component  */
+
+#settingsBar {
+  min-height: 80px;
+  margin-bottom: 5px;
+  padding: 10px;
+}

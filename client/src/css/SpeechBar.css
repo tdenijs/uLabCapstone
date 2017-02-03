@@ -1,0 +1,33 @@
+/*   SpeechBar  Component  */
+
+#speechBar {
+  min-height: 80px;
+  padding: 10px;
+  margin-bottom: 0px;
+}
+
+
+
+#playButton, #backspaceButton, #clearButton, #settingsButton{
+  min-height: 80px;
+  min-width: 5%;
+  font-size:1.7em;
+}
+
+#settingsButton{
+  float: right;
+}
+
+.MessageWindow {
+  min-height: 80px;
+  min-width: 70%;
+  float: left;
+  margin-left:5px;
+}
+
+.MessageWindow .Word { /* word component inside of the message window */
+  margin: auto;
+  width: 50px;
+  border: none;
+  float: left;
+}

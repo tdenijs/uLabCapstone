@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ButtonGroup} from 'react-bootstrap';
+import {ButtonToolbar, Button, Glyphicon } from 'react-bootstrap';
 import Word from './Word'
 
 class SpeechBar extends Component {
@@ -9,6 +9,11 @@ class SpeechBar extends Component {
     this.messageString = this.messageString.bind(this);
     this.speakMessage = this.speakMessage.bind(this);
     this.renderMessageWindow = this.renderMessageWindow.bind(this);
+
+    this.state = {
+      btnSize: "large",
+    }
+
   }
 
 
@@ -59,12 +64,15 @@ class SpeechBar extends Component {
 
     return (
       <div id="speechBar">
-        <ButtonGroup>
-          <button id="playButton" onClick={this.speakMessage}> Play</button>
+
+        <ButtonToolbar bsSize={this.state.btnSize}>
+          <Button id="playButton" bsStyle="success" onClick={this.speakMessage}><Glyphicon glyph="glyphicon glyphicon-play" aria-label="Play Button"/> </Button>
           {this.renderMessageWindow()}
-          <button id="backspaceButton" onClick={this.props.handleBackButton}>BackSpace</button>
-          <button id="clearButton" onClick={this.props.handleClearMessage}>Clear</button>
-        </ButtonGroup>
+          <Button id="backspaceButton" bsStyle="primary" onClick={this.props.handleBackButton}><Glyphicon glyph="glyphicon glyphicon-step-backward" aria-label="Backspace Button"/> </Button>
+          <Button id="clearButton" bsStyle="warning" onClick={this.props.handleClearMessage}><Glyphicon glyph="glyphicon glyphicon-remove-sign" aria-label="Clear Message Button"/> </Button>
+          <Button id="settingsButton" bsStyle="info" onClick={this.props.settingsToggle}><Glyphicon glyph="glyphicon glyphicon-cog" aria-label="Open Settings Button"/> </Button>
+
+        </ButtonToolbar>
       </div>
     );
   }
@@ -75,6 +83,7 @@ SpeechBar.propTypes = {
   message: React.PropTypes.array,
   handleClearMessage: React.PropTypes.func,
   handleBackButton: React.PropTypes.func,
+  settingsToggle: React.PropTypes.func,
 };
 
 

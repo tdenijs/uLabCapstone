@@ -111,10 +111,59 @@ function getAllWordsByGridName (req, res, next) {
 }
 
 
+// this fucntion returns an array of grids in current DB
+// in the form
+//      [{"grid_id": ,"grid_title": }, ...]
+function getAllGrids(req, res, next) {
+      db.any('SELECT g.grid_id, g.grid_title FROM grids g')
+    .then(function (data) {
+      if (data.length > 0) {
+      res.status(200)
+        .json(data)
+        console.log("All grids were sent.")
+      }
+      else {
+        res.status(404)
+          .send("ERROR: No grid found");
+          console.log("ERROR (404)");
+      }
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+// this fucntion returns an array of lists in a given grid
+// in the form
+//      [{"grid_id": , "list_id": , "list_title": }, ...]
+function getAllListsByGridID(req, res, next) {
+  var targetGridID = req.params.grid_id;
+  db.any('SELECT gl.grid_id, gl.list_id, l.list_title '
+         + 'FROM gridlists gl '
+         + 'INNER JOIN lists l ON gl.list_id=l.list_id '
+         + 'WHERE gl.grid_id=' + '\'' + targetGridID + '\' '
+         + 'ORDER BY gl.list_id asc')
+    .then(function (data) {
+      if (data.length > 0) {
+        res.status(200)
+          .json(data);
+          console.log("All lists for grid_id " + targetGridID + " were sent.");
+      } else {
+        res.status(404)
+        .send("ERROR: grid_id " + '\'' + targetGridID + '\' ' + "not found");
+        console.log("ERROR (404)");
+      }
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 module.exports = {
     getAllWords: getAllWords,
     getAllWordsByListName: getAllWordsByListName,
     getAllWordsByListId: getAllWordsByListId,
-    getAllWordsByGridName: getAllWordsByGridName
+    getAllWordsByGridName: getAllWordsByGridName,
+    getAllGrids: getAllGrids,
+    getAllListsByGridID: getAllListsByGridID
 }
-

@@ -30,7 +30,6 @@ class App extends Component {
       settingsBarVisible: false,
       settingsLocked: false,
       buttonSize: "5",
-      idCounter: 0,
       colArray: [],
       messageArray: [],
     }

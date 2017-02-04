@@ -25,7 +25,7 @@ Column.propTypes = {
 };
 
 Column.defaultProps = {
-  words: []
+  words: [{id: "1", word:"love", symbol_path:"", alt:""}]
 };
 
 export default Column;

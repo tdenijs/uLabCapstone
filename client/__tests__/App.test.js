@@ -1,6 +1,13 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import App from '../src/App';
+import speechSynthesis from '../src/mocks';
+
+// global.speechSynthesis = {
+//   getVoices: () => {
+//     return [{ name: "Google UK English Male" }, { name: "Google UK English Female" }];
+//   }
+// };
 
 it('App component shallow renders without crashing', () => {
   shallow(<App />);
@@ -13,8 +20,8 @@ describe('Test suite for mounted App', () => {
     app = mount(<App />);
   });
 
-  it('English is the default language', () => {
-    expect(app.state().selectedLanguage).toEqual('English');
+  it('Default is the default voice', () => {
+    expect(app.state().selectedVoice).toEqual('Default');
   });
 
   it('SettingsBar is initially hidden', () => {
@@ -59,16 +66,4 @@ describe('Test suite for mounted App', () => {
     clearButton.simulate('click');
     expect(app.state().messageArray).toEqual([]);
   });
-
-  // // SpeechSynthesisUtterance breaks this
-  // it('Clicking on a word adds its text to the SpeechBar', () => {
-  //   // Clear the window
-  //   const clearButton = app.find('button').at(2);
-  //   clearButton.simulate('click');
-  //
-  //   // Click a word button
-  //   const wordButton = app.find('.WordButton').first();
-  //   wordButton.simulate('click');
-  //   expect(app.state().speechBarMessage).toContain("I");
-  // });
 });

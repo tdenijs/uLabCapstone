@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {ButtonToolbar, Button, Glyphicon } from 'react-bootstrap';
 import Word from './Word'
+import _ from 'lodash'
 
 class SpeechBar extends Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class SpeechBar extends Component {
       <div className="MessageWindow" >
         {
           this.props.message.map(({id, word, src, alt}) => {
-              return ( <Word key={id} id={id} text={word} src={src} alt={alt}/> );
+              return ( <Word key={_.uniqueId()} id={id} text={word} src={src} alt={alt}/> );
             }
           )}
       </div>

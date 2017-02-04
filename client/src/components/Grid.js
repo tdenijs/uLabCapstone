@@ -25,7 +25,10 @@ Grid.propTypes = {
 };
 
 Grid.defaultProps = {
-  cols: [],
+  cols: [{
+    title: "test",
+    words: [{id: "1", word:"love", symbol_path:"", alt:""}]
+  }],
 };
 
 export default Grid;

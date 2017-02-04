@@ -66,4 +66,22 @@ describe('Test suite for mounted App', () => {
     clearButton.simulate('click');
     expect(app.state().messageArray).toEqual([]);
   });
+
+  it('Clicking on a word adds it to the messageArray', () => {
+    // give app a word to test
+    app.setState({colArray: [{
+      title: "test",
+      words: [{id: "1", word:"love", symbol_path:"", alt:""}]
+    }]});
+
+    // Clear the window
+    const clearButton = app.find('#clearButton').first();
+    clearButton.simulate('click');
+
+    // Click a word button
+    const wordButton = app.find('.Word').first();
+    wordButton.simulate('click');
+
+    expect(app.state().messageArray[0].word).toContain('love');
+  });
 });

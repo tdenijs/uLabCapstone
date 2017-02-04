@@ -6,7 +6,7 @@ class Column extends Component {
   render() {
     return (
       <div className="Column">
-        {this.props.title}
+        <div id="columnTitle">{this.props.title}</div>
         {
           this.props.words.map(({id, word, symbol_path, alt}) => {
             return (
@@ -14,7 +14,6 @@ class Column extends Component {
             );
           })
         }
-        <br/>
       </div>
     );
   }

@@ -17,7 +17,6 @@ class SettingsBar extends Component {
 
 
   render() {
-
     // Disable the dropdown menu if the settingsLocked prop is true
     let disabled = this.props.settingsLocked ? 'disabled' : '';
 
@@ -26,12 +25,11 @@ class SettingsBar extends Component {
 
     return (
       <div id="settingsBar">
-        <Row>
-
+	<Row>
           <Col xs={12} md={4}>
-            <form id="option">
-              <label id="voiceLabel">Voice</label>
-              <select id="voice" defaultValue={this.state.selectedVoice} disabled={disabled}
+            <form id="langForm">
+              <label id="langLabel">Voice</label>
+              <select id="langMenu" defaultValue={this.state.selectedVoice} disabled={disabled}
                       onChange={(e) => {this.setState({selectedVoice: e.target.value}); 
 		      		this.props.updateVoice(e)}} > 
                 {
@@ -44,7 +42,6 @@ class SettingsBar extends Component {
 
 
           </Col>
-
           <Col xs={12} md={4}>
             <form id="buttonSizeForm">
               <label id="buttonSizeLabel">Button Size</label>
@@ -68,9 +65,9 @@ class SettingsBar extends Component {
 
 
 SettingsBar.propTypes = {
-  lockToggle: React.PropTypes.func,
   resizeButton: React.PropTypes.func,
   updateVoice: React.PropTypes.func,
+  lockToggle: React.PropTypes.func,
 };
 
 export default SettingsBar;

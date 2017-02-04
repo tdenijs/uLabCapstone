@@ -31,10 +31,15 @@ class SpeechBar extends Component {
 
   speakMessage(e) {
     e.preventDefault();
-
+    var voices = speechSynthesis.getVoices();
+    var selectedVoice = this.props.selectedVoice;
     var msg = new SpeechSynthesisUtterance();
-
-    console.log(this.messageString());
+    for(var i = 0; i < voices.length; i++) {
+	if(voices[i].name === selectedVoice) {
+		msg.voice = voices[i];
+		break;
+	}
+    }
 
     if (this.props.message.length >= 1) {
       msg.text = this.messageString();
@@ -83,6 +88,7 @@ SpeechBar.propTypes = {
   message: React.PropTypes.array,
   handleClearMessage: React.PropTypes.func,
   handleBackButton: React.PropTypes.func,
+  selectedVoice: React.PropTypes.string,
   settingsToggle: React.PropTypes.func,
 };
 

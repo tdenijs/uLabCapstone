@@ -1,7 +1,19 @@
 import React, {Component} from 'react';
-import {Row, Col} from 'react-bootstrap';
+import {Row, Col, } from 'react-bootstrap';
+// DropdownButton, MenuItem
 
 class SettingsBar extends Component {
+  constructor(props) {
+    super(props);
+
+    var voices = speechSynthesis.getVoices();
+
+    this.state = {
+	selectedVoice: voices[0] && voices[0].value,
+	voices, 
+    }
+  }
+
 
 
   render() {
@@ -13,20 +25,22 @@ class SettingsBar extends Component {
 
     return (
       <div id="settingsBar">
-        <p> Global Button Size: {this.props.buttonSize} </p>
-        <p> Global Language: {this.props.selectedLanguage} </p>
-        <Row>
+	<Row>
           <Col xs={12} md={4}>
             <form id="langForm">
-              <label id="langLabel">Language: </label>
-              <select id="langMenu" defaultValue={this.props.selectedLanguage}
-                      onChange={this.props.updateLanguage} disabled={disabled}>
-                <option value="English">English</option>
-                <option value="Spanish">Spanish</option>
-                <option value="French">French</option>
-                <option value="German">German</option>
+              <label id="langLabel">Voice</label>
+              <select id="langMenu" defaultValue={this.state.selectedVoice} disabled={disabled}
+                      onChange={(e) => {this.setState({selectedVoice: e.target.value}); 
+		      		this.props.updateVoice(e)}} > 
+                {
+                    this.state.voices.map((voice) => {
+			return <option key={voice.name} value={voice && voice.value}>{voice.name}</option>
+		    })
+ 		}
               </select>
             </form>
+
+
           </Col>
           <Col xs={12} md={4}>
             <form id="buttonSizeForm">
@@ -37,23 +51,30 @@ class SettingsBar extends Component {
                      min="0" max="10" disabled={disabled} style={{margin: "auto", width: "200px"}}/>
             </form>
           </Col>
+
           <Col xs={12} md={4}>
             <input type="checkbox" id="lockCheck" onChange={this.props.lockToggle} checked={checked}/>
             Lock Settings
           </Col>
+
         </Row>
-
-
       </div>
     );
   }
 }
 
+
 SettingsBar.propTypes = {
-  updateLanguage: React.PropTypes.func,
-  lockToggle: React.PropTypes.func,
   resizeButton: React.PropTypes.func,
+  updateVoice: React.PropTypes.func,
+  lockToggle: React.PropTypes.func,
 };
 
 export default SettingsBar;
+
+
+
+
+
+
 

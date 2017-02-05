@@ -153,7 +153,7 @@ class App extends Component {
 	  selectedVoice={this.state.selectedVoice}
           handleBackButton={this.handleBackButton}
           settingsToggle={this.settingsToggle}/>
-        <div id="settings" style={{margin: "auto"}}>
+        <div className="Settings" style={{margin: "auto"}}>
           {settingsBar}
           <p> Global Button Size: {this.state.buttonSize} </p>
           <p> Global Voice: {this.state.selectedVoice} </p>

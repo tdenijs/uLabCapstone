@@ -6,7 +6,7 @@ class Column extends Component {
   render() {
     return (
       <div className="Column">
-        <div id="columnTitle">{this.props.title}</div>
+        <div className="ColumnTitle">{this.props.title}</div>
         {
           this.props.words.map(({id, word, symbol_path, alt}) => {
             return (

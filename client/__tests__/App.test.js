@@ -3,12 +3,6 @@ import { shallow, mount } from 'enzyme';
 import App from '../src/App';
 import speechSynthesis from '../src/mocks';
 
-// global.speechSynthesis = {
-//   getVoices: () => {
-//     return [{ name: "Google UK English Male" }, { name: "Google UK English Female" }];
-//   }
-// };
-
 it('App component shallow renders without crashing', () => {
   shallow(<App />);
 });
@@ -33,7 +27,7 @@ describe('Test suite for mounted App', () => {
   });
 
   it('Settings button shows SettingsBar when clicked', () => {
-    const settingsButton = app.find('#settingsButton').first();
+    const settingsButton = app.find('.SettingsButton').first();
     settingsButton.simulate('click');
     expect(app.state().settingsBarVisible).toEqual(true);
   });
@@ -45,11 +39,11 @@ describe('Test suite for mounted App', () => {
 
   it('SettingsBar remains locked after opening then locking then closing and reopening', () => {
     // Open the SettingsBar
-    const settingsButton = app.find('#settingsButton').first();
+    const settingsButton = app.find('.SettingsButton').first();
     settingsButton.simulate('click');
 
     // Check the checkbox
-    const lockCheck = app.find('#lockCheck').first();
+    const lockCheck = app.find('.LockCheck').first();
     lockCheck.simulate('change');
 
     expect(app.state().settingsLocked).toEqual(true);
@@ -62,7 +56,7 @@ describe('Test suite for mounted App', () => {
   });
 
   it('Clear button results in empty speechBarMessage', () => {
-    const clearButton = app.find('#clearButton').first();
+    const clearButton = app.find('.ClearButton').first();
     clearButton.simulate('click');
     expect(app.state().messageArray).toEqual([]);
   });
@@ -75,7 +69,7 @@ describe('Test suite for mounted App', () => {
     }]});
 
     // Clear the window
-    const clearButton = app.find('#clearButton').first();
+    const clearButton = app.find('.ClearButton').first();
     clearButton.simulate('click');
 
     // Click a word button

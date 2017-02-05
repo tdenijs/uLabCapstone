@@ -8,7 +8,7 @@ class Grid extends Component {
     let sortedCols = _.sortBy(this.props.cols, 'title');
 
     return (
-      <div id="grid">
+      <div className="Grid">
         {
           sortedCols.map(({title, words}) => {
             return (<Column key={_.uniqueId()} title={title} words={words} add={this.props.add}/>);

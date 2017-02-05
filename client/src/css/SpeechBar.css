@@ -1,6 +1,6 @@
 /*   SpeechBar  Component  */
 
-#speechBar {
+.SpeechBar {
   min-height: 80px;
   padding: 10px;
   margin-bottom: 0px;
@@ -8,13 +8,13 @@
 
 
 
-#playButton, #backspaceButton, #clearButton, #settingsButton{
+.PlayButton, .BackspaceButton, .ClearButton, .SettingsButton{
   min-height: 80px;
   min-width: 5%;
   font-size:1.7em;
 }
 
-#settingsButton{
+.SettingsButton{
   float: right;
 }
 

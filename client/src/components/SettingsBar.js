@@ -24,12 +24,12 @@ class SettingsBar extends Component {
     let checked = this.props.settingsLocked ? 'checked' : '';
 
     return (
-      <div id="settingsBar">
+      <div className="SettingsBar">
 	<Row>
           <Col xs={12} md={4}>
-            <form id="langForm">
-              <label id="langLabel">Voice</label>
-              <select id="langMenu" defaultValue={this.state.selectedVoice} disabled={disabled}
+            <form className="VoiceForm">
+              <label className="VoiceLabel">Voice</label>
+              <select className="VoiceMenu" defaultValue={this.state.selectedVoice} disabled={disabled}
                       onChange={(e) => {this.setState({selectedVoice: e.target.value}); 
 		      		this.props.updateVoice(e)}} > 
                 {
@@ -43,17 +43,17 @@ class SettingsBar extends Component {
 
           </Col>
           <Col xs={12} md={4}>
-            <form id="buttonSizeForm">
-              <label id="buttonSizeLabel">Button Size</label>
-              <output id="buttonSizeOutput">{this.props.buttonSize}</output>
-              <input id="buttonSizeSlider" type="range"
+            <form className="ButtonSizeForm">
+              <label className="ButtonSizeLabel">Button Size</label>
+              <output className="ButtonSizeOutput">{this.props.buttonSize}</output>
+              <input className="ButtonSizeSlider" type="range"
                      value={this.props.buttonSize} onChange={this.props.resizeButton}
                      min="0" max="10" disabled={disabled} style={{margin: "auto", width: "200px"}}/>
             </form>
           </Col>
 
           <Col xs={12} md={4}>
-            <input type="checkbox" id="lockCheck" onChange={this.props.lockToggle} checked={checked}/>
+            <input type="checkbox" className="LockCheck" onChange={this.props.lockToggle} checked={checked}/>
             Lock Settings
           </Col>
 

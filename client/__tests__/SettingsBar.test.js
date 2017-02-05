@@ -3,12 +3,6 @@ import { shallow, mount } from 'enzyme';
 import SettingsBar from '../src/components/SettingsBar';
 import speechSynthesis from '../src/mocks';
 
-// global.speechSynthesis = {
-//     getVoices: () => {
-//         return [{ name: "Google UK English Male" }, { name: "Google UK English Female" }];
-//     }
-// };
-
 it('SettingsBar renders without crashing', () => {
     shallow(<SettingsBar />);
 });
@@ -25,17 +19,17 @@ describe("Test suite for mounted SettingsBar", () => {
     });
 
     it('SettingsBar calls updateVoice function when the drop down menu changes', () => {
-        bar.find('select').simulate('change');
+        bar.find('.VoiceMenu').simulate('change');
         expect(onChange).toBeCalled();
     });
 
     it('SettingsBar calls lockToggle function when the lock checkbox is clicked', () => {
-        bar.find('#lockCheck').first().simulate('change');
+        bar.find('.LockCheck').first().simulate('change');
         expect(onChange).toBeCalled();
     });
 
     it('SettingsBar calls reSize function when the button size slider is changed', () => {
-        bar.find('#buttonSizeSlider').first().simulate('change');
+        bar.find('.ButtonSizeSlider').first().simulate('change');
         expect(onChange).toBeCalled();
     });
 });

@@ -4,12 +4,6 @@ import { mount } from 'enzyme';
 import Word from '../src/components/Word.js';
 import { speechSynthesis, SpeechSynthesisUtterance } from '../src/mocks';
 
-// global.speechSynthesis = {
-//     getVoices: () => {
-//         return [{ name: "Google UK English Male" }, { name: "Google UK English Female" }];
-//     }
-// };
-
 it('word renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<Word />, div);

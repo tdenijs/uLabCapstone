@@ -1,6 +1,6 @@
 /*  SettingsBar Component  */
 
-#settingsBar {
+.SettingsBar {
   min-height: 80px;
   margin-bottom: 5px;
   padding: 10px;

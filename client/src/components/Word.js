@@ -44,4 +44,11 @@ Word.propTypes = {
   add: React.PropTypes.func,
 };
 
+Word.defaultProps = {
+  id: "1",
+  word: "love",
+  src: "",
+  alt: ""
+};
+
 export default Word;

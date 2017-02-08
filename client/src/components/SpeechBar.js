@@ -36,10 +36,10 @@ class SpeechBar extends Component {
     var selectedVoice = this.props.selectedVoice;
     var msg = new SpeechSynthesisUtterance();
     for(var i = 0; i < voices.length; i++) {
-	if(voices[i].name === selectedVoice) {
-		msg.voice = voices[i];
-		break;
-	}
+	   if(voices[i].name === selectedVoice) {
+		   msg.voice = voices[i];
+		   break;
+	    }
     }
 
     if (this.props.message.length >= 1) {

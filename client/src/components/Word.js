@@ -19,11 +19,24 @@ class Word extends Component {
 
     this.props.add(word);
 
-    // this.props.add(this.props.text);
+    speechSynthesis.getVoices().forEach(function(voice) {
+             console.log(voice.name, voice.default ? voice.default :'');
+    });
 
     // Speak the text of the Word
     var spokenWord = new SpeechSynthesisUtterance(this.props.text);
-    window.speechSynthesis.speak(spokenWord);
+
+     var voices= speechSynthesis.getVoices();
+     console.log(this.props.selectedVoice);
+     var chosenVoice= this.props.selectedVoice;
+
+     for(var i = 0; i < voices.length; i++) {
+     	   if(voices[i].name === chosenVoice) {
+     		   spokenWord.voice = voices[i];
+     		   break;
+     	    }
+         }
+     speechSynthesis.speak(spokenWord);
   }
 
   render() {

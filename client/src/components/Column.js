@@ -10,7 +10,8 @@ class Column extends Component {
         {
           this.props.words.map(({id, word, symbol_path, alt}) => {
             return (
-              <Word key={_.uniqueId()} id={id} text={word} src={symbol_path} alt={alt} add={this.props.add}/>
+              <Word key={_.uniqueId()} id={id} text={word} src={symbol_path} alt={alt} add={this.props.add}
+              selectedVoice={this.props.selectedVoice}/>
             );
           })
         }

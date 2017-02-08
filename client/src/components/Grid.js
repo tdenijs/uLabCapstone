@@ -11,7 +11,8 @@ class Grid extends Component {
       <div className="Grid">
         {
           sortedCols.map(({title, words}) => {
-            return (<Column key={_.uniqueId()} title={title} words={words} add={this.props.add}/>);
+            return (<Column key={_.uniqueId()} title={title} words={words} add={this.props.add}
+            selectedVoice={this.props.selectedVoice}/>);
           })
         }
       </div>

@@ -150,7 +150,7 @@ class App extends Component {
         <SpeechBar
           message={this.state.messageArray}
           handleClearMessage={this.handleClearMessage}
-	  selectedVoice={this.state.selectedVoice}
+	        selectedVoice={this.state.selectedVoice}
           handleBackButton={this.handleBackButton}
           settingsToggle={this.settingsToggle}/>
         <div className="Settings" style={{margin: "auto"}}>
@@ -159,7 +159,8 @@ class App extends Component {
           <p> Global Voice: {this.state.selectedVoice} </p>
         </div>
 
-        <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}/>
+        <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
+        selectedVoice={this.state.selectedVoice}/>
       </div>
 
     );

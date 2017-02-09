@@ -44,6 +44,9 @@
 - [ ] I have added comments where appropriate to my code so others can understand it
 - [ ] I have assigned the minimum reviewers for this pull request
 - [ ] I have pasted links to appropriate Trello tasks for reviewers
+- [ ] I wrote new tests that test my changes
+- [ ] FE - I ran `npm test` and all tests passed 
+- [ ] BE - I ran `npm run test` at root and all tests passed
 
 ## Documentation
 <!--- Put an ‘x’ in at least one of the following -->

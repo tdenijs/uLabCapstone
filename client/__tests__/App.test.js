@@ -78,4 +78,56 @@ describe('Test suite for mounted App', () => {
 
     expect(app.state().messageArray[0].word).toContain('love');
   });
+
+  it('The vocab columns display in the correct order', () => {
+    // give app some cols to test
+    app.setState({colArray: [
+        {
+          order: 1,
+          title: "pronoun",
+          words: [{id: "1", word:"love", symbol_path:"", alt:""}]},
+        {
+          order: 2,
+          title: "noun",
+          words: [{id: "1", word:"love", symbol_path:"", alt:""}]},
+        {
+          order: 3,
+          title: "verb",
+          words: [{id: "1", word:"love", symbol_path:"", alt:""}]},
+        {
+          order: 4,
+          title: "adjective",
+          words: [{id: "1", word:"love", symbol_path:"", alt:""}]},
+        {
+          order: 5,
+          title: "adverb",
+          words: [{id: "1", word:"love", symbol_path:"", alt:""}]},
+        {
+          order: 6,
+          title: "preposition",
+          words: [{id: "1", word:"love", symbol_path:"", alt:""}]},
+        {
+          order: 7,
+          title: "exclamation",
+          words: [{id: "1", word:"love", symbol_path:"", alt:""}]},
+    ]});
+
+    // Get each column
+    const col1 = app.find('Column').at(0);
+    const col2 = app.find('Column').at(1);
+    const col3 = app.find('Column').at(2);
+    const col4 = app.find('Column').at(3);
+    const col5 = app.find('Column').at(4);
+    const col6 = app.find('Column').at(5);
+    const col7 = app.find('Column').at(6);
+
+    // Expect each column to have the correct title
+    expect(col1.props().title).toEqual('pronoun');
+    expect(col2.props().title).toEqual('noun');
+    expect(col3.props().title).toEqual('verb');
+    expect(col4.props().title).toEqual('adjective');
+    expect(col5.props().title).toEqual('adverb');
+    expect(col6.props().title).toEqual('preposition');
+    expect(col7.props().title).toEqual('exclamation');
+  })
 });

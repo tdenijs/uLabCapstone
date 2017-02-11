@@ -42,7 +42,14 @@ class App extends Component {
   // Initializes wordArrays with JSON data from API call
   getWords() {
     let nextCol;
-    let titles = ['adjective', 'adverb', 'exclamation', 'noun', 'preposition', 'pronoun', 'verb'];
+    let titles = [
+      {title: 'pronoun', order: 1},
+      {title: 'noun', order: 2},
+      {title: 'verb', order: 3},
+      {title: 'adjective', order: 4},
+      {title: 'adverb', order: 5},
+      {title: 'preposition', order: 6},
+      {title: 'exclamation', order: 7}];
 
     // titles.map((title) => {
     //   return(
@@ -57,10 +64,11 @@ class App extends Component {
     //   );
     // });
 
-    titles.forEach((title) => {
+    titles.forEach(({title, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
         .then((data) => {
           nextCol = {
+            order: order,
             title: title,
             words: data
           };

@@ -58,6 +58,14 @@ class SettingsBar extends Component {
           </Col>
 
         </Row>
+	<Row>
+	  <Col xs={12} md={6}>
+	    <button className="AddButton" onClick="" disabled={disabled}>Add Button</button>
+	  </Col>
+	  <Col xs={12} md={6}>
+	    <button className="EditorButton" onClick={this.props.enableEditorMode} disabled={disabled}>Editor Mode</button>
+	  </Col>
+	</Row>
       </div>
     );
   }
@@ -68,6 +76,7 @@ SettingsBar.propTypes = {
   resizeButton: React.PropTypes.func,
   updateVoice: React.PropTypes.func,
   lockToggle: React.PropTypes.func,
+  enableEditorMode: React.PropTypes.func,
 };
 
 export default SettingsBar;

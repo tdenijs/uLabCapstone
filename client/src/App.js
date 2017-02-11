@@ -20,6 +20,7 @@ class App extends Component {
     this.updateVoice = this.updateVoice.bind(this);
     this.lockToggle = this.lockToggle.bind(this);
     this.resizeButton = this.resizeButton.bind(this);
+    this.enableEditorMode = this.enableEditorMode.bind(this);
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
     this.getWords = this.getWords.bind(this);
@@ -29,6 +30,7 @@ class App extends Component {
       selectedVoice: "Default",
       settingsBarVisible: false,
       settingsLocked: false,
+      enableEditorMode: false,
       buttonSize: "5",
       colArray: [],
       messageArray: [],
@@ -111,6 +113,11 @@ class App extends Component {
     this.setState({settingsBarVisible: !(this.state.settingsBarVisible)});
   }
 
+  //Enables enableEditorMode state variable when the Editor Mode button is clicked in SettingsBar
+  enableEditorMode() {
+    console.log("Toggling Editor Mode");
+    this.setState({enableEditorMode: !(this.state.enableEditorMode)});
+  }
 
   // Callback function passed to the SettingsBar to update the App's settingsLocked state variable
   lockToggle() {
@@ -145,7 +152,10 @@ class App extends Component {
 
   render() {
 
+    //Get the Browser's voices loaded before anything. Allows synching
+    //of SettingsBar voices
     speechSynthesis.getVoices();
+
     // Render the SettingsBar only if the settingsBarVisible state variable is true
     let settingsBar = this.state.settingsBarVisible
       ? <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
@@ -165,6 +175,7 @@ class App extends Component {
           {settingsBar}
           <p> Global Button Size: {this.state.buttonSize} </p>
           <p> Global Voice: {this.state.selectedVoice} </p>
+	  <p> Editor Mode Enabled: {this.state.enableEditorMode} </p>
         </div>
 
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}

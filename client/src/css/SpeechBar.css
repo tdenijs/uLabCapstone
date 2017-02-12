@@ -1,29 +1,31 @@
 /*   SpeechBar  Component  */
 
-.SpeechBar {
-  min-height: 80px;
-  padding: 10px;
-  margin-bottom: 0px;
-}
+/*Button{*/
+  /*min-height: 80px;*/
+  /*min-width: 5%;*/
+  /*font-size:1.7em;*/
+  /*margin-right: 50px;*/
+/*}*/
 
+/* Small screens */
+@media all and (max-width: 599px) {
 
+  .SpeechBar {
+    min-height: 80px;
+    padding: 10px;
+    margin-bottom: 0px;
 
-.PlayButton, .BackspaceButton, .ClearButton, .SettingsButton{
-  min-height: 80px;
-  min-width: 5%;
-  font-size:1.7em;
-}
-
-.SettingsButton{
-  float: right;
-}
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+  }
 
 .MessageWindow {
-  min-height: 80px;
-  min-width: 70%;
   float: left;
-  margin-left: 5px;
-
+  min-height: 80px;
+  margin-bottom: 5px;
+  flex-wrap: nowrap;
 }
 
 /* word component inside of the message window */
@@ -38,7 +40,66 @@
   min-height: inherit;
 }
 
+
 .MessageWindow .Word img {
   max-width: 80%;
 }
 
+  .MessageWindow { flex: 1 100%; order: 1; }
+  .PlayButton  { order: 2; }
+  .BackspaceButton { order: 3;
+    justify-content: flex-end;
+  }
+  .ClearButton { order: 4; justify-content: flex-end; }
+  .SettingsButton  { order: 5; justify-content: flex-end;}
+}
+
+
+/* Medium screens */
+@media all and (min-width: 600px) {
+  .SpeechBar {
+    min-height: 80px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+  }
+
+  .MessageWindow {
+    float: left;
+    min-height: 80px;
+    margin-right: 10px;
+    margin-left: 10px;
+    flex-wrap: nowrap;
+  }
+
+  .MessageWindow .Word { /* word component inside of the message window */
+    margin: auto;
+    width: 50px;
+    border: none;
+    float: left;
+  }
+
+  .MessageWindow { flex: 1; order: 2 }
+  .PlayButton  {  order: 2; }
+  .BackspaceButton {  order: 3;
+    justify-content: flex-end;
+  }
+  .ClearButton {  order: 4; justify-content: flex-end; margin-left: 10px;}
+  .SettingsButton  {  order: 5; justify-content: flex-end; margin-left: 10px;}
+}
+
+
+
+
+/* Large screens */
+@media all and (min-width: 800px) {
+
+  .MessageWindow { flex: 2 0px; order: 1; }
+  .PlayButton  { order: 1; }
+  .BackspaceButton { order: 3; }
+  .ClearButton { order: 4; }
+  .SettingsButton  { order: 5; }
+}

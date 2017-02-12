@@ -43,7 +43,7 @@ class Word extends Component {
     return (
       <div className="Word" onClick={this.speak}>
         <div className="WordSymbol">
-          <img src={this.props.src} alt={this.props.alt}/>
+          <img src={this.props.src} data-pin-nopin="true" alt={this.props.alt} />
         </div>
         <div className="WordText">{this.props.text}</div>
       </div>

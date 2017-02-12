@@ -22,12 +22,23 @@
   min-height: 80px;
   min-width: 70%;
   float: left;
-  margin-left:5px;
+  margin-left: 5px;
+
 }
 
-.MessageWindow .Word { /* word component inside of the message window */
-  margin: auto;
-  width: 50px;
+/* word component inside of the message window */
+.MessageWindow .Word {
+  width: 60px;
   border: none;
   float: left;
+  height: 90%;
 }
+
+.MessageWindow .WordSymbol{
+  min-height: inherit;
+}
+
+.MessageWindow .Word img {
+  max-width: 80%;
+}
+

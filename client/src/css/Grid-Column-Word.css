@@ -1,4 +1,10 @@
 
+/*  Grid  Component*/
+.Grid {
+
+}
+
+
 
 /*  Column Component  */
 .Column {
@@ -11,7 +17,7 @@
 }
 
 .ColumnTitle {
-  padding: 5px 10px ;
+  /*margin: 5px 5px ;*/
 }
 
 
@@ -19,6 +25,7 @@
 .Word {
   margin: auto;
   width: 100px;
+
   min-height: 50px;
 
   /*use flexbox to center img &  word text*/
@@ -28,14 +35,17 @@
 
 }
 
+.Word:hover {
+  background-color: #F5f5fa;
+  color: red;
+}
+
 .Word img {
   max-width: 100%;
-  height: auto;
 }
 
 .WordText {
   padding-top: 5px;
   font-size: 1.2em;
-
 
 }

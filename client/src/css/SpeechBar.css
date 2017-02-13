@@ -1,13 +1,5 @@
 /*   SpeechBar  Component  */
 
-/*Button{*/
-  /*min-height: 80px;*/
-  /*min-width: 5%;*/
-  /*font-size:1.7em;*/
-  /*margin-right: 50px;*/
-/*}*/
-
-
 /** Small screens **/
 
 @media all and (max-width: 599px) {
@@ -31,7 +23,6 @@
 
     overflow: auto;
     white-space: nowrap;
-    /*overflow-x: scroll;*/
   }
 
   /* word component inside of the message window */
@@ -40,7 +31,7 @@
     border: none;
     float: left;
     height: 90%;
-    display: inline-block;
+
   }
 
   .MessageWindow .Word:hover {

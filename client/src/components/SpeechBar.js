@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ButtonToolbar, Button, Glyphicon } from 'react-bootstrap';
+import {Button, Glyphicon } from 'react-bootstrap';
 import Word from './Word'
 import _ from 'lodash'
 
@@ -70,15 +70,11 @@ class SpeechBar extends Component {
 
     return (
       <div className="SpeechBar">
-
-        {/*<ButtonToolbar bsSize={this.state.btnSize}>*/}
           <Button className="PlayButton" bsStyle="success" onClick={this.speakMessage}><Glyphicon glyph="glyphicon glyphicon-play" aria-label="Play Button"/> </Button>
           {this.renderMessageWindow()}
           <Button className="BackspaceButton" bsStyle="primary" onClick={this.props.handleBackButton}><Glyphicon glyph="glyphicon glyphicon-step-backward" aria-label="Backspace Button"/> </Button>
           <Button className="ClearButton" bsStyle="warning" onClick={this.props.handleClearMessage}><Glyphicon glyph="glyphicon glyphicon-remove-sign" aria-label="Clear Message Button"/> </Button>
           <Button className="SettingsButton" bsStyle="info" onClick={this.props.settingsToggle}><Glyphicon glyph="glyphicon glyphicon-cog" aria-label="Open Settings Button"/> </Button>
-
-        {/*</ButtonToolbar>*/}
       </div>
     );
   }

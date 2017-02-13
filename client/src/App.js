@@ -30,7 +30,7 @@ class App extends Component {
       selectedVoice: "Default",
       settingsBarVisible: false,
       settingsLocked: false,
-      enableEditorMode: false,
+      editorToggle: false,
       buttonSize: "5",
       colArray: [],
       messageArray: [],
@@ -105,10 +105,9 @@ class App extends Component {
     this.setState({settingsBarVisible: !(this.state.settingsBarVisible)});
   }
 
-  //Enables enableEditorMode state variable when the Editor Mode button is clicked in SettingsBar
+  //Enables editorToggle state variable when the Editor Mode button is clicked in SettingsBar
   enableEditorMode() {
-    console.log("Toggling Editor Mode");
-    this.setState({enableEditorMode: !(this.state.enableEditorMode)});
+    this.setState({editorToggle: !(this.state.editorToggle)});
   }
 
   // Callback function passed to the SettingsBar to update the App's settingsLocked state variable
@@ -152,22 +151,26 @@ class App extends Component {
     let settingsBar = this.state.settingsBarVisible
       ? <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
                      settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
+		     editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
                      buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}/>
       : null;
+    let editing = this.state.editorToggle
+      ? "True"
+      : "False";
 
     return (
       <div className="App">
         <SpeechBar
           message={this.state.messageArray}
           handleClearMessage={this.handleClearMessage}
-	        selectedVoice={this.state.selectedVoice}
+	  selectedVoice={this.state.selectedVoice}
           handleBackButton={this.handleBackButton}
           settingsToggle={this.settingsToggle}/>
         <div className="Settings" style={{margin: "auto"}}>
           {settingsBar}
           <p> Global Button Size: {this.state.buttonSize} </p>
           <p> Global Voice: {this.state.selectedVoice} </p>
-	  <p> Editor Mode Enabled: {this.state.enableEditorMode} </p>
+	  <p> Editor Mode Enabled: {editing} </p>
         </div>
 
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}

@@ -1,12 +1,11 @@
 /*   SpeechBar  Component  */
 
 /*Button{*/
-/*min-height: 80px;*/
-/*min-width: 5%;*/
-/*font-size:1.7em;*/
-/*margin-right: 50px;*/
+  /*min-height: 80px;*/
+  /*min-width: 5%;*/
+  /*font-size:1.7em;*/
+  /*margin-right: 50px;*/
 /*}*/
-
 
 
 /** Small screens **/
@@ -76,6 +75,7 @@
     order: 5;
     justify-content: flex-end;
   }
+
 }
 
 /**  Medium screens  **/
@@ -142,29 +142,40 @@
     justify-content: flex-end;
     margin-left: 10px;
   }
-}
 
-/**  Large screens **/
-
-@media all and (min-width: 800px) {
   .MessageWindow {
-    flex: 2 0px;
-    order: 1;
+    float: left;
+    min-height: 80px;
+    margin-bottom: 5px;
+    flex-wrap: nowrap;
   }
 
-  .PlayButton {
-    order: 1;
-  }
-
-  .BackspaceButton {
-    order: 3;
-  }
-
-  .ClearButton {
-    order: 4;
-  }
-
-  .SettingsButton {
-    order: 5;
-  }
 }
+
+  /**  Large screens **/
+  @media all and (min-width: 800px) {
+    .MessageWindow {
+      flex: 2 0px;
+      order: 1;
+    }
+
+    .PlayButton {
+      order: 1;
+    }
+
+    .BackspaceButton {
+      order: 3;
+    }
+
+    .ClearButton {
+      order: 4;
+    }
+
+    .SettingsButton {
+      order: 5;
+    }
+
+  }
+
+
+

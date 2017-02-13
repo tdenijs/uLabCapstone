@@ -38,6 +38,7 @@ router.get('/words', db.getAllWords);
 router.get('/lists/title/:title', db.getAllWordsByListName);
 router.get('/lists/id/:id', db.getAllWordsByListId);
 router.get('/grids/title/:grid_title/words', db.getAllWordsByGridName)
+router.get('/grids/id/:grid_id/words', db.getAllWordsByGridId)
 router.get('/grids', db.getAllGrids)
 router.get('/grids/id/:grid_id', db.getAllListsByGridID)
 

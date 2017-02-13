@@ -1,10 +1,10 @@
 /*   SpeechBar  Component  */
 
 /*Button{*/
-  /*min-height: 80px;*/
-  /*min-width: 5%;*/
-  /*font-size:1.7em;*/
-  /*margin-right: 50px;*/
+/*min-height: 80px;*/
+/*min-width: 5%;*/
+/*font-size:1.7em;*/
+/*margin-right: 50px;*/
 /*}*/
 
 /* Small screens */
@@ -21,41 +21,57 @@
     align-content: stretch;
   }
 
-.MessageWindow {
-  float: left;
-  min-height: 80px;
-  margin-bottom: 5px;
-  flex-wrap: nowrap;
-}
+  .MessageWindow {
+    float: left;
+    min-height: 80px;
+    margin-bottom: 5px;
+    flex-wrap: nowrap;
+  }
 
-/* word component inside of the message window */
-.MessageWindow .Word {
-  width: 60px;
-  border: none;
-  float: left;
-  height: 90%;
-}
+  /* word component inside of the message window */
+  .MessageWindow .Word {
+    width: 60px;
+    border: none;
+    float: left;
+    height: 90%;
+  }
 
-.MessageWindow .WordSymbol{
-  min-height: inherit;
-}
+  .MessageWindow .Word:hover {
+    background-color: transparent;
+    color: inherit;
+  }
 
+  .MessageWindow .WordSymbol {
+    min-height: inherit;
+  }
 
-.MessageWindow .Word img {
-  max-width: 80%;
-}
+  .MessageWindow {
+    flex: 1 100%;
+    order: 1;
+  }
 
-  .MessageWindow { flex: 1 100%; order: 1; }
-  .PlayButton  { order: 2; }
-  .BackspaceButton { order: 3;
+  .PlayButton {
+    order: 2;
+  }
+
+  .BackspaceButton {
+    order: 3;
     justify-content: flex-end;
   }
-  .ClearButton { order: 4; justify-content: flex-end; }
-  .SettingsButton  { order: 5; justify-content: flex-end;}
+
+  .ClearButton {
+    order: 4;
+    justify-content: flex-end;
+  }
+
+  .SettingsButton {
+    order: 5;
+    justify-content: flex-end;
+  }
 }
 
+/**  Medium screens  **/
 
-/* Medium screens */
 @media all and (min-width: 600px) {
   .SpeechBar {
     min-height: 80px;
@@ -76,30 +92,69 @@
   }
 
   .MessageWindow .Word { /* word component inside of the message window */
-    margin: auto;
-    width: 50px;
+    width: 60px;
     border: none;
     float: left;
+    height: 90%;
   }
 
-  .MessageWindow { flex: 1; order: 2 }
-  .PlayButton  {  order: 2; }
-  .BackspaceButton {  order: 3;
+  .MessageWindow .Word:hover {
+    background-color: transparent;
+    color: inherit;
+  }
+
+  .MessageWindow .WordSymbol {
+    min-height: inherit;
+  }
+
+  .MessageWindow {
+    flex: 1;
+    order: 2
+  }
+
+  .PlayButton {
+    order: 2;
+  }
+
+  .BackspaceButton {
+    order: 3;
     justify-content: flex-end;
   }
-  .ClearButton {  order: 4; justify-content: flex-end; margin-left: 10px;}
-  .SettingsButton  {  order: 5; justify-content: flex-end; margin-left: 10px;}
+
+  .ClearButton {
+    order: 4;
+    justify-content: flex-end;
+    margin-left: 10px;
+  }
+
+  .SettingsButton {
+    order: 5;
+    justify-content: flex-end;
+    margin-left: 10px;
+  }
 }
 
+/**  Large screens **/
 
-
-
-/* Large screens */
 @media all and (min-width: 800px) {
+  .MessageWindow {
+    flex: 2 0px;
+    order: 1;
+  }
 
-  .MessageWindow { flex: 2 0px; order: 1; }
-  .PlayButton  { order: 1; }
-  .BackspaceButton { order: 3; }
-  .ClearButton { order: 4; }
-  .SettingsButton  { order: 5; }
+  .PlayButton {
+    order: 1;
+  }
+
+  .BackspaceButton {
+    order: 3;
+  }
+
+  .ClearButton {
+    order: 4;
+  }
+
+  .SettingsButton {
+    order: 5;
+  }
 }

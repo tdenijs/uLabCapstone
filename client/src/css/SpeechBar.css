@@ -7,7 +7,10 @@
 /*margin-right: 50px;*/
 /*}*/
 
-/* Small screens */
+
+
+/** Small screens **/
+
 @media all and (max-width: 599px) {
 
   .SpeechBar {
@@ -21,11 +24,15 @@
     align-content: stretch;
   }
 
+
   .MessageWindow {
     float: left;
     min-height: 80px;
     margin-bottom: 5px;
-    flex-wrap: nowrap;
+
+    overflow: auto;
+    white-space: nowrap;
+    /*overflow-x: scroll;*/
   }
 
   /* word component inside of the message window */
@@ -34,6 +41,7 @@
     border: none;
     float: left;
     height: 90%;
+    display: inline-block;
   }
 
   .MessageWindow .Word:hover {
@@ -89,6 +97,8 @@
     margin-right: 10px;
     margin-left: 10px;
     flex-wrap: nowrap;
+
+    overflow-x: auto;
   }
 
   .MessageWindow .Word { /* word component inside of the message window */

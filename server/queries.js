@@ -136,7 +136,6 @@ function getAllWordsByGridId (req, res, next) {
     });
 }
 
-
 // this fucntion returns an array of grids in current DB
 // in the form
 //      [{"grid_id": ,"grid_title": }, ...]
@@ -185,7 +184,6 @@ function getAllListsByGridID(req, res, next) {
     });
 }
 
-
 function getAllListWordsByListId(req, res, next) {
   var gridId = req.params.grid_id;
   var listId = req.params.list_id;
@@ -210,6 +208,15 @@ function getAllListWordsByListId(req, res, next) {
     .catch(function (err) {
       return next(err);
     });
+
+// This function will insert data into the DB for creating a new button
+function createWord(req, res, next) {
+  var wName = req.body.name;
+  var wSymbol = req.file;
+  var wText = req.body.text;
+  var lName = req.body.list;
+  .db.one();
+
 }
 
 module.exports = {
@@ -220,5 +227,6 @@ module.exports = {
     getAllWordsByGridId: getAllWordsByGridId,
     getAllGrids: getAllGrids,
     getAllListsByGridID: getAllListsByGridID,
-    getAllListWordsByListId: getAllListWordsByListId
+    getAllListWordsByListId: getAllListWordsByListId,
+    createWord: createWord
 }

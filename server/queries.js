@@ -245,6 +245,29 @@ function createWord(req, res, next) {
       return next(err);
    });
 
+// this fucntion returns a word which word_nameis specific
+// in the form
+//      ["word_id": , "word": , "symbol_id": , "symbol_path": ]
+function getWordByName(req, res, next) {
+  var targetWordName = req.params.word_name;
+  db.any('SELECT w.word_id, w.word, w.symbol_id, s.symbol_path '
+       + 'FROM words w, symbols s '
+       + 'WHERE w.word=' + '\'' + targetWordName + '\' '
+       + 'AND w.symbol_id=s.symbol_id')
+    .then(function (data) {
+      if (data.length > 0) {
+        res.status(200)
+          .json(data);
+          console.log("the word which word_name is " + targetWordName + " were sent.");
+      } else {
+        res.status(404)
+        .send("ERROR: word_name " + '\'' + targetWordName + '\' ' + "not found");
+        console.log("ERROR (404)");
+      }
+    })
+    .catch(function (err) {
+      return next(err);
+    });
 }
 
 module.exports = {
@@ -257,4 +280,5 @@ module.exports = {
     getAllListsByGridID: getAllListsByGridID,
     getAllListWordsByListId: getAllListWordsByListId,
     createWord: createWord
+    getWordByID: getWordByID
 }

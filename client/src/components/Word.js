@@ -19,31 +19,31 @@ class Word extends Component {
 
     this.props.add(word);
 
-    speechSynthesis.getVoices().forEach(function(voice) {
-             console.log(voice.name, voice.default ? voice.default :'');
-    });
+    // speechSynthesis.getVoices().forEach(function (voice) {
+    //   console.log(voice.name, voice.default ? voice.default : '');
+    // });
 
     // Speak the text of the Word
     var spokenWord = new SpeechSynthesisUtterance(this.props.text);
 
-     var voices= speechSynthesis.getVoices();
-     console.log(this.props.selectedVoice);
-     var chosenVoice= this.props.selectedVoice;
+    var voices = speechSynthesis.getVoices();
+    console.log("selected voice: ", this.props.selectedVoice );
+    var chosenVoice = this.props.selectedVoice;
 
-     for(var i = 0; i < voices.length; i++) {
-     	   if(voices[i].name === chosenVoice) {
-     		   spokenWord.voice = voices[i];
-     		   break;
-     	    }
-         }
-     speechSynthesis.speak(spokenWord);
+    for (var i = 0; i < voices.length; i++) {
+      if (voices[i].name === chosenVoice) {
+        spokenWord.voice = voices[i];
+        break;
+      }
+    }
+    speechSynthesis.speak(spokenWord);
   }
 
   render() {
     return (
       <div className="Word" onClick={this.speak}>
         <div className="WordSymbol">
-          <img src={this.props.src} alt={this.props.alt}/>
+          <img src={this.props.src} data-pin-nopin="true" alt={this.props.alt}/>
         </div>
         <div className="WordText">{this.props.text}</div>
       </div>

@@ -56,6 +56,13 @@ describe('Test suite for mounted App', () => {
   });
 
   it('Clear button results in empty speechBarMessage', () => {
+    // start with words in the message array
+    app.setState({messageArray: [
+        {id: "1", word:"infinite", symbol_path:"", alt:""},
+        {id: "2", word:"love", symbol_path:"", alt:""}
+      ]
+    });
+
     const clearButton = app.find('.ClearButton').first();
     clearButton.simulate('click');
     expect(app.state().messageArray).toEqual([]);

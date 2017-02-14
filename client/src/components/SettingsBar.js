@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Row, Col, } from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
+import WordEditor from './WordEditor.js';
 // DropdownButton, MenuItem
 
 
@@ -77,13 +78,11 @@ class SettingsBar extends Component {
 
 	    <Modal
 	        contentLabel="Modal"
-          aria-labelledby='modal-label'
-          show={this.state.showModal}
-          onHide={this.close}>
+                aria-labelledby='modal-label'
+                show={this.state.showModal}
+                onHide={this.close}>
 
-	       <div>
-	          <button> test </button>
-	       </div>
+	        <WordEditor/>
 
 	    </Modal>
 

@@ -86,6 +86,7 @@ class SettingsBar extends Component {
 	       </div>
 
 	    </Modal>
+
 	  </Col>
 	  <Col xs={12} md={6}>
 	    <button className="EditorButton" onClick={this.props.enableEditorMode} disabled={disabled}>Editor Mode</button>

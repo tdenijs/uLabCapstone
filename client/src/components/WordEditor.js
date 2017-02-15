@@ -1,14 +1,8 @@
 import React, {Component} from 'react';
+import {Row, Col} from 'react-bootstrap';
+import Dropzone from 'react-dropzone';
+import request from 'superagent';
 import {Button, ButtonToolbar, Glyphicon} from 'react-bootstrap';
-import $ from 'jquery';
-
-
-
-// import {Row, Col} from 'react-bootstrap';
-// import Dropzone from 'react-dropzone';
-// import request from 'superagent';
-
-
 
 class WordEditor extends Component {
   constructor(props) {
@@ -108,13 +102,11 @@ class WordEditor extends Component {
             List:
             ...drop down
           </label>
-
-
-
           <br/>
           <ButtonToolbar>
-            <Button className="CancelNewWord" bsStyle="danger"><Glyphicon glyph="glyphicon glyphicon-remove-sign"
-                                                                          aria-label="Clear Message Button"/>Cancel
+            <Button className="CancelNewWord" bsStyle="danger" onClick={this.props.close}>
+              <Glyphicon glyph="glyphicon glyphicon-remove-sign" aria-label="Clear Message Button"/>
+              Cancel
             </Button>
             <Button type="submit" className="SubmitNewWord" bsStyle="primary">Submit </Button>
           </ButtonToolbar>
@@ -132,9 +124,11 @@ class WordEditor extends Component {
     );
 
   }
-
-
 }
+
+WordEditor.propTypes = {
+  close: React.PropTypes.array,
+};
 
 
 export default WordEditor;

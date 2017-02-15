@@ -10,7 +10,6 @@ import Grid from './components/Grid';
 import _ from 'lodash';
 import $ from 'jquery';
 
-import {FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 
 
 class App extends Component {
@@ -41,8 +40,15 @@ class App extends Component {
     }
   }
 
+  componentWillMount() {
+    this.getCoreVocabTitles();
+  }
+
   componentDidMount() {
     this.getWords();
+
+    console.log('Component Mounted:');
+    console.log('CoreListTitles: ', this.state.coreListTitles);
   }
 
   // Initializes wordArrays with JSON data from API call
@@ -70,7 +76,9 @@ class App extends Component {
     });
   }
 
-  // retrieves the titles of the core vocabulary from the database
+
+  // Retrieves the titles of the core vocabulary from the database
+  // and updates the state variable "coreListTitles"
   getCoreVocabTitles() {
     let coreVocabId = '1';
     let listTitles = [];
@@ -80,14 +88,12 @@ class App extends Component {
         _.forEach(data, function (value) {
           listTitles.push(value.list_title);
         });
-
         console.log('Retrieved Core Vocab titles: ', listTitles);
       })
 
-    // this.setState({ coreListTitles: listTitles })
+    this.setState({ coreListTitles: listTitles });
 
-    return listTitles;
-
+    console.log('list titles ', listTitles);
   }
 
   // Updates the colArray with the next column
@@ -162,9 +168,7 @@ class App extends Component {
 
 
 
-
   render() {
-
 
     //Get the Browser's voices loaded before anything. Allows synching
     //of SettingsBar voices
@@ -181,67 +185,41 @@ class App extends Component {
       ? "True"
       : "False";
 
-    let lists = this.getCoreVocabTitles;
-
-
     return (
-
       <div className="App">
 
         <div>
-
-          <FormGroup>
-            <ControlLabel>Category</ControlLabel>
-            <FormControl componentClass="select" placeholder="select"
-                    onChange={(e) => {
-                      {/*this.setState({selectedVoice: e.target.value});*/}
-                      {/*this.props.updateVoice(e)*/}
-                    }}>
-              {console.log('lists: ', lists)}
+          <form className="ExampleDropDown">
+            <label className="VoiceLabel">List_Title</label>
+            <select className="ourSelect" defaultValue="select">
               {
-
-                lists((title) => {
+                this.state.coreListTitles.map((title) => {
                   return <option key={title} value={title}>{title}</option>
                 })
               }
-            </FormControl>
-          </FormGroup>
-
-
-        <FormGroup controlId="formControlsSelect">
-          <ControlLabel>Select</ControlLabel>
-          <FormControl componentClass="select" placeholder="select">
-            { _.forEach(lists, function (value) {
-              () => { return ( <option value="other">{value}</option> ) }
-            })
-            }
-            <option value="other">test</option>
-
-
-          </FormControl>
-        </FormGroup>
-
+            </select>
+          </form>
         </div>
 
-          <SpeechBar
-            message={this.state.messageArray}
-            handleClearMessage={this.handleClearMessage}
-            selectedVoice={this.state.selectedVoice}
-            handleBackButton={this.handleBackButton}
-            settingsToggle={this.settingsToggle}/>
-          <div className="Settings" style={{margin: "auto"}}>
-            {settingsBar}
-            <p> Global Button Size: {this.state.buttonSize} </p>
-            <p> Global Voice: {this.state.selectedVoice} </p>
-            <p> Editor Mode Enabled: {editing} </p>
-          </div>
 
-          <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
-                selectedVoice={this.state.selectedVoice}/>
+        <SpeechBar
+          message={this.state.messageArray}
+          handleClearMessage={this.handleClearMessage}
+          selectedVoice={this.state.selectedVoice}
+          handleBackButton={this.handleBackButton}
+          settingsToggle={this.settingsToggle}/>
+        <div className="Settings" style={{margin: "auto"}}>
+          {settingsBar}
+          <p> Global Button Size: {this.state.buttonSize} </p>
+          <p> Global Voice: {this.state.selectedVoice} </p>
+          <p> Editor Mode Enabled: {editing} </p>
+        </div>
+
+        <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
+              selectedVoice={this.state.selectedVoice}/>
       </div>
-
-  );
+    );
   }
-  }
+}
 
-  export default App;
+export default App;

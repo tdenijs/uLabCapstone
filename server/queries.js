@@ -226,7 +226,7 @@ function createWord(req, res, next) {
           + 'VALUES ((SELECT word_id from Words WHERE word = ' + '\'' + wName + '\'),'
           + '(SELECT  list_id from Lists WHERE list_title = ' + '\'' + lName + '\'));')
   .then(function () {
-    if () {
+    if (db.one('SELECT EXISTS (SELECT * FROM Words WHERE word = ' +'\'' + wName + '\')')) {
       res.status(201);
       consol.log("New word " + '\'' + wName + '\'' + " created");
     } else {

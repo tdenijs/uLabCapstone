@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
-import {Row, Col} from 'react-bootstrap';
-import Dropzone from 'react-dropzone';
-import request from 'superagent';
+// import {Row, Col} from 'react-bootstrap';
+// import Dropzone from 'react-dropzone';
+// import request from 'superagent';
 import {Button, ButtonToolbar, Glyphicon} from 'react-bootstrap';
 
 class WordEditor extends Component {
   constructor(props) {
 
     super(props);
-
-    this.getGridCategories = this.getGridCategories.bind(this);
 
     //vars here
 
@@ -43,30 +41,6 @@ class WordEditor extends Component {
     reader.readAsDataURL(file)
   }
 
-
-  getGridCategories() {
-    // console.log("the data")
-    //
-    // var gridId = '1';  // this is the ID for core vocab
-    //
-    // let data = $.getJSON('http://localhost:3001/api/grids/id/1' );
-    //
-    // console.log("the data", data);
-    //
-    // console.log("parsing the data", data.responseJSON[0].list_title);
-    //
-
-    // var obj = $.getJSON('http://localhost:3001/api/grids/id/1' )
-    //   .then((data) => {
-    //       console.log("list titles", data.list_title);
-    //   })
-
-
-
-
-    console.log('nouns: ', $.getJSON('http://localhost:3001/api/lists/title/noun'))
-
-  }
 
   render() {
     let {imagePreviewUrl} = this.state;

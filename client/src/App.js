@@ -10,6 +10,8 @@ import Grid from './components/Grid';
 import _ from 'lodash';
 import $ from 'jquery';
 
+import {FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+
 
 class App extends Component {
   constructor(props) {
@@ -25,6 +27,7 @@ class App extends Component {
     this.handleBackButton = this.handleBackButton.bind(this);
     this.getWords = this.getWords.bind(this);
     this.appendToCols = this.appendToCols.bind(this);
+    this.getCoreVocabTitles = this.getCoreVocabTitles.bind(this);
 
     this.state = {
       selectedVoice: "Default",
@@ -34,6 +37,7 @@ class App extends Component {
       buttonSize: "5",
       colArray: [],
       messageArray: [],
+      coreListTitles: [],
     }
   }
 
@@ -53,19 +57,6 @@ class App extends Component {
       {title: 'preposition', order: 6},
       {title: 'exclamation', order: 7}];
 
-    // titles.map((title) => {
-    //   return(
-    //     $.getJSON('http://localhost:3001/api/lists/title/' + title)
-    //         .then((data) => {
-    //           nextCol = {
-    //             title: title,
-    //             words: data
-    //           };
-    //           this.setState(this.appendToCols(nextCol));
-    //         })
-    //   );
-    // });
-
     titles.forEach(({title, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
         .then((data) => {
@@ -77,6 +68,26 @@ class App extends Component {
           this.setState(this.appendToCols(nextCol));
         });
     });
+  }
+
+  // retrieves the titles of the core vocabulary from the database
+  getCoreVocabTitles() {
+    let coreVocabId = '1';
+    let listTitles = [];
+
+    $.getJSON('http://localhost:3001/api/grids/id/' + coreVocabId)
+      .then((data) => {
+        _.forEach(data, function (value) {
+          listTitles.push(value.list_title);
+        });
+
+        console.log('Retrieved Core Vocab titles: ', listTitles);
+      })
+
+    // this.setState({ coreListTitles: listTitles })
+
+    return listTitles;
+
   }
 
   // Updates the colArray with the next column
@@ -149,7 +160,11 @@ class App extends Component {
     });
   }
 
+
+
+
   render() {
+
 
     //Get the Browser's voices loaded before anything. Allows synching
     //of SettingsBar voices
@@ -159,34 +174,74 @@ class App extends Component {
     let settingsBar = this.state.settingsBarVisible
       ? <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
                      settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
-		     editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
+                     editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
                      buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}/>
       : null;
     let editing = this.state.editorToggle
       ? "True"
       : "False";
 
+    let lists = this.getCoreVocabTitles;
+
+
     return (
+
       <div className="App">
-        <SpeechBar
-          message={this.state.messageArray}
-          handleClearMessage={this.handleClearMessage}
-	  selectedVoice={this.state.selectedVoice}
-          handleBackButton={this.handleBackButton}
-          settingsToggle={this.settingsToggle}/>
-        <div className="Settings" style={{margin: "auto"}}>
-          {settingsBar}
-          <p> Global Button Size: {this.state.buttonSize} </p>
-          <p> Global Voice: {this.state.selectedVoice} </p>
-	  <p> Editor Mode Enabled: {editing} </p>
+
+        <div>
+
+          <FormGroup>
+            <ControlLabel>Category</ControlLabel>
+            <FormControl componentClass="select" placeholder="select"
+                    onChange={(e) => {
+                      {/*this.setState({selectedVoice: e.target.value});*/}
+                      {/*this.props.updateVoice(e)*/}
+                    }}>
+              {console.log('lists: ', lists)}
+              {
+
+                lists((title) => {
+                  return <option key={title} value={title}>{title}</option>
+                })
+              }
+            </FormControl>
+          </FormGroup>
+
+
+        <FormGroup controlId="formControlsSelect">
+          <ControlLabel>Select</ControlLabel>
+          <FormControl componentClass="select" placeholder="select">
+            { _.forEach(lists, function (value) {
+              () => { return ( <option value="other">{value}</option> ) }
+            })
+            }
+            <option value="other">test</option>
+
+
+          </FormControl>
+        </FormGroup>
+
         </div>
 
-        <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
-        selectedVoice={this.state.selectedVoice}/>
+          <SpeechBar
+            message={this.state.messageArray}
+            handleClearMessage={this.handleClearMessage}
+            selectedVoice={this.state.selectedVoice}
+            handleBackButton={this.handleBackButton}
+            settingsToggle={this.settingsToggle}/>
+          <div className="Settings" style={{margin: "auto"}}>
+            {settingsBar}
+            <p> Global Button Size: {this.state.buttonSize} </p>
+            <p> Global Voice: {this.state.selectedVoice} </p>
+            <p> Editor Mode Enabled: {editing} </p>
+          </div>
+
+          <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
+                selectedVoice={this.state.selectedVoice}/>
       </div>
 
-    );
+  );
   }
-}
+  }
 
-export default App;
+  export default App;

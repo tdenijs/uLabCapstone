@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, } from 'react-bootstrap';
+import {Row, Col,} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 import WordEditor from './WordEditor.js';
 // DropdownButton, MenuItem
@@ -14,20 +14,21 @@ class SettingsBar extends Component {
     this.open = this.open.bind(this);
 
     this.state = {
-	    selectedVoice: voices[0] && voices[0].value,
-	    voices,
-	    showModal: false,
+      selectedVoice: voices[0] && voices[0].value,
+      voices,
+      showModal: false,
 
     }
   }
 
   // MODAL SETTINGS
-   close(){
-        this.setState({showModal: false});
-   }
-   open(){
-        this.setState({showModal: true});
-   }
+  close() {
+    this.setState({showModal: false});
+  }
+
+  open() {
+    this.setState({showModal: true});
+  }
 
 
   render() {
@@ -39,18 +40,20 @@ class SettingsBar extends Component {
 
     return (
       <div className="SettingsBar">
-	<Row>
+        <Row>
           <Col xs={12} md={4}>
             <form className="VoiceForm">
               <label className="VoiceLabel">Voice</label>
               <select className="VoiceMenu" defaultValue={this.state.selectedVoice} disabled={disabled}
-                      onChange={(e) => {this.setState({selectedVoice: e.target.value});
-		      		this.props.updateVoice(e)}} >
+                      onChange={(e) => {
+                        this.setState({selectedVoice: e.target.value});
+                        this.props.updateVoice(e)
+                      }}>
                 {
-                    this.state.voices.map((voice) => {
-			return <option key={voice.name} value={voice && voice.value}>{voice.name}</option>
-		    })
- 		}/
+                  this.state.voices.map((voice) => {
+                    return <option key={voice.name} value={voice && voice.value}>{voice.name}</option>
+                  })
+                }
               </select>
             </form>
 
@@ -72,25 +75,26 @@ class SettingsBar extends Component {
           </Col>
 
         </Row>
-	<Row>
-	  <Col xs={12} md={6}>
-	    <button className="AddButton" onClick={this.open} disabled={disabled}>Add Button</button>
+        <Row>
+          <Col xs={12} md={6}>
+            <button className="AddButton" onClick={this.open} disabled={disabled}>Add Button</button>
 
-	    <Modal
-	        contentLabel="Modal"
-                aria-labelledby='modal-label'
-                show={this.state.showModal}
-                onHide={this.close}>
+            <Modal
+              contentLabel="Modal"
+              aria-labelledby='modal-label'
+              show={this.state.showModal}
+              onHide={this.close}>
 
-	        <WordEditor/>
+              <WordEditor/>
 
-	    </Modal>
+            </Modal>
 
-	  </Col>
-	  <Col xs={12} md={6}>
-	    <button className="EditorButton" onClick={this.props.enableEditorMode} disabled={disabled}>Editor Mode</button>
-	  </Col>
-	</Row>
+          </Col>
+          <Col xs={12} md={6}>
+            <button className="EditorButton" onClick={this.props.enableEditorMode} disabled={disabled}>Editor Mode
+            </button>
+          </Col>
+        </Row>
       </div>
     );
   }

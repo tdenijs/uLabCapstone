@@ -1,60 +1,92 @@
 import React, {Component} from 'react';
-import {Row, Col} from 'react-bootstrap';
-import Dropzone from 'react-dropzone';
-import request from 'superagent';
-import {Button, ButtonToolbar, Glyphicon } from 'react-bootstrap';
+import {Button, ButtonToolbar, Glyphicon} from 'react-bootstrap';
+import $ from 'jquery';
+
+
+
+// import {Row, Col} from 'react-bootstrap';
+// import Dropzone from 'react-dropzone';
+// import request from 'superagent';
+
+
 
 class WordEditor extends Component {
-    constructor(props) {
+  constructor(props) {
 
-        super(props);
+    super(props);
 
-        //vars here
+    this.getGridCategories = this.getGridCategories.bind(this);
 
-        this.state = {
-            //States here
-            file: '',
-            imagePreviewURL: ''
-        };
+    //vars here
 
+    this.state = {
+      //States here
+      file: '',
+      imagePreviewURL: ''
+    };
+
+  }
+
+  _handleSubmit(e) {
+    e.preventDefault();
+    // TODO: do something with -> this.state.file
+    console.log('handle uploading-', this.state.file);
+  }
+
+  _handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result
+      });
     }
 
-    _handleSubmit(e) {
-        e.preventDefault();
-        // TODO: do something with -> this.state.file
-        console.log('handle uploading-', this.state.file);
+    reader.readAsDataURL(file)
+  }
+
+
+  getGridCategories() {
+    // console.log("the data")
+    //
+    // var gridId = '1';  // this is the ID for core vocab
+    //
+    // let data = $.getJSON('http://localhost:3001/api/grids/id/1' );
+    //
+    // console.log("the data", data);
+    //
+    // console.log("parsing the data", data.responseJSON[0].list_title);
+    //
+
+    // var obj = $.getJSON('http://localhost:3001/api/grids/id/1' )
+    //   .then((data) => {
+    //       console.log("list titles", data.list_title);
+    //   })
+
+
+
+
+    console.log('nouns: ', $.getJSON('http://localhost:3001/api/lists/title/noun'))
+
+  }
+
+  render() {
+    let {imagePreviewUrl} = this.state;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<img src={imagePreviewUrl} role="presentation"/>);
+    } else {
+      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
     }
 
-    _handleImageChange(e) {
-        e.preventDefault();
 
-        let reader = new FileReader();
-        let file = e.target.files[0];
-
-        reader.onloadend = () => {
-            this.setState({
-                file: file,
-                imagePreviewUrl: reader.result
-            });
-        }
-
-        reader.readAsDataURL(file)
-    }
+    return (
 
 
-    render() {
-        let {imagePreviewUrl} = this.state;
-        let $imagePreview = null;
-        if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} />);
-        } else {
-            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-        }
-
-
-      return (
-        
-          
       <div>
         <h1>Add New Word Menu</h1>
         <form>
@@ -64,21 +96,26 @@ class WordEditor extends Component {
           </label>
           <br/>
           <div>
-                <input type="file" name="filename"
-                        onChange={(e)=>this._handleImageChange(e)}
-                        accept="image/gif, image/jpeg, image/png, image/jpg"/>
-                <div className="imgPreview">
-                        {$imagePreview}
-                </div>
+            <input type="file" name="filename"
+                   onChange={(e) => this._handleImageChange(e)}
+                   accept="image/gif, image/jpeg, image/png, image/jpg"/>
+            <div className="imgPreview">
+              {$imagePreview}
+            </div>
           </div>
           <br/>
           <label>
             List:
             ...drop down
           </label>
+
+
+
           <br/>
           <ButtonToolbar>
-            <Button className="CancelNewWord" bsStyle="danger"><Glyphicon glyph="glyphicon glyphicon-remove-sign" aria-label="Clear Message Button"/>Cancel </Button>
+            <Button className="CancelNewWord" bsStyle="danger"><Glyphicon glyph="glyphicon glyphicon-remove-sign"
+                                                                          aria-label="Clear Message Button"/>Cancel
+            </Button>
             <Button type="submit" className="SubmitNewWord" bsStyle="primary">Submit </Button>
           </ButtonToolbar>
         </form>
@@ -87,14 +124,14 @@ class WordEditor extends Component {
       </div>
 
 
-           // <Dropzone multiple={false}
-           //     accept="image/jpg,image/png,image/gif"
-           //     onDrop={this.onImageDrop}>
-           //     <p>Drop an image or click to select a file to upload.</p>
-           // </Dropzone>
-        );
+      // <Dropzone multiple={false}
+      //     accept="image/jpg,image/png,image/gif"
+      //     onDrop={this.onImageDrop}>
+      //     <p>Drop an image or click to select a file to upload.</p>
+      // </Dropzone>
+    );
 
-    }
+  }
 
 
 }

@@ -10,25 +10,24 @@ class SettingsBar extends Component {
     super(props);
 
     var voices = speechSynthesis.getVoices();
-    this.close = this.close.bind(this);
-    this.open = this.open.bind(this);
+   // this.close = this.close.bind(this);
+    //this.open = this.open.bind(this);
 
     this.state = {
-      selectedVoice: voices[0] && voices[0].value,
-      voices,
-      showModal: false,
+	    selectedVoice: voices[0] && voices[0].value,
+	    voices,
+	    //showModal: false,
 
     }
   }
 
   // MODAL SETTINGS
-  close() {
-    this.setState({showModal: false});
-  }
-
-  open() {
-    this.setState({showModal: true});
-  }
+  /* close(){
+        this.setState({showModal: false});
+   }
+   open(){
+        this.setState({showModal: true});
+   }*/
 
 
   render() {
@@ -75,19 +74,19 @@ class SettingsBar extends Component {
           </Col>
 
         </Row>
-        <Row>
-          <Col xs={12} md={6}>
-            <button className="AddButton" onClick={this.open} disabled={disabled}>Add Button</button>
+	<Row>
+	  <Col xs={12} md={6}>
+	    <button className="AddButton" onClick={this.props.open} disabled={disabled}>Add Button</button>
 
-            <Modal
-              contentLabel="Modal"
-              aria-labelledby='modal-label'
-              show={this.state.showModal}
-              onHide={this.close}>
+	    <Modal
+	        contentLabel="Modal"
+                aria-labelledby='modal-label'
+                show={this.props.showModal}
+                onHide={this.props.close}>
 
 	        <WordEditor close={this.close}/>
 
-            </Modal>
+	    </Modal>
 
           </Col>
           <Col xs={12} md={6}>
@@ -106,6 +105,8 @@ SettingsBar.propTypes = {
   updateVoice: React.PropTypes.func,
   lockToggle: React.PropTypes.func,
   enableEditorMode: React.PropTypes.func,
+  open: React.PropTypes.func,
+  close: React.PropTypes.func,
 };
 
 export default SettingsBar;

@@ -11,7 +11,6 @@ import _ from 'lodash';
 import $ from 'jquery';
 
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +25,9 @@ class App extends Component {
     this.handleBackButton = this.handleBackButton.bind(this);
     this.getWords = this.getWords.bind(this);
     this.appendToCols = this.appendToCols.bind(this);
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
+
     this.getCoreVocabTitles = this.getCoreVocabTitles.bind(this);
 
     this.state = {
@@ -37,6 +39,7 @@ class App extends Component {
       colArray: [],
       messageArray: [],
       coreListTitles: [],
+      showModal: false,
     }
   }
 
@@ -146,7 +149,13 @@ class App extends Component {
     this.setState({buttonSize: e.target.value});
   }
 
-
+   //These following 2 functions are setting modal
+   close(){
+        this.setState({showModal: false});
+   }
+   open(){
+        this.setState({showModal: true});
+   }
   // Callback function passed to the Word Component to add a word to the speechBarMessage
   addWordToSpeechBar(word) {
     let newWord = {
@@ -177,9 +186,10 @@ class App extends Component {
     // Render the SettingsBar only if the settingsBarVisible state variable is true
     let settingsBar = this.state.settingsBarVisible
       ? <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
-                     settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
-                     editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
-                     buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}/>
+          open={this.open} close={this.close} showModal={this.state.showModal}
+          settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
+		      editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
+          buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}/>
       : null;
     let editing = this.state.editorToggle
       ? "True"
@@ -218,6 +228,7 @@ class App extends Component {
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
               selectedVoice={this.state.selectedVoice}/>
       </div>
+
     );
   }
 }

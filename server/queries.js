@@ -216,22 +216,29 @@ function createWord(req, res, next) {
   var wText = req.body.text;
   var lName = req.body.list;
 
-  db.any('INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)'
-          + 'VALUES (' + '\'' + wName + '\', \'' + wPath + '\', \'' + wText + '\');')
-        //  + 'INSERT INTO Words (word, symbol_id)'
-        //  + 'VALUES (' + '\'' + wName + '\', ' + '(select symbol_id from Symbols '
-        //  + 'WHERE symbol_name = ' + '\'' + wName + '\');'
-        //  + 'INSERT INTO ListWords (word_id, list_id) '
-        //  + 'VALUES ((SELECT word_id from Words WHERE word = ' + '\'' + wName + '\'),'
-        //  + '(SELECT  list_id from Lists WHERE list_title = ' + '\'' + lName + '\'));')
-
-    .then(function () {
-      //if (db.one('SELECT EXISTS (SELECT * FROM Words WHERE word = ' +'\'' + wName + '\')')) {
-        res.status(201);
+ db.task( function (t) {
+    return t.one('SELECT list_id from Lists WHERE list_title = $1', [lName])
+        .then(function (lId) {
+            return t.one('INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)'
+                      + ' VALUES ($1, $2, $3) RETURNING symbol_id;', [wName, wPath, wText])
+             .then( function (sId) {
+                  return t.one('INSERT INTO Words (word, symbol_id)'
+                            + ' VALUES ($1, $2) RETURNING word_id;', [wName, sId.symbol_id])
+                        .then( function(wId) {
+                          return t.none('INSERT INTO ListWords (word_id, list_id) '
+                                 + 'VALUES ($1, $2);', [wId.word_id, lId.list_id]);
+                        });
+              });
+      });
+  })
+    .then(function (data) {
+     if (db.one('SELECT EXISTS (SELECT * FROM Words WHERE word = $1);', [wName])) {
+        res.status(201).json(data);
         console.log("New word " + '\'' + wName + '\'' + " created");
-    //  } else {
-      //  res.status(400);
-      //}
+      } else {
+        res.status(400)
+          .send("ERROR: new word not added");
+      }
     })
    .catch (function (err) {
       return next(err);

@@ -15,7 +15,6 @@ const bodyParser = require('body-parser');
 // with an object keyed by the cookie names
 const cookieParser = require('cookie-parser');
 
-
 app.use(cookieParser());
 app.use(cors());
 app.use(bodyParser.json());

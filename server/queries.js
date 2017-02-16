@@ -212,25 +212,26 @@ function getAllListWordsByListId(req, res, next) {
 // This function will insert data into the DB for creating a new button
 function createWord(req, res, next) {
   var wName = req.body.name;
-  var wPath = rew.body.path;
+  var wPath = req.body.path;
   var wText = req.body.text;
   var lName = req.body.list;
 
-  db.one('INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)'
-          + 'VALUES (' + '\'' + wName + '\', \'' + wPath + '\', \'' + wText + '\');'
-          + 'INSERT INTO Words (word, symbol_id)'
-          + 'VALUES (' + '\'' + wName + '\', ' + '(select symbol_id from Symbols '
-          + 'WHERE symbol_name = ' + '\'' + wName + '\');'
-          + 'INSERT INTO ListWords (word_id, list_id) '
-          + 'VALUES ((SELECT word_id from Words WHERE word = ' + '\'' + wName + '\'),'
-          + '(SELECT  list_id from Lists WHERE list_title = ' + '\'' + lName + '\'));')
+  db.any('INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)'
+          + 'VALUES (' + '\'' + wName + '\', \'' + wPath + '\', \'' + wText + '\');')
+        //  + 'INSERT INTO Words (word, symbol_id)'
+        //  + 'VALUES (' + '\'' + wName + '\', ' + '(select symbol_id from Symbols '
+        //  + 'WHERE symbol_name = ' + '\'' + wName + '\');'
+        //  + 'INSERT INTO ListWords (word_id, list_id) '
+        //  + 'VALUES ((SELECT word_id from Words WHERE word = ' + '\'' + wName + '\'),'
+        //  + '(SELECT  list_id from Lists WHERE list_title = ' + '\'' + lName + '\'));')
+
     .then(function () {
-      if (db.one('SELECT EXISTS (SELECT * FROM Words WHERE word = ' +'\'' + wName + '\')')) {
+      //if (db.one('SELECT EXISTS (SELECT * FROM Words WHERE word = ' +'\'' + wName + '\')')) {
         res.status(201);
-        consol.log("New word " + '\'' + wName + '\'' + " created");
-      } else {
-        res.status(400);
-      }
+        console.log("New word " + '\'' + wName + '\'' + " created");
+    //  } else {
+      //  res.status(400);
+      //}
     })
    .catch (function (err) {
       return next(err);

@@ -185,6 +185,33 @@ function getAllListsByGridID(req, res, next) {
     });
 }
 
+
+function getAllListWordsByListId(req, res, next) {
+  var gridId = req.params.grid_id;
+  var listId = req.params.list_id;
+  db.any("select g.grid_id, g.grid_title, l.list_id, l.list_title, w.word_id, w.word, s.symbol_id, s.symbol_path, s.symbol_text "
+         + "from grids g inner join gridlists gl on g.grid_id=gl.grid_id "
+         + "inner join lists l on l.list_id = gl.list_id "
+         + "inner join listwords lw on l.list_id = lw.list_id "
+         + "inner join words w on w.word_id = lw.word_id "
+         + "inner join symbols s on w.symbol_id = s.symbol_id "
+         + "where g.grid_id= " + '\'' + gridId + '\'' + " and l.list_id = " + '\'' + listId + '\'' )
+    .then(function (data) {
+      if (data.length > 0) {
+        res.status(200)
+          .json(data);
+          console.log("All words for list " + '\'' + listId + '\'' + " were sent.");
+      } else {
+        res.status(404)
+        .send("ERROR: List " + '\'' + listId + '\' ' + "not found");
+        console.log("ERROR (404)");
+      }
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 module.exports = {
     getAllWords: getAllWords,
     getAllWordsByListName: getAllWordsByListName,
@@ -192,5 +219,6 @@ module.exports = {
     getAllWordsByGridName: getAllWordsByGridName,
     getAllWordsByGridId: getAllWordsByGridId,
     getAllGrids: getAllGrids,
-    getAllListsByGridID: getAllListsByGridID
+    getAllListsByGridID: getAllListsByGridID,
+    getAllListWordsByListId: getAllListWordsByListId
 }

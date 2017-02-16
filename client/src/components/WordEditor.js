@@ -9,12 +9,11 @@ class WordEditor extends Component {
 
     super(props);
 
-    //vars here
-
     this.state = {
       //States here
       file: '',
-      imagePreviewURL: ''
+      imagePreviewURL: '',
+      selectedTitle: '',
     };
 
   }
@@ -74,8 +73,18 @@ class WordEditor extends Component {
           <br/>
           <label>
             List:
-            ...drop down
           </label>
+          <select className="listTitles" defaultValue={this.state.selectedTitle}
+                  onChange={(e) => {
+                    this.setState({selectedTitle: e.target.value})
+                  }}>
+            {
+              this.props.coreListTitles.map((title) => {
+                return <option key={title} value={title}>{title}</option>
+              })
+            }
+          </select>
+
           <br/>
           <ButtonToolbar>
             <Button className="CancelNewWord" bsStyle="danger" onClick={this.props.close}>
@@ -101,7 +110,7 @@ class WordEditor extends Component {
 }
 
 WordEditor.propTypes = {
-  close: React.PropTypes.array,
+  close: React.PropTypes.func,
 };
 
 

@@ -80,12 +80,10 @@ class SettingsBar extends Component {
 
 	    <Modal
 	        contentLabel="Modal"
-                aria-labelledby='modal-label'
-                show={this.props.showModal}
-                onHide={this.props.close}>
-
-	        <WordEditor close={this.close}/>
-
+          aria-labelledby='modal-label'
+          show={this.props.showModal}
+          onHide={this.props.close}>
+	        <WordEditor coreListTitles={this.props.coreListTitles} close={this.props.close}/>
 	    </Modal>
 
           </Col>

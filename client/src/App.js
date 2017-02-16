@@ -156,6 +156,7 @@ class App extends Component {
    open(){
         this.setState({showModal: true});
    }
+
   // Callback function passed to the Word Component to add a word to the speechBarMessage
   addWordToSpeechBar(word) {
     let newWord = {
@@ -186,10 +187,11 @@ class App extends Component {
     // Render the SettingsBar only if the settingsBarVisible state variable is true
     let settingsBar = this.state.settingsBarVisible
       ? <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
-          open={this.open} close={this.close} showModal={this.state.showModal}
           settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
 		      editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
-          buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}/>
+          buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
+          open={this.open} close={this.close} showModal={this.state.showModal}
+          coreListTitles={this.state.coreListTitles} />
       : null;
     let editing = this.state.editorToggle
       ? "True"
@@ -197,20 +199,6 @@ class App extends Component {
 
     return (
       <div className="App">
-
-        <div>
-          <form className="ExampleDropDown">
-            <label className="VoiceLabel">List_Title</label>
-            <select className="ourSelect" defaultValue="select">
-              {
-                this.state.coreListTitles.map((title) => {
-                  return <option key={title} value={title}>{title}</option>
-                })
-              }
-            </select>
-          </form>
-        </div>
-
 
         <SpeechBar
           message={this.state.messageArray}

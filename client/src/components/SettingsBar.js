@@ -82,7 +82,7 @@ class SettingsBar extends Component {
                 show={this.props.showModal}
                 onHide={this.props.close}>
 
-	        <WordEditor/>
+	        <WordEditor close={this.close}/>
 
 	    </Modal>
 

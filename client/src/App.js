@@ -159,7 +159,7 @@ class App extends Component {
     let settingsBar = this.state.settingsBarVisible
       ? <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
                      settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
-		     editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
+                     editorToggle={this.state.editorToggle} enableEditorMode={this.enableEditorMode}
                      buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}/>
       : null;
     let editing = this.state.editorToggle
@@ -171,18 +171,17 @@ class App extends Component {
         <SpeechBar
           message={this.state.messageArray}
           handleClearMessage={this.handleClearMessage}
-	  selectedVoice={this.state.selectedVoice}
+	      selectedVoice={this.state.selectedVoice}
           handleBackButton={this.handleBackButton}
           settingsToggle={this.settingsToggle}/>
         <div className="Settings" style={{margin: "auto"}}>
           {settingsBar}
           <p> Global Button Size: {this.state.buttonSize} </p>
           <p> Global Voice: {this.state.selectedVoice} </p>
-	  <p> Editor Mode Enabled: {editing} </p>
+	      <p> Editor Mode Enabled: {editing} </p>
         </div>
-
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
-        selectedVoice={this.state.selectedVoice}/>
+              selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle} />
       </div>
 
     );

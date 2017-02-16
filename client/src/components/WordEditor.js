@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Row, Col} from 'react-bootstrap';
-import Dropzone from 'react-dropzone';
-import request from 'superagent';
+// import {Row, Col} from 'react-bootstrap';
+// import Dropzone from 'react-dropzone';
+// import request from 'superagent';
 import {Button, ButtonToolbar, Glyphicon} from 'react-bootstrap';
 
 class WordEditor extends Component {
@@ -9,12 +9,11 @@ class WordEditor extends Component {
 
     super(props);
 
-    //vars here
-
     this.state = {
       //States here
       file: '',
-      imagePreviewURL: ''
+      imagePreviewURL: '',
+      selectedTitle: '',
     };
 
   }
@@ -46,7 +45,7 @@ class WordEditor extends Component {
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl}/>);
+      $imagePreview = (<img src={imagePreviewUrl} role="presentation"/>);
     } else {
       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
     }
@@ -74,8 +73,18 @@ class WordEditor extends Component {
           <br/>
           <label>
             List:
-            ...drop down
           </label>
+          <select className="listTitles" defaultValue={this.state.selectedTitle}
+                  onChange={(e) => {
+                    this.setState({selectedTitle: e.target.value})
+                  }}>
+            {
+              this.props.coreListTitles.map((title) => {
+                return <option key={title} value={title}>{title}</option>
+              })
+            }
+          </select>
+
           <br/>
           <ButtonToolbar>
             <Button className="CancelNewWord" bsStyle="danger" onClick={this.props.close}>
@@ -101,7 +110,7 @@ class WordEditor extends Component {
 }
 
 WordEditor.propTypes = {
-  close: React.PropTypes.array,
+  close: React.PropTypes.func,
 };
 
 

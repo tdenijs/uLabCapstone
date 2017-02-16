@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, } from 'react-bootstrap';
+import {Row, Col,} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 import WordEditor from './WordEditor.js';
 // DropdownButton, MenuItem
@@ -39,18 +39,20 @@ class SettingsBar extends Component {
 
     return (
       <div className="SettingsBar">
-	<Row>
+        <Row>
           <Col xs={12} md={4}>
             <form className="VoiceForm">
               <label className="VoiceLabel">Voice</label>
               <select className="VoiceMenu" defaultValue={this.state.selectedVoice} disabled={disabled}
-                      onChange={(e) => {this.setState({selectedVoice: e.target.value});
-		      		this.props.updateVoice(e)}} >
+                      onChange={(e) => {
+                        this.setState({selectedVoice: e.target.value});
+                        this.props.updateVoice(e)
+                      }}>
                 {
-                    this.state.voices.map((voice) => {
-			return <option key={voice.name} value={voice && voice.value}>{voice.name}</option>
-		    })
- 		}/
+                  this.state.voices.map((voice) => {
+                    return <option key={voice.name} value={voice && voice.value}>{voice.name}</option>
+                  })
+                }
               </select>
             </form>
 
@@ -78,19 +80,18 @@ class SettingsBar extends Component {
 
 	    <Modal
 	        contentLabel="Modal"
-                aria-labelledby='modal-label'
-                show={this.props.showModal}
-                onHide={this.props.close}>
-
-	        <WordEditor close={this.close}/>
-
+          aria-labelledby='modal-label'
+          show={this.props.showModal}
+          onHide={this.props.close}>
+	        <WordEditor coreListTitles={this.props.coreListTitles} close={this.props.close}/>
 	    </Modal>
 
-	  </Col>
-	  <Col xs={12} md={6}>
-	    <button className="EditorButton" onClick={this.props.enableEditorMode} disabled={disabled}>Editor Mode</button>
-	  </Col>
-	</Row>
+          </Col>
+          <Col xs={12} md={6}>
+            <button className="EditorButton" onClick={this.props.enableEditorMode} disabled={disabled}>Editor Mode
+            </button>
+          </Col>
+        </Row>
       </div>
     );
   }

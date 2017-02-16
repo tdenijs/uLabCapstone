@@ -28,6 +28,7 @@ class App extends Component {
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
 
+    this.getCoreVocabTitles = this.getCoreVocabTitles.bind(this);
 
     this.state = {
       selectedVoice: "Default",
@@ -37,12 +38,20 @@ class App extends Component {
       buttonSize: "5",
       colArray: [],
       messageArray: [],
+      coreListTitles: [],
       showModal: false,
     }
   }
 
+  componentWillMount() {
+    this.getCoreVocabTitles();
+  }
+
   componentDidMount() {
     this.getWords();
+
+    console.log('Component Mounted:');
+    console.log('CoreListTitles: ', this.state.coreListTitles);
   }
 
   // Initializes wordArrays with JSON data from API call
@@ -57,19 +66,6 @@ class App extends Component {
       {title: 'preposition', order: 6},
       {title: 'exclamation', order: 7}];
 
-    // titles.map((title) => {
-    //   return(
-    //     $.getJSON('http://localhost:3001/api/lists/title/' + title)
-    //         .then((data) => {
-    //           nextCol = {
-    //             title: title,
-    //             words: data
-    //           };
-    //           this.setState(this.appendToCols(nextCol));
-    //         })
-    //   );
-    // });
-
     titles.forEach(({title, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
         .then((data) => {
@@ -81,6 +77,26 @@ class App extends Component {
           this.setState(this.appendToCols(nextCol));
         });
     });
+  }
+
+
+  // Retrieves the titles of the core vocabulary from the database
+  // and updates the state variable "coreListTitles"
+  getCoreVocabTitles() {
+    let coreVocabId = '1';
+    let listTitles = [];
+
+    $.getJSON('http://localhost:3001/api/grids/id/' + coreVocabId)
+      .then((data) => {
+        _.forEach(data, function (value) {
+          listTitles.push(value.list_title);
+        });
+        console.log('Retrieved Core Vocab titles: ', listTitles);
+      })
+
+    this.setState({ coreListTitles: listTitles });
+
+    console.log('list titles ', listTitles);
   }
 
   // Updates the colArray with the next column
@@ -140,6 +156,7 @@ class App extends Component {
    open(){
         this.setState({showModal: true});
    }
+
   // Callback function passed to the Word Component to add a word to the speechBarMessage
   addWordToSpeechBar(word) {
     let newWord = {
@@ -159,6 +176,8 @@ class App extends Component {
     });
   }
 
+
+
   render() {
 
     //Get the Browser's voices loaded before anything. Allows synching
@@ -168,10 +187,11 @@ class App extends Component {
     // Render the SettingsBar only if the settingsBarVisible state variable is true
     let settingsBar = this.state.settingsBarVisible
       ? <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
-          open={this.open} close={this.close} showModal={this.state.showModal}
           settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
 		      editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
-          buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}/>
+          buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
+          open={this.open} close={this.close} showModal={this.state.showModal}
+          coreListTitles={this.state.coreListTitles} />
       : null;
     let editing = this.state.editorToggle
       ? "True"
@@ -179,21 +199,22 @@ class App extends Component {
 
     return (
       <div className="App">
+
         <SpeechBar
           message={this.state.messageArray}
           handleClearMessage={this.handleClearMessage}
-	  selectedVoice={this.state.selectedVoice}
+          selectedVoice={this.state.selectedVoice}
           handleBackButton={this.handleBackButton}
           settingsToggle={this.settingsToggle}/>
         <div className="Settings" style={{margin: "auto"}}>
           {settingsBar}
           <p> Global Button Size: {this.state.buttonSize} </p>
           <p> Global Voice: {this.state.selectedVoice} </p>
-	  <p> Editor Mode Enabled: {editing} </p>
+          <p> Editor Mode Enabled: {editing} </p>
         </div>
 
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
-        selectedVoice={this.state.selectedVoice}/>
+              selectedVoice={this.state.selectedVoice}/>
       </div>
 
     );

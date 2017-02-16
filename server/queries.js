@@ -208,6 +208,7 @@ function getAllListWordsByListId(req, res, next) {
     .catch(function (err) {
       return next(err);
     });
+}
 
 // This function will insert data into the DB for creating a new button
 function createWord(req, res, next) {

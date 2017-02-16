@@ -25,6 +25,7 @@ class App extends Component {
     this.handleBackButton = this.handleBackButton.bind(this);
     this.getWords = this.getWords.bind(this);
     this.appendToCols = this.appendToCols.bind(this);
+    this.removeFromGrid = this.removeFromGrid.bind(this);
 
     this.state = {
       selectedVoice: "Default",
@@ -149,6 +150,41 @@ class App extends Component {
     });
   }
 
+  // Callback function passed to the Word Component to delete that word from the grid
+  removeFromGrid(word, column) {
+    // Get the column to remove from
+    let col = this.state.colArray.filter((el) =>  {
+      return el.title === column;
+    });
+
+    // Pull the column from the filter results
+    col = col[0];
+
+    // Get a new set of columns that has the column we want to alter removed
+    let newCols = this.state.colArray.filter((el) => {
+      return el.title !== column;
+    });
+
+    // Get the new array of words with the desired word removed
+    let newWords = col.words.filter((el) => {
+      return el.word !== word;
+    });
+
+    // Assemble the new column with the filtered words
+    let newCol = {
+      order: col.order,
+      title: col.title,
+      words: newWords,
+    };
+
+    // Update the state and add the updated column back on
+    this.setState({
+      colArray: [
+          ...newCols, newCol
+      ]
+    });
+  }
+
   render() {
 
     //Get the Browser's voices loaded before anything. Allows synching
@@ -181,7 +217,8 @@ class App extends Component {
 	      <p> Editor Mode Enabled: {editing} </p>
         </div>
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
-              selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle} />
+              selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
+              removeFromGrid={this.removeFromGrid}/>
       </div>
 
     );

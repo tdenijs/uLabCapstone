@@ -12,7 +12,7 @@ class Grid extends Component {
         {
           sortedCols.map(({title, words}) => {
             return (<Column key={_.uniqueId()} title={title} words={words} add={this.props.add}
-            selectedVoice={this.props.selectedVoice}/>);
+                            selectedVoice={this.props.selectedVoice} editorToggle={this.props.editorToggle} />);
           })
         }
       </div>

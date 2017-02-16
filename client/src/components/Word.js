@@ -42,7 +42,7 @@ class Word extends Component {
   render() {
       // Only show the delete button on a word if editorToggle is true
       let deleteButton = this.props.editorToggle ?
-          <div className="DeleteButton"></div>
+          <div className="DeleteButton" onClick={() => this.props.removeFromGrid(this.props.text, this.props.column)}></div>
           : null;
 
       return (

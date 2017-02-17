@@ -136,7 +136,6 @@ function getAllWordsByGridId (req, res, next) {
     });
 }
 
-
 // this fucntion returns an array of grids in current DB
 // in the form
 //      [{"grid_id": ,"grid_title": }, ...]
@@ -185,7 +184,6 @@ function getAllListsByGridID(req, res, next) {
     });
 }
 
-
 function getAllListWordsByListId(req, res, next) {
   var gridId = req.params.grid_id;
   var listId = req.params.list_id;
@@ -212,6 +210,43 @@ function getAllListWordsByListId(req, res, next) {
     });
 }
 
+// This function will insert data into the DB for creating a new button
+function createWord(req, res, next) {
+  var wName = req.body.name;
+  var wPath = req.body.path;
+  var wText = req.body.text;
+  var lName = req.body.list;
+
+ db.task( function (t) {
+    return t.one('SELECT list_id from Lists WHERE list_title = $1', [lName])
+        .then(function (lId) {
+            return t.one('INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)'
+                      + ' VALUES ($1, $2, $3) RETURNING symbol_id;', [wName, wPath, wText])
+             .then( function (sId) {
+                  return t.one('INSERT INTO Words (word, symbol_id)'
+                            + ' VALUES ($1, $2) RETURNING word_id;', [wName, sId.symbol_id])
+                        .then( function(wId) {
+                          return t.none('INSERT INTO ListWords (word_id, list_id) '
+                                 + 'VALUES ($1, $2);', [wId.word_id, lId.list_id]);
+                        });
+              });
+      });
+  })
+    .then(function (data) {
+     if (db.one('SELECT EXISTS (SELECT * FROM Words WHERE word = $1);', [wName])) {
+        res.status(201).json(data);
+        console.log("New word " + '\'' + wName + '\'' + " created");
+      } else {
+        res.status(400)
+          .send("ERROR: new word not added");
+      }
+    })
+   .catch (function (err) {
+      return next(err);
+   });
+
+}
+
 module.exports = {
     getAllWords: getAllWords,
     getAllWordsByListName: getAllWordsByListName,
@@ -220,5 +255,6 @@ module.exports = {
     getAllWordsByGridId: getAllWordsByGridId,
     getAllGrids: getAllGrids,
     getAllListsByGridID: getAllListsByGridID,
-    getAllListWordsByListId: getAllListWordsByListId
+    getAllListWordsByListId: getAllListWordsByListId,
+    createWord: createWord
 }

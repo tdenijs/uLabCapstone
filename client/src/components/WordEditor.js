@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Row, Col} from 'react-bootstrap';
 // import Dropzone from 'react-dropzone';
 // import request from 'superagent';
-import {Button, ButtonToolbar} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import '../css/WordEditor.css';
 
 
@@ -11,17 +11,23 @@ class WordEditor extends Component {
 
     super(props);
 
+    this.setWordText = this.setWordText.bind(this);
+
+
     this.state = {
       file: '',
       imagePreviewURL: '',
       selectedTitle: '',
+      wordText: '',
     };
+
 
   }
 
   _handleSubmit(e) {
     e.preventDefault();
     // TODO: do something with -> this.state.file
+
     console.log('handle uploading-', this.state.file);
   }
 
@@ -42,6 +48,11 @@ class WordEditor extends Component {
   }
 
 
+  setWordText(e){
+    this.setState({wordText: e.target.value});
+  }
+
+
   render() {
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
@@ -52,6 +63,7 @@ class WordEditor extends Component {
     }
 
 
+
     return (
       <div className="WordEditor">
         <h1>Add New Word</h1>
@@ -59,12 +71,13 @@ class WordEditor extends Component {
         <Row >
           <Col xs={12} md={6} lg={6}>
             <div className="imgPreview"> {$imagePreview} </div>
+            {this.state.wordText}
           </Col>
 
           <Col xs={12} md={6} lg={6}>
             <form className="AddNewWordForm">
               <label> New Word Text: </label>
-              <input type="text" name="word_text" className="WordTextInput" placeholder="Enter text"/>
+              <input type="text" name="word_text" className="WordTextInput" placeholder="Enter text" onChange={this.setWordText}/>
 
               <Row>
                 <Col xs={12}>

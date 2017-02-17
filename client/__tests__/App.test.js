@@ -72,6 +72,7 @@ describe('Test suite for mounted App', () => {
     // give app a word to test
     app.setState({colArray: [{
       title: "test",
+      order: 1,
       words: [{id: "1", word:"love", symbol_path:"", alt:""}]
     }]});
 
@@ -80,9 +81,31 @@ describe('Test suite for mounted App', () => {
     clearButton.simulate('click');
 
     // Click a word button
-    const wordButton = app.find('.Word').first();
+    const wordButton = app.find('.WordText').first();
     wordButton.simulate('click');
 
     expect(app.state().messageArray[0].word).toContain('love');
+  });
+
+  it('Enabling editor mode then clicking a DeleteButton deletes that word from the grid', () => {
+    // give app a word to test
+    app.setState({colArray: [{
+      title: "test",
+      order: 1,
+      words: [{id: "1", word:"love", symbol_path:"", alt:""}]
+    }]});
+
+    // Enable EditorMode
+    const settingsButton = app.find('.SettingsButton').first();
+    settingsButton.simulate('click');
+    const editorModeButton = app.find('.EditorButton').first();
+    editorModeButton.simulate('click');
+
+    // Click the DeleteButton
+    const deleteButton = app.find('.DeleteButton').first();
+    deleteButton.simulate('click');
+
+    // Expect the word to be deleted
+    expect(app.state().colArray[0].words).toEqual([]);
   });
 });

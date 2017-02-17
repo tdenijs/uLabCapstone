@@ -40,14 +40,20 @@ class Word extends Component {
   }
 
   render() {
-    return (
-      <div className="Word" onClick={this.speak}>
-        <div className="WordSymbol">
-          <img src={this.props.src} data-pin-nopin="true" alt={this.props.alt}/>
+      // Only show the delete button on a word if editorToggle is true
+      let deleteButton = this.props.editorToggle ?
+          <div className="DeleteButton" onClick={() => this.props.removeFromGrid(this.props.text, this.props.column)}></div>
+          : null;
+
+      return (
+        <div className="Word">
+            {deleteButton}
+            <div className="WordSymbol" onClick={this.speak}>
+                <img src={this.props.src} data-pin-nopin="true" alt={this.props.alt}/>
+            </div>
+            <div className="WordText" onClick={this.speak}>{this.props.text}</div>
         </div>
-        <div className="WordText">{this.props.text}</div>
-      </div>
-    );
+      );
   }
 
 

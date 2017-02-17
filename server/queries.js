@@ -244,24 +244,25 @@ function createWord(req, res, next) {
    .catch (function (err) {
       return next(err);
    });
+}
 
-// this fucntion returns a word which word_nameis specific
+// this fucntion returns a word which word_id is specific
 // in the form
 //      ["word_id": , "word": , "symbol_id": , "symbol_path": ]
-function getWordByName(req, res, next) {
-  var targetWordName = req.params.word_name;
+function getWordByID(req, res, next) {
+  var targetWordID = req.params.word_id;
   db.any('SELECT w.word_id, w.word, w.symbol_id, s.symbol_path '
        + 'FROM words w, symbols s '
-       + 'WHERE w.word=' + '\'' + targetWordName + '\' '
+       + 'WHERE w.word_id=' + '\'' + targetWordID + '\' '
        + 'AND w.symbol_id=s.symbol_id')
     .then(function (data) {
       if (data.length > 0) {
         res.status(200)
           .json(data);
-          console.log("the word which word_name is " + targetWordName + " were sent.");
+          console.log("the word which word_id is " + targetWordID + " were sent.");
       } else {
         res.status(404)
-        .send("ERROR: word_name " + '\'' + targetWordName + '\' ' + "not found");
+        .send("ERROR: word_id " + '\'' + targetWordID + '\' ' + "not found");
         console.log("ERROR (404)");
       }
     })
@@ -270,7 +271,7 @@ function getWordByName(req, res, next) {
     });
 }
 
-// this fucntion returns a word which word_nameis specific
+// this fucntion returns a word which word_name is specific
 // in the form
 //      ["word_id": , "word": , "symbol_id": , "symbol_path": ]
 function getWordByName(req, res, next) {

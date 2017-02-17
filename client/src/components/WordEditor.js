@@ -71,7 +71,7 @@ class WordEditor extends Component {
         <Row >
           <Col xs={12} md={6} lg={6}>
             <div className="imgPreview"> {$imagePreview} </div>
-            {this.state.wordText}
+            <div className="wordPreview">{this.state.wordText} </div>
           </Col>
 
           <Col xs={12} md={6} lg={6}>

@@ -44,6 +44,8 @@ router.get('/grids/id/:grid_id', db.getAllListsByGridID)
 router.get('/grids/:grid_id/lists/:list_id', db.getAllListWordsByListId)
 router.post('/words', db.createWord);
 
+router.get('/words/id/:word_id', db.getWordByID)
+router.get('/words/name/:word_name', db.getWordByName)
 // ....add more routes here ....
 
 //===============================================

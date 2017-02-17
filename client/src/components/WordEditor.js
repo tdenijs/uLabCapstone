@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-// import {Row, Col} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 // import Dropzone from 'react-dropzone';
 // import request from 'superagent';
-import {Button, ButtonToolbar, Glyphicon} from 'react-bootstrap';
+import {Button, ButtonToolbar} from 'react-bootstrap';
+import '../css/WordEditor.css';
+
 
 class WordEditor extends Component {
   constructor(props) {
@@ -10,7 +12,6 @@ class WordEditor extends Component {
     super(props);
 
     this.state = {
-      //States here
       file: '',
       imagePreviewURL: '',
       selectedTitle: '',
@@ -52,48 +53,55 @@ class WordEditor extends Component {
 
 
     return (
+      <div className="WordEditor">
+        <h1>Add New Word</h1>
 
+        <Row >
+          <Col xs={12} md={6} lg={6}>
+            <div className="imgPreview"> {$imagePreview} </div>
+          </Col>
 
-      <div>
-        <h1>Add New Word Menu</h1>
-        <form>
-          <label>
-            Text
-            <input type="text" name="word_text"/>
-          </label>
-          <br/>
-          <div>
-            <input type="file" name="filename"
-                   onChange={(e) => this._handleImageChange(e)}
-                   accept="image/gif, image/jpeg, image/png, image/jpg"/>
-            <div className="imgPreview">
-              {$imagePreview}
-            </div>
-          </div>
-          <br/>
-          <label>
-            List:
-          </label>
-          <select className="listTitles" defaultValue={this.state.selectedTitle}
-                  onChange={(e) => {
-                    this.setState({selectedTitle: e.target.value})
-                  }}>
-            {
-              this.props.coreListTitles.map((title) => {
-                return <option key={title} value={title}>{title}</option>
-              })
-            }
-          </select>
+          <Col xs={12} md={6} lg={6}>
+            <form className="AddNewWordForm">
+              <label> New Word Text: </label>
+              <input type="text" name="word_text" className="WordTextInput" placeholder="Enter text"/>
 
-          <br/>
-          <ButtonToolbar>
-            <Button className="CancelNewWord" bsStyle="danger" onClick={this.props.close}>
-              <Glyphicon glyph="glyphicon glyphicon-remove-sign" aria-label="Clear Message Button"/>
-              Cancel
-            </Button>
-            <Button type="submit" className="SubmitNewWord" bsStyle="primary">Submit </Button>
-          </ButtonToolbar>
-        </form>
+              <Row>
+                <Col xs={12}>
+              <label>Choose an Image: </label>
+                </Col>
+                <Col xs={12}>
+              <input type="file" name="filename" className="FileInputButton"
+                     onChange={(e) => this._handleImageChange(e)}
+                     accept="image/gif, image/jpeg, image/png, image/jpg"/>
+                </Col>
+              </Row>
+
+              <label>Add to List: </label>
+
+              <select className="ListTitles" defaultValue={this.state.selectedTitle}
+                      onChange={(e) => {
+                        this.setState({selectedTitle: e.target.value})
+                      }}>
+                {
+                  this.props.coreListTitles.map((title) => {
+                    return <option key={title} value={title}>{title}</option>
+                  })
+                }
+              </select>
+            </form>
+
+          </Col>
+        </Row>
+
+        <div className="modal-footer">
+
+          <Button className="CancelNewWord" bsStyle="danger" onClick={this.props.close}>
+            Cancel
+          </Button>
+          <Button type="submit" className="SaveNewWord" bsStyle="primary">Save </Button>
+
+        </div>
 
 
       </div>

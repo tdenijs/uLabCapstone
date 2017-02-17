@@ -1,0 +1,67 @@
+/*   css for WordEditor Component  */
+
+
+.WordEditor {
+  padding: 0 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 1.2em;
+}
+
+
+.WordEditor h1 {
+  font-size: 2em;
+  color: var(--light-blue);
+  border-bottom: 2px solid var(--light-blue);
+}
+
+
+.AddNewWordForm{
+  padding-bottom: 5px;
+}
+
+
+.imgPreview {
+  padding: 2px;
+  margin-bottom: 10px;
+  border: 1px solid #DEE3e6;
+  color: #fafafa;
+  min-height: 100px;
+}
+
+.imgPreview img{
+  max-width: 100%;   /* img fills size of container */
+}
+
+
+.WordEditor label {
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+
+.WordTextInput {
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  font-size: .9em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+
+.FileInputButton {
+  font-size: .8em;
+  font-style: italic;
+  font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #7f7f7f;
+  padding-bottom: 5px;
+}
+
+
+.CancelNewWord {
+  float: left;}
+
+

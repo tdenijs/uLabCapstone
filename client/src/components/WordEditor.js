@@ -4,6 +4,8 @@ import {Row, Col} from 'react-bootstrap';
 // import request from 'superagent';
 import {Button} from 'react-bootstrap';
 import '../css/WordEditor.css';
+import $ from 'jquery';
+
 
 
 class WordEditor extends Component {
@@ -12,24 +14,41 @@ class WordEditor extends Component {
     super(props);
 
     this.setWordText = this.setWordText.bind(this);
-
+    this._handleSubmit = this._handleSubmit.bind(this);
+    this._handleImageChange = this._handleImageChange.bind(this);
 
     this.state = {
       file: '',
       imagePreviewURL: '',
       selectedTitle: '',
       wordText: '',
+      imgUrl: '',
     };
-
 
   }
 
   _handleSubmit(e) {
     e.preventDefault();
+
+    // 1. write file to folder
     // TODO: do something with -> this.state.file
+    // FIle Uploader???
+
+
+    // 2. POST api call to save `name` (wordText), `path` (imgUrl), `text` (WordText) and `list`(selectedTitle)
+
+    console.log('file name: ', this.state.file.name );
+
+    $.post('http://localhost:3001/api/words/'
+      + this.state.wordText + '/'
+      + this.state.file.name + '/'
+      + this.state.wordText + '/'
+      + this.state.selectedTitle
+    )
 
     console.log('handle uploading-', this.state.file);
   }
+
 
   _handleImageChange(e) {
     e.preventDefault();
@@ -112,7 +131,7 @@ class WordEditor extends Component {
           <Button className="CancelNewWord" bsStyle="danger" onClick={this.props.close}>
             Cancel
           </Button>
-          <Button type="submit" className="SaveNewWord" bsStyle="primary">Save </Button>
+          <Button type="submit" className="SaveNewWord" bsStyle="primary" onClick={this._handleSubmit}>Save</Button>
 
         </div>
 

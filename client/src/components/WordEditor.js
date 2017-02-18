@@ -41,7 +41,7 @@ class WordEditor extends Component {
 
     $.post('http://localhost:3001/api/words/'
       + this.state.wordText + '/'
-      + this.state.file.name + '/'
+      + 'img/' + this.state.file.name + '/'
       + this.state.wordText + '/'
       + this.state.selectedTitle
     )

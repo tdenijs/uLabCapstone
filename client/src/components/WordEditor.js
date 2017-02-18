@@ -7,6 +7,7 @@ import '../css/WordEditor.css';
 
 
 
+
 class WordEditor extends Component {
   constructor(props) {
 
@@ -32,39 +33,29 @@ class WordEditor extends Component {
     // 1. write file to folder
     // TODO: do something with -> this.state.file
     // FIle Uploader???
+    console.log('file name: ', this.state.file.name );
+    console.log('handle uploading-', this.state.file);
 
 
     // 2. POST api call to save
-    // `name` (wordText),
-    // `path` (imgUrl),   //Image not working now -- need server endpoint!
-    // `text` (WordText) and
-    // `list`(selectedTitle)
+    // fetch('http://localhost:3001/api/words/', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     name: this.state.wordText,
+    //     path: '',
+    //     text: this.state.wordText,
+    //     list: this.state.selectedTitle
+    //   })
+    // })
 
-    console.log('file name: ', this.state.file.name );
+    console.log('Submit New Word: ');
+    this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
 
-    // $.post('http://localhost:3001/api/words/'
-    //   + this.state.wordText + '/'
-    //   + '\'\'/'
-    //   + this.state.wordText + '/'
-    //   + this.state.selectedTitle
-    // )
-
-    fetch('http://localhost:3001/api/words/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: this.state.wordText,
-        path: '',
-        text: this.state.wordText,
-        list: this.state.selectedTitle
-      })
-    })
-
-
-    console.log('handle uploading-', this.state.file);
+    this.props.close(); //close modal
   }
 
 
@@ -146,9 +137,7 @@ class WordEditor extends Component {
 
         <div className="modal-footer">
 
-          <Button className="CancelNewWord" bsStyle="danger" onClick={this.props.close}>
-            Cancel
-          </Button>
+          <Button className="CancelNewWord" bsStyle="danger" onClick={this.props.close}>Cancel</Button>
           <Button type="submit" className="SaveNewWord" bsStyle="primary" onClick={this._handleSubmit}>Save</Button>
 
         </div>
@@ -169,6 +158,7 @@ class WordEditor extends Component {
 
 WordEditor.propTypes = {
   close: React.PropTypes.func,
+  handleAddNewWord: React.PropTypes.func,
 };
 
 

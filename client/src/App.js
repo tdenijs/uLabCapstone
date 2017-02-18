@@ -29,6 +29,7 @@ class App extends Component {
     this.open = this.open.bind(this);
     this.getCoreVocabTitles = this.getCoreVocabTitles.bind(this);
     this.removeFromGrid = this.removeFromGrid.bind(this);
+    this.handleAddNewWord = this.handleAddNewWord.bind(this);
 
     this.state = {
       selectedVoice: "Default",
@@ -99,12 +100,14 @@ class App extends Component {
     console.log('list titles ', listTitles);
   }
 
+
   // Updates the colArray with the next column
   appendToCols(nextCol) {
     return ((prevState) => {
       return {...prevState, colArray: [...prevState.colArray, nextCol]}
     });
   }
+
 
   // Callback function passed to the SpeechBar back button removed last item in message
   handleBackButton() {
@@ -153,9 +156,11 @@ class App extends Component {
    close(){
         this.setState({showModal: false});
    }
+
    open(){
         this.setState({showModal: true});
    }
+
 
   // Callback function passed to the Word Component to add a word to the speechBarMessage
   addWordToSpeechBar(word) {
@@ -212,6 +217,29 @@ class App extends Component {
   }
 
 
+
+
+
+  // API POST CALL
+  // Callback function passed to the WordEditor Component to add a word through POST api call
+  handleAddNewWord(wordText, selectedTitle) {
+    fetch('http://localhost:3001/api/words/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: wordText,
+        path: '',
+        text: wordText,
+        list: selectedTitle
+      })
+    })
+  }
+
+
+
   render() {
 
     //Get the Browser's voices loaded before anything. Allows synching
@@ -225,7 +253,7 @@ class App extends Component {
 		      editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
           buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
           open={this.open} close={this.close} showModal={this.state.showModal}
-          coreListTitles={this.state.coreListTitles} />
+          coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}/>
 
       : null;
     let editing = this.state.editorToggle

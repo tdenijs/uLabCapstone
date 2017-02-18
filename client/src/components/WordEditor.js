@@ -4,7 +4,6 @@ import {Row, Col} from 'react-bootstrap';
 // import request from 'superagent';
 import {Button} from 'react-bootstrap';
 import '../css/WordEditor.css';
-import $ from 'jquery';
 
 
 
@@ -35,16 +34,35 @@ class WordEditor extends Component {
     // FIle Uploader???
 
 
-    // 2. POST api call to save `name` (wordText), `path` (imgUrl), `text` (WordText) and `list`(selectedTitle)
+    // 2. POST api call to save
+    // `name` (wordText),
+    // `path` (imgUrl),   //Image not working now -- need server endpoint!
+    // `text` (WordText) and
+    // `list`(selectedTitle)
 
     console.log('file name: ', this.state.file.name );
 
-    $.post('http://localhost:3001/api/words/'
-      + this.state.wordText + '/'
-      + 'img/' + this.state.file.name + '/'
-      + this.state.wordText + '/'
-      + this.state.selectedTitle
-    )
+    // $.post('http://localhost:3001/api/words/'
+    //   + this.state.wordText + '/'
+    //   + '\'\'/'
+    //   + this.state.wordText + '/'
+    //   + this.state.selectedTitle
+    // )
+
+    fetch('http://localhost:3001/api/words/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.state.wordText,
+        path: '',
+        text: this.state.wordText,
+        list: this.state.selectedTitle
+      })
+    })
+
 
     console.log('handle uploading-', this.state.file);
   }

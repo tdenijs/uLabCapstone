@@ -18,7 +18,7 @@
 
 /*  SpeechBar  */
 
-#speechBar {
+.SpeechBar {
   background-color: var(--dark-navy);
 }
 
@@ -35,12 +35,11 @@
 
 /*  SettingsBar  */
 
-#settingsBar {
+.SettingsBar {
   background-color: var(--light-blue);
 }
 
 
-/*  GRID  */
 
 
 .Column {
@@ -48,8 +47,8 @@
   border: 2px solid var(--border-color);
 }
 
-#columnTitle {
-  font-size: 1.5em;
+.ColumnTitle {
+  font-size: 1.4em;
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-style: italic;
@@ -62,9 +61,7 @@
 /*   Word  Component  */
 .Word {
   color: #000;
-
   border-bottom: 1px solid var(--border-color);
-
 }
 
 

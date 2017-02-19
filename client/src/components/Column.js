@@ -6,11 +6,13 @@ class Column extends Component {
   render() {
     return (
       <div className="Column">
-        <div id="columnTitle">{this.props.title}</div>
+        <div className="ColumnTitle">{this.props.title}</div>
         {
           this.props.words.map(({id, word, symbol_path, alt}) => {
             return (
-              <Word key={_.uniqueId()} id={id} text={word} src={symbol_path} alt={alt} add={this.props.add}/>
+              <Word key={_.uniqueId()} id={id} text={word} src={symbol_path} alt={alt} add={this.props.add}
+                    selectedVoice={this.props.selectedVoice} editorToggle={this.props.editorToggle}
+                    column={this.props.title} removeFromGrid={this.props.removeFromGrid} />
             );
           })
         }
@@ -25,7 +27,7 @@ Column.propTypes = {
 };
 
 Column.defaultProps = {
-  words: []
+  words: [{id: "1", word:"love", symbol_path:"", alt:""}]
 };
 
 export default Column;

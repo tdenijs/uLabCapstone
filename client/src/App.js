@@ -20,17 +20,19 @@ class App extends Component {
     this.updateVoice = this.updateVoice.bind(this);
     this.lockToggle = this.lockToggle.bind(this);
     this.resizeButton = this.resizeButton.bind(this);
+    this.enableEditorMode = this.enableEditorMode.bind(this);
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
     this.getWords = this.getWords.bind(this);
     this.appendToCols = this.appendToCols.bind(this);
+    this.removeFromGrid = this.removeFromGrid.bind(this);
 
     this.state = {
       selectedVoice: "Default",
       settingsBarVisible: false,
       settingsLocked: false,
+      editorToggle: false,
       buttonSize: "5",
-      idCounter: 0,
       colArray: [],
       messageArray: [],
     }
@@ -43,7 +45,14 @@ class App extends Component {
   // Initializes wordArrays with JSON data from API call
   getWords() {
     let nextCol;
-    let titles = ['adjective', 'adverb', 'exclamation', 'noun', 'preposition', 'pronoun', 'verb'];
+    let titles = [
+      {title: 'pronoun', order: 1},
+      {title: 'noun', order: 2},
+      {title: 'verb', order: 3},
+      {title: 'adjective', order: 4},
+      {title: 'adverb', order: 5},
+      {title: 'preposition', order: 6},
+      {title: 'exclamation', order: 7}];
 
     // titles.map((title) => {
     //   return(
@@ -58,10 +67,11 @@ class App extends Component {
     //   );
     // });
 
-    titles.forEach((title) => {
+    titles.forEach(({title, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
         .then((data) => {
           nextCol = {
+            order: order,
             title: title,
             words: data
           };
@@ -104,6 +114,10 @@ class App extends Component {
     this.setState({settingsBarVisible: !(this.state.settingsBarVisible)});
   }
 
+  //Enables editorToggle state variable when the Editor Mode button is clicked in SettingsBar
+  enableEditorMode() {
+    this.setState({editorToggle: !(this.state.editorToggle)});
+  }
 
   // Callback function passed to the SettingsBar to update the App's settingsLocked state variable
   lockToggle() {
@@ -136,31 +150,75 @@ class App extends Component {
     });
   }
 
+  // Callback function passed to the Word Component to delete that word from the grid
+  removeFromGrid(word, column) {
+    // Get the column to remove from
+    let col = this.state.colArray.filter((el) =>  {
+      return el.title === column;
+    });
+
+    // Pull the column from the filter results
+    col = col[0];
+
+    // Get a new set of columns that has the column we want to alter removed
+    let newCols = this.state.colArray.filter((el) => {
+      return el.title !== column;
+    });
+
+    // Get the new array of words with the desired word removed
+    let newWords = col.words.filter((el) => {
+      return el.word !== word;
+    });
+
+    // Assemble the new column with the filtered words
+    let newCol = {
+      order: col.order,
+      title: col.title,
+      words: newWords,
+    };
+
+    // Update the state and add the updated column back on
+    this.setState({
+      colArray: [
+          ...newCols, newCol
+      ]
+    });
+  }
+
   render() {
 
+    //Get the Browser's voices loaded before anything. Allows synching
+    //of SettingsBar voices
     speechSynthesis.getVoices();
+
     // Render the SettingsBar only if the settingsBarVisible state variable is true
     let settingsBar = this.state.settingsBarVisible
       ? <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
                      settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
+                     editorToggle={this.state.editorToggle} enableEditorMode={this.enableEditorMode}
                      buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}/>
       : null;
+    let editing = this.state.editorToggle
+      ? "True"
+      : "False";
 
     return (
       <div className="App">
         <SpeechBar
           message={this.state.messageArray}
           handleClearMessage={this.handleClearMessage}
-	  selectedVoice={this.state.selectedVoice}
+	      selectedVoice={this.state.selectedVoice}
           handleBackButton={this.handleBackButton}
           settingsToggle={this.settingsToggle}/>
-        <div id="settings" style={{margin: "auto"}}>
+        <div className="Settings" style={{margin: "auto"}}>
           {settingsBar}
           <p> Global Button Size: {this.state.buttonSize} </p>
           <p> Global Voice: {this.state.selectedVoice} </p>
+	      <p> Editor Mode Enabled: {editing} </p>
         </div>
-
-        <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}/>
+        <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
+              selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
+              removeFromGrid={this.removeFromGrid}/>
       </div>
 
     );

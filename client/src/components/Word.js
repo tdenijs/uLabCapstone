@@ -19,22 +19,41 @@ class Word extends Component {
 
     this.props.add(word);
 
-    // this.props.add(this.props.text);
+    // speechSynthesis.getVoices().forEach(function (voice) {
+    //   console.log(voice.name, voice.default ? voice.default : '');
+    // });
 
     // Speak the text of the Word
     var spokenWord = new SpeechSynthesisUtterance(this.props.text);
-    window.speechSynthesis.speak(spokenWord);
+
+    var voices = speechSynthesis.getVoices();
+    console.log("selected voice: ", this.props.selectedVoice );
+    var chosenVoice = this.props.selectedVoice;
+
+    for (var i = 0; i < voices.length; i++) {
+      if (voices[i].name === chosenVoice) {
+        spokenWord.voice = voices[i];
+        break;
+      }
+    }
+    speechSynthesis.speak(spokenWord);
   }
 
   render() {
-    return (
-      <div className="Word" onClick={this.speak}>
-        <div className="WordSymbol">
-          <img src={this.props.src} alt={this.props.alt}/>
+      // Only show the delete button on a word if editorToggle is true
+      let deleteButton = this.props.editorToggle ?
+          <div className="DeleteButton" onClick={() => this.props.removeFromGrid(this.props.text, this.props.column)}></div>
+          : null;
+
+      return (
+        <div className="Word">
+            {deleteButton}
+            <div className="WordSymbol" onClick={this.speak}>
+                <img src={this.props.src} data-pin-nopin="true" alt={this.props.alt}/>
+            </div>
+            <div className="WordText" onClick={this.speak}>{this.props.text}</div>
         </div>
-        <div className="WordText">{this.props.text}</div>
-      </div>
-    );
+      );
   }
 
 
@@ -42,6 +61,13 @@ class Word extends Component {
 
 Word.propTypes = {
   add: React.PropTypes.func,
+};
+
+Word.defaultProps = {
+  id: "1",
+  word: "love",
+  src: "",
+  alt: ""
 };
 
 export default Word;

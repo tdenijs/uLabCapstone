@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('./queries');
 const app = express();
+const swaggerUi = require('swagger-ui-express');
+const swaggerDoc = require('./swagger.json');
 const path = require('path');
 const cors = require('cors');
 const port = process.env.PORT || 3001;
@@ -54,6 +56,7 @@ router.get('/words/name/:word_name', db.getWordByName)
 //===============================================
 
 app.use('/api', router);
+app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.listen(port, function() {
   console.log('The API server is running at localhost:' + port);
 });

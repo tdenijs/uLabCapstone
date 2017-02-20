@@ -20,7 +20,8 @@
     "fs": "0.0.2",
     "multer": "^1.2.1",
     "pg-promise": "^3.2.3",
-    "sql.js": "^0.3.2"
+    "sql.js": "^0.3.2",
+    "swagger-ui-express": "latest"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",

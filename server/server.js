@@ -56,7 +56,7 @@ router.get('/words/name/:word_name', db.getWordByName)
 //===============================================
 
 app.use('/api', router);
-app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use('/api/doc', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.listen(port, function() {
   console.log('The API server is running at localhost:' + port);
 });

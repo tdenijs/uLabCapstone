@@ -83,7 +83,10 @@ class SettingsBar extends Component {
           aria-labelledby='modal-label'
           show={this.props.showModal}
           onHide={this.props.close}>
-	        <WordEditor coreListTitles={this.props.coreListTitles} close={this.props.close}/>
+	        <WordEditor
+            coreListTitles={this.props.coreListTitles}
+            close={this.props.close}
+            handleAddNewWord={this.props.handleAddNewWord} />
 	    </Modal>
 
           </Col>
@@ -105,6 +108,7 @@ SettingsBar.propTypes = {
   enableEditorMode: React.PropTypes.func,
   open: React.PropTypes.func,
   close: React.PropTypes.func,
+  handleAddNewWord: React.PropTypes.func,
 };
 
 export default SettingsBar;

@@ -12,14 +12,22 @@ it('word renders without crashing', () => {
 describe("Test suite for mounted Word", () => {
     let word;
     let add;
+    let remove;
 
     beforeEach(() => {
         add = jest.fn();
-        word = mount(<Word id='1' word="love" src="" alt="" add={add} />);
+        remove = jest.fn();
+        word = mount(<Word id='1' word="love" src="" alt="" add={add}
+                           editorToggle={true} removeFromGrid={remove} />);
     });
 
-    it('Word calls addWordToSpeechBar function when the word is clicked', () => {
-        word.find('.Word').simulate('click');
+    it('Word calls addWordToSpeechBar function when the word text is clicked', () => {
+        word.find('.WordText').simulate('click');
         expect(add).toBeCalled();
+    });
+
+    it('Word calls removeFromGrid callback when the DeleteButton is clicked', () => {
+        word.find('.DeleteButton').simulate('click');
+        expect(remove).toBeCalled();
     });
 });

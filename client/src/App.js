@@ -27,8 +27,9 @@ class App extends Component {
     this.appendToCols = this.appendToCols.bind(this);
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
-
     this.getCoreVocabTitles = this.getCoreVocabTitles.bind(this);
+    this.removeFromGrid = this.removeFromGrid.bind(this);
+    this.handleAddNewWord = this.handleAddNewWord.bind(this);
 
     this.state = {
       selectedVoice: "Default",
@@ -99,12 +100,14 @@ class App extends Component {
     console.log('list titles ', listTitles);
   }
 
+
   // Updates the colArray with the next column
   appendToCols(nextCol) {
     return ((prevState) => {
       return {...prevState, colArray: [...prevState.colArray, nextCol]}
     });
   }
+
 
   // Callback function passed to the SpeechBar back button removed last item in message
   handleBackButton() {
@@ -153,9 +156,11 @@ class App extends Component {
    close(){
         this.setState({showModal: false});
    }
+
    open(){
         this.setState({showModal: true});
    }
+
 
   // Callback function passed to the Word Component to add a word to the speechBarMessage
   addWordToSpeechBar(word) {
@@ -176,6 +181,63 @@ class App extends Component {
     });
   }
 
+  // Callback function passed to the Word Component to delete that word from the grid
+  removeFromGrid(word, column) {
+    // Get the column to remove from
+    let col = this.state.colArray.filter((el) =>  {
+      return el.title === column;
+    });
+
+    // Pull the column from the filter results
+    col = col[0];
+
+    // Get a new set of columns that has the column we want to alter removed
+    let newCols = this.state.colArray.filter((el) => {
+      return el.title !== column;
+    });
+
+    // Get the new array of words with the desired word removed
+    let newWords = col.words.filter((el) => {
+      return el.word !== word;
+    });
+
+    // Assemble the new column with the filtered words
+    let newCol = {
+      order: col.order,
+      title: col.title,
+      words: newWords,
+    };
+
+    // Update the state and add the updated column back on
+    this.setState({
+      colArray: [
+          ...newCols, newCol
+      ]
+    });
+  }
+
+
+
+
+
+  // API POST CALL
+  // Callback function passed to the WordEditor Component to add a word through POST api call
+  handleAddNewWord(wordText, selectedTitle) {
+    fetch('http://localhost:3001/api/words/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: wordText,
+        path: '',
+        text: wordText,
+        list: selectedTitle
+      })
+    })
+  }
+
 
 
   render() {
@@ -191,7 +253,8 @@ class App extends Component {
 		      editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
           buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
           open={this.open} close={this.close} showModal={this.state.showModal}
-          coreListTitles={this.state.coreListTitles} />
+          coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}/>
+
       : null;
     let editing = this.state.editorToggle
       ? "True"
@@ -212,9 +275,9 @@ class App extends Component {
           <p> Global Voice: {this.state.selectedVoice} </p>
           <p> Editor Mode Enabled: {editing} </p>
         </div>
-
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
-              selectedVoice={this.state.selectedVoice}/>
+              selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
+              removeFromGrid={this.removeFromGrid}/>
       </div>
 
     );

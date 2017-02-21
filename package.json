@@ -20,7 +20,8 @@
     "fs": "0.0.2",
     "multer": "^1.2.1",
     "pg-promise": "^3.2.3",
-    "sql.js": "^0.3.2"
+    "sql.js": "^0.3.2",
+    "swagger-ui-express": "latest"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
@@ -28,7 +29,8 @@
     "client": "babel-node ./client/start-client.js",
     "api": "nodemon ./server/server.js",
     "test": "newman run server/Tests/uLab.postman_collection.json -e server/Tests/Development.postman_environment.json -n 7 -d server/Tests/list_ids.json -d server/Tests/var_data.json",
-    "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1"
+    "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1",
+    "deploy": "set NODE_ENV=protduction&& set PORT=8080&& node server/server.js"
   },
   "devDependencies": {
     "concurrently": "^3.1.0",

@@ -1,6 +1,5 @@
 const express = require('express');
-const router = express.Router();
-const db = require('./queries');
+const routes = require('./routes');
 const app = express();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('./swagger.json');
@@ -23,8 +22,10 @@ app.use(cookieParser());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false }));
+app.use('/api', routes);
+app.use('/api/doc', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
-// Express only serves static assets in production
+// Serve up client in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   app.get('/', function (req, res) {
@@ -37,27 +38,7 @@ else {
   });
 }
 
-//===============================================
-// Routes
-//===============================================
-
-router.get('/grids', db.getAllGrids)
-router.get('/grids/title/:grid_title/words', db.getAllWordsByGridName)
-router.get('/grids/id/:grid_id/words', db.getAllWordsByGridId)
-router.get('/grids/id/:grid_id', db.getAllListsByGridID)
-router.get('/grids/:grid_id/lists/:list_id', db.getAllListWordsByListId)
-router.get('/lists/title/:title', db.getAllWordsByListName);
-router.get('/lists/id/:id', db.getAllWordsByListId);
-router.get('/words', db.getAllWords);
-router.post('/words', db.createWord);
-router.get('/words/id/:word_id', db.getWordByID)
-router.get('/words/name/:word_name', db.getWordByName)
-
-//===============================================
-
-app.use('/api', router);
-app.use('/api/doc', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.listen(port, function() {
   console.log('The API server is running at localhost:' + port);
 });
-module.exprts = router;
+//module.exprts = router;

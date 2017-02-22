@@ -8,10 +8,28 @@
 
 const express = require('express');
 const router = express.Router();
+// middleware for handling file uploads
+
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'client/public/img/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '.png');
+  }
+})
+const upload = multer({ storage: storage })
+/*
+const upload = multer({
+    dest: 'client/public/img/'
+    //limit: 100000
+ })*/
 const words = require('../middleware/words');
 //const mw = require('../middleware');
 const lists = require('../middleware/lists');
-const grids = require('..//middleware/grids');
+const grids = require('../middleware/grids');
+//const img = require('../middleware/img');
 //===============================================
 // GET Requests
 //===============================================
@@ -34,13 +52,17 @@ router.get('/grids/id/:grid_id', grids.getAllListsByGridID);
 //-------- Get data by grid and list -------------
 router.get('/grids/:grid_id/lists/:list_id', grids.getAllListWordsByListId);
 
-
+router.get('/imgupload.html', function(req, res) {
+  res.sendFile(__dirname + '/imgupload.html');
+});
 //===============================================
 // POST Requests
 //===============================================
 
 router.post('/words', words.createWord);
-
+router.post('/imgupload', upload.any(), function(req, res, next) {
+  res.send(req.files);
+});
 //===============================================
 
 //===============================================

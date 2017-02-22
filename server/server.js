@@ -13,18 +13,10 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('./swagger.json');
 const path = require('path');
 const cors = require('cors');
-const port = process.env.PORT || 3001;
-//const fs = require('fs');
-
-// for handling post requests
 const bodyParser = require('body-parser');
-
-// middleware for handling file uploads
-//const multer = require('multer');
-//const upload = multer({ dest: 'uploads/'})
-// Node middleware used to parser cookie header and populate req.cookie-parser
-// with an object keyed by the cookie names
 const cookieParser = require('cookie-parser');
+
+const port = process.env.PORT || 3001;
 
 app.use(cookieParser());
 app.use(cors());

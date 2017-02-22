@@ -26,6 +26,10 @@ describe('Test suite for mounted App', () => {
     expect(app.state().settingsLocked).toEqual(false);
   });
 
+  it('Editor Mode is initially off', () => {
+    expect(app.state().editorToggle).toEqual(false);
+  });
+
   it('Settings button shows SettingsBar when clicked', () => {
     const settingsButton = app.find('.SettingsButton').first();
     settingsButton.simulate('click');
@@ -66,6 +70,19 @@ describe('Test suite for mounted App', () => {
     const clearButton = app.find('.ClearButton').first();
     clearButton.simulate('click');
     expect(app.state().messageArray).toEqual([]);
+  });
+
+  it('Backspace button results in one less in speechBarMessage', () => {
+    // start with words in the message array
+    app.setState({messageArray: [
+        {id: "1", word:"infinite", symbol_path:"", alt:""},
+        {id: "2", word:"love", symbol_path:"", alt:""}
+      ]
+    });
+
+    const backspaceButton = app.find('.BackspaceButton').first();
+    backspaceButton.simulate('click');
+    expect(app.state().messageArray).toEqual([{id: "1", word:"infinite", symbol_path:"", alt:""}]);
   });
 
   it('Clicking on a word adds it to the messageArray', () => {

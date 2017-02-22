@@ -14,7 +14,7 @@ describe("Test suite for mounted SettingsBar", () => {
     beforeEach(() => {
         onChange = jest.fn();
         bar = mount(<SettingsBar selectedVoice="Default" updateVoice={onChange}
-                    settingsLocked={false} lockToggle={onChange}
+                    settingsLocked={false} enableEditorMode={onChange} lockToggle={onChange}
                     buttonSize="5" resizeButton={onChange}/>);
     });
 
@@ -30,6 +30,11 @@ describe("Test suite for mounted SettingsBar", () => {
 
     it('SettingsBar calls reSize function when the button size slider is changed', () => {
         bar.find('.ButtonSizeSlider').first().simulate('change');
+        expect(onChange).toBeCalled();
+    });
+	
+    it('SettingsBar calls enableEditorMode when the button is clicked', () => {
+	bar.find('.EditorButton').first().simulate('click');
         expect(onChange).toBeCalled();
     });
 });

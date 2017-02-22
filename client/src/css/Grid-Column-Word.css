@@ -51,7 +51,15 @@
 }
 
 .DeleteButton {
-  height: 10px;
-  width: 10px;
+  height: 20px;
+  width: 20px;
+  border: solid 1px red;
+  background-color: #fff;
+  color: red;
+}
+
+.DeleteButton:hover {
+  color: black;
   background-color: red;
+
 }

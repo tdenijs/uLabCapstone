@@ -1,19 +1,33 @@
 import React, {Component} from 'react';
-import {Row, Col, } from 'react-bootstrap';
+import {Row, Col,} from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
+import WordEditor from './WordEditor.js';
 // DropdownButton, MenuItem
+
 
 class SettingsBar extends Component {
   constructor(props) {
     super(props);
 
     var voices = speechSynthesis.getVoices();
+   // this.close = this.close.bind(this);
+    //this.open = this.open.bind(this);
 
     this.state = {
-	selectedVoice: voices[0] && voices[0].value,
-	voices, 
+	    selectedVoice: voices[0] && voices[0].value,
+	    voices,
+	    //showModal: false,
+
     }
   }
 
+  // MODAL SETTINGS
+  /* close(){
+        this.setState({showModal: false});
+   }
+   open(){
+        this.setState({showModal: true});
+   }*/
 
 
   render() {
@@ -25,18 +39,20 @@ class SettingsBar extends Component {
 
     return (
       <div className="SettingsBar">
-	<Row>
+        <Row>
           <Col xs={12} md={4}>
             <form className="VoiceForm">
               <label className="VoiceLabel">Voice</label>
               <select className="VoiceMenu" defaultValue={this.state.selectedVoice} disabled={disabled}
-                      onChange={(e) => {this.setState({selectedVoice: e.target.value}); 
-		      		this.props.updateVoice(e)}} > 
+                      onChange={(e) => {
+                        this.setState({selectedVoice: e.target.value});
+                        this.props.updateVoice(e)
+                      }}>
                 {
-                    this.state.voices.map((voice) => {
-			return <option key={voice.name} value={voice && voice.value}>{voice.name}</option>
-		    })
- 		}
+                  this.state.voices.map((voice) => {
+                    return <option key={voice.name} value={voice && voice.value}>{voice.name}</option>
+                  })
+                }
               </select>
             </form>
 
@@ -54,18 +70,31 @@ class SettingsBar extends Component {
 
           <Col xs={12} md={4}>
             <input type="checkbox" className="LockCheck" onChange={this.props.lockToggle} checked={checked}/>
-            Lock Settings
+            Lock Setting
           </Col>
 
         </Row>
 	<Row>
 	  <Col xs={12} md={6}>
-	    <button className="AddButton" onClick="" disabled={disabled}>Add Button</button>
-	  </Col>
-	  <Col xs={12} md={6}>
-	    <button className="EditorButton" onClick={this.props.enableEditorMode} disabled={disabled}>Editor Mode</button>
-	  </Col>
-	</Row>
+	    <button className="AddButton" onClick={this.props.open} disabled={disabled}>Add Button</button>
+
+	    <Modal
+	        contentLabel="Modal"
+          aria-labelledby='modal-label'
+          show={this.props.showModal}
+          onHide={this.props.close}>
+	        <WordEditor
+            coreListTitles={this.props.coreListTitles}
+            close={this.props.close}
+            handleAddNewWord={this.props.handleAddNewWord} />
+	    </Modal>
+
+          </Col>
+          <Col xs={12} md={6}>
+            <button className="EditorButton" onClick={this.props.enableEditorMode} disabled={disabled}>Editor Mode
+            </button>
+          </Col>
+        </Row>
       </div>
     );
   }
@@ -77,6 +106,9 @@ SettingsBar.propTypes = {
   updateVoice: React.PropTypes.func,
   lockToggle: React.PropTypes.func,
   enableEditorMode: React.PropTypes.func,
+  open: React.PropTypes.func,
+  close: React.PropTypes.func,
+  handleAddNewWord: React.PropTypes.func,
 };
 
 export default SettingsBar;

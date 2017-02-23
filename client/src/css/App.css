@@ -19,3 +19,10 @@
   font-size: large;
 }
 
+
+
+.modal-dialog {
+  padding-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+}

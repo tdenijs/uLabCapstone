@@ -54,7 +54,19 @@ function getAllWordsByListName(req, res, next) {
     });
 }
 
+function deleteWordByID(req, res, next) {
+
+}
+
+
+function deleteWordByName(req, res, next) {
+
+}
+
+
 module.exports = {
     getAllWordsByListId: getAllWordsByListId,
-    getAllWordsByListName: getAllWordsByListName
+    getAllWordsByListName: getAllWordsByListName,
+    deleteWordByID: deleteWordByID,
+    deleteWordByName: deleteWordByName
 }

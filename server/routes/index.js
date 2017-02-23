@@ -43,4 +43,12 @@ router.post('/words', words.createWord);
 
 //===============================================
 
+//===============================================
+// DELETE Requests
+//===============================================
+router.delete('/words/list_id/:list_id/word_id/:word_id', lists.deleteWordByID);
+router.delete('/words/list_name/:list_name/word_name/:word_name', lists.deleteWordByName);
+
+
+//===============================================
 module.exports = router;

@@ -55,18 +55,29 @@ function getAllWordsByListName(req, res, next) {
 }
 
 function deleteWordByID(req, res, next) {
-
-}
-
-
-function deleteWordByName(req, res, next) {
-
+  console.log("deleteWordByID starts");
+  var targetListID = parseInt(req.params.list_id);
+  var targetWordID = parseInt(req.params.word_id);
+  db.result('delete from listwords where list_id=$1 AND word_id=$2',[targetListID, targetWordID])
+  .then(function (result) {
+     res.status(200)
+       .json({
+         status: 'success',
+         message: `Removed ${result.rowCount} word`
+       });
+       console.log("Removed " + result.rowCount + " word");
+      //  res.status(404)
+      //  .send("ERROR: word_id: " + targetWordID + " not found in list_id: " + targetListID);
+      //  console.log("ERROR (404)");
+     })
+   .catch(function (err) {
+     return next(err);
+   });
 }
 
 
 module.exports = {
     getAllWordsByListId: getAllWordsByListId,
     getAllWordsByListName: getAllWordsByListName,
-    deleteWordByID: deleteWordByID,
-    deleteWordByName: deleteWordByName
+    deleteWordByID: deleteWordByID
 }

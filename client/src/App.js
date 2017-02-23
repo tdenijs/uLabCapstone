@@ -58,16 +58,21 @@ class App extends Component {
   // Initializes wordArrays with JSON data from API call
   getWords() {
     let nextCol;
-    let titles = [
-      {title: 'pronoun', order: 1},
-      {title: 'noun', order: 2},
-      {title: 'verb', order: 3},
-      {title: 'adjective', order: 4},
-      {title: 'adverb', order: 5},
-      {title: 'preposition', order: 6},
-      {title: 'exclamation', order: 7}];
+    let nextList;
+    let coreVocabId = '1';
+    let listData = [];
 
-    titles.forEach(({title, order}) => {
+    $.getJSON('http://localhost:3001/api/grids/id/' + coreVocabId)
+        .then((data) => {
+          _.forEach(data, function (value) {
+            nextList = {title: value.list_title, order: value.list_id};
+            listData.push(nextList);
+          });
+          console.log('Retrieved Core Vocab titles and ids: ', listData[0]);
+        });
+
+    console.log('Retrieved Core Vocab titles and ids: ', listData);
+    listData.forEach(({title, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
         .then((data) => {
           nextCol = {
@@ -93,7 +98,7 @@ class App extends Component {
           listTitles.push(value.list_title);
         });
         console.log('Retrieved Core Vocab titles: ', listTitles);
-      })
+      });
 
     this.setState({ coreListTitles: listTitles });
 

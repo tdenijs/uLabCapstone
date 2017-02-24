@@ -9,6 +9,7 @@ import SettingsBar from './components/SettingsBar';
 import Grid from './components/Grid';
 import _ from 'lodash';
 import $ from 'jquery';
+import { Button, Modal } from 'react-bootstrap';
 
 
 class App extends Component {
@@ -30,6 +31,10 @@ class App extends Component {
     this.getCoreVocabTitles = this.getCoreVocabTitles.bind(this);
     this.removeFromGrid = this.removeFromGrid.bind(this);
     this.handleAddNewWord = this.handleAddNewWord.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleDeleteConfirm = this.handleDeleteConfirm.bind(this);
+    this.openDeleteModal = this.openDeleteModal.bind(this);
+    this.closeDeleteModal = this.closeDeleteModal.bind(this);
 
     this.state = {
       selectedVoice: "Default",
@@ -41,6 +46,10 @@ class App extends Component {
       messageArray: [],
       coreListTitles: [],
       showModal: false,
+      showDeleteModal: false,
+      deleteWordText: "",
+      deleteWordId: "0",
+      deleteColId: "0",
     }
   }
 
@@ -182,6 +191,26 @@ class App extends Component {
     });
   }
 
+  openDeleteModal() {
+    this.setState({showDeleteModal: true});
+  }
+
+  closeDeleteModal() {
+    this.setState({showDeleteModal: false});
+  }
+
+  handleDelete(word_text, word_id, col_id) {
+    this.setState({deleteWordText: word_text});
+    this.setState({deleteWordId: word_id});
+    this.setState({deleteColId: col_id});
+    this.openDeleteModal();
+  }
+
+  handleDeleteConfirm() {
+    this.removeFromGrid(this.state.deleteWordId, this.state.deleteColId);
+    this.closeDeleteModal();
+  }
+
   // Callback function passed to the Word Component to delete that word from the grid
   removeFromGrid(word_id, col_id) {
     console.log("wordId: " + word_id + " columnId: " + col_id);
@@ -279,7 +308,16 @@ class App extends Component {
         </div>
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
               selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
-              removeFromGrid={this.removeFromGrid}/>
+              removeFromGrid={this.handleDelete}/>
+        <Modal show={this.state.showDeleteModal} onHide={this.closeDeleteModal}>
+            <Modal.Body>
+              <p>Are you sure you want to delete "{this.state.deleteWordText}"?</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.handleDeleteConfirm}>Yes</Button>
+              <Button onClick={this.closeDeleteModal}>No</Button>
+            </Modal.Footer>
+          </Modal>
       </div>
 
     );

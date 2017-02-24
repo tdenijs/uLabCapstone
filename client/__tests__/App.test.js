@@ -1,6 +1,7 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow, mount, ReactWrapper } from 'enzyme';
 import App from '../src/App';
+import ReactTestUtils from 'react-addons-test-utils'
 import speechSynthesis from '../src/mocks';
 
 it('App component shallow renders without crashing', () => {
@@ -121,6 +122,11 @@ describe('Test suite for mounted App', () => {
     // Click the DeleteButton
     const deleteButton = app.find('.DeleteButton').first();
     deleteButton.simulate('click');
+
+    // Click the "Yes" option on the DeleteModal
+    // Pulls the modal out of the DOM and gets the first button
+    const deleteConfirmButton = document.body.getElementsByClassName("Modal")[0].getElementsByClassName("btn btn-default")[0];
+    ReactTestUtils.Simulate.click(deleteConfirmButton);
 
     // Expect the word to be deleted
     expect(app.state().colArray[0].words).toEqual([]);

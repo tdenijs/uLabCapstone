@@ -58,30 +58,25 @@ class App extends Component {
   // Initializes wordArrays with JSON data from API call
   getWords() {
     let nextCol;
-    let nextList;
-    let coreVocabId = '1';
-    let listData = [];
+    let titles = [
+      {title: 'pronoun', id: 6},
+      {title: 'noun', id: 4},
+      {title: 'verb', id: 7},
+      {title: 'adjective', id: 1},
+      {title: 'adverb', id: 2},
+      {title: 'preposition', id: 5},
+      {title: 'exclamation', id: 3}];
 
-    $.getJSON('http://localhost:3001/api/grids/id/' + coreVocabId)
-        .then((data) => {
-          _.forEach(data, function (value) {
-            nextList = {title: value.list_title, order: value.list_id};
-            listData.push(nextList);
-          });
-          console.log('Retrieved Core Vocab titles and ids: ', listData[0]);
-        });
-
-    console.log('Retrieved Core Vocab titles and ids: ', listData);
-    listData.forEach(({title, order}) => {
+    titles.forEach(({title, id}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
-        .then((data) => {
-          nextCol = {
-            order: order,
-            title: title,
-            words: data
-          };
-          this.setState(this.appendToCols(nextCol));
-        });
+          .then((data) => {
+            nextCol = {
+              id: id,
+              title: title,
+              words: data
+            };
+            this.setState(this.appendToCols(nextCol));
+          });
     });
   }
 
@@ -187,10 +182,12 @@ class App extends Component {
   }
 
   // Callback function passed to the Word Component to delete that word from the grid
-  removeFromGrid(word, column) {
+  removeFromGrid(wordId, columnId) {
+    console.log("wordId: " + wordId + " columnId: " + columnId);
+
     // Get the column to remove from
     let col = this.state.colArray.filter((el) =>  {
-      return el.title === column;
+      return el.id === columnId;
     });
 
     // Pull the column from the filter results
@@ -198,20 +195,26 @@ class App extends Component {
 
     // Get a new set of columns that has the column we want to alter removed
     let newCols = this.state.colArray.filter((el) => {
-      return el.title !== column;
+      return el.id !== columnId;
     });
 
     // Get the new array of words with the desired word removed
     let newWords = col.words.filter((el) => {
-      return el.word !== word;
+      return el.id !== wordId;
     });
 
     // Assemble the new column with the filtered words
     let newCol = {
-      order: col.order,
+      ...col,
+      id: col.id,
       title: col.title,
       words: newWords,
     };
+
+    console.log("col: " + col);
+    console.log("newWords: " + newWords);
+    console.log("newCol: " + newCol);
+    console.log("newCols" + newCols);
 
     // Update the state and add the updated column back on
     this.setState({

@@ -45,7 +45,7 @@ class Word extends Component {
   render() {
       // Only show the delete button on a word if editorToggle is true
       let deleteButton = this.props.editorToggle ?
-          <div className="DeleteButton" onClick={() => this.props.removeFromGrid(this.props.text, this.props.column)}>
+          <div className="DeleteButton" onClick={() => this.props.removeFromGrid(this.props.id, this.props.columnId)}>
             <Glyphicon glyph="glyphicon glyphicon-remove-sign" aria-label="delete word"/>
           </div>
           : null;

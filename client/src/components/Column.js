@@ -8,11 +8,11 @@ class Column extends Component {
       <div className="Column">
         <div className="ColumnTitle">{this.props.title}</div>
         {
-          this.props.words.map(({id, word, symbol_path, alt}) => {
+          this.props.words.map(({word_id, word, symbol_path, alt}) => {
             return (
-              <Word key={_.uniqueId()} id={id} text={word} src={symbol_path} alt={alt} add={this.props.add}
+              <Word key={_.uniqueId()} id={word_id} text={word} src={symbol_path} alt={alt} add={this.props.add}
                     selectedVoice={this.props.selectedVoice} editorToggle={this.props.editorToggle}
-                    column={this.props.title} removeFromGrid={this.props.removeFromGrid} />
+                    columnId={this.props.id} removeFromGrid={this.props.removeFromGrid} />
             );
           })
         }

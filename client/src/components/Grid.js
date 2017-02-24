@@ -5,13 +5,13 @@ import _ from 'lodash';
 class Grid extends Component {
   render() {
     // Make sure the cols are in the right order
-    let sortedCols = _.sortBy(this.props.cols, 'order');
+    let sortedCols = _.sortBy(this.props.cols, 'id');
 
     return (
       <div className="Grid">
         {
-          sortedCols.map(({title, words}) => {
-            return (<Column key={_.uniqueId()} title={title} words={words} add={this.props.add}
+          sortedCols.map(({id, title, words}) => {
+            return (<Column key={_.uniqueId()} id={id} title={title} words={words} add={this.props.add}
                             selectedVoice={this.props.selectedVoice} editorToggle={this.props.editorToggle}
                             removeFromGrid={this.props.removeFromGrid} />);
           })
@@ -28,6 +28,7 @@ Grid.propTypes = {
 
 Grid.defaultProps = {
   cols: [{
+    id: "0",
     title: "test",
     words: [{id: "1", word:"love", symbol_path:"", alt:""}]
   }],

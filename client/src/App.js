@@ -59,13 +59,13 @@ class App extends Component {
   getWords() {
     let nextCol;
     let titles = [
-      {title: 'pronoun', id: 6},
-      {title: 'noun', id: 4},
-      {title: 'verb', id: 7},
-      {title: 'adjective', id: 1},
-      {title: 'adverb', id: 2},
-      {title: 'preposition', id: 5},
-      {title: 'exclamation', id: 3}];
+      {title: 'pronoun', id: "6"},
+      {title: 'noun', id: "4"},
+      {title: 'verb', id: "7"},
+      {title: 'adjective', id: "1"},
+      {title: 'adverb', id: "2"},
+      {title: 'preposition', id: "5"},
+      {title: 'exclamation', id: "3"}];
 
     titles.forEach(({title, id}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
@@ -182,12 +182,12 @@ class App extends Component {
   }
 
   // Callback function passed to the Word Component to delete that word from the grid
-  removeFromGrid(wordId, columnId) {
-    console.log("wordId: " + wordId + " columnId: " + columnId);
+  removeFromGrid(word_id, col_id) {
+    console.log("wordId: " + word_id + " columnId: " + col_id);
 
     // Get the column to remove from
     let col = this.state.colArray.filter((el) =>  {
-      return el.id === columnId;
+      return el.id === col_id;
     });
 
     // Pull the column from the filter results
@@ -195,26 +195,19 @@ class App extends Component {
 
     // Get a new set of columns that has the column we want to alter removed
     let newCols = this.state.colArray.filter((el) => {
-      return el.id !== columnId;
+      return el.id !== col_id;
     });
 
     // Get the new array of words with the desired word removed
     let newWords = col.words.filter((el) => {
-      return el.id !== wordId;
+      return el.word_id !== word_id;
     });
 
     // Assemble the new column with the filtered words
     let newCol = {
       ...col,
-      id: col.id,
-      title: col.title,
       words: newWords,
     };
-
-    console.log("col: " + col);
-    console.log("newWords: " + newWords);
-    console.log("newCol: " + newCol);
-    console.log("newCols" + newCols);
 
     // Update the state and add the updated column back on
     this.setState({

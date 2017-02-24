@@ -12,7 +12,7 @@ class Column extends Component {
             return (
               <Word key={_.uniqueId()} id={word_id} text={word} src={symbol_path} alt={alt} add={this.props.add}
                     selectedVoice={this.props.selectedVoice} editorToggle={this.props.editorToggle}
-                    columnId={this.props.id} removeFromGrid={this.props.removeFromGrid} />
+                    col_id={this.props.col_id} removeFromGrid={this.props.removeFromGrid} />
             );
           })
         }

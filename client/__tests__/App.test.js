@@ -89,8 +89,8 @@ describe('Test suite for mounted App', () => {
     // give app a word to test
     app.setState({colArray: [{
       title: "test",
-      order: 1,
-      words: [{id: "1", word:"love", symbol_path:"", alt:""}]
+      id: "1",
+      words: [{word_id: "1", word:"love", symbol_path:"", alt:""}]
     }]});
 
     // Clear the window
@@ -108,8 +108,8 @@ describe('Test suite for mounted App', () => {
     // give app a word to test
     app.setState({colArray: [{
       title: "test",
-      order: 1,
-      words: [{id: "1", word:"love", symbol_path:"", alt:""}]
+      id: "1",
+      words: [{word_id: "1", word:"love", symbol_path:"", alt:""}]
     }]});
 
     // Enable EditorMode

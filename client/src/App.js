@@ -59,18 +59,19 @@ class App extends Component {
   getWords() {
     let nextCol;
     let titles = [
-      {title: 'pronoun', id: "6"},
-      {title: 'noun', id: "4"},
-      {title: 'verb', id: "7"},
-      {title: 'adjective', id: "1"},
-      {title: 'adverb', id: "2"},
-      {title: 'preposition', id: "5"},
-      {title: 'exclamation', id: "3"}];
+      {title: 'pronoun', id: "6", order: "1"},
+      {title: 'noun', id: "4", order: "2"},
+      {title: 'verb', id: "7", order: "3"},
+      {title: 'adjective', id: "1", order: "4"},
+      {title: 'adverb', id: "2", order: "5"},
+      {title: 'preposition', id: "5", order: " 6"},
+      {title: 'exclamation', id: "3", order: "7"}];
 
-    titles.forEach(({title, id}) => {
+    titles.forEach(({title, id, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
           .then((data) => {
             nextCol = {
+              order: order,
               id: id,
               title: title,
               words: data

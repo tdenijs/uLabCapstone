@@ -5,7 +5,7 @@ import _ from 'lodash';
 class Grid extends Component {
   render() {
     // Make sure the cols are in the right order
-    let sortedCols = _.sortBy(this.props.cols, 'id');
+    let sortedCols = _.sortBy(this.props.cols, 'order');
 
     return (
       <div className="Grid">

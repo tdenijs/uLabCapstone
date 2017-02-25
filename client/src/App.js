@@ -20,7 +20,6 @@ class App extends Component {
     this.handleClearMessage = this.handleClearMessage.bind(this);
     this.updateVoice = this.updateVoice.bind(this);
     this.lockToggle = this.lockToggle.bind(this);
-    this.resizeButton = this.resizeButton.bind(this);
     this.enableEditorMode = this.enableEditorMode.bind(this);
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
@@ -35,6 +34,10 @@ class App extends Component {
     this.handleDeleteConfirm = this.handleDeleteConfirm.bind(this);
     this.openDeleteModal = this.openDeleteModal.bind(this);
     this.closeDeleteModal = this.closeDeleteModal.bind(this);
+
+    // component render helper functions
+    this.renderSettingsBar = this.renderSettingsBar.bind(this);
+
 
     this.state = {
       selectedVoice: "Default",
@@ -73,9 +76,12 @@ class App extends Component {
       {title: 'verb', id: "7", order: "3"},
       {title: 'adjective', id: "1", order: "4"},
       {title: 'adverb', id: "2", order: "5"},
-      {title: 'preposition', id: "5", order: " 6"},
+      {title: 'preposition', id: "5", order: "6"},
       {title: 'exclamation', id: "3", order: "7"}];
 
+    this.setState({colArray: []});  // getWords() will be called when a new word is added,
+                                    // clear the colArray before retrieving words from api
+    
     titles.forEach(({title, id, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
           .then((data) => {
@@ -91,10 +97,12 @@ class App extends Component {
   }
 
 
-  // Retrieves the titles of the core vocabulary from the database
-  // and updates the state variable "coreListTitles"
+  /**
+   * getCoreVocabTitles()   Retrieves the titles of the core vocabulary from the database
+   * and updates the state variable "coreListTitles"
+   */
   getCoreVocabTitles() {
-    let coreVocabId = '1';
+    let coreVocabId = '1';  // list_id for coreVocab list
     let listTitles = [];
 
     $.getJSON('http://localhost:3001/api/grids/id/' + coreVocabId)
@@ -102,12 +110,9 @@ class App extends Component {
         _.forEach(data, function (value) {
           listTitles.push(value.list_title);
         });
-        console.log('Retrieved Core Vocab titles: ', listTitles);
-      });
+      })
 
-    this.setState({ coreListTitles: listTitles });
-
-    console.log('list titles ', listTitles);
+    this.setState({coreListTitles: listTitles});
   }
 
 
@@ -157,19 +162,19 @@ class App extends Component {
   }
 
 
-  // Callback function passed to the SettingsBar to update the App's buttonSize state variable
-  resizeButton(e) {
-    this.setState({buttonSize: e.target.value});
+  // // Callback function passed to the SettingsBar to update the App's buttonSize state variable
+  // resizeButton(e) {
+  //   this.setState({buttonSize: e.target.value});
+  // }
+
+  //These following 2 functions are setting modal
+  close() {
+    this.setState({showModal: false});
   }
 
-   //These following 2 functions are setting modal
-   close(){
-        this.setState({showModal: false});
-   }
-
-   open(){
-        this.setState({showModal: true});
-   }
+  open() {
+    this.setState({showModal: true});
+  }
 
 
   // Callback function passed to the Word Component to add a word to the speechBarMessage
@@ -242,17 +247,17 @@ class App extends Component {
     // Update the state and add the updated column back on
     this.setState({
       colArray: [
-          ...newCols, newCol
+        ...newCols, newCol
       ]
     });
   }
 
 
-
-
-
-  // API POST CALL
-  // Callback function passed to the WordEditor Component to add a word through POST api call
+  /**
+   * handleAddNewWord()
+   * {API POST CALL}
+   * Callback function passed to the WordEditor Component to add a word through POST api call
+   */
   handleAddNewWord(wordText, selectedTitle) {
     fetch('http://localhost:3001/api/words/', {
       method: 'POST',
@@ -266,27 +271,37 @@ class App extends Component {
         text: wordText,
         list: selectedTitle
       })
-    })
+    }).then(() => this.getWords());  //then... call getWords() to reload words
   }
 
+
+  /**
+   * renderSettingsBar()
+   * a helper function that returns the SettingsBar component
+   * */
+  renderSettingsBar() {
+    return (
+      <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
+                   settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
+                   editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
+                   buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
+                   open={this.open} close={this.close} showModal={this.state.showModal}
+                   coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}/>
+    )
+  }
 
 
   render() {
 
-    //Get the Browser's voices loaded before anything. Allows synching
+    //Get the Browser's voices loaded before anything. Allows syncing
     //of SettingsBar voices
     speechSynthesis.getVoices();
 
     // Render the SettingsBar only if the settingsBarVisible state variable is true
     let settingsBar = this.state.settingsBarVisible
-      ? <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
-          settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
-		      editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
-          buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
-          open={this.open} close={this.close} showModal={this.state.showModal}
-          coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}/>
-
+      ? this.renderSettingsBar()
       : null;
+
     let editing = this.state.editorToggle
       ? "True"
       : "False";
@@ -300,11 +315,9 @@ class App extends Component {
           selectedVoice={this.state.selectedVoice}
           handleBackButton={this.handleBackButton}
           settingsToggle={this.settingsToggle}/>
+
         <div className="Settings" style={{margin: "auto"}}>
           {settingsBar}
-          <p> Global Button Size: {this.state.buttonSize} </p>
-          <p> Global Voice: {this.state.selectedVoice} </p>
-          <p> Editor Mode Enabled: {editing} </p>
         </div>
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
               selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}

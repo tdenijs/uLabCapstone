@@ -28,10 +28,11 @@ describe("Test suite for mounted SettingsBar", () => {
         expect(onChange).toBeCalled();
     });
 
-    it('SettingsBar calls reSize function when the button size slider is changed', () => {
-        bar.find('.ButtonSizeSlider').first().simulate('change');
-        expect(onChange).toBeCalled();
-    });
+    //
+    // it('SettingsBar calls reSize function when the button size slider is changed', () => {
+    //     bar.find('.ButtonSizeSlider').first().simulate('change');
+    //     expect(onChange).toBeCalled();
+    // });
 	
     it('SettingsBar calls enableEditorMode when the button is clicked', () => {
 	bar.find('.EditorButton').first().simulate('click');

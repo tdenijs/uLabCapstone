@@ -19,7 +19,6 @@ class App extends Component {
     this.handleClearMessage = this.handleClearMessage.bind(this);
     this.updateVoice = this.updateVoice.bind(this);
     this.lockToggle = this.lockToggle.bind(this);
-    this.resizeButton = this.resizeButton.bind(this);
     this.enableEditorMode = this.enableEditorMode.bind(this);
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
@@ -153,10 +152,10 @@ class App extends Component {
   }
 
 
-  // Callback function passed to the SettingsBar to update the App's buttonSize state variable
-  resizeButton(e) {
-    this.setState({buttonSize: e.target.value});
-  }
+  // // Callback function passed to the SettingsBar to update the App's buttonSize state variable
+  // resizeButton(e) {
+  //   this.setState({buttonSize: e.target.value});
+  // }
 
   //These following 2 functions are setting modal
   close() {
@@ -288,9 +287,6 @@ class App extends Component {
 
         <div className="Settings" style={{margin: "auto"}}>
           {settingsBar}
-          <p> Global Button Size: {this.state.buttonSize} </p>
-          <p> Global Voice: {this.state.selectedVoice} </p>
-          <p> Editor Mode Enabled: {editing} </p>
         </div>
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
               selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}

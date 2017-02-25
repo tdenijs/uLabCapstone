@@ -9,25 +9,26 @@ class SettingsBar extends Component {
   constructor(props) {
     super(props);
 
+
     var voices = speechSynthesis.getVoices();
-   // this.close = this.close.bind(this);
-    //this.open = this.open.bind(this);
 
     this.state = {
-	    selectedVoice: voices[0] && voices[0].value,
-	    voices,
-	    //showModal: false,
+      selectedVoice: voices[0] && voices[0].value,
+      voices,
+      //showModal: false,
 
     }
   }
 
-  // MODAL SETTINGS
-  /* close(){
-        this.setState({showModal: false});
-   }
-   open(){
-        this.setState({showModal: true});
-   }*/
+  // <Col xs={12} md={4}>
+  // <form className="ButtonSizeForm">
+  // <label className="ButtonSizeLabel">Button Size</label>
+  // <output className="ButtonSizeOutput">{this.props.buttonSize}</output>
+  // <input className="ButtonSizeSlider" type="range"
+  // value={this.props.buttonSize} onChange={this.props.resizeButton}
+  // min="0" max="10" disabled={disabled} style={{margin: "auto", width: "200px"}}/>
+  // </form>
+  // </Col>
 
 
   render() {
@@ -40,7 +41,9 @@ class SettingsBar extends Component {
     return (
       <div className="SettingsBar">
         <Row>
-          <Col xs={12} md={4}>
+
+          {/* Voice Options */}
+          <Col xs={12} md={3}>
             <form className="VoiceForm">
               <label className="VoiceLabel">Voice</label>
               <select className="VoiceMenu" defaultValue={this.state.selectedVoice} disabled={disabled}
@@ -55,45 +58,35 @@ class SettingsBar extends Component {
                 }
               </select>
             </form>
-
-
-          </Col>
-          <Col xs={12} md={4}>
-            <form className="ButtonSizeForm">
-              <label className="ButtonSizeLabel">Button Size</label>
-              <output className="ButtonSizeOutput">{this.props.buttonSize}</output>
-              <input className="ButtonSizeSlider" type="range"
-                     value={this.props.buttonSize} onChange={this.props.resizeButton}
-                     min="0" max="10" disabled={disabled} style={{margin: "auto", width: "200px"}}/>
-            </form>
           </Col>
 
-          <Col xs={12} md={4}>
+          {/* Add Button */}
+          <Col xs={4} md={3}>
+            <button className="AddButton" onClick={this.props.open} disabled={disabled}>Add New Word</button>
+            <Modal
+              contentLabel="Modal"
+              aria-labelledby='modal-label'
+              show={this.props.showModal}
+              onHide={this.props.close}>
+              <WordEditor
+                coreListTitles={this.props.coreListTitles}
+                close={this.props.close}
+                handleAddNewWord={this.props.handleAddNewWord}/>
+            </Modal>
+          </Col>
+
+          {/* Editor Button, allows you to delete words */}
+          <Col xs={4} md={3}>
+            <button className="EditorButton" onClick={this.props.enableEditorMode} disabled={disabled}>Delete a Word
+            </button>
+          </Col>
+
+          {/* Lock Settings */}
+          <Col xs={4} md={3}>
             <input type="checkbox" className="LockCheck" onChange={this.props.lockToggle} checked={checked}/>
             Lock Setting
           </Col>
 
-        </Row>
-	<Row>
-	  <Col xs={12} md={6}>
-	    <button className="AddButton" onClick={this.props.open} disabled={disabled}>Add Button</button>
-
-	    <Modal
-	        contentLabel="Modal"
-          aria-labelledby='modal-label'
-          show={this.props.showModal}
-          onHide={this.props.close}>
-	        <WordEditor
-            coreListTitles={this.props.coreListTitles}
-            close={this.props.close}
-            handleAddNewWord={this.props.handleAddNewWord} />
-	    </Modal>
-
-          </Col>
-          <Col xs={12} md={6}>
-            <button className="EditorButton" onClick={this.props.enableEditorMode} disabled={disabled}>Editor Mode
-            </button>
-          </Col>
         </Row>
       </div>
     );
@@ -102,7 +95,6 @@ class SettingsBar extends Component {
 
 
 SettingsBar.propTypes = {
-  resizeButton: React.PropTypes.func,
   updateVoice: React.PropTypes.func,
   lockToggle: React.PropTypes.func,
   enableEditorMode: React.PropTypes.func,

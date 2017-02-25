@@ -271,9 +271,6 @@ class App extends Component {
           settingsToggle={this.settingsToggle}/>
         <div className="Settings" style={{margin: "auto"}}>
           {settingsBar}
-          <p> Global Button Size: {this.state.buttonSize} </p>
-          <p> Global Voice: {this.state.selectedVoice} </p>
-          <p> Editor Mode Enabled: {editing} </p>
         </div>
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
               selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}

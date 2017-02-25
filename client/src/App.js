@@ -31,6 +31,10 @@ class App extends Component {
     this.removeFromGrid = this.removeFromGrid.bind(this);
     this.handleAddNewWord = this.handleAddNewWord.bind(this);
 
+    // component render helper functions
+    this.renderSettingsBar = this.renderSettingsBar.bind(this);
+
+
     this.state = {
       selectedVoice: "Default",
       settingsBarVisible: false,
@@ -67,12 +71,8 @@ class App extends Component {
       {title: 'preposition', order: 6},
       {title: 'exclamation', order: 7}];
 
-    //this.setState({colArray: []});  // getWords() will be called when a new word is added,
+    this.setState({colArray: []});  // getWords() will be called when a new word is added,
                                     // clear the colArray before retrieving words from api
-
-    this.setState((prevState) => {
-      return {...prevState, colArray: []};
-    });
 
     titles.forEach(({title, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
@@ -100,11 +100,10 @@ class App extends Component {
       .then((data) => {
         _.forEach(data, function (value) {
           listTitles.push(value.list_title);
-          //console.log('values ', value)
         });
       })
 
-    this.setState({ coreListTitles: listTitles });
+    this.setState({coreListTitles: listTitles});
   }
 
 
@@ -159,14 +158,14 @@ class App extends Component {
     this.setState({buttonSize: e.target.value});
   }
 
-   //These following 2 functions are setting modal
-   close(){
-        this.setState({showModal: false});
-   }
+  //These following 2 functions are setting modal
+  close() {
+    this.setState({showModal: false});
+  }
 
-   open(){
-        this.setState({showModal: true});
-   }
+  open() {
+    this.setState({showModal: true});
+  }
 
 
   // Callback function passed to the Word Component to add a word to the speechBarMessage
@@ -191,7 +190,7 @@ class App extends Component {
   // Callback function passed to the Word Component to delete that word from the grid
   removeFromGrid(word, column) {
     // Get the column to remove from
-    let col = this.state.colArray.filter((el) =>  {
+    let col = this.state.colArray.filter((el) => {
       return el.title === column;
     });
 
@@ -218,12 +217,10 @@ class App extends Component {
     // Update the state and add the updated column back on
     this.setState({
       colArray: [
-          ...newCols, newCol
+        ...newCols, newCol
       ]
     });
   }
-
-
 
 
   /**
@@ -244,28 +241,35 @@ class App extends Component {
         text: wordText,
         list: selectedTitle
       })
-    })
-
-    console.log('adding new word, calling getWords()');
-    this.getWords();  //call getWords() to reload.
+    }).then(() => this.getWords());  //then... call getWords() to reload words
   }
 
+
+  /**
+   * renderSettingsBar()
+   * a helper function that returns the SettingsBar component
+   * */
+  renderSettingsBar() {
+    return (
+      <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
+                   settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
+                   editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
+                   buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
+                   open={this.open} close={this.close} showModal={this.state.showModal}
+                   coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}/>
+    )
+  }
 
 
   render() {
 
-    //Get the Browser's voices loaded before anything. Allows synching
+    //Get the Browser's voices loaded before anything. Allows syncing
     //of SettingsBar voices
     speechSynthesis.getVoices();
 
     // Render the SettingsBar only if the settingsBarVisible state variable is true
     let settingsBar = this.state.settingsBarVisible
-      ? <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
-          settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
-		      editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
-          buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
-          open={this.open} close={this.close} showModal={this.state.showModal}
-          coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}/>
+      ? this.renderSettingsBar()
       : null;
 
     let editing = this.state.editorToggle
@@ -281,6 +285,7 @@ class App extends Component {
           selectedVoice={this.state.selectedVoice}
           handleBackButton={this.handleBackButton}
           settingsToggle={this.settingsToggle}/>
+
         <div className="Settings" style={{margin: "auto"}}>
           {settingsBar}
           <p> Global Button Size: {this.state.buttonSize} </p>

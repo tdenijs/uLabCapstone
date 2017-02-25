@@ -99,7 +99,15 @@ const dbconfig = {
 
 #### Running Client tests
 
- No information for running tests for the client has been added
+ Front end testing is ran with [Jest](https://facebook.github.io/jest/) using tests written with a combination of Jest and [Enzyme](http://airbnb.io/enzyme/). All tests are in the `client\__tests__` folder, which Jest automatically looks in. Mock functions are in `client\src\mocks.js`.
+ 
+ The client test script is defined in `client\package.json`. More information on this script can be found at [create-react-app](-app/blob/master/packages/react-scripts/template/README.md#running-tests).
+ 
+ ```
+"test": "react-scripts test --env=jsdom",
+```
+
+Run `npm test` in the `client` folder to execute the tests. Run `npm test -- --coverage` to include information about test coverage.
 
 #### Running API test
 

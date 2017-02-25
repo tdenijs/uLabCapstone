@@ -67,6 +67,13 @@ class App extends Component {
       {title: 'preposition', order: 6},
       {title: 'exclamation', order: 7}];
 
+    //this.setState({colArray: []});  // getWords() will be called when a new word is added,
+                                    // clear the colArray before retrieving words from api
+
+    this.setState((prevState) => {
+      return {...prevState, colArray: []};
+    });
+
     titles.forEach(({title, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
         .then((data) => {
@@ -81,23 +88,23 @@ class App extends Component {
   }
 
 
-  // Retrieves the titles of the core vocabulary from the database
-  // and updates the state variable "coreListTitles"
+  /**
+   * getCoreVocabTitles()   Retrieves the titles of the core vocabulary from the database
+   * and updates the state variable "coreListTitles"
+   */
   getCoreVocabTitles() {
-    let coreVocabId = '1';
+    let coreVocabId = '1';  // list_id for coreVocab list
     let listTitles = [];
 
     $.getJSON('http://localhost:3001/api/grids/id/' + coreVocabId)
       .then((data) => {
         _.forEach(data, function (value) {
           listTitles.push(value.list_title);
+          //console.log('values ', value)
         });
-        console.log('Retrieved Core Vocab titles: ', listTitles);
       })
 
     this.setState({ coreListTitles: listTitles });
-
-    console.log('list titles ', listTitles);
   }
 
 
@@ -219,9 +226,11 @@ class App extends Component {
 
 
 
-
-  // API POST CALL
-  // Callback function passed to the WordEditor Component to add a word through POST api call
+  /**
+   * handleAddNewWord()
+   * {API POST CALL}
+   * Callback function passed to the WordEditor Component to add a word through POST api call
+   */
   handleAddNewWord(wordText, selectedTitle) {
     fetch('http://localhost:3001/api/words/', {
       method: 'POST',
@@ -236,6 +245,9 @@ class App extends Component {
         list: selectedTitle
       })
     })
+
+    console.log('adding new word, calling getWords()');
+    this.getWords();  //call getWords() to reload.
   }
 
 
@@ -254,8 +266,8 @@ class App extends Component {
           buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
           open={this.open} close={this.close} showModal={this.state.showModal}
           coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}/>
-
       : null;
+
     let editing = this.state.editorToggle
       ? "True"
       : "False";

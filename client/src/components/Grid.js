@@ -10,8 +10,8 @@ class Grid extends Component {
     return (
       <div className="Grid">
         {
-          sortedCols.map(({title, words}) => {
-            return (<Column key={_.uniqueId()} title={title} words={words} add={this.props.add}
+          sortedCols.map(({id, title, words}) => {
+            return (<Column key={_.uniqueId()} col_id={id} title={title} words={words} add={this.props.add}
                             selectedVoice={this.props.selectedVoice} editorToggle={this.props.editorToggle}
                             removeFromGrid={this.props.removeFromGrid} />);
           })
@@ -28,6 +28,7 @@ Grid.propTypes = {
 
 Grid.defaultProps = {
   cols: [{
+    id: "0",
     title: "test",
     words: [{id: "1", word:"love", symbol_path:"", alt:""}]
   }],

@@ -9,6 +9,7 @@ import SettingsBar from './components/SettingsBar';
 import Grid from './components/Grid';
 import _ from 'lodash';
 import $ from 'jquery';
+import { Button, Modal } from 'react-bootstrap';
 
 
 class App extends Component {
@@ -29,6 +30,10 @@ class App extends Component {
     this.getCoreVocabTitles = this.getCoreVocabTitles.bind(this);
     this.removeFromGrid = this.removeFromGrid.bind(this);
     this.handleAddNewWord = this.handleAddNewWord.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleDeleteConfirm = this.handleDeleteConfirm.bind(this);
+    this.openDeleteModal = this.openDeleteModal.bind(this);
+    this.closeDeleteModal = this.closeDeleteModal.bind(this);
 
     // component render helper functions
     this.renderSettingsBar = this.renderSettingsBar.bind(this);
@@ -44,6 +49,10 @@ class App extends Component {
       messageArray: [],
       coreListTitles: [],
       showModal: false,
+      showDeleteModal: false,
+      deleteWordText: "",
+      deleteWordId: "0",
+      deleteColId: "0",
     }
   }
 
@@ -62,27 +71,28 @@ class App extends Component {
   getWords() {
     let nextCol;
     let titles = [
-      {title: 'pronoun', order: 1},
-      {title: 'noun', order: 2},
-      {title: 'verb', order: 3},
-      {title: 'adjective', order: 4},
-      {title: 'adverb', order: 5},
-      {title: 'preposition', order: 6},
-      {title: 'exclamation', order: 7}];
+      {title: 'pronoun', id: "6", order: "1"},
+      {title: 'noun', id: "4", order: "2"},
+      {title: 'verb', id: "7", order: "3"},
+      {title: 'adjective', id: "1", order: "4"},
+      {title: 'adverb', id: "2", order: "5"},
+      {title: 'preposition', id: "5", order: "6"},
+      {title: 'exclamation', id: "3", order: "7"}];
 
     this.setState({colArray: []});  // getWords() will be called when a new word is added,
                                     // clear the colArray before retrieving words from api
-
-    titles.forEach(({title, order}) => {
+    
+    titles.forEach(({title, id, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
-        .then((data) => {
-          nextCol = {
-            order: order,
-            title: title,
-            words: data
-          };
-          this.setState(this.appendToCols(nextCol));
-        });
+          .then((data) => {
+            nextCol = {
+              order: order,
+              id: id,
+              title: title,
+              words: data
+            };
+            this.setState(this.appendToCols(nextCol));
+          });
     });
   }
 
@@ -186,11 +196,33 @@ class App extends Component {
     });
   }
 
+  openDeleteModal() {
+    this.setState({showDeleteModal: true});
+  }
+
+  closeDeleteModal() {
+    this.setState({showDeleteModal: false});
+  }
+
+  handleDelete(word_text, word_id, col_id) {
+    this.setState({deleteWordText: word_text});
+    this.setState({deleteWordId: word_id});
+    this.setState({deleteColId: col_id});
+    this.openDeleteModal();
+  }
+
+  handleDeleteConfirm() {
+    this.removeFromGrid(this.state.deleteWordId, this.state.deleteColId);
+    this.closeDeleteModal();
+  }
+
   // Callback function passed to the Word Component to delete that word from the grid
-  removeFromGrid(word, column) {
+  removeFromGrid(word_id, col_id) {
+    console.log("wordId: " + word_id + " columnId: " + col_id);
+
     // Get the column to remove from
-    let col = this.state.colArray.filter((el) => {
-      return el.title === column;
+    let col = this.state.colArray.filter((el) =>  {
+      return el.id === col_id;
     });
 
     // Pull the column from the filter results
@@ -198,18 +230,17 @@ class App extends Component {
 
     // Get a new set of columns that has the column we want to alter removed
     let newCols = this.state.colArray.filter((el) => {
-      return el.title !== column;
+      return el.id !== col_id;
     });
 
     // Get the new array of words with the desired word removed
     let newWords = col.words.filter((el) => {
-      return el.word !== word;
+      return el.word_id !== word_id;
     });
 
     // Assemble the new column with the filtered words
     let newCol = {
-      order: col.order,
-      title: col.title,
+      ...col,
       words: newWords,
     };
 
@@ -290,7 +321,16 @@ class App extends Component {
         </div>
         <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
               selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
-              removeFromGrid={this.removeFromGrid}/>
+              removeFromGrid={this.handleDelete}/>
+        <Modal show={this.state.showDeleteModal} onHide={this.closeDeleteModal}>
+            <Modal.Body>
+              <p>Are you sure you want to delete "{this.state.deleteWordText}"?</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.handleDeleteConfirm}>Yes</Button>
+              <Button onClick={this.closeDeleteModal}>No</Button>
+            </Modal.Footer>
+          </Modal>
       </div>
 
     );

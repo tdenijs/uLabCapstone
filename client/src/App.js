@@ -43,9 +43,11 @@ class App extends Component {
     this.openDeleteModal = this.openDeleteModal.bind(this);
     this.closeDeleteModal = this.closeDeleteModal.bind(this);
     this.renderRemoveWordModal = this.renderRemoveWordModal.bind(this);
+    this.handleAddNewImage = this.handleAddNewImage.bind(this);
 
     // component render helper functions
     this.renderSettingsBar = this.renderSettingsBar.bind(this);
+
 
 
     this.state = {
@@ -261,12 +263,24 @@ class App extends Component {
     });
   }
 
+  handleAddNewImage(imgFile, wordText, formData) {
+    $.ajax({
+      method: 'POST',
+      url: 'http://localhose:3001/api/imgupload',
+      data: formData,
+      ContentType: false
+    })
+    console.log('img API POST call submitted')
+  }
 
   /**
    * handleAddNewWord()
    * {API POST CALL}
    * Callback function passed to the WordEditor Component to add a word through POST api call
    */
+
+  // API POST CALL
+  // Callback function passed to the WordEditor Component to add a word through POST api call
   handleAddNewWord(wordText, selectedTitle) {
     fetch('http://localhost:3001/api/words/', {
       method: 'POST',
@@ -325,7 +339,7 @@ class App extends Component {
     let settingsBar = this.state.settingsBarVisible
       ? this.renderSettingsBar()
       : null;
-    
+
     return (
       <div className="App">
 

@@ -41,6 +41,7 @@ class WordEditor extends Component {
     // 1. write file to folder
     // TODO: do something with -> this.state.file
     // FIle Uploader???
+<<<<<<< HEAD
     console.log('file name: ', this.state.file.name );
     console.log('handle uploading-', this.state.file);
 
@@ -59,31 +60,41 @@ class WordEditor extends Component {
     //     list: this.state.selectedTitle
     //   })
     // })
-  var voices = speechSynthesis.getVoices();
-      var selectedVoice = this.props.selectedVoice;
-      var msg = new SpeechSynthesisUtterance();
-      for(var i = 0; i < voices.length; i++) {
-       if(voices[i].name === selectedVoice) {
+    console.log("Uploading image...");
+    const form = document.getElementById('AddNewImgForm');
+    const formData = new FormData(form);
+    this.props.handleAddNewImage(this.state.file, this.state.wordText, formData);
+
+    console.log('Submit New Word: ');
+    this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
+
+    var voices = speechSynthesis.getVoices();
+    var selectedVoice = this.props.selectedVoice;
+    var msg = new SpeechSynthesisUtterance();
+    for(var i = 0; i < voices.length; i++) {
+      if(voices[i].name === selectedVoice) {
          msg.voice = voices[i];
          break;
-        }
       }
+    }
 
-      // Check for a empty string and a string with more than 25 characters
-      if(this.state.wordText.length > 25){
-        msg.text = "please enter less than 25 character"
-      }
-      else if (this.state.wordText.length >= 1) {
-        console.log('Submit New Word: ');
-        this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
+    // Check for a empty string and a string with more than 25 characters
+    if(this.state.wordText.length > 25){
+      msg.text = "please enter less than 25 character"
+    }
+    else if (this.state.wordText.length >= 1) {
+      console.log('Submit New Word: ');
+      this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
 
-        this.props.close(); //close modal
-      }
-      else {
-        msg.text = "The text box is empty."
-      }
+      this.props.close(); //close modal
+    }
+    else {
+      msg.text = "The text box is empty."
+    }
 
-window.speechSynthesis.speak(msg);
+    window.speechSynthesis.speak(msg);
+
+    this.props.close(); //close modal
   }
 
 
@@ -119,7 +130,6 @@ window.speechSynthesis.speak(msg);
     }
 
 
-
     return (
       <div className="WordEditor">
         <h1>Add New Word</h1>
@@ -131,7 +141,7 @@ window.speechSynthesis.speak(msg);
           </Col>
 
           <Col xs={12} md={6} lg={6}>
-            <form className="AddNewWordForm">
+            <form className="AddNewWordForm" >
               <label> New Word Text: </label>
               <input type="text" name="word_text" className="WordTextInput" placeholder="Enter text" onChange={this.setWordText}/>
 
@@ -140,9 +150,11 @@ window.speechSynthesis.speak(msg);
               <label>Choose an Image: </label>
                 </Col>
                 <Col xs={12}>
-              <input type="file" name="filename" className="FileInputButton"
-                     onChange={(e) => this._handleImageChange(e)}
-                     accept="image/gif, image/jpeg, image/png, image/jpg"/>
+                  <form id="AddNewImgForm" >
+                  <input type="file" name="filename" className="FileInputButton"
+                      onChange={(e) => this._handleImageChange(e)}
+                      accept="image/gif, image/jpeg, image/png, image/jpg"/>
+                  </form>
                 </Col>
               </Row>
 
@@ -187,6 +199,7 @@ window.speechSynthesis.speak(msg);
 WordEditor.propTypes = {
   close: React.PropTypes.func,
   handleAddNewWord: React.PropTypes.func,
+  handleAddNewImage: React.PropTypes.func
 };
 
 

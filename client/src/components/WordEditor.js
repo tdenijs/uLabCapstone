@@ -41,28 +41,21 @@ class WordEditor extends Component {
     // 1. write file to folder
     // TODO: do something with -> this.state.file
     // FIle Uploader???
-    console.log('file name: ', this.state.file.name );
-    console.log('handle uploading-', this.state.file);
-
-
-    // 2. POST api call to save
-    // fetch('http://localhost:3001/api/words/', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     name: this.state.wordText,
-    //     path: '',
-    //     text: this.state.wordText,
-    //     list: this.state.selectedTitle
-    //   })
-    // })
     console.log("Uploading image...");
     const form = document.getElementById('AddNewImgForm');
     const formData = new FormData(form);
-    this.props.handleAddNewImage(this.state.file, this.state.wordText, formData);
+    formData.append("userfile", this.state.file);
+    formData.append("filename", this.state.wordText);
+
+    console.log('Text: ', this.state.wordText);
+    console.log('file name: ', this.state.file.name );
+    // Display the key/value pairs
+    for (var pair of formData.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]);
+    }
+    console.log('handle uploading-', this.state.file);
+
+    this.props.handleAddNewImage(formData);
 
     console.log('Submit New Word: ');
     this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
@@ -149,11 +142,9 @@ class WordEditor extends Component {
               <label>Choose an Image: </label>
                 </Col>
                 <Col xs={12}>
-                  <form id="AddNewImgForm" >
                   <input type="file" name="filename" className="FileInputButton"
                       onChange={(e) => this._handleImageChange(e)}
                       accept="image/gif, image/jpeg, image/png, image/jpg"/>
-                  </form>
                 </Col>
               </Row>
 

@@ -266,7 +266,7 @@ class App extends Component {
   handleAddNewImage(imgFile, wordText, formData) {
     $.ajax({
       method: 'POST',
-      url: 'http://localhose:3001/api/imgupload',
+      url: 'http://localhost:3001/api/imgupload',
       data: formData,
       ContentType: false
     })
@@ -285,13 +285,15 @@ class App extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
+      //ContentType:
       body: JSON.stringify({
         name: wordText,
-        path: '',
+        path: 'img/' + wordText + '.png',
         text: wordText,
         list: selectedTitle
       })
-    }).then(() => this.getWords());  //then... call getWords() to reload words
+    });//.then(() => this.getWords());
+    //then... call getWords() to reload words
   }
 
 
@@ -321,7 +323,8 @@ class App extends Component {
                    editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
                    buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
                    open={this.open} close={this.close} showModal={this.state.showModal}
-                   coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}/>
+                   coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}
+                   handleAddNewImage={this.handleAddNewImage}/>
     )
   }
 

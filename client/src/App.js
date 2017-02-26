@@ -278,9 +278,6 @@ class App extends Component {
    * {API POST CALL}
    * Callback function passed to the WordEditor Component to add a word through POST api call
    */
-
-  // API POST CALL
-  // Callback function passed to the WordEditor Component to add a word through POST api call
   handleAddNewWord(wordText, selectedTitle) {
     fetch('http://localhost:3001/api/words/', {
       method: 'POST',

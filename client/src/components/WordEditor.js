@@ -41,7 +41,6 @@ class WordEditor extends Component {
     // 1. write file to folder
     // TODO: do something with -> this.state.file
     // FIle Uploader???
-<<<<<<< HEAD
     console.log('file name: ', this.state.file.name );
     console.log('handle uploading-', this.state.file);
 

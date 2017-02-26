@@ -79,7 +79,8 @@ class SettingsBar extends Component {
               <WordEditor
                 coreListTitles={this.props.coreListTitles}
                 close={this.props.close}
-                handleAddNewWord={this.props.handleAddNewWord}/>
+                handleAddNewWord={this.props.handleAddNewWord}
+                handleAddNewImage={this.props.handleAddNewImage}/>
             </Modal>
           </Col>
 
@@ -109,6 +110,7 @@ SettingsBar.propTypes = {
   open: React.PropTypes.func,
   close: React.PropTypes.func,
   handleAddNewWord: React.PropTypes.func,
+  handleAddNewImage: React.PropTypes.func,
 };
 
 export default SettingsBar;

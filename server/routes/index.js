@@ -16,10 +16,20 @@ const storage = multer.diskStorage({
     cb(null, 'client/public/img/')
   },
   filename: function (req, file, cb) {
+
+    if(!file.originalname.match(/\.(png)$/)) {
+      var err = new Error();
+      err.code = 'filetype';
+      return cb(err);
+    } else {
     cb(null, file.fieldname + '.png');
+    }
   }
 })
-const upload = multer({ storage: storage })
+var upload = multer({
+  storage: storage,
+  limits: { fileSize: 10000000}
+}).single('myfile');
 /*
 const upload = multer({
     dest: 'client/public/img/'
@@ -60,8 +70,26 @@ router.get('/imgupload.html', function(req, res) {
 //===============================================
 
 router.post('/words', words.createWord);
-router.post('/imgupload', upload.any(), function(req, res, next) {
-  res.send(req.files);
+router.post('/imgupload'/*, upload.any()*/, function(req, res/*, next*/) {
+  upload(req, res, function(err) {
+    if (err) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        res.json({ success: false, message: 'File size is large. Max limit is 10MB'});
+      } else if (err.code === 'filetype') {
+        res.json({ success: false, message: 'File type is invalid. Must be .png'});
+      } else {
+        console.log(err);
+        res.json({ success: false, message: 'File was unable to upload'});
+      }
+    } else {
+      if (!req.file) {
+        res.json({success: false, message: 'No file'});
+      } else {
+          res.send(req.file);
+      }
+    }
+  });
+
 });
 //===============================================
 

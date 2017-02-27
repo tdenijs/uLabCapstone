@@ -1,19 +1,19 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Grid from '../src/components/Grid';
+import Vocab from '../src/components/Vocab';
 
-it('Grid component shallow renders without crashing', () => {
+it('Vocab component shallow renders without crashing', () => {
     let add = jest.fn();
-    shallow(<Grid add={add}/>);
+    shallow(<Vocab add={add}/>);
 });
 
-describe("Test suite for mounted Grid", () => {
-    let grid;
+describe("Test suite for mounted Vocab", () => {
+    let vocab;
     let add;
 
     beforeEach(() => {
         add = jest.fn();
-        grid = mount(<Grid cols={
+      vocab = mount(<Vocab cols={
             [
                 {
                     order: 1,
@@ -47,15 +47,15 @@ describe("Test suite for mounted Grid", () => {
         } add={add} selectedVoice="Default" />);
     });
 
-    it('The grid columns display in the correct order', () => {
+    it('The vocab columns display in the correct order', () => {
         // Get each column
-        const col1 = grid.find('Column').at(0);
-        const col2 = grid.find('Column').at(1);
-        const col3 = grid.find('Column').at(2);
-        const col4 = grid.find('Column').at(3);
-        const col5 = grid.find('Column').at(4);
-        const col6 = grid.find('Column').at(5);
-        const col7 = grid.find('Column').at(6);
+        const col1 = vocab.find('Column').at(0);
+        const col2 = vocab.find('Column').at(1);
+        const col3 = vocab.find('Column').at(2);
+        const col4 = vocab.find('Column').at(3);
+        const col5 = vocab.find('Column').at(4);
+        const col6 = vocab.find('Column').at(5);
+        const col7 = vocab.find('Column').at(6);
 
         // Expect each column to have the correct title
         expect(col1.props().title).toEqual('pronoun');

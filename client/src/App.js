@@ -6,10 +6,10 @@ import './css/font-color.css';
 import './css/Grid-Column-Word.css';
 import SpeechBar from './components/SpeechBar.js';
 import SettingsBar from './components/SettingsBar';
-import Grid from './components/Grid';
+import Vocab from './components/Vocab';
 import _ from 'lodash';
 import $ from 'jquery';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Grid, Row, Col } from 'react-bootstrap';
 
 
 class App extends Component {
@@ -319,7 +319,7 @@ class App extends Component {
         <div className="Settings" style={{margin: "auto"}}>
           {settingsBar}
         </div>
-        <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
+        <Vocab cols={this.state.colArray} add={this.addWordToSpeechBar}
               selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
               removeFromGrid={this.handleDelete}/>
         <Modal show={this.state.showDeleteModal} onHide={this.closeDeleteModal}>

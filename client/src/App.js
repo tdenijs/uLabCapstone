@@ -289,10 +289,10 @@ class App extends Component {
       body: JSON.stringify({
         name: wordText,
         path: 'img/' + wordText + '.png',
-        text: wordText,
+        text: wordText + 'symbol',
         list: selectedTitle
       })
-    });//.then(() => this.getWords());
+    }).then(() => this.getWords());
     //then... call getWords() to reload words
   }
 

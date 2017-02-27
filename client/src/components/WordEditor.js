@@ -44,6 +44,7 @@ class WordEditor extends Component {
     console.log("Uploading image...");
     const form = document.getElementById('AddNewImgForm');
     const formData = new FormData(form);
+
     formData.append("userfile", this.state.file);
     formData.append("filename", this.state.wordText);
 

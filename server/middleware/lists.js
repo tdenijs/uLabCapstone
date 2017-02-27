@@ -58,26 +58,27 @@ function deleteWordByID(req, res, next) {
   var targetListID = parseInt(req.params.list_id);
   var targetWordID = parseInt(req.params.word_id);
   var query = 'select * from listwords where list_id=' + targetListID + ' and word_id=' + targetWordID;
-  console.log(query);
   db.any(query)
-    .then(function(data) {
-      if (data.length > 0) {
+    .then(data => {
+      if (data.length === 1) {
         db.result('delete from listwords where list_id=$1 AND word_id=$2', [targetListID, targetWordID])
           .then(function(result) {
-            res.status(200)
-              .json({
+            if (result.rowCount === 1) {
+              res.status(200).json({
                 status: 'success',
                 message: `Removed ${result.rowCount} word`
-              });
+              })
+            } else {
+              console.log("Failure: delete failes")
+            }
           })
       } else {
-        res.status(404)
-          .send("The word does not exist in the list.");
+        res.status(404).send("ERROR: No word found.");
       }
     })
     .catch(function(err) {
-      return next(err);
-    });
+      return next(err)
+    })
 }
 
 module.exports = {

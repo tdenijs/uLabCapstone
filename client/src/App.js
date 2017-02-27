@@ -81,7 +81,7 @@ class App extends Component {
 
     this.setState({colArray: []});  // getWords() will be called when a new word is added,
                                     // clear the colArray before retrieving words from api
-    
+
     titles.forEach(({title, id, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
           .then((data) => {
@@ -302,10 +302,10 @@ class App extends Component {
       ? this.renderSettingsBar()
       : null;
 
-    let editing = this.state.editorToggle
+   /* let editing = this.state.editorToggle
       ? "True"
       : "False";
-
+  */
     return (
       <div className="App">
 

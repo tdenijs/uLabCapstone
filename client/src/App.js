@@ -309,11 +309,7 @@ class App extends Component {
     let settingsBar = this.state.settingsBarVisible
       ? this.renderSettingsBar()
       : null;
-
-   /* let editing = this.state.editorToggle
-      ? "True"
-      : "False";
-  */
+    
     return (
       <div className="App">
 

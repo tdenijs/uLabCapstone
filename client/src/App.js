@@ -1,3 +1,11 @@
+/***************************************************************
+ * Copyright (c) 2016 Universal Design Lab. All rights reserved.
+ *
+ * This file is part of uLabCapstone, distibuted under the MIT
+ * open source licence. For full terms see the LICENSE.md file
+ * included in the root of this project.
+ **************************************************************/
+
 import React, {Component} from 'react';
 import './css/App.css';
 import './css/SpeechBar.css';
@@ -81,7 +89,7 @@ class App extends Component {
 
     this.setState({colArray: []});  // getWords() will be called when a new word is added,
                                     // clear the colArray before retrieving words from api
-    
+
     titles.forEach(({title, id, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
           .then((data) => {

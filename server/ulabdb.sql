@@ -1,3 +1,11 @@
+/***************************************************************
+ * Copyright (c) 2016 Universal Design Lab. All rights reserved.
+ *
+ * This file is part of uLabCapstone, distibuted under the MIT
+ * open source licence. For full terms see the LICENSE.md file
+ * included in the root of this project.
+ **************************************************************/
+
 /**
  * sql file to initialize the ulabdb
  * version 1.3
@@ -284,6 +292,3 @@ INSERT INTO ListWords (word_id, list_id)
    ((SELECT W.word_id from Words W WHERE word = 'think'),    (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
    ((SELECT W.word_id from Words W WHERE word = 'turn'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
    ((SELECT W.word_id from Words W WHERE word = 'want'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'verb'));
-
-
-

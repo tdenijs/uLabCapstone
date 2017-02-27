@@ -5,8 +5,8 @@
     "grid_id": 1,
     "word_id": 1,
     "word_name": "good",
-    "list_id_for_del": 7,
-    "word_id_for_del": 41
+    "list_id_for_del": 1,
+    "word_id_for_del": 2
   },
   {
     "title": "adverb",
@@ -15,8 +15,8 @@
     "grid_id": 1,
     "word_id": 2,
     "word_name": "bad",
-    "list_id_for_del": 7,
-    "word_id_for_del": 42
+    "list_id_for_del": 2,
+    "word_id_for_del": 8
   },
   {
     "title": "exclamation",
@@ -25,8 +25,8 @@
     "grid_id": 1,
     "word_id": 3,
     "word_name": "happy",
-    "list_id_for_del": 7,
-    "word_id_for_del": 43
+    "list_id_for_del": 2,
+    "word_id_for_del": 8
   },
   {
     "title": "noun",
@@ -35,8 +35,8 @@
     "grid_id": 1,
     "word_id": 4,
     "word_name": "off",
-    "list_id_for_del": 7,
-    "word_id_for_del": 44
+    "list_id_for_del": 4,
+    "word_id_for_del": 18
   },
   {
     "title": "preposition",
@@ -45,8 +45,8 @@
     "grid_id": 1,
     "word_id": 5,
     "word_name": "not",
-    "list_id_for_del": 7,
-    "word_id_for_del": 45
+    "list_id_for_del": 5,
+    "word_id_for_del": 20
   },
   {
     "title": "pronoun",
@@ -55,8 +55,8 @@
     "grid_id": 1,
     "word_id": 6,
     "word_name": "why",
-    "list_id_for_del": 7,
-    "word_id_for_del": 46
+    "list_id_for_del": 6,
+    "word_id_for_del": 23
   },
   {
     "title": "verb",
@@ -66,6 +66,6 @@
     "word_id": 7,
     "word_name": "who",
     "list_id_for_del": 7,
-    "word_id_for_del": 47
+    "word_id_for_del": 29
   }
 ]

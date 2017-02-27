@@ -64,6 +64,7 @@ function deleteWordByID(req, res, next) {
         db.result('delete from listwords where list_id=$1 AND word_id=$2', [targetListID, targetWordID])
           .then(function(result) {
             if (result.rowCount === 1) {
+              console.log("word is removed from list");
               res.status(200).json({
                 status: 'success',
                 message: `Removed ${result.rowCount} word`

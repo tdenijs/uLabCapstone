@@ -14,10 +14,10 @@ import './css/font-color.css';
 import './css/Grid-Column-Word.css';
 import SpeechBar from './components/SpeechBar.js';
 import SettingsBar from './components/SettingsBar';
-import Grid from './components/Grid';
+import Vocab from './components/Vocab';
 import _ from 'lodash';
 import $ from 'jquery';
-import { Button, Modal } from 'react-bootstrap';
+import {Button, Modal, Grid, Row, Col} from 'react-bootstrap';
 
 
 class App extends Component {
@@ -42,6 +42,7 @@ class App extends Component {
     this.handleDeleteConfirm = this.handleDeleteConfirm.bind(this);
     this.openDeleteModal = this.openDeleteModal.bind(this);
     this.closeDeleteModal = this.closeDeleteModal.bind(this);
+    this.renderRemoveWordModal = this.renderRemoveWordModal.bind(this);
 
     // component render helper functions
     this.renderSettingsBar = this.renderSettingsBar.bind(this);
@@ -92,15 +93,15 @@ class App extends Component {
 
     titles.forEach(({title, id, order}) => {
       $.getJSON('http://localhost:3001/api/lists/title/' + title)
-          .then((data) => {
-            nextCol = {
-              order: order,
-              id: id,
-              title: title,
-              words: data
-            };
-            this.setState(this.appendToCols(nextCol));
-          });
+        .then((data) => {
+          nextCol = {
+            order: order,
+            id: id,
+            title: title,
+            words: data
+          };
+          this.setState(this.appendToCols(nextCol));
+        });
     });
   }
 
@@ -229,7 +230,7 @@ class App extends Component {
     console.log("wordId: " + word_id + " columnId: " + col_id);
 
     // Get the column to remove from
-    let col = this.state.colArray.filter((el) =>  {
+    let col = this.state.colArray.filter((el) => {
       return el.id === col_id;
     });
 
@@ -283,6 +284,21 @@ class App extends Component {
   }
 
 
+  renderRemoveWordModal() {
+    return (
+      <Modal show={this.state.showDeleteModal} onHide={this.closeDeleteModal}>
+        <Modal.Body>
+          <p>Are you sure you want to delete "{this.state.deleteWordText}"?</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.handleDeleteConfirm}>Yes</Button>
+          <Button onClick={this.closeDeleteModal}>No</Button>
+        </Modal.Footer>
+      </Modal>
+    )
+  }
+
+
   /**
    * renderSettingsBar()
    * a helper function that returns the SettingsBar component
@@ -313,29 +329,40 @@ class App extends Component {
     return (
       <div className="App">
 
-        <SpeechBar
-          message={this.state.messageArray}
-          handleClearMessage={this.handleClearMessage}
-          selectedVoice={this.state.selectedVoice}
-          handleBackButton={this.handleBackButton}
-          settingsToggle={this.settingsToggle}/>
+        <Grid className="LayoutGrid">
+          <Row className="SpeechSettingsRow">
+            <SpeechBar
+              message={this.state.messageArray}
+              handleClearMessage={this.handleClearMessage}
+              selectedVoice={this.state.selectedVoice}
+              handleBackButton={this.handleBackButton}
+              settingsToggle={this.settingsToggle}/>
 
-        <div className="Settings" style={{margin: "auto"}}>
-          {settingsBar}
-        </div>
-        <Grid cols={this.state.colArray} add={this.addWordToSpeechBar}
-              selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
-              removeFromGrid={this.handleDelete}/>
-        <Modal show={this.state.showDeleteModal} onHide={this.closeDeleteModal}>
-            <Modal.Body>
-              <p>Are you sure you want to delete "{this.state.deleteWordText}"?</p>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.handleDeleteConfirm}>Yes</Button>
-              <Button onClick={this.closeDeleteModal}>No</Button>
-            </Modal.Footer>
-          </Modal>
+            <div className="Settings" >
+              {settingsBar}
+            </div>
+
+          </Row>
+
+          <Row className="FringeVocabRow">
+
+            <Col xs={8} md={4} className="FringeCol">
+              <div> fringe list...</div>
+            </Col>
+
+            <Col xs={12} md={8} className="VocabCol">
+              <Vocab cols={this.state.colArray} add={this.addWordToSpeechBar}
+                     selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
+                     removeFromGrid={this.handleDelete}/>
+            </Col>
+
+            {this.renderRemoveWordModal()}
+
+          </Row>
+
+        </Grid>
       </div>
+
 
     );
   }

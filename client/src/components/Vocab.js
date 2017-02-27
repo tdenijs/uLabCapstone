@@ -10,7 +10,7 @@ import React, {Component} from 'react';
 import Column from './Column'
 import _ from 'lodash';
 
-class Grid extends Component {
+class Vocab extends Component {
   render() {
     // Make sure the cols are in the right order
     let sortedCols = _.sortBy(this.props.cols, 'order');
@@ -29,12 +29,12 @@ class Grid extends Component {
   }
 }
 
-Grid.propTypes = {
+Vocab.propTypes = {
   cols: React.PropTypes.array,
   add: React.PropTypes.func,
 };
 
-Grid.defaultProps = {
+Vocab.defaultProps = {
   cols: [{
     id: "0",
     title: "test",
@@ -42,4 +42,4 @@ Grid.defaultProps = {
   }],
 };
 
-export default Grid;
+export default Vocab;

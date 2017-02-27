@@ -1,3 +1,11 @@
+/***************************************************************
+ * Copyright (c) 2016 Universal Design Lab. All rights reserved.
+ *
+ * This file is part of uLabCapstone, distibuted under the MIT
+ * open source licence. For full terms see the LICENSE.md file
+ * included in the root of this project.
+ **************************************************************/
+
 import React, {Component} from 'react';
 import './css/App.css';
 import './css/SpeechBar.css';
@@ -301,7 +309,7 @@ class App extends Component {
     let settingsBar = this.state.settingsBarVisible
       ? this.renderSettingsBar()
       : null;
-
+    
     return (
       <div className="App">
 

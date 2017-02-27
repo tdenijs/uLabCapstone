@@ -1,3 +1,11 @@
+/***************************************************************
+ * Copyright (c) 2016 Universal Design Lab. All rights reserved.
+ *
+ * This file is part of uLabCapstone, distibuted under the MIT
+ * open source licence. For full terms see the LICENSE.md file
+ * included in the root of this project.
+ **************************************************************/
+
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import SettingsBar from '../src/components/SettingsBar';
@@ -33,7 +41,7 @@ describe("Test suite for mounted SettingsBar", () => {
     //     bar.find('.ButtonSizeSlider').first().simulate('change');
     //     expect(onChange).toBeCalled();
     // });
-	
+
     it('SettingsBar calls enableEditorMode when the button is clicked', () => {
 	bar.find('.EditorButton').first().simulate('click');
         expect(onChange).toBeCalled();

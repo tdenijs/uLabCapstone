@@ -1,3 +1,11 @@
+/***************************************************************
+ * Copyright (c) 2016 Universal Design Lab. All rights reserved.
+ *
+ * This file is part of uLabCapstone, distibuted under the MIT
+ * open source licence. For full terms see the LICENSE.md file
+ * included in the root of this project.
+ **************************************************************/
+
 import React, {Component} from 'react';
 import {Row, Col} from 'react-bootstrap';
 // import Dropzone from 'react-dropzone';
@@ -51,11 +59,31 @@ class WordEditor extends Component {
     //     list: this.state.selectedTitle
     //   })
     // })
+  var voices = speechSynthesis.getVoices();
+      var selectedVoice = this.props.selectedVoice;
+      var msg = new SpeechSynthesisUtterance();
+      for(var i = 0; i < voices.length; i++) {
+       if(voices[i].name === selectedVoice) {
+         msg.voice = voices[i];
+         break;
+        }
+      }
 
-    console.log('Submit New Word: ');
-    this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
+      // Check for a empty string and a string with more than 25 characters
+      if(this.state.wordText.length > 25){
+        msg.text = "please enter less than 25 character"
+      }
+      else if (this.state.wordText.length >= 1) {
+        console.log('Submit New Word: ');
+        this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
 
-    this.props.close(); //close modal
+        this.props.close(); //close modal
+      }
+      else {
+        msg.text = "The text box is empty."
+      }
+
+window.speechSynthesis.speak(msg);
   }
 
 
@@ -163,4 +191,3 @@ WordEditor.propTypes = {
 
 
 export default WordEditor;
-

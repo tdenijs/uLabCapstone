@@ -1,10 +1,14 @@
-/***************************************************************
- * Copyright (c) 2016 Universal Design Lab. All rights reserved.
+/*******************************************************************
+ * Copyright (c) 2016 Portland State University CS Capstone Team
  *
- * This file is part of uLabCapstone, distibuted under the MIT
+ * Authors: Siggy Hinds, Jiaqi Luo, Christopher Monk, Tristan de Nijs,
+ *                 Simone Talla Silatchom, Carson Volker, Anton Zipper
+ *
+ * This file is part of uLabCapstone, distributed under the MIT
  * open source licence. For full terms see the LICENSE.md file
  * included in the root of this project.
- **************************************************************/
+ *
+ *******************************************************************/
 
 // TODO: There should be a way to set up settings for development and production
 // and using NODE_ENV to determine if in production or development

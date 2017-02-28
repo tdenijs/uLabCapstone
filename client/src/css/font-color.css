@@ -7,7 +7,11 @@
  **************************************************************/
 
 
-/* red: #E4004A*/
+/* red: #E4004A     */
+/* yellow: #F0D24C  */
+/* green: #28Ac70   */
+/* blue: #449EA8    */
+/* orange: #F98935  */
 
 
 
@@ -21,13 +25,12 @@
 
 /*  SpeechBar  */
 
-.SpeechBar {
+.SpeechBar {  }
 
-}
+
 
 
 .MessageWindow {
-
   background-color: white;
 
   border: 6px solid #E4004A;
@@ -38,19 +41,69 @@
   color: #3a33d1;
 }
 
+/* BUTTONS */
 
-/*  SettingsBar  */
+.SettingsButton {
+  /*background-color: #449EA8;*/
+  background-color: transparent;
+  color: #449EA8;
+  font-size: 2.8em;
 
-.SettingsBar {
-  background-color: var(--light-blue);
+  border: 1px solid transparent;
+  border-radius: 50%;
+}
+
+
+.PlayButton {
+  background-color: #E4004A;
+  color: #fff;
+  font-size: 1.6em;
+
+  border: 1px solid #E4004A;
+  border-radius: 50%;
+}
+
+.BackspaceButton {
+  background-color: #28Ac70;
+  color: #fff;
+  font-size: 1.6em;
+
+  border: 1px solid #28Ac70;
+  border-radius: 50%;
+}
+
+.ClearButton {
+  background-color: #449EA8;
+  color: #fff;
+  font-size: 1.6em;
+
+  border: 1px solid #28Ac70;
+  border-radius: 50%;
 }
 
 
 
 
+/*  SettingsBar  */
+
+.SettingsBar {
+
+}
+
+
+/*  Fringe and Vocab Row   */
+
+
+/*.FringeCol {*/
+  /*border: 6px solid #F0D24C;*/
+  /*border-radius: 15px;*/
+/*}*/
+
+
+
 .Column {
   background-color: #fff;
-  border: 2px solid var(--border-color);
+  /*border: 2px solid #fff;*/
 }
 
 .ColumnTitle {
@@ -58,7 +111,7 @@
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-style: italic;
-  border-bottom: 3px solid var(--border-color);
+  /*border-bottom: 3px solid var(--border-color);*/
 
 }
 
@@ -67,5 +120,5 @@
 /*   Word  Component  */
 .Word {
   color: #000;
-  border-bottom: 1px solid var(--border-color);
+  /*border-bottom: 1px solid var(--border-color);*/
 }

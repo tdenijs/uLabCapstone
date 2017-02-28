@@ -262,7 +262,11 @@ class App extends Component {
       ]
     });
   }
-
+  /**
+   * handleAddNewImage()
+   * {API POST CALL}
+   * Callback function passed to the WordEditor Component to add a image through POST api call
+   */
   handleAddNewImage(formData) {
     $.ajax({
       contentType: false,

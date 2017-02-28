@@ -74,18 +74,18 @@ router.post('/imgupload'/*, upload.any()*/, function(req, res/*, next*/) {
   upload(req, res, function(err) {
     if (err) {
       if (err.code === 'LIMIT_FILE_SIZE') {
-        res.json({ success: false, message: 'File size is large. Max limit is 10MB'});
+        res.status(400).json({ success: false, message: 'File size is large. Max limit is 10MB'});
       } else if (err.code === 'filetype') {
-        res.json({ success: false, message: 'File type is invalid. Must be .png'});
+        res.status(400).json({ success: false, message: 'File type is invalid. Must be .png'});
       } else {
         console.log(err);
-        res.json({ success: false, message: 'File was unable to upload'});
+        res.status(400).json({ success: false, message: 'File was unable to upload'});
       }
     } else {
       if (!req.file) {
-        res.json({success: false, message: 'No file'});
+        res.status(400).json({success: false, message: 'No file'});
       } else {
-          res.send(req.file);
+          res.status(201).send(req.file);
       }
     }
   });

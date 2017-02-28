@@ -45,9 +45,6 @@ class WordEditor extends Component {
     console.log("Uploading image...");
     this.props.handleAddNewImage(formData);
 
-    console.log('Submit New Word: ');
-    this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
-
     var voices = speechSynthesis.getVoices();
     var selectedVoice = this.props.selectedVoice;
     var msg = new SpeechSynthesisUtterance();

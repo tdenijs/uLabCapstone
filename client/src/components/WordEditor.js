@@ -35,18 +35,14 @@ class WordEditor extends Component {
   _handleSubmit(e) {
     e.preventDefault();
 
-    console.log("Uploading image...");
-    // Create form data to send via API POST call
+    // Create form data for API call
+    // TODO: Change file extension based on file type selected by user
+    let newFileName = this.state.wordText + '.png';
     const formData = new FormData();
-    formData.append('myfile', $('input[type=file]')[0].files[0], this.state.wordText + '.png');
-
-    // Display the key/value pairs
-    //for (var pair of formData.entries()) {
-    //    console.log(pair[0]+ ', ' + pair[1]);
-    //}
-    //console.log('handle uploading-', this.state.file);
+    formData.append('myfile', $('input[type=file]')[0].files[0], newFileName);
 
     // Uplood image via API call
+    console.log("Uploading image...");
     this.props.handleAddNewImage(formData);
 
     console.log('Submit New Word: ');
@@ -163,13 +159,6 @@ class WordEditor extends Component {
 
 
       </div>
-
-
-      // <Dropzone multiple={false}
-      //     accept="image/jpg,image/png,image/gif"
-      //     onDrop={this.onImageDrop}>
-      //     <p>Drop an image or click to select a file to upload.</p>
-      // </Dropzone>
     );
 
   }

@@ -8,12 +8,9 @@
 
 import React, {Component} from 'react';
 import {Row, Col} from 'react-bootstrap';
-// import Dropzone from 'react-dropzone';
-// import request from 'superagent';
 import {Button} from 'react-bootstrap';
 import '../css/WordEditor.css';
-
-
+import $ from 'jquery';
 
 
 class WordEditor extends Component {
@@ -28,7 +25,7 @@ class WordEditor extends Component {
     this.state = {
       file: '',
       imagePreviewURL: '',
-      selectedTitle: '',
+      selectedTitle: this.props.coreListTitles[0],
       wordText: '',
       imgUrl: '',
     };
@@ -38,24 +35,18 @@ class WordEditor extends Component {
   _handleSubmit(e) {
     e.preventDefault();
 
-    // 1. write file to folder
-    // TODO: do something with -> this.state.file
-    // FIle Uploader???
     console.log("Uploading image...");
-    const form = document.getElementById('AddNewImgForm');
-    const formData = new FormData(form);
+    // Create form data to send via API POST call
+    const formData = new FormData();
+    formData.append('myfile', $('input[type=file]')[0].files[0], this.state.wordText + '.png');
 
-    formData.append("userfile", this.state.file);
-    formData.append("filename", this.state.wordText);
-
-    console.log('Text: ', this.state.wordText);
-    console.log('file name: ', this.state.file.name );
     // Display the key/value pairs
-    for (var pair of formData.entries()) {
-        console.log(pair[0]+ ', ' + pair[1]);
-    }
-    console.log('handle uploading-', this.state.file);
+    //for (var pair of formData.entries()) {
+    //    console.log(pair[0]+ ', ' + pair[1]);
+    //}
+    //console.log('handle uploading-', this.state.file);
 
+    // Uplood image via API call
     this.props.handleAddNewImage(formData);
 
     console.log('Submit New Word: ');
@@ -137,13 +128,12 @@ class WordEditor extends Component {
             <form className="AddNewWordForm" >
               <label> New Word Text: </label>
               <input type="text" name="word_text" className="WordTextInput" placeholder="Enter text" onChange={this.setWordText}/>
-
               <Row>
                 <Col xs={12}>
-              <label>Choose an Image: </label>
+                  <label>Choose an Image: </label>
                 </Col>
                 <Col xs={12}>
-                  <input type="file" name="filename" className="FileInputButton"
+                  <input type="file" name="newfile" className="FileInputButton"
                       onChange={(e) => this._handleImageChange(e)}
                       accept="image/gif, image/jpeg, image/png, image/jpg"/>
                 </Col>
@@ -162,10 +152,8 @@ class WordEditor extends Component {
                 }
               </select>
             </form>
-
           </Col>
         </Row>
-
         <div className="modal-footer">
 
           <Button className="CancelNewWord" bsStyle="danger" onClick={this.props.close}>Cancel</Button>

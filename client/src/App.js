@@ -263,12 +263,15 @@ class App extends Component {
     });
   }
 
-  handleAddNewImage(imgFile, wordText, formData) {
+  handleAddNewImage(formData) {
+    console.log('Making API call...');
     $.ajax({
+      contentType: false,
+      processData: false,
       method: 'POST',
       url: 'http://localhost:3001/api/imgupload',
-      data: formData,
-      ContentType: false
+      data: formData
+
     })
     console.log('img API POST call submitted')
   }

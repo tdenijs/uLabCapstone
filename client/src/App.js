@@ -265,7 +265,6 @@ class App extends Component {
 
   /**
    * callDeleteApi(word_id, list_id)
-<<<<<<< HEAD
    * {API DELETE CALL}
    * Called by handleDeleteConfirm to remove the specified word from the specified list in the database
    */

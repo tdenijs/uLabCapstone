@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
       err.code = 'filetype';
       return cb(err);
     } else {
-    cb(null, file.fieldname + '.png');
+    cb(null, file.originalname);
     }
   }
 })
@@ -30,11 +30,7 @@ var upload = multer({
   storage: storage,
   limits: { fileSize: 10000000}
 }).single('myfile');
-/*
-const upload = multer({
-    dest: 'client/public/img/'
-    //limit: 100000
- })*/
+
 const words = require('../middleware/words');
 //const mw = require('../middleware');
 const lists = require('../middleware/lists');
@@ -70,7 +66,7 @@ router.get('/imgupload.html', function(req, res) {
 //===============================================
 
 router.post('/words', words.createWord);
-router.post('/imgupload'/*, upload.any()*/, function(req, res/*, next*/) {
+router.post('/imgupload', function(req, res) {
   upload(req, res, function(err) {
     if (err) {
       if (err.code === 'LIMIT_FILE_SIZE') {

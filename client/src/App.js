@@ -265,11 +265,13 @@ class App extends Component {
 
   /**
    * callDeleteApi(word_id, list_id)
-   * {API POST CALL}
+   * {API DELETE CALL}
    * Called by handleDeleteConfirm to remove the specified word from the specified list in the database
    */
   callDeleteApi(word_id, list_id) {
-    fetch(('http://localhost:3001/api/list_id/' + list_id + '/word_id/' + word_id), {
+    let address = 'http://localhost:3001/api/words/list_id/' + list_id + '/word_id/' + word_id;
+    console.log(address);
+    fetch(address, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',

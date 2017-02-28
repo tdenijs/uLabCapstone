@@ -9,7 +9,52 @@
 /*  SettingsBar Component  */
 
 .SettingsBar {
-  min-height: 80px;
+  min-height: 70px;
   margin-bottom: 5px;
   padding: 10px;
+  background-color: #449EA8;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  border-radius: 15px;
 }
+
+.AddButton {
+  background-color: #28Ac70; /* Green */
+  border: none;
+  color: black;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-family:"Courier New";
+  font-weight: bold;
+}
+
+.EditorButton {
+  background-color: #9932CC; /* purple */
+  border: none;
+  color: black;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-family:"Courier New";
+  font-weight: bold;
+
+}
+
+.VoiceLabel {
+    background-color: #F0D24C; /* purple */
+    border: none;
+    color: black;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-family:"Courier New";
+    font-weight: bold;
+}
+

@@ -6,20 +6,15 @@
  * included in the root of this project.
  **************************************************************/
 
-:root {
-  --border-color: #DEE3e6;
 
-  --yellow: #f6e58f;
-  --brown: #C0B19B;
-  --light-green: #55af55;
-  --light-blue: #53bddc;
-  --dark-navy: #262B35;
-}
+/* red: #E4004A*/
+
+
+
 
 /*  App  */
 
 .App {
-  background-color: #F5f5fa;
   font-family: 'Lato', sans-serif;
 }
 
@@ -27,13 +22,16 @@
 /*  SpeechBar  */
 
 .SpeechBar {
-  background-color: var(--dark-navy);
+
 }
 
 
 .MessageWindow {
-  border: 0px solid var(--border-color);
+
   background-color: white;
+
+  border: 6px solid #E4004A;
+  border-radius: 15px;
 }
 
 .MessageWindow .Word { /* word component inside of the message window */

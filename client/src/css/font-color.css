@@ -12,6 +12,7 @@
 /* green: #28Ac70   */
 /* blue: #449EA8    */
 /* orange: #F98935  */
+/* light-blue: #BEE3DB */
 
 
 
@@ -81,7 +82,20 @@
   border-radius: 50%;
 }
 
+/* button hover & focus */
 
+.PlayButton:hover, .BackspaceButton:hover,  .ClearButton:hover {
+  background-color: #F98935;
+  border: 1px solid #BEE3DB;
+}
+
+.SettingsButton:hover {
+  color: #F98935;
+}
+
+.SettingsButton:focus, .PlayButton:focus, .BackspaceButton:focus,  .ClearButton:focus {
+  outline: none;   /* prevents blue outline from appearing on buttons*/
+}
 
 
 /*  SettingsBar  */

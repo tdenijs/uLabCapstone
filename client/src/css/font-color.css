@@ -13,8 +13,7 @@
 /* blue: #449EA8    */
 /* orange: #F98935  */
 /* light-blue: #BEE3DB */
-
-
+/* purple: #9932CC;  */
 
 
 /*  App  */
@@ -98,11 +97,34 @@
 }
 
 
-/*  SettingsBar  */
+/*  SettingsBar   */
 
 .SettingsBar {
+  background-color: #449EA8;
+  font-weight: bold;
+
 
 }
+
+.SettingsBar .AddButton {
+  background-color: #28Ac70; /* Green */
+  font-family:"Courier New";
+
+}
+.SettingsBar .EditorButton {
+  background-color: #9932CC; /* purple */
+  font-family:"Courier New";
+
+
+}
+
+.VoiceLabel {
+  background-color: #F0D24C; /* purple */
+  font-family:"Courier New";
+
+}
+
+
 
 
 /*  Fringe and Vocab Row   */

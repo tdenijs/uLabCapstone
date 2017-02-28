@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 var upload = multer({
   storage: storage,
   limits: { fileSize: 10000000}
-}).single('myfile');
+}).single('userfile');
 
 function createImage(req, res) {
   upload(req, res, function(err) {

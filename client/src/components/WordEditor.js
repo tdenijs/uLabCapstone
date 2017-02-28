@@ -39,7 +39,7 @@ class WordEditor extends Component {
     // TODO: Change file extension based on file type selected by user
     let newFileName = this.state.wordText + '.png';
     const formData = new FormData();
-    formData.append('myfile', $('input[type=file]')[0].files[0], newFileName);
+    formData.append('userfile', $('input[type=file]')[0].files[0], newFileName);
 
     // Uplood image via API call
     console.log("Uploading image...");

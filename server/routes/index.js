@@ -35,9 +35,6 @@ router.get('/grids/id/:grid_id', grids.getAllListsByGridID);
 //-------- Get data by grid and list -------------
 router.get('/grids/:grid_id/lists/:list_id', grids.getAllListWordsByListId);
 
-router.get('/imgupload.html', function(req, res) {
-  res.sendFile(__dirname + '/imgupload.html');
-});
 //===============================================
 // POST Requests
 //===============================================

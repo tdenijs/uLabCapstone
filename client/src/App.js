@@ -43,6 +43,7 @@ class App extends Component {
     this.openDeleteModal = this.openDeleteModal.bind(this);
     this.closeDeleteModal = this.closeDeleteModal.bind(this);
     this.renderRemoveWordModal = this.renderRemoveWordModal.bind(this);
+    this.callDeleteApi = this.callDeleteApi.bind(this);
 
     // component render helper functions
     this.renderSettingsBar = this.renderSettingsBar.bind(this);
@@ -222,6 +223,7 @@ class App extends Component {
 
   handleDeleteConfirm() {
     this.removeFromGrid(this.state.deleteWordId, this.state.deleteColId);
+    this.callDeleteApi(this.state.deleteWordId, this.state.deleteColId);
     this.closeDeleteModal();
   }
 
@@ -261,6 +263,24 @@ class App extends Component {
     });
   }
 
+  /**
+   * callDeleteApi(word_id, list_id)
+   * {API POST CALL}
+   * Called by handleDeleteConfirm to remove the specified word from the specified list in the database
+   */
+  callDeleteApi(word_id, list_id) {
+    fetch(('http://localhost:3001/api/list_id/' + list_id + '/word_id/' + word_id), {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        word_id: word_id,
+        list_id: list_id,
+      })
+    });
+  }
 
   /**
    * handleAddNewWord()

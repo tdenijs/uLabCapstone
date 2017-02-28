@@ -264,7 +264,6 @@ class App extends Component {
   }
 
   handleAddNewImage(formData) {
-    console.log('Making API call...');
     $.ajax({
       contentType: false,
       processData: false,
@@ -273,7 +272,6 @@ class App extends Component {
       data: formData
 
     })
-    console.log('img API POST call submitted')
   }
 
   /**

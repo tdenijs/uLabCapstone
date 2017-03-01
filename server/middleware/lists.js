@@ -89,15 +89,20 @@ function deleteWordByID(req, res, next) {
 function createList(req, res, next) {
   var newListTitle = req.body.title;
 
-  db.any('INSERT INTO Lists (list_title)' +
+  db.one('INSERT INTO Lists (list_title)' +
       ' VALUES ($1) RETURNING list_id;', [newListTitle])
-    .then(function(lId) {
-      if(db.one('SELECT EXISTS (SELECT * FROM Lists WHERE list_title = $1 AND list_id = $2);', [newListTitle, lId.list_id])) {
+    .then(function (data) {
+      if(db.one('SELECT EXISTS (SELECT * FROM Lists WHERE list_title = $1 AND list_id = $2);', [newListTitle, data.list_id])) {
         res.status(201)
           .json({
             status: 'success',
-            message: 'New list ' + '\''+ newListTitle + '\'' + ' created'
+            message: 'New list ' + '\''+ newListTitle + '\'' + ' created',
+            data: {
+              id: data.list_id
+            }
           });
+          console.log('New list ' + '\''+ newListTitle + '\'' + ' created with id: '+ data.list_id);
+
       } else {
         res.status(400)
           .json({

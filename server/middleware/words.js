@@ -92,7 +92,8 @@ function createWord(req, res, next) {
   var query = 'SELECT l.list_id FROM grids g '
             + 'INNER JOIN gridlists gl ON g.grid_id=gl.grid_id '
             + 'INNER JOIN lists l ON gl.list_id=l.list_id '
-            + 'WHERE list_title=' + lName + ' AND WHERE grid_title=' + gName + ';'
+            + 'WHERE list_title=' + '\'' + lName + '\'' + ' AND grid_title=' + '\'' + gName + '\';'
+
   db.task(function(t) {
 
       return t.one(query)

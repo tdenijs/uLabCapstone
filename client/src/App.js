@@ -300,6 +300,7 @@ class App extends Component {
         path: 'img/' + wordText + '.png',
         text: wordText + 'symbol',
         list: selectedTitle
+        grid: 'core vocabulary'
       })
     }).then(() => this.getWords());
     //then... call getWords() to reload words

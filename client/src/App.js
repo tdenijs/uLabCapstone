@@ -299,7 +299,7 @@ class App extends Component {
         name: wordText,
         path: 'img/' + wordText + '.png',
         text: wordText + 'symbol',
-        list: selectedTitle
+        list: selectedTitle,
         grid: 'core vocabulary'
       })
     }).then(() => this.getWords());

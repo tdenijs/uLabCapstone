@@ -86,18 +86,25 @@ function createWord(req, res, next) {
   var wPath = req.body.path;
   var wText = req.body.text;
   var lName = req.body.list;
+  var gName = req.body.grid;
 
+  // queries DB for the list_id based on the req.body.grid and req.body.list
+  var query = 'SELECT l.list_id FROM grids g '
+            + 'INNER JOIN gridlists gl ON g.grid_id=gl.grid_id '
+            + 'INNER JOIN lists l ON gl.list_id=l.list_id '
+            + 'WHERE list_title=' + lName + ' AND WHERE grid_title=' + gName + ';'
   db.task(function(t) {
-      return t.one('SELECT list_id from Lists WHERE list_title = $1', [lName])
+
+      return t.one(query)
         .then(function(lId) {
           return t.one('INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)' +
-              ' VALUES ($1, $2, $3) RETURNING symbol_id;', [wName, wPath, wText])
+                      ' VALUES ($1, $2, $3) RETURNING symbol_id;', [wName, wPath, wText])
             .then(function(sId) {
               return t.one('INSERT INTO Words (word, symbol_id)' +
-                  ' VALUES ($1, $2) RETURNING word_id;', [wName, sId.symbol_id])
+                          ' VALUES ($1, $2) RETURNING word_id;', [wName, sId.symbol_id])
                 .then(function(wId) {
                   return t.none('INSERT INTO ListWords (word_id, list_id) ' +
-                    'VALUES ($1, $2);', [wId.word_id, lId.list_id]);
+                                'VALUES ($1, $2);', [wId.word_id, lId.list_id]);
                 });
             });
         });

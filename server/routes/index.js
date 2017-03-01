@@ -11,7 +11,8 @@ const router = express.Router();
 const words = require('../middleware/words');
 //const mw = require('../middleware');
 const lists = require('../middleware/lists');
-const grids = require('..//middleware/grids');
+const grids = require('../middleware/grids');
+const image = require('../middleware/upload');
 //===============================================
 // GET Requests
 //===============================================
@@ -34,13 +35,12 @@ router.get('/grids/id/:grid_id', grids.getAllListsByGridID);
 //-------- Get data by grid and list -------------
 router.get('/grids/:grid_id/lists/:list_id', grids.getAllListWordsByListId);
 
-
 //===============================================
 // POST Requests
 //===============================================
 
 router.post('/words', words.createWord);
-
+router.post('/imgupload', image.createImage);
 //===============================================
 
 //===============================================

@@ -1,19 +1,20 @@
-/***************************************************************
- * Copyright (c) 2016 Universal Design Lab. All rights reserved.
+/*******************************************************************
+ * Copyright (c) 2016 Portland State University CS Capstone Team
  *
- * This file is part of uLabCapstone, distibuted under the MIT
+ * Authors: Siggy Hinds, Jiaqi Luo, Christopher Monk, Tristan de Nijs,
+ *                 Simone Talla Silatchom, Carson Volker, Anton Zipper
+ *
+ * This file is part of uLabCapstone, distributed under the MIT
  * open source licence. For full terms see the LICENSE.md file
  * included in the root of this project.
- **************************************************************/
+ *
+ *******************************************************************/
 
 import React, {Component} from 'react';
 import {Row, Col} from 'react-bootstrap';
-// import Dropzone from 'react-dropzone';
-// import request from 'superagent';
 import {Button} from 'react-bootstrap';
 import '../css/WordEditor.css';
-
-
+import $ from 'jquery';
 
 
 class WordEditor extends Component {
@@ -28,7 +29,7 @@ class WordEditor extends Component {
     this.state = {
       file: '',
       imagePreviewURL: '',
-      selectedTitle: '',
+      selectedTitle: this.props.coreListTitles[0],
       wordText: '',
       imgUrl: '',
     };
@@ -38,52 +39,43 @@ class WordEditor extends Component {
   _handleSubmit(e) {
     e.preventDefault();
 
-    // 1. write file to folder
-    // TODO: do something with -> this.state.file
-    // FIle Uploader???
-    console.log('file name: ', this.state.file.name );
-    console.log('handle uploading-', this.state.file);
+    // Create form data for API call
+    // TODO: Change file extension based on file type selected by user
+    let newFileName = this.state.wordText + '.png';
+    const formData = new FormData();
+    formData.append('userfile', $('input[type=file]')[0].files[0], newFileName);
 
+    // Uplood image via API call
+    console.log("Uploading image...");
+    this.props.handleAddNewImage(formData);
 
-    // 2. POST api call to save
-    // fetch('http://localhost:3001/api/words/', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     name: this.state.wordText,
-    //     path: '',
-    //     text: this.state.wordText,
-    //     list: this.state.selectedTitle
-    //   })
-    // })
-  var voices = speechSynthesis.getVoices();
-      var selectedVoice = this.props.selectedVoice;
-      var msg = new SpeechSynthesisUtterance();
-      for(var i = 0; i < voices.length; i++) {
-       if(voices[i].name === selectedVoice) {
+    var voices = speechSynthesis.getVoices();
+    var selectedVoice = this.props.selectedVoice;
+    var msg = new SpeechSynthesisUtterance();
+    for(var i = 0; i < voices.length; i++) {
+      if(voices[i].name === selectedVoice) {
          msg.voice = voices[i];
          break;
-        }
       }
+    }
 
-      // Check for a empty string and a string with more than 25 characters
-      if(this.state.wordText.length > 25){
-        msg.text = "please enter less than 25 character"
-      }
-      else if (this.state.wordText.length >= 1) {
-        console.log('Submit New Word: ');
-        this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
+    // Check for a empty string and a string with more than 25 characters
+    if(this.state.wordText.length > 25){
+      msg.text = "please enter less than 25 character"
+    }
+    else if (this.state.wordText.length >= 1) {
+      console.log('Submit New Word: ');
+      this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
 
-        this.props.close(); //close modal
-      }
-      else {
-        msg.text = "The text box is empty."
-      }
+      this.props.close(); //close modal
+    }
+    else {
+      msg.text = "The text box is empty."
+    }
 
-window.speechSynthesis.speak(msg);
+    window.speechSynthesis.speak(msg);
+
+    this.props.close(); //close modal
   }
 
 
@@ -119,7 +111,6 @@ window.speechSynthesis.speak(msg);
     }
 
 
-
     return (
       <div className="WordEditor">
         <h1>Add New Word</h1>
@@ -131,18 +122,17 @@ window.speechSynthesis.speak(msg);
           </Col>
 
           <Col xs={12} md={6} lg={6}>
-            <form className="AddNewWordForm">
+            <form className="AddNewWordForm" >
               <label> New Word Text: </label>
               <input type="text" name="word_text" className="WordTextInput" placeholder="Enter text" onChange={this.setWordText}/>
-
               <Row>
                 <Col xs={12}>
-              <label>Choose an Image: </label>
+                  <label>Choose an Image: </label>
                 </Col>
                 <Col xs={12}>
-              <input type="file" name="filename" className="FileInputButton"
-                     onChange={(e) => this._handleImageChange(e)}
-                     accept="image/gif, image/jpeg, image/png, image/jpg"/>
+                  <input type="file" name="newfile" className="FileInputButton"
+                      onChange={(e) => this._handleImageChange(e)}
+                      accept="image/gif, image/jpeg, image/png, image/jpg"/>
                 </Col>
               </Row>
 
@@ -159,10 +149,8 @@ window.speechSynthesis.speak(msg);
                 }
               </select>
             </form>
-
           </Col>
         </Row>
-
         <div className="modal-footer">
 
           <Button className="CancelNewWord" bsStyle="danger" onClick={this.props.close}>Cancel</Button>
@@ -172,13 +160,6 @@ window.speechSynthesis.speak(msg);
 
 
       </div>
-
-
-      // <Dropzone multiple={false}
-      //     accept="image/jpg,image/png,image/gif"
-      //     onDrop={this.onImageDrop}>
-      //     <p>Drop an image or click to select a file to upload.</p>
-      // </Dropzone>
     );
 
   }
@@ -187,6 +168,7 @@ window.speechSynthesis.speak(msg);
 WordEditor.propTypes = {
   close: React.PropTypes.func,
   handleAddNewWord: React.PropTypes.func,
+  handleAddNewImage: React.PropTypes.func
 };
 
 

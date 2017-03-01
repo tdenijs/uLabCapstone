@@ -270,7 +270,6 @@ class App extends Component {
    */
   callDeleteApi(word_id, list_id) {
     let address = 'http://localhost:3001/api/words/list_id/' + list_id + '/word_id/' + word_id;
-    console.log(address);
     fetch(address, {
       method: 'DELETE',
       headers: {

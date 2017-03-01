@@ -86,8 +86,34 @@ function deleteWordByID(req, res, next) {
     })
 }
 
+function createList(req, res, next) {
+  var newListTitle = req.body.title;
+
+  db.any('INSERT INTO Lists (list_title)' +
+      ' VALUES ($1) RETURNING list_id;', [newListTitle])
+    .then(function(lId) {
+      if(db.one('SELECT EXISTS (SELECT * FROM Lists WHERE list_title = $1 AND list_id = $2);', [newListTitle, lId.list_id])) {
+        res.status(201)
+          .json({
+            status: 'success',
+            message: 'New list ' + '\''+ newListTitle + '\'' + ' created'
+          });
+      } else {
+        res.status(400)
+          .json({
+            status: 'failed',
+            message: 'Unable to create new list ' + '\''+ newListTitle + '\''
+          })
+      }
+    })
+    .catch(function(err) {
+      return next(err)
+    })
+}
+
 module.exports = {
   getAllWordsByListId: getAllWordsByListId,
   getAllWordsByListName: getAllWordsByListName,
-  deleteWordByID: deleteWordByID
+  deleteWordByID: deleteWordByID,
+  createList: createList
 }

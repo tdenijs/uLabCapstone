@@ -62,6 +62,9 @@ class App extends Component {
       deleteWordText: "",
       deleteWordId: "0",
       deleteColId: "0",
+
+      maxWidth: "1200",        // arbitrary default maxWidth for update dimensions function
+      maxHeight: "800",
     }
   }
 
@@ -330,7 +333,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <Grid className="LayoutGrid">
+        <Grid className="LayoutGrid" fluid="true">
           <Row className="SpeechSettingsRow">
             <SpeechBar
               message={this.state.messageArray}

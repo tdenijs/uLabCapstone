@@ -19,12 +19,13 @@ class Vocab extends Component {
     let sortedCols = _.sortBy(this.props.cols, 'order');
 
     return (
-      <div className="Grid">
+      <div className="Grid" style={{ height: this.props.maxHeight, border: '6px solid orange', overflow: 'scroll'}}>
         {
           sortedCols.map(({id, title, words}) => {
             return (<Column key={_.uniqueId()} col_id={id} title={title} words={words} add={this.props.add}
                             selectedVoice={this.props.selectedVoice} editorToggle={this.props.editorToggle}
-                            removeFromGrid={this.props.removeFromGrid} />);
+                            removeFromGrid={this.props.removeFromGrid}
+              />);
           })
         }
       </div>

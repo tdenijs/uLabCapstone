@@ -39,7 +39,9 @@ class WordEditor extends Component {
   _handleSubmit(e) {
     e.preventDefault();
 
-    var fileSelected = this.state.file === '' ? false : true;
+    var fileSelected = this.state.file === '' ?
+                       false
+                     : true;
     // Create form data for API call
     // TODO: Change file extension based on file type selected by user
     if (fileSelected) {

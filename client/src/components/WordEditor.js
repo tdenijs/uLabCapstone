@@ -68,7 +68,7 @@ class WordEditor extends Component {
     }
     else if (this.state.wordText.length >= 1) {
       console.log('Submit New Word: ');
-      this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
+      this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle, fileSelected );
 
       this.props.close(); //close modal
     }

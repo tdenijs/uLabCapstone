@@ -7,7 +7,7 @@
  **************************************************************/
 
 import React, {Component} from 'react';
-import {Button, Glyphicon } from 'react-bootstrap';
+import {Glyphicon } from 'react-bootstrap';
 import Word from './Word'
 import _ from 'lodash'
 

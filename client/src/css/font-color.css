@@ -7,13 +7,16 @@
  **************************************************************/
 
 
-/* red: #E4004A     */
-/* yellow: #F0D24C  */
-/* green: #28Ac70   */
-/* blue: #449EA8    */
-/* orange: #F98935  */
-
-
+/* red: #E4004A         */
+/* yellow: #F0D24C      */
+/* green: #28Ac70       */
+/* bright-green: #6cbf15 */
+/* light-green: #adef67; /*
+/* blue: #449EA8        */
+/* orange: #F98935      */
+/* light-blue: #BEE3DB  */
+/* purple: #9932CC;     */
+/* lt-purple: #89609E  */
 
 
 /*  App  */
@@ -81,13 +84,83 @@
   border-radius: 50%;
 }
 
+/* SpeechBar button hover & focus */
+
+.PlayButton:hover, .BackspaceButton:hover,  .ClearButton:hover {
+  background-color: #F98935;
+  border: 1px solid #BEE3DB;
+}
+
+.SettingsButton:hover {
+  color: #F98935;
+}
+
+.SettingsButton:focus, .PlayButton:focus, .BackspaceButton:focus,  .ClearButton:focus {
+  outline: none;   /* prevents blue outline from appearing on buttons*/
+}
 
 
-
-/*  SettingsBar  */
+/*  SettingsBar   */
 
 .SettingsBar {
+  background-color: #449EA8;
+  font-weight: bold;
+}
 
+.SettingsBar .AddButton {
+  background-color: #6cbf15; /* Green */
+  font-family:"Courier New";
+}
+
+.SettingsBar .AddButton-locked {
+  background-color: #449EA8;
+  font-family:"Courier New";
+}
+
+.SettingsBar .EditorButton {
+  background-color: #9932CC; /* purple */
+  font-family:"Courier New";
+}
+
+.SettingsBar .EditorButton-locked {
+  background-color: #449EA8;
+  font-family:"Courier New";
+}
+.VoiceLabel {
+  background-color: #F98935; /* orange */
+  font-family:"Courier New";
+}
+
+.VoiceLabel-locked {
+  background-color: #449EA8; /* blue */
+  font-family:"Courier New";
+}
+
+.LockSetting {
+  background-color: #BEE3DB;
+  font-family:"Courier New";
+}
+
+.LockSetting-locked {
+  background-color: #F0D24C; /* yellow */
+  font-family:"Courier New";
+}
+
+.Locked {
+  color: red;
+}
+.Unlocked {
+  color: green;;
+}
+
+/* SpeechBar button hover & focus */
+.SettingsBar .EditorButton:hover {
+  background-color: violet; /* light-purple */
+}
+
+.SettingsBar .AddButton:hover {
+  background-color: #adef67; /* light-green */
+  /*dk green 71a53a*/
 }
 
 

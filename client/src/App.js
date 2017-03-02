@@ -64,9 +64,15 @@ class App extends Component {
       deleteColId: "0",
 
       maxWidth: "1200",        // arbitrary default maxWidth for update dimensions function
-      maxHeight: "800",
+      maxHeight: "600",
+      maxVocabHeight: "400",
     }
+
   }
+
+
+
+
 
   componentWillMount() {
     this.getCoreVocabTitles();
@@ -330,10 +336,18 @@ class App extends Component {
       ? this.renderSettingsBar()
       : null;
 
+
+  //   const customGridStyle = {
+  //     color: 'blue',
+  //     overflow: 'scroll',
+  //     height: {{this.state.maxHeight}},
+  //     border: '6px solid #E4004A',
+  // }
+
     return (
       <div className="App">
 
-        <Grid className="LayoutGrid" fluid="true">
+        <Grid className="LayoutGrid" fluid="true" style={{ height: this.state.maxHeight, border: '6px solid #ffff00', overflow: 'scroll'}} >
           <Row className="SpeechSettingsRow">
             <SpeechBar
               message={this.state.messageArray}
@@ -355,7 +369,9 @@ class App extends Component {
             </Col>
 
             <Col xs={12} md={8} className="VocabCol">
-              <Vocab cols={this.state.colArray} add={this.addWordToSpeechBar}
+              <Vocab
+                     maxHeight={this.state.maxVocabHeight}
+                     cols={this.state.colArray} add={this.addWordToSpeechBar}
                      selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
                      removeFromGrid={this.handleDelete}/>
             </Col>

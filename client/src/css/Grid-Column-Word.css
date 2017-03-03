@@ -10,20 +10,38 @@
  *******************************************************************/
 
 /*  Grid  Component*/
-.Grid {
-
+.LayoutGrid {
 }
 
 
+/* ROW -- FringeVocabRow */
+.FringeVocabRow {
+  padding-top: 10px;
 
-/*  Column Component  */
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.VocabContainer {   /* orange border */
+  overflow: scroll;
+
+  display: flex;
+  flex-flow: row nowrap;
+
+}
+
+/*  COLUMN COMPONENT  */
+
 .Column {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 10px;
+  /*display: flex;*/
+  /*flex-flow: column nowrap;*/
+
+
+  /*display: inline-block;*/
+  /*vertical-align: top;*/
 
   /*adds shadow to the columns*/
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
 }
 
 .ColumnTitle {
@@ -31,7 +49,11 @@
 }
 
 
-/*   Word  Component  */
+
+
+/*   WORD COMPONENT  */
+
+
 .Word {
   margin: auto;
   width: 100px;
@@ -40,36 +62,24 @@
 
   /*use flexbox to center img &  word text*/
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   justify-content: center;
-
-}
-
-.Word:hover {
-  background-color: #F5f5fa;
-  color: red;
 }
 
 .Word img {
   max-width: 100%;
+
+  order: 1;
 }
 
 .WordText {
   padding-top: 5px;
   font-size: 1.2em;
 
+  order: 2;
 }
 
 .DeleteButton {
   height: 20px;
   width: 20px;
-  border: solid 1px red;
-  background-color: #fff;
-  color: red;
-}
-
-.DeleteButton:hover {
-  color: black;
-  background-color: red;
-
 }

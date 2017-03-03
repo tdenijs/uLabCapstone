@@ -71,7 +71,7 @@ class App extends Component {
 
       maxWidth: "1200",        // arbitrary default maxWidth for update dimensions function
       maxHeight: "600",
-      maxVocabHeight: "400",
+      maxVocabHeight: "550",
     }
 
   }
@@ -278,6 +278,7 @@ class App extends Component {
     });
   }
 
+
   /**
    * handleAddNewImage()
    * {API POST CALL}
@@ -292,6 +293,8 @@ class App extends Component {
       data: formData
     })
   }
+
+
 
   /**
    * callDeleteApi(word_id, list_id)
@@ -341,6 +344,7 @@ class App extends Component {
   }
 
 
+
   renderRemoveWordModal() {
     return (
       <Modal show={this.state.showDeleteModal} onHide={this.closeDeleteModal}>
@@ -372,7 +376,6 @@ class App extends Component {
     )
   }
 
-
   render() {
 
     //Get the Browser's voices loaded before anything. Allows syncing
@@ -385,17 +388,14 @@ class App extends Component {
       : null;
 
 
-  //   const customGridStyle = {
-  //     color: 'blue',
-  //     overflow: 'scroll',
-  //     height: {{this.state.maxHeight}},
-  //     border: '6px solid #E4004A',
-  // }
+    // fix below when the function to detect the window height works...
+    // <Grid className="LayoutGrid" fluid="true" style={{ height: this.state.maxHeight }} >
+
 
     return (
       <div className="App">
 
-        <Grid className="LayoutGrid" fluid="true" style={{ height: this.state.maxHeight, border: '6px solid #ffff00', overflow: 'scroll'}} >
+        <Grid className="LayoutGrid" fluid="true">
           <Row className="SpeechSettingsRow">
             <SpeechBar
               message={this.state.messageArray}
@@ -407,10 +407,9 @@ class App extends Component {
             <div className="Settings" >
               {settingsBar}
             </div>
-
           </Row>
 
-          <Row className="FringeVocabRow">
+          <Row className="FringeVocabRow" >
 
             <Col xs={8} md={4} className="FringeCol">
               <div> fringe list...</div>

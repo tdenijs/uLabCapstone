@@ -52,7 +52,6 @@ class App extends Component {
     this.updateDimensions = this.updateDimensions.bind(this)
 
 
-
     this.state = {
       selectedVoice: "Default",
       settingsBarVisible: false,
@@ -70,7 +69,6 @@ class App extends Component {
 
       maxWidth: 768,        // arbitrary default maxWidth for update dimensions function
       maxHeight: 920,
-      maxVocabHeight: 920,
     }
 
   }
@@ -101,22 +99,51 @@ class App extends Component {
   }
 
 
+  /**
+   * Calculate & Update state of new dimensions
+   *
+   * Some important device dimensions
+   * ipad portrait  { w = 768px h = 920px }
+   * ipad landscape { w = 1010px h = 660px }
+   * iphone portrait  { w = 310px h = 352}
+   * iphone landscape { w = 468px h = 202}
+   * reasonable desktop screen resolution { w=1280px h=800px }
+   *
+   */
+
 
   updateDimensions() {
-    console.log("updateDimensions: ", window.innerWidth);
+    console.log("updateDimensions called: width:", window.innerWidth, " height: ", window.innerHeight);
 
-    if(window.innerWidth < 500) {
-      this.setState({ maxWidth: 450, maxHeight: 102 });
-    } else {
-      let update_width  = window.innerWidth-50;
-      let update_height = Math.round(update_width/4.4);
-      this.setState({ maxWidth: update_width, maxHeight: update_height, maxVocabHeight: update_height-300});
+
+    // maxWidth: 768,        // arbitrary default maxWidth for update dimensions function
+    //   maxHeight: 920,
+    //   maxVocabHeight: 920,
+
+    if(window.innerHeight < 202 ) {
+      this.setState({maxHeight: 200});
+      //this.setState({maxVocabHeight: })
+
+    }
+    if(window.innerHeight < 352 ) {
+      this.setState({maxHeight: 340});
+
+    }
+    if(window.innerHeight < 660 ) {
+      this.setState({maxHeight: 650});
+
+    }
+    if(window.innerHeight < 800 ) {
+      this.setState({maxHeight: 790});
+
+    }
+    else {  // 900
+      this.setState({maxHeight: 850});
     }
 
-    console.log('Dimensions: width- ', this.state.maxWidth,
-      '  height- ', this.state.maxWidth,
-      '  vocabHeight- ', this.state.maxVocabHeight);
 
+    console.log('Dimensions: width- ', this.state.maxWidth,
+      '  height- ', this.state.maxWidth);
   }
 
 
@@ -439,7 +466,7 @@ class App extends Component {
             </div>
           </Row>
 
-          <Row className="FringeVocabRow" style={{ width: this.state.maxWidth }} >
+          <Row className="FringeVocabRow"  >
 
             <Col xs={8} md={4} className="FringeCol">
               <div> fringe list...</div>
@@ -447,7 +474,7 @@ class App extends Component {
 
             <Col xs={12} md={8} className="VocabCol">
               <Vocab
-                     maxHeight={this.state.maxVocabHeight}
+                     maxHeight={this.state.maxHeight - 400}
                      cols={this.state.colArray} add={this.addWordToSpeechBar}
                      selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
                      removeFromGrid={this.handleDelete}/>

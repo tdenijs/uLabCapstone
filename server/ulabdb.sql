@@ -72,10 +72,6 @@ INSERT INTO Grids(grid_title)
 INSERT INTO Lists (list_title)
   VALUES ('adjective');
 
--- add title for goodnight moon list
-INSERT INTO Lists (list_title)
-  VALUES ('goodnight moon');
-
 -- add adjective list to core vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
   VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'core vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'adjective'));
@@ -304,6 +300,11 @@ INSERT INTO ListWords (word_id, list_id)
    ((SELECT W.word_id from Words W WHERE word = 'turn'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
    ((SELECT W.word_id from Words W WHERE word = 'want'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'verb'));
 
+
+-- add title for goodnight moon list
+INSERT INTO Lists (list_title)
+  VALUES ('goodnight moon');
+
 -- add goodnight moon list to fringe vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
   VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'fringe vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'goodnight moon'));
@@ -317,21 +318,21 @@ INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
 
 -- add words for goodnight moon list
 INSERT INTO Words (word, symbol_id)
-  VALUES ('bears',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'bears')),
+  VALUES ('bears', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'bears')),
          ('cow', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'cow')),
-   	     ('goodnight moon',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'goodnight moon')),
+   	     ('goodnight moon', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'goodnight moon')),
   	     ('kittens', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'kittens')),
-  	     ('mittens',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'mittens')),
+  	     ('mittens', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'mittens')),
   	     ('moon', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'moon')),
   	     ('room', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'room'));
 
 -- add words to goodnight moon list
 INSERT INTO ListWords (word_id, list_id)
   VALUES
-   ((SELECT W.word_id from Words W WHERE word = 'bears'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+   ((SELECT W.word_id from Words W WHERE word = 'bears'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
    ((SELECT W.word_id from Words W WHERE word = 'cows'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
-   ((SELECT W.word_id from Words W WHERE word = 'goodnight moon'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+   ((SELECT W.word_id from Words W WHERE word = 'goodnight moon'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
    ((SELECT W.word_id from Words W WHERE word = 'kittens'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
-   ((SELECT W.word_id from Words W WHERE word = 'mittens'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+   ((SELECT W.word_id from Words W WHERE word = 'mittens'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
    ((SELECT W.word_id from Words W WHERE word = 'moon'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
    ((SELECT W.word_id from Words W WHERE word = 'room'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon'));

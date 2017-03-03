@@ -45,6 +45,7 @@ router.get('/grids/:grid_id/lists/:list_id', grids.getAllListWordsByListId);
 
 router.post('/words', words.createWord);
 router.post('/imgupload', image.createImage);
+router.post('/lists', lists.createList);
 //===============================================
 
 //===============================================

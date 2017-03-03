@@ -170,14 +170,23 @@
 }
 
 
-/*  Fringe and Vocab Row   */
+/* ROW -- FringeVocabRow */
 
 
-/*.FringeCol {*/
-  /*border: 6px solid #F0D24C;*/
-  /*border-radius: 15px;*/
-/*}*/
+.FringeCol {
+  border: 6px solid #F0D24C;  /* yellow border */
+  border-radius: 15px;
+  background-color: #fff;
+}
 
+.VocabCol {}
+
+
+.VocabContainer{
+  border: 6px solid #F98935;  /* orange border */
+  border-radius: 15px;
+  background-color: #fff;
+}
 
 
 .Column {
@@ -191,13 +200,33 @@
   font-weight: 900;
   font-style: italic;
   /*border-bottom: 3px solid var(--border-color);*/
-
 }
 
 
 
-/*   Word  Component  */
+/*   WORD COMPONENT  */
+
 .Word {
   color: #000;
-  /*border-bottom: 1px solid var(--border-color);*/
+  border: solid 1px #BEE3DB;
+
+}
+
+.Word:hover {
+  background-color: #F5f5fa;
+  color: red;
+}
+
+/*   Delete Icon in Word Component  */
+
+.DeleteButton {
+  border: solid 1px red;
+  background-color: #fff;
+  color: red;
+}
+
+
+.DeleteButton:hover {
+  color: black;
+  background-color: red;
 }

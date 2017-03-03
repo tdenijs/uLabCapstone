@@ -19,14 +19,15 @@ class Vocab extends Component {
     // Make sure the cols are in the right order
     let sortedCols = _.sortBy(this.props.cols, 'order');
 
+
     return (
-      <div className="Grid" style={{ height: this.props.maxHeight, border: '6px solid orange', overflow: 'scroll'}}>
+      <div className="VocabContainer" style={{height: this.props.maxHeight}}>
         {
           sortedCols.map(({id, title, words}) => {
             return (<Column key={_.uniqueId()} col_id={id} title={title} words={words} add={this.props.add}
                             selectedVoice={this.props.selectedVoice} editorToggle={this.props.editorToggle}
                             removeFromGrid={this.props.removeFromGrid}
-              />);
+            />);
           })
         }
       </div>
@@ -43,7 +44,7 @@ Vocab.defaultProps = {
   cols: [{
     id: "0",
     title: "test",
-    words: [{id: "1", word:"love", symbol_path:"", alt:""}]
+    words: [{id: "1", word: "love", symbol_path: "", alt: ""}]
   }],
 };
 

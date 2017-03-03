@@ -1,17 +1,22 @@
-/***************************************************************
- * Copyright (c) 2016 Universal Design Lab. All rights reserved.
+/*******************************************************************
+ * Copyright (c) 2016 Portland State University CS Capstone Team
  *
- * This file is part of uLabCapstone, distibuted under the MIT
+ * Authors: Siggy Hinds, Jiaqi Luo, Christopher Monk, Tristan de Nijs,
+ *                 Simone Talla Silatchom, Carson Volker, Anton Zipper
+ *
+ * This file is part of uLabCapstone, distributed under the MIT
  * open source licence. For full terms see the LICENSE.md file
  * included in the root of this project.
- **************************************************************/
+ *
+ *******************************************************************/
 
 const express = require('express');
 const router = express.Router();
 const words = require('../middleware/words');
 //const mw = require('../middleware');
 const lists = require('../middleware/lists');
-const grids = require('..//middleware/grids');
+const grids = require('../middleware/grids');
+const image = require('../middleware/upload');
 //===============================================
 // GET Requests
 //===============================================
@@ -34,13 +39,19 @@ router.get('/grids/id/:grid_id', grids.getAllListsByGridID);
 //-------- Get data by grid and list -------------
 router.get('/grids/:grid_id/lists/:list_id', grids.getAllListWordsByListId);
 
-
 //===============================================
 // POST Requests
 //===============================================
 
 router.post('/words', words.createWord);
-
+router.post('/imgupload', image.createImage);
 //===============================================
 
+//===============================================
+// DELETE Requests
+//===============================================
+router.delete('/words/list_id/:list_id/word_id/:word_id', lists.deleteWordByID);
+
+
+//===============================================
 module.exports = router;

@@ -1,10 +1,14 @@
-/***************************************************************
- * Copyright (c) 2016 Universal Design Lab. All rights reserved.
+/*******************************************************************
+ * Copyright (c) 2016 Portland State University CS Capstone Team
  *
- * This file is part of uLabCapstone, distibuted under the MIT
+ * Authors: Siggy Hinds, Jiaqi Luo, Christopher Monk, Tristan de Nijs,
+ *                 Simone Talla Silatchom, Carson Volker, Anton Zipper
+ *
+ * This file is part of uLabCapstone, distributed under the MIT
  * open source licence. For full terms see the LICENSE.md file
  * included in the root of this project.
- **************************************************************/
+ *
+ *******************************************************************/
 
 const express = require('express');
 const routes = require('./routes');
@@ -13,18 +17,10 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('./swagger.json');
 const path = require('path');
 const cors = require('cors');
-const port = process.env.PORT || 3001;
-//const fs = require('fs');
-
-// for handling post requests
 const bodyParser = require('body-parser');
-
-// middleware for handling file uploads
-//const multer = require('multer');
-//const upload = multer({ dest: 'uploads/'})
-// Node middleware used to parser cookie header and populate req.cookie-parser
-// with an object keyed by the cookie names
 const cookieParser = require('cookie-parser');
+
+const port = process.env.PORT || 3001;
 
 app.use(cookieParser());
 app.use(cors());

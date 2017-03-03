@@ -287,7 +287,10 @@ class App extends Component {
    * {API POST CALL}
    * Callback function passed to the WordEditor Component to add a word through POST api call
    */
-  handleAddNewWord(wordText, selectedTitle) {
+  handleAddNewWord(wordText, selectedTitle, fileSelected) {
+    var newPath = fileSelected ?
+                  'img/' + wordText + '.png'
+                : 'img/blank.png'
     fetch('http://localhost:3001/api/words/', {
       method: 'POST',
       headers: {
@@ -297,7 +300,7 @@ class App extends Component {
       //ContentType:
       body: JSON.stringify({
         name: wordText,
-        path: 'img/' + wordText + '.png',
+        path: newPath,
         text: wordText + 'symbol',
         list: selectedTitle
       })

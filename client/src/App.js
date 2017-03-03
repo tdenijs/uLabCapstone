@@ -48,9 +48,8 @@ class App extends Component {
     this.renderRemoveWordModal = this.renderRemoveWordModal.bind(this);
     this.callDeleteApi = this.callDeleteApi.bind(this);
     this.handleAddNewImage = this.handleAddNewImage.bind(this);
-
-    // component render helper functions
     this.renderSettingsBar = this.renderSettingsBar.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this)
 
 
 
@@ -69,9 +68,9 @@ class App extends Component {
       deleteWordId: "0",
       deleteColId: "0",
 
-      maxWidth: "1200",        // arbitrary default maxWidth for update dimensions function
-      maxHeight: "600",
-      maxVocabHeight: "550",
+      maxWidth: 768,        // arbitrary default maxWidth for update dimensions function
+      maxHeight: 920,
+      maxVocabHeight: 920,
     }
 
   }
@@ -82,6 +81,9 @@ class App extends Component {
 
   componentWillMount() {
     this.getCoreVocabTitles();
+
+    this.updateDimensions();     // update dimensions when mounting
+    window.addEventListener("resize", this.updateDimensions());    // add event listener for update dimensions
   }
 
   componentDidMount() {
@@ -90,6 +92,34 @@ class App extends Component {
     console.log('Component Mounted:');
     console.log('CoreListTitles: ', this.state.coreListTitles);
   }
+
+  componentWillUnmount() {
+    console.log('Component Unmounted:');
+
+    // Remove event listener
+    window.removeEventListener("resize", this.updateDimensions());  // remove event listener for update functions when unmounting
+  }
+
+
+
+  updateDimensions() {
+    console.log("updateDimensions: ", window.innerWidth);
+
+    if(window.innerWidth < 500) {
+      this.setState({ maxWidth: 450, maxHeight: 102 });
+    } else {
+      let update_width  = window.innerWidth-50;
+      let update_height = Math.round(update_width/4.4);
+      this.setState({ maxWidth: update_width, maxHeight: update_height, maxVocabHeight: update_height-300});
+    }
+
+    console.log('Dimensions: width- ', this.state.maxWidth,
+      '  height- ', this.state.maxWidth,
+      '  vocabHeight- ', this.state.maxVocabHeight);
+
+  }
+
+
 
   // Initializes wordArrays with JSON data from API call
   getWords() {
@@ -395,7 +425,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <Grid className="LayoutGrid" fluid="true">
+        <Grid className="LayoutGrid" fluid='true'>
           <Row className="SpeechSettingsRow">
             <SpeechBar
               message={this.state.messageArray}
@@ -409,7 +439,7 @@ class App extends Component {
             </div>
           </Row>
 
-          <Row className="FringeVocabRow" >
+          <Row className="FringeVocabRow" style={{ width: this.state.maxWidth }} >
 
             <Col xs={8} md={4} className="FringeCol">
               <div> fringe list...</div>

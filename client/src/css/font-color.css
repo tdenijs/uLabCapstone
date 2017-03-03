@@ -153,8 +153,10 @@
 .Locked {
   color: red;
 }
-.Unlocked {
-  color: green;;
+.Lock {
+  color: green;
+  font-family:"Courier New";
+  font-size: 1.3em;
 }
 
 /* SpeechBar button hover & focus */

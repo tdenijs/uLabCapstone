@@ -30,16 +30,6 @@ class SettingsBar extends Component {
     }
   }
 
-  // <Col xs={12} md={4}>
-  // <form className="ButtonSizeForm">
-  // <label className="ButtonSizeLabel">Button Size</label>
-  // <output className="ButtonSizeOutput">{this.props.buttonSize}</output>
-  // <input className="ButtonSizeSlider" type="range"
-  // value={this.props.buttonSize} onChange={this.props.resizeButton}
-  // min="0" max="10" disabled={disabled} style={{margin: "auto", width: "200px"}}/>
-  // </form>
-  // </Col>
-
 
   renderLock() {
     // Check the checkbox if the settingsLocked prop is true
@@ -49,8 +39,13 @@ class SettingsBar extends Component {
     console.log("settings is locked: ", this.props.settingsLocked);
 
     let lock = this.props.settingsLocked
-      ? <span><Glyphicon className="Locked" glyph="glyphicon glyphicon-lock" aria-hidden="true"/> Unlock </span>
-      : <span><Glyphicon className="Unlocked" glyph="glyphicon glyphicon-lock" aria-hidden="true"/>Lock..</span>;
+      ? <Glyphicon className="Locked" glyph="glyphicon glyphicon-lock" aria-hidden="true"/>
+      : <i className="fa fa-unlock" aria-hidden="true"></i>;
+
+
+    // <i class="fa fa-unlock" aria-hidden="true"></i>
+  // : <span><Glyphicon className="Unlocked" glyph="glyphicon glyphicon-lock" aria-hidden="true"/>Lock..</span>;
+
 
     return(
       <div className={"LockSetting" + (this.props.settingsLocked ? '-locked' : '')} onClick={this.props.lockToggle}>

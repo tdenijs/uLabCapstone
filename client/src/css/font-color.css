@@ -39,7 +39,7 @@
 .MessageWindow {
   background-color: white;
 
-  border: 6px solid #E4004A;
+  border: 7px solid #E4004A;
   border-radius: 15px;
 }
 
@@ -173,7 +173,7 @@
 
 
 .FringeCol {
-  border: 6px solid #F0D24C;  /* yellow border */
+  border: 7px solid #F0D24C;  /* yellow border */
   border-radius: 15px;
   background-color: #fff;
 }
@@ -182,7 +182,7 @@
 
 
 .VocabContainer{
-  border: 6px solid #F98935;  /* orange border */
+  border: 7px solid #F98935;  /* orange border */
   border-radius: 15px;
   background-color: #fff;
 }

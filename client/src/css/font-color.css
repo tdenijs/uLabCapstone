@@ -10,53 +10,179 @@
  *
  *******************************************************************/
 
-:root {
-  --border-color: #DEE3e6;
 
-  --yellow: #f6e58f;
-  --brown: #C0B19B;
-  --light-green: #55af55;
-  --light-blue: #53bddc;
-  --dark-navy: #262B35;
-}
+/* red: #E4004A         */
+/* yellow: #F0D24C      */
+/* green: #28Ac70       */
+/* bright-green: #6cbf15 */
+/* light-green: #adef67; /*
+/* blue: #449EA8        */
+/* orange: #F98935      */
+/* light-blue: #BEE3DB  */
+/* purple: #9932CC;     */
+/* lt-purple: #89609E  */
+
 
 /*  App  */
 
 .App {
-  background-color: #F5f5fa;
   font-family: 'Lato', sans-serif;
 }
 
 
 /*  SpeechBar  */
 
-.SpeechBar {
-  background-color: var(--dark-navy);
-}
+.SpeechBar {  }
+
+
 
 
 .MessageWindow {
-  border: 0px solid var(--border-color);
   background-color: white;
+
+  border: 6px solid #E4004A;
+  border-radius: 15px;
 }
 
 .MessageWindow .Word { /* word component inside of the message window */
   color: #3a33d1;
 }
 
+/* BUTTONS */
 
-/*  SettingsBar  */
+.SettingsButton {
+  /*background-color: #449EA8;*/
+  background-color: transparent;
+  color: #449EA8;
+  font-size: 2.8em;
 
-.SettingsBar {
-  background-color: var(--light-blue);
+  border: 1px solid transparent;
+  border-radius: 50%;
 }
 
+
+.PlayButton {
+  background-color: #E4004A;
+  color: #fff;
+  font-size: 1.6em;
+
+  border: 1px solid #E4004A;
+  border-radius: 50%;
+}
+
+.BackspaceButton {
+  background-color: #28Ac70;
+  color: #fff;
+  font-size: 1.6em;
+
+  border: 1px solid #28Ac70;
+  border-radius: 50%;
+}
+
+.ClearButton {
+  background-color: #449EA8;
+  color: #fff;
+  font-size: 1.6em;
+
+  border: 1px solid #28Ac70;
+  border-radius: 50%;
+}
+
+/* SpeechBar button hover & focus */
+
+.PlayButton:hover, .BackspaceButton:hover,  .ClearButton:hover {
+  background-color: #F98935;
+  border: 1px solid #BEE3DB;
+}
+
+.SettingsButton:hover {
+  color: #F98935;
+}
+
+.SettingsButton:focus, .PlayButton:focus, .BackspaceButton:focus,  .ClearButton:focus {
+  outline: none;   /* prevents blue outline from appearing on buttons*/
+}
+
+
+/*  SettingsBar   */
+
+.SettingsBar {
+  background-color: #449EA8;
+  font-weight: bold;
+}
+
+.SettingsBar .AddButton {
+  background-color: #6cbf15; /* Green */
+  font-family:"Courier New";
+}
+
+.SettingsBar .AddButton-locked {
+  background-color: #449EA8;
+  font-family:"Courier New";
+}
+
+.SettingsBar .EditorButton {
+  background-color: #9932CC; /* purple */
+  font-family:"Courier New";
+}
+
+.SettingsBar .EditorButton-locked {
+  background-color: #449EA8;
+  font-family:"Courier New";
+}
+.VoiceLabel {
+  background-color: #F98935; /* orange */
+  font-family:"Courier New";
+}
+
+.VoiceLabel-locked {
+  background-color: #449EA8; /* blue */
+  font-family:"Courier New";
+}
+
+.LockSetting {
+  background-color: #BEE3DB;
+  font-family:"Courier New";
+}
+
+.LockSetting-locked {
+  background-color: #F0D24C; /* yellow */
+  font-family:"Courier New";
+}
+
+.Locked {
+  color: red;
+}
+.Lock {
+  color: green;
+  font-family:"Courier New";
+  font-size: 1.3em;
+}
+
+/* SpeechBar button hover & focus */
+.SettingsBar .EditorButton:hover {
+  background-color: violet; /* light-purple */
+}
+
+.SettingsBar .AddButton:hover {
+  background-color: #adef67; /* light-green */
+  /*dk green 71a53a*/
+}
+
+
+/*  Fringe and Vocab Row   */
+
+
+/*.FringeCol {*/
+  /*border: 6px solid #F0D24C;*/
+  /*border-radius: 15px;*/
+/*}*/
 
 
 
 .Column {
   background-color: #fff;
-  border: 2px solid var(--border-color);
+  /*border: 2px solid #fff;*/
 }
 
 .ColumnTitle {
@@ -64,7 +190,7 @@
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-style: italic;
-  border-bottom: 3px solid var(--border-color);
+  /*border-bottom: 3px solid var(--border-color);*/
 
 }
 
@@ -73,5 +199,5 @@
 /*   Word  Component  */
 .Word {
   color: #000;
-  border-bottom: 1px solid var(--border-color);
+  /*border-bottom: 1px solid var(--border-color);*/
 }

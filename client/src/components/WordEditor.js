@@ -39,15 +39,20 @@ class WordEditor extends Component {
   _handleSubmit(e) {
     e.preventDefault();
 
+    var fileSelected = this.state.file === '' ?
+                       false
+                     : true;
     // Create form data for API call
     // TODO: Change file extension based on file type selected by user
-    let newFileName = this.state.wordText + '.png';
-    const formData = new FormData();
-    formData.append('userfile', $('input[type=file]')[0].files[0], newFileName);
+    if (fileSelected) {
+      let newFileName = this.state.wordText + '.png';
+      const formData = new FormData();
+      formData.append('userfile', $('input[type=file]')[0].files[0], newFileName);
 
-    // Uplood image via API call
-    console.log("Uploading image...");
-    this.props.handleAddNewImage(formData);
+      // Uplood image via API call
+      console.log("Uploading image...");
+      this.props.handleAddNewImage(formData);
+    }
 
     var voices = speechSynthesis.getVoices();
     var selectedVoice = this.props.selectedVoice;
@@ -65,7 +70,7 @@ class WordEditor extends Component {
     }
     else if (this.state.wordText.length >= 1) {
       console.log('Submit New Word: ');
-      this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle );
+      this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle, fileSelected );
 
       this.props.close(); //close modal
     }

@@ -12,13 +12,14 @@
 
 /*   SpeechBar  Component  */
 
+
 /** Small screens **/
 
 @media all and (max-width: 599px) {
 
   .SpeechBar {
     min-height: 80px;
-    padding: 10px;
+
     margin-bottom: 0px;
 
     display: flex;
@@ -31,10 +32,6 @@
   .MessageWindow {
     float: left;
     min-height: 80px;
-    margin-bottom: 5px;
-
-    overflow: auto;
-    white-space: nowrap;
   }
 
   /* word component inside of the message window */
@@ -43,7 +40,6 @@
     border: none;
     float: left;
     height: 90%;
-
   }
 
   .MessageWindow .Word:hover {
@@ -55,28 +51,45 @@
     min-height: inherit;
   }
 
+
+  /* FLEX */
   .MessageWindow {
     flex: 1 100%;
     order: 1;
+
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
   .PlayButton {
+    width: 50px;
+    height: 50px;
+
     order: 2;
   }
 
   .BackspaceButton {
+    width: 50px;
+    height: 50px;
+
     order: 3;
     justify-content: flex-end;
   }
 
   .ClearButton {
+    width: 50px;
+    height: 50px;
+
     order: 4;
     justify-content: flex-end;
   }
 
   .SettingsButton {
+    width: 50px;
+    height: 50px;
+
     order: 5;
-    justify-content: flex-end;
+    align-self: flex-end;
   }
 
 }
@@ -86,23 +99,28 @@
 @media all and (min-width: 600px) {
   .SpeechBar {
     min-height: 80px;
-    padding: 10px;
 
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-content: stretch;
+
+    align-items: center;
+    justify-content: center;
   }
 
   .MessageWindow {
     float: left;
     min-height: 80px;
+
     margin-right: 10px;
     margin-left: 10px;
-    flex-wrap: nowrap;
 
+    flex-wrap: nowrap;
     overflow-x: auto;
   }
+
+
 
   .MessageWindow .Word { /* word component inside of the message window */
     width: 60px;
@@ -120,51 +138,73 @@
     min-height: inherit;
   }
 
+
   .MessageWindow {
     flex: 1;
-    order: 2
+    order: 2;
+
+  }
+
+  .SettingsButton {
+    width: 50px;
+    height: 50px;
+
+    order: 1;
+    justify-content: flex-end;
+    margin-left: 10px;
+
+
+
   }
 
   .PlayButton {
+    width: 50px;
+    height: 50px;
+
     order: 2;
   }
 
   .BackspaceButton {
+    width: 50px;
+    height: 50px;
+
     order: 3;
     justify-content: flex-end;
   }
 
   .ClearButton {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+
+
     order: 4;
     justify-content: flex-end;
-    margin-left: 10px;
   }
 
-  .SettingsButton {
-    order: 5;
-    justify-content: flex-end;
-    margin-left: 10px;
-  }
 
-  .MessageWindow {
-    float: left;
-    min-height: 80px;
-    margin-bottom: 5px;
-    flex-wrap: nowrap;
-  }
 
 }
 
-  /**  Large screens **/
+
+
+  /**  LARGE  SCREENS **/
+
   @media all and (min-width: 800px) {
-    .MessageWindow {
-      flex: 2 0px;
+
+    .SettingsButton {
       order: 1;
     }
 
     .PlayButton {
       order: 1;
     }
+
+    .MessageWindow {
+      flex: 2 0px;
+      order: 2;
+    }
+
 
     .BackspaceButton {
       order: 3;
@@ -174,8 +214,6 @@
       order: 4;
     }
 
-    .SettingsButton {
-      order: 5;
-    }
+
 
   }

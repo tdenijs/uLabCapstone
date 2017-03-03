@@ -127,8 +127,8 @@
 			"description": "",
 			"collectionId": "2335097b-cb16-0b02-1dbf-6ef2e94bc249",
 			"responses": [],
-			"rawModeData": "{\n\t\"name\": \"love\",\n\t\"path\": \"img/love.png\",\n\t\"text\": \"love symbol\",\n\t\"list\": \"verb\"\n}",
-			"folder": "6c26685d-9696-8f85-3096-889fd7d7dca6"
+			"rawModeData": "{\n\t\"name\": \"love\",\n\t\"path\": \"img/love.png\",\n\t\"text\": \"love symbol\",\n\t\"list\": \"verb\",\n\t\"grid\": \"core vocabulary\"\n}",
+			"folder": "a4091582-8bd0-7c02-1d2a-162a38919bd9"
 		},
 		{
 			"id": "509c06b3-20cd-11df-87ca-2c418cdc319c",

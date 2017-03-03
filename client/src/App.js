@@ -47,6 +47,7 @@ class App extends Component {
     this.openDeleteModal = this.openDeleteModal.bind(this);
     this.closeDeleteModal = this.closeDeleteModal.bind(this);
     this.renderRemoveWordModal = this.renderRemoveWordModal.bind(this);
+    this.callDeleteApi = this.callDeleteApi.bind(this);
     this.handleAddNewImage = this.handleAddNewImage.bind(this);
 
     // component render helper functions
@@ -173,6 +174,7 @@ class App extends Component {
 
   // Callback function passed to the SettingsBar to update the App's settingsLocked state variable
   lockToggle() {
+    console.log("settings lockToggle called")
     this.setState({settingsLocked: !(this.state.settingsLocked)});
   }
 
@@ -228,6 +230,7 @@ class App extends Component {
 
   handleDeleteConfirm() {
     this.removeFromGrid(this.state.deleteWordId, this.state.deleteColId);
+    this.callDeleteApi(this.state.deleteWordId, this.state.deleteColId);
     this.closeDeleteModal();
   }
 
@@ -266,6 +269,7 @@ class App extends Component {
       ]
     });
   }
+  
   /**
    * handleAddNewImage()
    * {API POST CALL}
@@ -278,8 +282,27 @@ class App extends Component {
       method: 'POST',
       url: 'http://localhost:3001/api/imgupload',
       data: formData
-
     })
+  }
+  
+  /**
+   * callDeleteApi(word_id, list_id)
+   * {API DELETE CALL}
+   * Called by handleDeleteConfirm to remove the specified word from the specified list in the database
+   */
+  callDeleteApi(word_id, list_id) {
+    let address = 'http://localhost:3001/api/words/list_id/' + list_id + '/word_id/' + word_id;
+    fetch(address, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        word_id: word_id,
+        list_id: list_id,
+      })
+    });
   }
 
   /**
@@ -287,7 +310,10 @@ class App extends Component {
    * {API POST CALL}
    * Callback function passed to the WordEditor Component to add a word through POST api call
    */
-  handleAddNewWord(wordText, selectedTitle) {
+  handleAddNewWord(wordText, selectedTitle, fileSelected) {
+    var newPath = fileSelected ?
+                  'img/' + wordText + '.png'
+                : 'img/blank.png'
     fetch('http://localhost:3001/api/words/', {
       method: 'POST',
       headers: {
@@ -297,9 +323,10 @@ class App extends Component {
       //ContentType:
       body: JSON.stringify({
         name: wordText,
-        path: 'img/' + wordText + '.png',
+        path: newPath,
         text: wordText + 'symbol',
-        list: selectedTitle
+        list: selectedTitle,
+        grid: 'core vocabulary'
       })
     }).then(() => this.getWords());
     //then... call getWords() to reload words

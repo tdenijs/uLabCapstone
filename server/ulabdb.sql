@@ -326,13 +326,12 @@ INSERT INTO Words (word, symbol_id)
   	     ('moon', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'moon')),
   	     ('room', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'room'));
 
--- add words to goodnight moon list
+--add words to verb list
 INSERT INTO ListWords (word_id, list_id)
-  VALUES
-   ((SELECT W.word_id from Words W WHERE word = 'bears'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
-   ((SELECT W.word_id from Words W WHERE word = 'cows'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
-   ((SELECT W.word_id from Words W WHERE word = 'goodnight moon'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
-   ((SELECT W.word_id from Words W WHERE word = 'kittens'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
-   ((SELECT W.word_id from Words W WHERE word = 'mittens'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
-   ((SELECT W.word_id from Words W WHERE word = 'moon'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
-   ((SELECT W.word_id from Words W WHERE word = 'room'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon'));
+  VALUES ((SELECT W.word_id from Words W WHERE word = 'bears'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'cow'),       (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'goodnight moon'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'kittens'),       (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'mittens'),       (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'moon'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'room'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon'));

@@ -16,7 +16,7 @@ import _ from 'lodash';
 class Column extends Component {
   render() {
     return (
-      <div className="Column">
+      <div className="Column" >
         <div className="ColumnTitle">{this.props.title}</div>
         {
           this.props.words.map(({word_id, word, symbol_path, alt}) => {

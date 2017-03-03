@@ -47,6 +47,7 @@ class App extends Component {
     this.openDeleteModal = this.openDeleteModal.bind(this);
     this.closeDeleteModal = this.closeDeleteModal.bind(this);
     this.renderRemoveWordModal = this.renderRemoveWordModal.bind(this);
+    this.callDeleteApi = this.callDeleteApi.bind(this);
     this.handleAddNewImage = this.handleAddNewImage.bind(this);
 
     // component render helper functions
@@ -228,6 +229,7 @@ class App extends Component {
 
   handleDeleteConfirm() {
     this.removeFromGrid(this.state.deleteWordId, this.state.deleteColId);
+    this.callDeleteApi(this.state.deleteWordId, this.state.deleteColId);
     this.closeDeleteModal();
   }
 
@@ -266,6 +268,7 @@ class App extends Component {
       ]
     });
   }
+  
   /**
    * handleAddNewImage()
    * {API POST CALL}
@@ -278,8 +281,27 @@ class App extends Component {
       method: 'POST',
       url: 'http://localhost:3001/api/imgupload',
       data: formData
-
     })
+  }
+  
+  /**
+   * callDeleteApi(word_id, list_id)
+   * {API DELETE CALL}
+   * Called by handleDeleteConfirm to remove the specified word from the specified list in the database
+   */
+  callDeleteApi(word_id, list_id) {
+    let address = 'http://localhost:3001/api/words/list_id/' + list_id + '/word_id/' + word_id;
+    fetch(address, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        word_id: word_id,
+        list_id: list_id,
+      })
+    });
   }
 
   /**

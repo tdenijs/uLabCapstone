@@ -149,7 +149,7 @@
 			"description": "",
 			"collectionId": "b572d969-6bf4-7b9d-0678-28e9cccb063a",
 			"responses": [],
-			"rawModeData": "{\n\t\"name\": \"love\",\n\t\"path\": \"img/love.png\",\n\t\"text\": \"love symbol\",\n\t\"list\": \"verb\"\n}",
+			"rawModeData": "{\n\t\"name\": \"love\",\n\t\"path\": \"img/love.png\",\n\t\"text\": \"love symbol\",\n\t\"list\": \"verb\",\n\t\"grid\": \"core vocabulary\"\n}",
 			"folder": "a4091582-8bd0-7c02-1d2a-162a38919bd9"
 		},
 		{

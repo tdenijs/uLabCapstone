@@ -324,7 +324,8 @@ class App extends Component {
         name: wordText,
         path: newPath,
         text: wordText + 'symbol',
-        list: selectedTitle
+        list: selectedTitle,
+        grid: 'core vocabulary'
       })
     }).then(() => this.getWords());
     //then... call getWords() to reload words

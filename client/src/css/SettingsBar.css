@@ -10,10 +10,155 @@
  *
  *******************************************************************/
 
+/*  This file contains the CSS relating to Settings Bar elements
+ *  as well as the Media Queries pertaining to Settings Bar.
+ */
+
 /*  SettingsBar Component  */
 
 .SettingsBar {
-  min-height: 80px;
-  margin-bottom: 5px;
+  margin: 10px 0;
   padding: 10px;
+
+
+  flex-wrap: wrap;
+  border-radius: 15px;
+}
+
+
+.AddButton, .AddButton-locked {
+  border: none;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+
+  display: inline-block;
+
+}
+
+.EditorButton, .EditorButton-locked {
+  border: none;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+
+  display: inline-block;
+
+}
+
+.EditorButton:focus, .AddButton:focus, .SettingsBar:focus {
+  outline: none;   /* prevents blue outline from appearing on buttons*/
+}
+
+.VoiceLabel, .VoiceLabel-locked {
+  padding: 10px 20px;
+  margin-right: 5px;
+  text-align: center;
+  text-decoration: none;
+
+  display: inline-block;
+}
+
+.LockSetting, .LockSetting-locked {
+  padding: 10px 10px;
+}
+
+/*.Locked {*/
+  /*padding-right: 5px;*/
+/*}*/
+
+
+
+/** Media Queries **/
+
+/** SMALL SCREENS **/
+
+@media all and (max-width: 599px) {
+  /* flex container */
+  .SettingsBar {
+    display: flex;
+    flex-flow: row wrap;
+
+    align-content: stretch;
+
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .VoiceForm {
+    display: flex;
+    flex-flow: row nowrap;
+
+    margin-bottom: 5px;
+    order: 1;
+  }
+
+  .VoiceLabel, .VoiceLabel-locked {}
+  .VoiceMenu {}
+
+  /* flex items */
+  .AddButton, .AddButton-locked {
+    margin-bottom: 5px;
+    order: 3;
+  }
+
+  .EditorButton, .EditorButton-locked {
+    margin-bottom: 5px;
+    order: 4;
+  }
+
+  .LockSetting, .LockSetting-locked {
+    order: 5;
+  }
+
+
+
+
+}
+
+/**  Medium screens  **/
+
+@media all and (min-width: 600px) {
+
+  /* flex container */
+  .SettingsBar {
+    display: flex;
+    flex-flow: row wrap;
+
+    align-content: stretch;
+
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .VoiceForm {
+    order: 1;
+  }
+
+  .VoiceLabel, .VoiceLabel-locked {}
+  .VoiceMenu {}
+
+  /* flex items */
+  .AddButton, .AddButton-locked {
+    order: 3;
+
+  }
+
+  .EditorButton, .EditorButton-locked {
+
+    order: 4;
+  }
+
+  .LockSetting, .LockSetting-locked {
+    order: 5;
+  }
+
+}
+
+/**  LARGE  SCREENS **/
+
+@media all and (min-width: 800px) {
+
 }

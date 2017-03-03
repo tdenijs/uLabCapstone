@@ -174,6 +174,7 @@ class App extends Component {
 
   // Callback function passed to the SettingsBar to update the App's settingsLocked state variable
   lockToggle() {
+    console.log("settings lockToggle called")
     this.setState({settingsLocked: !(this.state.settingsLocked)});
   }
 

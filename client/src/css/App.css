@@ -13,6 +13,7 @@
 .App {
   text-align: center;
 
+  background-image: url(../../public/bkg.png);
 }
 
 .App-logo {

@@ -184,8 +184,11 @@ function getAllListWordsByListId(req, res, next) {
           '\'' + listId + '\'' + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: List " + '\'' + listId + '\' ' + "not found");
-        console.log("*** (getAllWordsByListId) ERROR 404: no list found");
+          .json({
+            success: false,
+            message: 'List id ' + '\'' + listId + '\'' + ' not found'
+          });
+        console.log('*** (getAllWordsByListId) ERROR: List id' + '\'' + listId + '\'' + ' not found');
       }
     })
     .catch(function(err) {

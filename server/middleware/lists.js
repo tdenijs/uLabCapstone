@@ -97,23 +97,31 @@ function deleteWordByID(req, res, next) {
             if (result.rowCount === 1) {
               console.log("(deleteWordByID) SUCCESS: word is removed from list");
               res.status(200).json({
-                status: 'success',
-                message: `Removed ${result.rowCount} word`
+                success: true,
+                message: 'Deleted word id ' + '\'' + targetWordID + '\''
               });
             } else {
-              console.log("*** (deleteWordByID) FAILURE: delete failes");
+              res.status(400)
+                .json({
+                  success: false,
+                  message: 'Query failed'
+                });
+              console.log("*** (deleteWordByID) FAILURE: Query failure");
             }
           });
       } else {
-        res.status(404).send("ERROR: No word found.");
-        console.log("*** (deleteWordByID) ERROR: No word found");
+        res.status(404)
+          .json({
+            success: false,
+            message: 'Word id ' + '\'' + targetWordID + '\'' + 'not found'
+          });
+        console.log("*** (deleteWordByID) ERROR: Word id " + '\'' + targetWordID + '\'' + " not found");
       }
     })
     .catch(function(err) {
       return next(err);
     });
 }
-
 
 
 // This is the implementation for api

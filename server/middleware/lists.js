@@ -159,6 +159,8 @@ function createList(req, res, next) {
             success: false,
             message: 'Failed to create new list ' + '\'' + newListTitle + '\''
           });
+        console.log("*** (createList) ERROR: Failed to create list " + '\'' + newListTitle + '\'');
+
       }
     })
     .catch(function(err) {

@@ -110,7 +110,7 @@ function createWord(req, res, next) {
   var wText = req.body.text;
   var lName = req.body.list;
   var gName = req.body.grid;
-
+  var newWordId;
   // queries DB for the list_id based on the req.body.grid and req.body.list
   var query = 'SELECT l.list_id FROM grids g ' +
     'INNER JOIN gridlists gl ON g.grid_id=gl.grid_id ' +
@@ -126,6 +126,7 @@ function createWord(req, res, next) {
               return t.one('INSERT INTO Words (word, symbol_id)' +
                   ' VALUES ($1, $2) RETURNING word_id;', [wName, sId.symbol_id])
                 .then(function(wId) {
+                  newWordId = wId;
                   return t.none('INSERT INTO ListWords (word_id, list_id) ' +
                     'VALUES ($1, $2);', [wId.word_id, lId.list_id]);
                 });
@@ -134,12 +135,22 @@ function createWord(req, res, next) {
     })
     .then(function(data) {
       if (db.one('SELECT EXISTS (SELECT * FROM Words WHERE word = $1);', [wName])) {
-        res.status(201).json(data);
+        res.status(201)
+          .json({
+            success: true,
+            message: 'New word ' + '\'' + wName + '\'' + ' created',
+            data: {
+              id: newWordId.word_id
+            }
+        });
         console.log("(createWord) SUCESS: new word " +
           '\'' + wName + '\'' + " created");
       } else {
         res.status(400)
-          .send("ERROR: new word NOT added");
+          .json({
+            success: false,
+            message: 'Failed to create new word ' + '\'' + wName + '\''
+          });
         console.log("*** (createWord) ERROR: new word NOT added");
       }
     })

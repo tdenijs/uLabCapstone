@@ -82,7 +82,7 @@ Word.propTypes = {
 Word.defaultProps = {
   id: "1",
   word: "love",
-  src: "",
+  src: "img/blank.png",
   alt: ""
 };
 

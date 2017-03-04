@@ -35,6 +35,7 @@ class App extends Component {
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
     this.getWords = this.getWords.bind(this);
+    this.getFringeWords = this.getFringeWords.bind(this);
     this.appendToCols = this.appendToCols.bind(this);
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
@@ -51,14 +52,14 @@ class App extends Component {
     this.renderSettingsBar = this.renderSettingsBar.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this)
 
-
     this.state = {
       selectedVoice: "Default",
       settingsBarVisible: false,
       settingsLocked: false,
       editorToggle: false,
       buttonSize: "5",
-      colArray: [],
+      colArray: [], // core vocab
+      fringeColArray: [], // fringe vocab
       messageArray: [],
       coreListTitles: [],
       showModal: false,
@@ -85,18 +86,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getWords();
+    this.getWords(); // get words for main core vocabulary
+    this.getFringeWords(); // get words for fringe vocabulary
 
     console.log('Component Mounted:');
     console.log('CoreListTitles: ', this.state.coreListTitles);
   }
 
-  componentWillUnmount() {
-    console.log('Component Unmounted:');
-
-    // Remove event listener
-    window.removeEventListener("resize", this.updateDimensions());  // remove event listener for update functions when unmounting
-  }
 
 
   /**
@@ -141,7 +137,38 @@ class App extends Component {
 
 
 
-  // Initializes wordArrays with JSON data from API call
+  /**
+   * getFringeWords()
+   * makes api call to database to pull the list of words from the "FringeVocabGrid"
+   * updates state fringeColArray
+   * */
+  getFringeWords() {
+    let fringelist = [];
+    let title = "goodnight moon"
+
+    this.setState({fringeColArray: []});  // getWords() will be called when a new word is added,
+    // so need to clear the fringeColArray before retrieving words from ap
+
+      $.getJSON('http://localhost:3001/api/lists/title/' + title)
+        .then((data) => {
+          fringelist = {
+            order: 1,
+            id: 8,
+            title: title,
+            words: data
+          };
+          this.setState({fringeColArray: [fringelist]});
+        });
+
+    console.log("GetFringe: fringelist: ", fringelist);
+    console.log("GetFringe: fringeColArray: ", this.state.fringeColArray);
+  }
+
+  /**
+   * getWords()
+   * makes api call, Initializes wordArrays with JSON data from API call
+   * calls appendToCols to add additional lists of words
+   * */
   getWords() {
     let nextCol;
     let titles = [
@@ -286,6 +313,7 @@ class App extends Component {
     this.openDeleteModal();
   }
 
+
   handleDeleteConfirm() {
     this.removeFromGrid(this.state.deleteWordId, this.state.deleteColId);
     this.callDeleteApi(this.state.deleteWordId, this.state.deleteColId);
@@ -375,8 +403,8 @@ class App extends Component {
    */
   handleAddNewWord(wordText, selectedTitle, fileSelected) {
     var newPath = fileSelected ?
-                  'img/' + wordText + '.png'
-                : 'img/blank.png'
+    'img/' + wordText + '.png'
+      : 'img/blank.png'
     fetch('http://localhost:3001/api/words/', {
       method: 'POST',
       headers: {
@@ -456,7 +484,7 @@ class App extends Component {
               handleBackButton={this.handleBackButton}
               settingsToggle={this.settingsToggle}/>
 
-            <div className="Settings" >
+            <div className="Settings">
               {settingsBar}
             </div>
           </Row>
@@ -464,7 +492,9 @@ class App extends Component {
           <Row className="FringeVocabRow"  >
 
             <Col xs={8} md={4} className="FringeCol">
-              <div> fringe list...</div>
+              <Vocab cols={this.state.fringeColArray} add={this.addWordToSpeechBar}
+                     selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
+                     removeFromGrid={this.handleDelete}/>
             </Col>
 
             <Col xs={12} md={8} className="VocabCol">

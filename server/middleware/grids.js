@@ -12,7 +12,6 @@
 const db = require('../config/dbconnect');
 
 
-
 // This is the implementation for api
 //    GET /grids
 // It will return all grids in the database in the form
@@ -28,8 +27,11 @@ function getAllGrids(req, res, next) {
         console.log("(getAllGrids) SUCCESS: All grids were sent.");
       } else {
         res.status(404)
-          .send("ERROR: No grid found");
-        console.log("(getAllGrids) ERROR 404: No grid found");
+          .json({
+            success: false,
+            message: 'No grids found'
+          });
+        console.log('(getAllGrids) ERROR: No grids found');
       }
     })
     .catch(function(err) {

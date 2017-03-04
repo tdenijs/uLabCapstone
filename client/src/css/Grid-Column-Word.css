@@ -12,6 +12,8 @@
 
 /*  Grid  Component*/
 .LayoutGrid {
+  max-height: 100vh;
+
 }
 
 
@@ -21,6 +23,9 @@
 
   display: flex;
   flex-flow: row nowrap;
+
+  max-height: 90vh;
+
 }
 
 .VocabContainer {   /* orange border */
@@ -35,6 +40,7 @@
   overflow-x: auto;  /* allow horizontal scrolling */
   overflow-y: auto;
 
+  max-height: 88vh;
 }
 
 /*  COLUMN COMPONENT  */
@@ -45,6 +51,7 @@
   align-items: flex-start;
 
   flex-basis: content;
+
 }
 
 .ColumnTitle {
@@ -55,8 +62,11 @@
 /*   WORD COMPONENT  */
 
 .WordContainer {
-  display: inline-flex;
+  display: flex;
   flex-flow: row wrap;
+
+  max-height: 95vh;
+  width: 200px;
 }
 
 

@@ -27,7 +27,10 @@ function getAllWords(req, res, next) {
         console.log("(getAllWords) SUCESS: All words were sent.");
       } else {
         res.status(404)
-          .send("ERROR: No words found");
+          .json({
+            success: false,
+            message: 'No words found'
+          });
         console.log("*** (getAllWords) ERROR 404: No words found, is the dababase setup correctly?");
       }
     })

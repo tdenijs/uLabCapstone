@@ -32,11 +32,14 @@ function getAllWordsByListId(req, res, next) {
         res.status(200)
           .json(data);
         console.log("(getAllWordsByListId) SUCCESS: All words for list id " +
-          id + " were sent.");
+          '\'' + id + '\'' + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: List id " + '\'' + id + '\' ' + "not found");
-        console.log("*** (getAllWordsByListId) ERROR 404");
+          .json({
+            success: false,
+            message: 'List id ' + '\'' + id + '\'' + ' not found'
+          });
+          console.log('*** (getAllWordsByListId) ERROR: List ' + '\'' + id + '\'' + ' not found');
       }
     })
     .catch(function(err) {

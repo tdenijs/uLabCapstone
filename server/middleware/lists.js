@@ -65,18 +65,20 @@ function getAllWordsByListName(req, res, next) {
         res.status(200)
           .json(data);
         console.log("(getAllWordsByListName) SUCCESS: All words for list " +
-          lTitle + " were sent.");
+          '\'' + lTitle + '\'' + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: List " + '\'' + lTitle + '\' ' + "not found");
-        console.log("*** (getAllWordsByListName) ERROR 404");
+          .json({
+            success: false,
+            message: 'List ' + '\'' + lTitle + '\'' + ' not found'
+          });
+        console.log('*** (getAllWordsByListName) ERROR: List ' + '\'' + lTitle + '\'' + ' not found');
       }
     })
     .catch(function(err) {
       return next(err);
     });
 }
-
 
 
 // This is the implementation for api
@@ -96,10 +98,11 @@ function deleteWordByID(req, res, next) {
           .then(function(result) {
             if (result.rowCount === 1) {
               console.log("(deleteWordByID) SUCCESS: word is removed from list");
-              res.status(200).json({
-                success: true,
-                message: 'Deleted word id ' + '\'' + targetWordID + '\''
-              });
+              res.status(200)
+                .json({
+                  success: true,
+                  message: 'Deleted word id ' + '\'' + targetWordID + '\''
+                });
             } else {
               res.status(400)
                 .json({

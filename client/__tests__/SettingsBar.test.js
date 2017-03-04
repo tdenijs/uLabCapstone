@@ -36,7 +36,7 @@ describe("Test suite for mounted SettingsBar", () => {
     });
 
     it('SettingsBar calls lockToggle function when the lock checkbox is clicked', () => {
-        bar.find('.LockCheck').first().simulate('change');
+        bar.find('.LockSetting').first().simulate('click');
         expect(onChange).toBeCalled();
     });
 

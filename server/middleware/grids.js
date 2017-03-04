@@ -121,7 +121,6 @@ function getAllWordsByGridName(req, res, next) {
 }
 
 
-
 // This is the implementation for api
 //    GET /grids/id/:grid_id
 // It will return all lists in a specific grid in the form
@@ -143,15 +142,17 @@ function getAllListsByGridID(req, res, next) {
           targetGridID + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: grid_id " + '\'' + targetGridID + '\' ' + "not found");
-        console.log("*** (getAllListsByGridID) ERROR 404: no grid found");
+          .json({
+            success: false,
+            message: 'Grid id ' + '\'' + gridId + '\'' + ' not found'
+          });
+        console.log('*** (getAllListsByGridID) ERROR: Grid id' + '\'' + gridId + '\'' + ' not found');
       }
     })
     .catch(function(err) {
       return next(err);
     });
 }
-
 
 
 // This is the implementation for api

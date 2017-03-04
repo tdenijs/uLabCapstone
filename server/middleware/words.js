@@ -55,7 +55,10 @@ function getWordByID(req, res, next) {
         console.log("(getWordByID) SUCCESS: the word (word_id:" + targetWordID + ") were sent.");
       } else {
         res.status(404)
-          .send("ERROR: word_id: " + '\'' + targetWordID + '\' ' + "not found");
+          .json({
+            success: false,
+            message: 'Word id ' + '\'' + targetWordID + '\'' + 'not found'
+          });
         console.log("*** (getWordByID) ERROR 404: No word found");
       }
     })

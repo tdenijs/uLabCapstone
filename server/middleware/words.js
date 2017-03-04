@@ -31,7 +31,7 @@ function getAllWords(req, res, next) {
             success: false,
             message: 'No words found'
           });
-        console.log("*** (getAllWords) ERROR 404: No words found, is the dababase setup correctly?");
+        console.log("*** (getAllWords) ERROR: No words found");
       }
     })
     .catch(function(err) {

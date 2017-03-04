@@ -346,6 +346,7 @@ class App extends Component {
 
 
 
+
   /**
    * callDeleteApi(word_id, list_id)
    * {API DELETE CALL}
@@ -365,6 +366,7 @@ class App extends Component {
       })
     });
   }
+
 
   /**
    * handleAddNewWord()

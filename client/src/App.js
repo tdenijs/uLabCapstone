@@ -78,7 +78,7 @@ class App extends Component {
 
 
   componentWillMount() {
-    this.getCoreVocabTitles();
+    // this.getCoreVocabTitles();
 
     this.updateDimensions();     // update dimensions when mounting
     window.addEventListener("resize", this.updateDimensions());    // add event listener for update dimensions

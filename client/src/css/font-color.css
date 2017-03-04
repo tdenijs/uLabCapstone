@@ -39,7 +39,7 @@
 .MessageWindow {
   background-color: white;
 
-  border: 6px solid #E4004A;
+  border: 7px solid #E4004A;
   border-radius: 15px;
 }
 
@@ -169,34 +169,65 @@
 }
 
 
-/*  Fringe and Vocab Row   */
+/* ROW -- FringeVocabRow */
 
 
-/*.FringeCol {*/
-  /*border: 6px solid #F0D24C;*/
-  /*border-radius: 15px;*/
-/*}*/
+.FringeCol {
+  border: 7px solid #F0D24C;  /* yellow border */
+  border-radius: 15px;
+  background-color: #fff;
+}
 
+.VocabCol {}
+
+
+.VocabContainer{
+  border: 7px solid #F98935;  /* orange border */
+  border-radius: 15px;
+  background-color: #fff;
+}
 
 
 .Column {
-  background-color: #fff;
-  /*border: 2px solid #fff;*/
+  background-color: #F98935;
+
 }
 
 .ColumnTitle {
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-style: italic;
-  /*border-bottom: 3px solid var(--border-color);*/
+  background-color: #F98935;
+  padding-bottom: 5px;
+}
 
+.WordContainer {
+  background-color: #fff;
+}
+
+/*   WORD COMPONENT  */
+
+.Word {
+  color: #000;
+  border: solid 1px #BEE3DB;
+}
+
+.Word:hover {
+  background-color: #F5f5fa;
+  color: red;
+}
+
+/*   Delete Icon in Word Component  */
+
+.DeleteButton {
+  border: solid 1px red;
+  background-color: #fff;
+  color: red;
 }
 
 
-
-/*   Word  Component  */
-.Word {
-  color: #000;
-  /*border-bottom: 1px solid var(--border-color);*/
+.DeleteButton:hover {
+  color: black;
+  background-color: red;
 }

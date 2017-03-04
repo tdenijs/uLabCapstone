@@ -9,26 +9,16 @@
  * included in the root of this project.
  *******************************************************************/
 
-.App {
-  text-align: center;
-
+body {
   background-image: url(../../public/bkg.png);
+  background-repeat: repeat;
+  margin: auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
+.App {
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
+  padding: 5px 5px;
+  text-align: center;
 }
 
 .modal-dialog {

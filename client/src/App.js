@@ -49,10 +49,8 @@ class App extends Component {
     this.renderRemoveWordModal = this.renderRemoveWordModal.bind(this);
     this.callDeleteApi = this.callDeleteApi.bind(this);
     this.handleAddNewImage = this.handleAddNewImage.bind(this);
-
-    // component render helper functions
     this.renderSettingsBar = this.renderSettingsBar.bind(this);
-
+    this.updateDimensions = this.updateDimensions.bind(this)
 
     this.state = {
       selectedVoice: "Default",
@@ -69,11 +67,22 @@ class App extends Component {
       deleteWordText: "",
       deleteWordId: "0",
       deleteColId: "0",
+
+      // maxWidth: 768,        // arbitrary default maxWidth for update dimensions function
+      // maxHeight: 920,
     }
+
   }
 
+
+
+
+
   componentWillMount() {
-    this.getCoreVocabTitles();
+    // this.getCoreVocabTitles();
+
+    this.updateDimensions();     // update dimensions when mounting
+    window.addEventListener("resize", this.updateDimensions());    // add event listener for update dimensions
   }
 
   componentDidMount() {
@@ -83,6 +92,50 @@ class App extends Component {
     console.log('Component Mounted:');
     console.log('CoreListTitles: ', this.state.coreListTitles);
   }
+
+
+
+  /**
+   * Calculate & Update state of new dimensions
+   *
+   * Some important device dimensions
+   * ipad portrait  { w = 768px h = 920px }
+   * ipad landscape { w = 1010px h = 660px }
+   * iphone portrait  { w = 310px h = 352}
+   * iphone landscape { w = 468px h = 202}
+   * reasonable desktop screen resolution { w=1280px h=800px }
+   *
+   */
+  updateDimensions() {
+    console.log("updateDimensions called: width:", window.innerWidth, " height: ", window.innerHeight);
+
+    if(window.innerHeight < 202 ) {
+      this.setState({maxHeight: 200});
+      //this.setState({maxVocabHeight: })
+
+    }
+    if(window.innerHeight < 352 ) {
+      this.setState({maxHeight: 340});
+
+    }
+    if(window.innerHeight < 660 ) {
+      this.setState({maxHeight: 650});
+
+    }
+    if(window.innerHeight < 800 ) {
+      this.setState({maxHeight: 790});
+
+    }
+    else {  // 900
+      this.setState({maxHeight: 850});
+    }
+
+
+    console.log('Dimensions: width- ', this.state.maxWidth,
+      '  height- ', this.state.maxWidth);
+  }
+
+
 
   /**
    * getFringeWords()
@@ -303,6 +356,7 @@ class App extends Component {
     });
   }
 
+
   /**
    * handleAddNewImage()
    * {API POST CALL}
@@ -317,6 +371,9 @@ class App extends Component {
       data: formData
     })
   }
+
+
+
 
   /**
    * callDeleteApi(word_id, list_id)
@@ -337,6 +394,7 @@ class App extends Component {
       })
     });
   }
+
 
   /**
    * handleAddNewWord()
@@ -364,6 +422,7 @@ class App extends Component {
     }).then(() => this.getWords());
     //then... call getWords() to reload words
   }
+
 
 
   renderRemoveWordModal() {
@@ -397,7 +456,6 @@ class App extends Component {
     )
   }
 
-
   render() {
 
     //Get the Browser's voices loaded before anything. Allows syncing
@@ -409,10 +467,15 @@ class App extends Component {
       ? this.renderSettingsBar()
       : null;
 
+
+    // fix below when the function to detect the window height works...
+    // <Grid className="LayoutGrid" fluid="true" style={{ height: this.state.maxHeight }} >
+
+
     return (
       <div className="App">
 
-        <Grid className="LayoutGrid">
+        <Grid className="LayoutGrid" fluid='true'>
           <Row className="SpeechSettingsRow">
             <SpeechBar
               message={this.state.messageArray}
@@ -424,10 +487,9 @@ class App extends Component {
             <div className="Settings">
               {settingsBar}
             </div>
-
           </Row>
 
-          <Row className="FringeVocabRow">
+          <Row className="FringeVocabRow"  >
 
             <Col xs={8} md={4} className="FringeCol">
               <Vocab cols={this.state.fringeColArray} add={this.addWordToSpeechBar}
@@ -436,7 +498,8 @@ class App extends Component {
             </Col>
 
             <Col xs={12} md={8} className="VocabCol">
-              <Vocab cols={this.state.colArray} add={this.addWordToSpeechBar}
+              <Vocab
+                     cols={this.state.colArray} add={this.addWordToSpeechBar}
                      selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
                      removeFromGrid={this.handleDelete}/>
             </Col>

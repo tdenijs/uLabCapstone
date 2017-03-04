@@ -32,11 +32,14 @@ function getAllWordsByListId(req, res, next) {
         res.status(200)
           .json(data);
         console.log("(getAllWordsByListId) SUCCESS: All words for list id " +
-          id + " were sent.");
+          '\'' + id + '\'' + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: List id " + '\'' + id + '\' ' + "not found");
-        console.log("*** (getAllWordsByListId) ERROR 404");
+          .json({
+            success: false,
+            message: 'List id ' + '\'' + id + '\'' + ' not found'
+          });
+          console.log('*** (getAllWordsByListId) ERROR: List ' + '\'' + id + '\'' + ' not found');
       }
     })
     .catch(function(err) {
@@ -65,18 +68,20 @@ function getAllWordsByListName(req, res, next) {
         res.status(200)
           .json(data);
         console.log("(getAllWordsByListName) SUCCESS: All words for list " +
-          lTitle + " were sent.");
+          '\'' + lTitle + '\'' + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: List " + '\'' + lTitle + '\' ' + "not found");
-        console.log("*** (getAllWordsByListName) ERROR 404");
+          .json({
+            success: false,
+            message: 'List ' + '\'' + lTitle + '\'' + ' not found'
+          });
+        console.log('*** (getAllWordsByListName) ERROR: List ' + '\'' + lTitle + '\'' + ' not found');
       }
     })
     .catch(function(err) {
       return next(err);
     });
 }
-
 
 
 // This is the implementation for api
@@ -96,24 +101,33 @@ function deleteWordByID(req, res, next) {
           .then(function(result) {
             if (result.rowCount === 1) {
               console.log("(deleteWordByID) SUCCESS: word is removed from list");
-              res.status(200).json({
-                status: 'success',
-                message: `Removed ${result.rowCount} word`
-              });
+              res.status(200)
+                .json({
+                  success: true,
+                  message: 'Deleted word id ' + '\'' + targetWordID + '\''
+                });
             } else {
-              console.log("*** (deleteWordByID) FAILURE: delete failes");
+              res.status(400)
+                .json({
+                  success: false,
+                  message: 'Query failed'
+                });
+              console.log("*** (deleteWordByID) FAILURE: Query failure");
             }
           });
       } else {
-        res.status(404).send("ERROR: No word found.");
-        console.log("*** (deleteWordByID) ERROR: No word found");
+        res.status(404)
+          .json({
+            success: false,
+            message: 'Word id ' + '\'' + targetWordID + '\'' + 'not found'
+          });
+        console.log("*** (deleteWordByID) ERROR: Word id " + '\'' + targetWordID + '\'' + " not found");
       }
     })
     .catch(function(err) {
       return next(err);
     });
 }
-
 
 
 // This is the implementation for api
@@ -131,7 +145,7 @@ function createList(req, res, next) {
       if (db.one('SELECT EXISTS (SELECT * FROM Lists WHERE list_title = $1 AND list_id = $2);', [newListTitle, data.list_id])) {
         res.status(201)
           .json({
-            status: 'success',
+            success: true,
             message: 'New list ' + '\'' + newListTitle + '\'' + ' created',
             data: {
               id: data.list_id
@@ -142,9 +156,11 @@ function createList(req, res, next) {
       } else {
         res.status(400)
           .json({
-            status: 'failed',
-            message: 'Unable to create new list ' + '\'' + newListTitle + '\''
+            success: false,
+            message: 'Failed to create new list ' + '\'' + newListTitle + '\''
           });
+        console.log("*** (createList) ERROR: Failed to create list " + '\'' + newListTitle + '\'');
+
       }
     })
     .catch(function(err) {

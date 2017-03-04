@@ -12,7 +12,6 @@
 const db = require('../config/dbconnect');
 
 
-
 // This is the implementation for api
 //    GET /grids
 // It will return all grids in the database in the form
@@ -28,8 +27,11 @@ function getAllGrids(req, res, next) {
         console.log("(getAllGrids) SUCCESS: All grids were sent.");
       } else {
         res.status(404)
-          .send("ERROR: No grid found");
-        console.log("(getAllGrids) ERROR 404: No grid found");
+          .json({
+            success: false,
+            message: 'No grids found'
+          });
+        console.log('(getAllGrids) ERROR: No grids found');
       }
     })
     .catch(function(err) {
@@ -65,15 +67,17 @@ function getAllWordsByGridId(req, res, next) {
           gridId + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: Grid " + '\'' + gridId + '\' ' + "not found");
-        console.log("*** (getAllWordsByGridId) ERROR 404: grid not found");
+          .json({
+            success: false,
+            message: 'Grid id ' + '\'' + gridId + '\'' + ' not found'
+          });
+        console.log('*** (getAllWordsByGridId) ERROR: Grid id' + '\'' + gridId + '\'' + ' not found');
       }
     })
     .catch(function(err) {
       return next(err);
     });
 }
-
 
 
 // This is the implementation for api
@@ -104,15 +108,17 @@ function getAllWordsByGridName(req, res, next) {
           gTitle + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: Grid " + '\'' + gTitle + '\' ' + "not found");
-        console.log("*** (getAllWordsByGridName) ERROR 404: no gird found");
+          .json({
+            success: false,
+            message: 'Grid ' + '\'' + gTitle + '\'' + ' not found'
+          });
+        console.log('*** (getAllWordsByGridName) ERROR: Grid ' + '\'' + gTitle + '\'' + ' not found');
       }
     })
     .catch(function(err) {
       return next(err);
     });
 }
-
 
 
 // This is the implementation for api
@@ -136,15 +142,17 @@ function getAllListsByGridID(req, res, next) {
           targetGridID + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: grid_id " + '\'' + targetGridID + '\' ' + "not found");
-        console.log("*** (getAllListsByGridID) ERROR 404: no grid found");
+          .json({
+            success: false,
+            message: 'Grid id ' + '\'' + gridId + '\'' + ' not found'
+          });
+        console.log('*** (getAllListsByGridID) ERROR: Grid id' + '\'' + gridId + '\'' + ' not found');
       }
     })
     .catch(function(err) {
       return next(err);
     });
 }
-
 
 
 // This is the implementation for api
@@ -176,8 +184,11 @@ function getAllListWordsByListId(req, res, next) {
           '\'' + listId + '\'' + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: List " + '\'' + listId + '\' ' + "not found");
-        console.log("*** (getAllWordsByListId) ERROR 404: no list found");
+          .json({
+            success: false,
+            message: 'List id ' + '\'' + listId + '\'' + ' not found'
+          });
+        console.log('*** (getAllWordsByListId) ERROR: List id' + '\'' + listId + '\'' + ' not found');
       }
     })
     .catch(function(err) {

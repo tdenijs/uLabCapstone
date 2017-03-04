@@ -80,7 +80,6 @@ function getAllWordsByGridId(req, res, next) {
 }
 
 
-
 // This is the implementation for api
 //    GET /grids/title/:grid_title/words
 // It will return all words in a specific grid in the form
@@ -109,8 +108,11 @@ function getAllWordsByGridName(req, res, next) {
           gTitle + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: Grid " + '\'' + gTitle + '\' ' + "not found");
-        console.log("*** (getAllWordsByGridName) ERROR 404: no gird found");
+          .json({
+            success: false,
+            message: 'Grid ' + '\'' + gTitle + '\'' + ' not found'
+          });
+        console.log('*** (getAllWordsByGridName) ERROR: Grid ' + '\'' + gTitle + '\'' + ' not found');
       }
     })
     .catch(function(err) {

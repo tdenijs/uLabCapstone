@@ -12,6 +12,7 @@
 body {
   background-image: url(../../public/bkg.png);
   background-repeat: repeat;
+  margin: auto;
 }
 
 .App {

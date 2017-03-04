@@ -15,6 +15,9 @@ import _ from 'lodash';
 
 class Vocab extends Component {
   render() {
+
+    console.log('from vocab: cols -- ', this.props.cols )
+
     // Make sure the cols are in the right order
     let sortedCols = _.sortBy(this.props.cols, 'order');
 
@@ -41,7 +44,7 @@ Vocab.defaultProps = {
   cols: [{
     id: "0",
     title: "test",
-    words: [{id: "1", word:"love", symbol_path:"", alt:""}]
+    words: [{id: "1", word:"love", src:"img/blank.png", alt:""}]
   }],
 };
 

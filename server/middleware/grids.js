@@ -67,8 +67,11 @@ function getAllWordsByGridId(req, res, next) {
           gridId + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: Grid " + '\'' + gridId + '\' ' + "not found");
-        console.log("*** (getAllWordsByGridId) ERROR 404: grid not found");
+          .json({
+            success: false,
+            message: 'Grid id ' + '\'' + gridId + '\'' + ' not found'
+          });
+        console.log('*** (getAllWordsByGridId) ERROR: Grid id' + '\'' + gridId + '\'' + ' not found');
       }
     })
     .catch(function(err) {

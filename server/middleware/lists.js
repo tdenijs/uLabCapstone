@@ -131,7 +131,7 @@ function createList(req, res, next) {
       if (db.one('SELECT EXISTS (SELECT * FROM Lists WHERE list_title = $1 AND list_id = $2);', [newListTitle, data.list_id])) {
         res.status(201)
           .json({
-            status: 'success',
+            success: true,
             message: 'New list ' + '\'' + newListTitle + '\'' + ' created',
             data: {
               id: data.list_id
@@ -142,8 +142,8 @@ function createList(req, res, next) {
       } else {
         res.status(400)
           .json({
-            status: 'failed',
-            message: 'Unable to create new list ' + '\'' + newListTitle + '\''
+            success: false,
+            message: 'Failed to create new list ' + '\'' + newListTitle + '\''
           });
       }
     })

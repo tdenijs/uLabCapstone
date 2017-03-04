@@ -84,7 +84,10 @@ function getWordByName(req, res, next) {
           targetWordName + " were sent.");
       } else {
         res.status(404)
-          .send("ERROR: word_name " + '\'' + targetWordName + '\' ' + "not found");
+          .json({
+            success: false,
+            message: 'Word ' + '\'' + wName + '\'' + 'not found'
+          });
         console.log("*** (getWordByName) ERROR 404: No word found");
       }
     })

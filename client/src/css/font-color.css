@@ -189,8 +189,8 @@
 
 
 .Column {
-  background-color: #fff;
-  /*border: 2px solid #fff;*/
+  background-color: #F98935;
+
 }
 
 .ColumnTitle {
@@ -198,11 +198,13 @@
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-style: italic;
-  /*background-color: #F98935;*/
-  /*border-bottom: 3px solid var(--border-color);*/
+  background-color: #F98935;
+  padding-bottom: 5px;
 }
 
-
+.WordContainer {
+  background-color: #fff;
+}
 
 /*   WORD COMPONENT  */
 

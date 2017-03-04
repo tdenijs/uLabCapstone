@@ -67,8 +67,8 @@ class App extends Component {
       deleteWordId: "0",
       deleteColId: "0",
 
-      maxWidth: 768,        // arbitrary default maxWidth for update dimensions function
-      maxHeight: 920,
+      // maxWidth: 768,        // arbitrary default maxWidth for update dimensions function
+      // maxHeight: 920,
     }
 
   }
@@ -110,15 +110,8 @@ class App extends Component {
    * reasonable desktop screen resolution { w=1280px h=800px }
    *
    */
-
-
   updateDimensions() {
     console.log("updateDimensions called: width:", window.innerWidth, " height: ", window.innerHeight);
-
-
-    // maxWidth: 768,        // arbitrary default maxWidth for update dimensions function
-    //   maxHeight: 920,
-    //   maxVocabHeight: 920,
 
     if(window.innerHeight < 202 ) {
       this.setState({maxHeight: 200});
@@ -474,7 +467,6 @@ class App extends Component {
 
             <Col xs={12} md={8} className="VocabCol">
               <Vocab
-                     maxHeight={this.state.maxHeight - 400}
                      cols={this.state.colArray} add={this.addWordToSpeechBar}
                      selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
                      removeFromGrid={this.handleDelete}/>

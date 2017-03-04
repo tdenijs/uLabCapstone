@@ -82,7 +82,10 @@ class App extends Component {
     console.log('CoreListTitles: ', this.state.coreListTitles);
   }
 
-  // Initializes wordArrays with JSON data from API call
+  /**
+   * getWords()
+   * Initializes colArray with JSON data from API call
+   */
   getWords() {
     let nextCol;
     let titles = [
@@ -131,7 +134,10 @@ class App extends Component {
   }
 
 
-  // Updates the colArray with the next column
+  /**
+   * appendToCols(nextCol)
+   * Adds a new column to the colArray
+   */
   appendToCols(nextCol) {
     return ((prevState) => {
       return {...prevState, colArray: [...prevState.colArray, nextCol]}
@@ -154,14 +160,19 @@ class App extends Component {
     this.setState({messageArray: []});
   }
 
-
-  // Callback function passed to the SettingsBar to update the App's selectedVoice state variable
+  /**
+   * updateVoice(e)
+   * Callback function passed to the SettingsBar to update the App's selectedVoice state variable
+   */
   updateVoice(e) {
     this.setState({selectedVoice: e.target.value});
   }
 
 
-  // Toggles the settingsBarVisible state variable when the settingsButton is clicked
+  /**
+   * settingsToggle()
+   * Toggles the settingsBarVisible state variable when the settingsButton is clicked
+   */
   settingsToggle() {
     this.setState({settingsBarVisible: !(this.state.settingsBarVisible)});
   }
@@ -212,14 +223,27 @@ class App extends Component {
     });
   }
 
+  /**
+   * settingsToggle()
+   * Toggles the settingsBarVisible state variable when the settingsButton is clicked
+   */
   openDeleteModal() {
     this.setState({showDeleteModal: true});
   }
 
+  /**
+   * settingsToggle()
+   * Toggles the settingsBarVisible state variable when the settingsButton is clicked
+   */
   closeDeleteModal() {
     this.setState({showDeleteModal: false});
   }
 
+  /**
+   * handleDelete(word_text, word_id, col_id)
+   * Callback function passed to Word component to remove that word from the grid.
+   * Updates state related to the delete confirmation modal and opens the modal.
+   */
   handleDelete(word_text, word_id, col_id) {
     this.setState({deleteWordText: word_text});
     this.setState({deleteWordId: word_id});
@@ -227,13 +251,21 @@ class App extends Component {
     this.openDeleteModal();
   }
 
+  /**
+   * handleDeleteConfirm()
+   * Updates the app's state, call's the backend API to delete from the database,
+   * and closes the delete confirmation modal.
+   */
   handleDeleteConfirm() {
     this.removeFromGrid(this.state.deleteWordId, this.state.deleteColId);
     this.callDeleteApi(this.state.deleteWordId, this.state.deleteColId);
     this.closeDeleteModal();
   }
 
-  // Callback function passed to the Word Component to delete that word from the grid
+  /**
+   * removeFromGrid(word_id, col_id)
+   * Updates the local state to remove the desired word from the desired column.
+   */
   removeFromGrid(word_id, col_id) {
     console.log("wordId: " + word_id + " columnId: " + col_id);
 
@@ -331,7 +363,10 @@ class App extends Component {
     //then... call getWords() to reload words
   }
 
-
+  /**
+   * renderRemoveWordModal
+   * Renders the modal that appears to confirm deleting a button
+   */
   renderRemoveWordModal() {
     return (
       <Modal show={this.state.showDeleteModal} onHide={this.closeDeleteModal}>

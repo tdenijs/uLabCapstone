@@ -43,6 +43,24 @@ describe('Test suite for mounted App', () => {
     expect(app.state().editorToggle).toEqual(false);
   });
 
+  it('Clicking EditorButton results in DeleteButton being defined', () => {
+    // give app a word to test
+    app.setState({colArray: [{
+      title: "test",
+      id: "1",
+      words: [{word_id: "1", word:"love", symbol_path:"", alt:""}]
+    }]});
+
+    // Open settings and click EditorButton
+    const settingsButton = app.find('.SettingsButton').first();
+    settingsButton.simulate('click');
+    const editorModeButton = app.find('.EditorButton').first();
+    editorModeButton.simulate('click');
+
+    const deleteButton = app.find('.DeleteButon').first();
+    expect(deleteButton).toBeDefined();
+  });
+
   it('Settings button shows SettingsBar when clicked', () => {
     const settingsButton = app.find('.SettingsButton').first();
     settingsButton.simulate('click');
@@ -60,8 +78,8 @@ describe('Test suite for mounted App', () => {
     settingsButton.simulate('click');
 
     // Check the checkbox
-    const lockCheck = app.find('.LockCheck').first();
-    lockCheck.simulate('change');
+    const lockCheck = app.find('.LockSetting').first();
+    lockCheck.simulate('click');
 
     expect(app.state().settingsLocked).toEqual(true);
 
@@ -70,6 +88,18 @@ describe('Test suite for mounted App', () => {
     settingsButton.simulate('click');
 
     expect(app.state().settingsLocked).toEqual(true);
+  });
+
+  it('Selecting a voice from the voice menu updates the selectedVoice state', () => {
+    // Open the SettingsBar
+    const settingsButton = app.find('.SettingsButton').first();
+    settingsButton.simulate('click');
+
+    // Select a voice found in the speechSynthesis mock
+    app.find('.VoiceMenu').simulate('change', {target: { value : 'Google UK English Female'}});
+
+    // Expect the selectedVoice state to match
+    expect(app.state().selectedVoice).toEqual('Google UK English Female');
   });
 
   it('Clear button results in empty speechBarMessage', () => {
@@ -117,7 +147,7 @@ describe('Test suite for mounted App', () => {
     expect(app.state().messageArray[0].word).toContain('love');
   });
 
-  it('Enabling editor mode then clicking a DeleteButton deletes that word from the grid', () => {
+  it('Enabling editor mode then clicking a DeleteButton deletes that word from the grid if confirmed', () => {
     // give app a word to test
     app.setState({colArray: [{
       title: "test",
@@ -142,5 +172,32 @@ describe('Test suite for mounted App', () => {
 
     // Expect the word to be deleted
     expect(app.state().colArray[0].words).toEqual([]);
+  });
+
+  it("Enabling editor mode then clicking a DeleteButton doesn't deletes that word from the grid if canceled", () => {
+    // give app a word to test
+    app.setState({colArray: [{
+      title: "test",
+      id: "1",
+      words: [{word_id: "1", word:"love", symbol_path:"", alt:""}]
+    }]});
+
+    // Enable EditorMode
+    const settingsButton = app.find('.SettingsButton').first();
+    settingsButton.simulate('click');
+    const editorModeButton = app.find('.EditorButton').first();
+    editorModeButton.simulate('click');
+
+    // Click the DeleteButton
+    const deleteButton = app.find('.DeleteButton').first();
+    deleteButton.simulate('click');
+
+    // Click the "No" option on the DeleteModal
+    // Pulls the modal out of the DOM and gets the first button
+    const deleteCancelButton = document.body.getElementsByClassName("Modal")[0].getElementsByClassName("btn btn-default")[1];
+    ReactTestUtils.Simulate.click(deleteCancelButton);
+
+    // Expect the word to be deleted
+    expect(app.state().colArray[0].words).toEqual([{word_id: "1", word:"love", symbol_path:"", alt:""}]);
   });
 });

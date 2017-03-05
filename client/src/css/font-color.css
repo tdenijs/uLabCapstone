@@ -173,10 +173,16 @@
 
 
 .FringeCol {
-  border: 7px solid #F0D24C;  /* yellow border */
+
+/* -- fringe container border
+   -- removed to fix nested orange inside
+   -- of yellow border, for demo
+   -- another hack
+  border: 7px solid #F0D24C;
   border-radius: 15px;
   background-color: #fff;
-}
+*/
+  }
 
 .VocabCol {}
 

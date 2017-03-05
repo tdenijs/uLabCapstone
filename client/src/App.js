@@ -92,7 +92,7 @@ class App extends Component {
     console.log('Component Mounted:');
     console.log('CoreListTitles: ', this.state.coreListTitles);
   }
-
+  
 
 
   /**

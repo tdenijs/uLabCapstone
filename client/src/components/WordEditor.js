@@ -24,11 +24,14 @@ class WordEditor extends Component {
     this.setWordText = this.setWordText.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleImageChange = this._handleImageChange.bind(this);
+    this.updateLists = this.updateLists.bind(this);
 
     this.state = {
       file: '',
       imagePreviewURL: '',
-      selectedTitle: this.props.coreListTitles[0],
+      selectedVocabulary: 'core',
+      selectedTitle: this.props.coreListTitles[0], //Defaults to core
+      listTitles: this.props.coreListTitles, //Defaults to core
       wordText: '',
       imgUrl: '',
     };
@@ -63,13 +66,13 @@ class WordEditor extends Component {
       }
     }
 
-    // Check for a empty string and a string with more than 25 characters
+    // Check for an empty string and a string with more than 25 characters
     if(this.state.wordText.length > 25){
-      msg.text = "please enter less than 25 character"
+      msg.text = "please enter less than 25 characters"
     }
     else if (this.state.wordText.length >= 1) {
       console.log('Submit New Word: ');
-      this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle, fileSelected );
+      this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle, this.state.selectedVocabulary, fileSelected);
 
       this.props.close(); //close modal
     }
@@ -102,6 +105,22 @@ class WordEditor extends Component {
 
   setWordText(e){
     this.setState({wordText: e.target.value});
+  }
+
+  /**
+   * Updates listTitles to either Core's lists or Fringe's lists
+   * Then sets the selectedTitle to the first item in the list
+   * @param e : The event's name being passed in, either "core" or "fringe".
+   */
+  updateLists(e){
+    if(e === "core") {
+        this.setState({listTitles: this.props.coreListTitles});
+	this.setState({selectedTitle: this.props.coreListTitles[0]});
+    }
+    if(e === "fringe") {
+        this.setState({listTitles: this.props.fringeListTitles});
+	this.setState({selectedTitle: this.props.fringeListTitles[0]});
+    }
   }
 
 
@@ -140,6 +159,16 @@ class WordEditor extends Component {
                 </Col>
               </Row>
 
+	      <Row>
+	      <label>Add to Vocabulary: </label>
+	      <select className="VocabTitles" defaultValue={this.state.selectedVocabulary}
+                      onChange={(e) => {this.setState({selectedVocabulary: e.target.value});
+                                         this.updateLists(e.target.value)}}>
+		      <option key="core" value="core">Core</option>
+		      <option key="fringe" value="fringe">Fringe</option>
+	      </select>
+	      </Row>
+
               <label>Add to List: </label>
 
               <select className="ListTitles" defaultValue={this.state.selectedTitle}
@@ -147,7 +176,7 @@ class WordEditor extends Component {
                         this.setState({selectedTitle: e.target.value})
                       }}>
                 {
-                  this.props.coreListTitles.map((title) => {
+                  this.state.listTitles.map((title) => {
                     return <option key={title} value={title}>{title}</option>
                   })
                 }

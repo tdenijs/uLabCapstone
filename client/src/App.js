@@ -40,15 +40,16 @@ class App extends Component {
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
     this.getCoreVocabTitles = this.getCoreVocabTitles.bind(this);
+    this.getFringeVocabTitles = this.getFringeVocabTitles.bind(this);
     this.removeFromGrid = this.removeFromGrid.bind(this);
     this.handleAddNewWord = this.handleAddNewWord.bind(this);
+    this.handleAddNewImage = this.handleAddNewImage.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleDeleteConfirm = this.handleDeleteConfirm.bind(this);
     this.openDeleteModal = this.openDeleteModal.bind(this);
     this.closeDeleteModal = this.closeDeleteModal.bind(this);
     this.renderRemoveWordModal = this.renderRemoveWordModal.bind(this);
     this.callDeleteApi = this.callDeleteApi.bind(this);
-    this.handleAddNewImage = this.handleAddNewImage.bind(this);
     this.renderSettingsBar = this.renderSettingsBar.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this)
 
@@ -62,6 +63,7 @@ class App extends Component {
       fringeColArray: [], // fringe vocab
       messageArray: [],
       coreListTitles: [],
+      fringeListTitles: [],
       showModal: false,
       showDeleteModal: false,
       deleteWordText: "",
@@ -79,9 +81,10 @@ class App extends Component {
 
 
   componentWillMount() {
-    // this.getCoreVocabTitles();
+    this.getCoreVocabTitles();
+    this.getFringeVocabTitles();
 
-    this.updateDimensions();     // update dimensions when mounting
+    //this.updateDimensions();     // update dimensions when mounting
     window.addEventListener("resize", this.updateDimensions());    // add event listener for update dimensions
   }
 
@@ -216,6 +219,23 @@ class App extends Component {
     this.setState({coreListTitles: listTitles});
   }
 
+  /**
+   * getFringeVocabTitles()   Retrieves the titles of the fringe vocabulary from the database
+   * and updates the state variable "fringeListTitles"
+   */
+  getFringeVocabTitles() {
+    let fringeVocabId = '2';  // list_id for fringeVocab list
+    let listTitles = [];
+
+    $.getJSON('http://localhost:3001/api/grids/id/' + fringeVocabId)
+      .then((data) => {
+        _.forEach(data, function (value) {
+          listTitles.push(value.list_title);
+        });
+      })
+
+    this.setState({fringeListTitles: listTitles});
+  }
 
   /**
    * appendToCols(nextCol)
@@ -352,18 +372,32 @@ class App extends Component {
   removeFromGrid(word_id, col_id) {
     console.log("wordId: " + word_id + " columnId: " + col_id);
 
-    // Get the column to remove from
-    let col = this.state.colArray.filter((el) => {
-      return el.id === col_id;
-    });
+    let col = 0;
+    let newCols = 0;
+
+    if(col_id > 7) {
+      col = this.state.fringeColArray.filter((el) => {
+        return el.id === col_id;
+      });
+      newCols = this.state.fringeColArray.filter((el) => {
+        return el.id !== col_id;
+      });
+    }else {
+      // Get the column to remove from
+      col = this.state.colArray.filter((el) => {
+        return el.id === col_id;
+      });
+
+      // Get a new set of columns that has the column we want to alter removed
+      newCols = this.state.colArray.filter((el) => {
+        return el.id !== col_id;
+      });
+    }
+
 
     // Pull the column from the filter results
     col = col[0];
 
-    // Get a new set of columns that has the column we want to alter removed
-    let newCols = this.state.colArray.filter((el) => {
-      return el.id !== col_id;
-    });
 
     // Get the new array of words with the desired word removed
     let newWords = col.words.filter((el) => {
@@ -377,11 +411,19 @@ class App extends Component {
     };
 
     // Update the state and add the updated column back on
-    this.setState({
-      colArray: [
-        ...newCols, newCol
-      ]
-    });
+    if(col_id > 7) {
+      this.setState({
+        fringeColArray: [
+          ...newCols, newCol
+        ]
+      });
+    }else{
+      this.setState({
+        colArray: [
+          ...newCols, newCol
+        ]
+      });
+    }
   }
 
 
@@ -429,7 +471,7 @@ class App extends Component {
    * {API POST CALL}
    * Callback function passed to the WordEditor Component to add a word through POST api call
    */
-  handleAddNewWord(wordText, selectedTitle, fileSelected) {
+  handleAddNewWord(wordText, selectedTitle, selectedVocabulary, fileSelected) {
     var newPath = fileSelected ?
     'img/' + wordText + '.png'
       : 'img/blank.png'
@@ -445,9 +487,9 @@ class App extends Component {
         path: newPath,
         text: wordText + 'symbol',
         list: selectedTitle,
-        grid: 'core vocabulary'
+        grid: selectedVocabulary + ' vocabulary'
       })
-    }).then(() => this.getWords());
+    }).then(() => {this.getWords(); this.getFringeWords()});
     //then... call getWords() to reload words
   }
 
@@ -483,7 +525,8 @@ class App extends Component {
                    buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
                    open={this.open} close={this.close} showModal={this.state.showModal}
                    coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}
-                   handleAddNewImage={this.handleAddNewImage}/>
+                   handleAddNewImage={this.handleAddNewImage}
+                   fringeListTitles={this.state.fringeListTitles}/>
     )
   }
 
@@ -506,7 +549,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <Grid className="LayoutGrid" fluid='true'>
+        <Grid className="LayoutGrid">
           <Row className="SpeechSettingsRow">
             <SpeechBar
               message={this.state.messageArray}

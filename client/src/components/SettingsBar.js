@@ -87,8 +87,10 @@ class SettingsBar extends Component {
           onHide={this.props.close}>
           <WordEditor
             coreListTitles={this.props.coreListTitles}
+	    fringeListTitles={this.props.fringeListTitles}
             close={this.props.close}
-            handleAddNewWord={this.props.handleAddNewWord}/>
+            handleAddNewWord={this.props.handleAddNewWord}
+            handleAddNewImage={this.props.handleAddNewImage}/>
         </Modal>
 
         {/* Editor Button, allows you to delete words */}

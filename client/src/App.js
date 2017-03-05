@@ -40,15 +40,16 @@ class App extends Component {
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
     this.getCoreVocabTitles = this.getCoreVocabTitles.bind(this);
+    this.getFringeVocabTitles = this.getFringeVocabTitles.bind(this);
     this.removeFromGrid = this.removeFromGrid.bind(this);
     this.handleAddNewWord = this.handleAddNewWord.bind(this);
+    this.handleAddNewImage = this.handleAddNewImage.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleDeleteConfirm = this.handleDeleteConfirm.bind(this);
     this.openDeleteModal = this.openDeleteModal.bind(this);
     this.closeDeleteModal = this.closeDeleteModal.bind(this);
     this.renderRemoveWordModal = this.renderRemoveWordModal.bind(this);
     this.callDeleteApi = this.callDeleteApi.bind(this);
-    this.handleAddNewImage = this.handleAddNewImage.bind(this);
     this.renderSettingsBar = this.renderSettingsBar.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this)
 
@@ -62,6 +63,7 @@ class App extends Component {
       fringeColArray: [], // fringe vocab
       messageArray: [],
       coreListTitles: [],
+      fringeListTitles: [],
       showModal: false,
       showDeleteModal: false,
       deleteWordText: "",
@@ -79,9 +81,10 @@ class App extends Component {
 
 
   componentWillMount() {
-    // this.getCoreVocabTitles();
+    this.getCoreVocabTitles();
+    this.getFringeVocabTitles();
 
-    this.updateDimensions();     // update dimensions when mounting
+    //this.updateDimensions();     // update dimensions when mounting
     window.addEventListener("resize", this.updateDimensions());    // add event listener for update dimensions
   }
 
@@ -216,6 +219,23 @@ class App extends Component {
     this.setState({coreListTitles: listTitles});
   }
 
+  /**
+   * getFringeVocabTitles()   Retrieves the titles of the fringe vocabulary from the database
+   * and updates the state variable "fringeListTitles"
+   */
+  getFringeVocabTitles() {
+    let fringeVocabId = '2';  // list_id for fringeVocab list
+    let listTitles = [];
+
+    $.getJSON('http://localhost:3001/api/grids/id/' + fringeVocabId)
+      .then((data) => {
+        _.forEach(data, function (value) {
+          listTitles.push(value.list_title);
+        });
+      })
+
+    this.setState({fringeListTitles: listTitles});
+  }
 
   // Updates the colArray with the next column
   appendToCols(nextCol) {
@@ -401,7 +421,7 @@ class App extends Component {
    * {API POST CALL}
    * Callback function passed to the WordEditor Component to add a word through POST api call
    */
-  handleAddNewWord(wordText, selectedTitle, fileSelected) {
+  handleAddNewWord(wordText, selectedTitle, selectedVocabulary, fileSelected) {
     var newPath = fileSelected ?
     'img/' + wordText + '.png'
       : 'img/blank.png'
@@ -417,9 +437,9 @@ class App extends Component {
         path: newPath,
         text: wordText + 'symbol',
         list: selectedTitle,
-        grid: 'core vocabulary'
+        grid: selectedVocabulary + ' vocabulary'
       })
-    }).then(() => this.getWords());
+    }).then(() => {this.getWords(); this.getFringeWords()});
     //then... call getWords() to reload words
   }
 
@@ -452,7 +472,8 @@ class App extends Component {
                    buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
                    open={this.open} close={this.close} showModal={this.state.showModal}
                    coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}
-                   handleAddNewImage={this.handleAddNewImage}/>
+                   handleAddNewImage={this.handleAddNewImage}
+                   fringeListTitles={this.state.fringeListTitles}/>
     )
   }
 
@@ -475,7 +496,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <Grid className="LayoutGrid" fluid='true'>
+        <Grid className="LayoutGrid">
           <Row className="SpeechSettingsRow">
             <SpeechBar
               message={this.state.messageArray}

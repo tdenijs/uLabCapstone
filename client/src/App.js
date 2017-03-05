@@ -344,18 +344,32 @@ class App extends Component {
   removeFromGrid(word_id, col_id) {
     console.log("wordId: " + word_id + " columnId: " + col_id);
 
-    // Get the column to remove from
-    let col = this.state.colArray.filter((el) => {
-      return el.id === col_id;
-    });
+    let col = 0;
+    let newCols = 0;
+
+    if(col_id > 7) {
+      col = this.state.fringeColArray.filter((el) => {
+        return el.id === col_id;
+      });
+      newCols = this.state.fringeColArray.filter((el) => {
+        return el.id !== col_id;
+      });
+    }else {
+      // Get the column to remove from
+      col = this.state.colArray.filter((el) => {
+        return el.id === col_id;
+      });
+
+      // Get a new set of columns that has the column we want to alter removed
+      newCols = this.state.colArray.filter((el) => {
+        return el.id !== col_id;
+      });
+    }
+
 
     // Pull the column from the filter results
     col = col[0];
 
-    // Get a new set of columns that has the column we want to alter removed
-    let newCols = this.state.colArray.filter((el) => {
-      return el.id !== col_id;
-    });
 
     // Get the new array of words with the desired word removed
     let newWords = col.words.filter((el) => {
@@ -369,11 +383,19 @@ class App extends Component {
     };
 
     // Update the state and add the updated column back on
-    this.setState({
-      colArray: [
-        ...newCols, newCol
-      ]
-    });
+    if(col_id > 7) {
+      this.setState({
+        fringeColArray: [
+          ...newCols, newCol
+        ]
+      });
+    }else{
+      this.setState({
+        colArray: [
+          ...newCols, newCol
+        ]
+      });
+    }
   }
 
 

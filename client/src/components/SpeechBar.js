@@ -1,5 +1,16 @@
+/*******************************************************************
+ * Copyright (c) 2016 Portland State University CS Capstone Team
+ *
+ * Authors: Siggy Hinds, Jiaqi Luo, Christopher Monk, Tristan de Nijs,
+ *          Simone Talla Silatchom, Carson Volker, Anton Zipper
+ *
+ * This file is part of uLabCapstone, distributed under the MIT
+ * open source license. For full terms see the LICENSE.md file
+ * included in the root of this project.
+ *******************************************************************/
+
 import React, {Component} from 'react';
-import {Button, Glyphicon } from 'react-bootstrap';
+import {Glyphicon } from 'react-bootstrap';
 import Word from './Word'
 import _ from 'lodash'
 
@@ -70,11 +81,11 @@ class SpeechBar extends Component {
 
     return (
       <div className="SpeechBar">
-          <Button className="PlayButton" bsStyle="success" onClick={this.speakMessage}><Glyphicon glyph="glyphicon glyphicon-play" aria-label="Play Button"/> </Button>
+        <button className="SettingsButton" onClick={this.props.settingsToggle}><Glyphicon glyph="glyphicon glyphicon-cog" aria-label="Open Settings Button"/> </button>
+        <button className="PlayButton" onClick={this.speakMessage}><Glyphicon glyph="glyphicon glyphicon-play" aria-label="Play Button"/> </button>
           {this.renderMessageWindow()}
-          <Button className="BackspaceButton" bsStyle="primary" onClick={this.props.handleBackButton}><Glyphicon glyph="glyphicon glyphicon-step-backward" aria-label="Backspace Button"/> </Button>
-          <Button className="ClearButton" bsStyle="warning" onClick={this.props.handleClearMessage}><Glyphicon glyph="glyphicon glyphicon-remove-sign" aria-label="Clear Message Button"/> </Button>
-          <Button className="SettingsButton" bsStyle="info" onClick={this.props.settingsToggle}><Glyphicon glyph="glyphicon glyphicon-cog" aria-label="Open Settings Button"/> </Button>
+          <button className="BackspaceButton"  onClick={this.props.handleBackButton}><Glyphicon glyph="glyphicon glyphicon-step-backward" aria-label="Backspace Button"/> </button>
+          <button className="ClearButton" onClick={this.props.handleClearMessage}><Glyphicon glyph="glyphicon glyphicon-remove" aria-label="Clear Message Button"/> </button>
       </div>
     );
   }

@@ -1,57 +1,110 @@
+/*******************************************************************
+ * Copyright (c) 2016 Portland State University CS Capstone Team
+ *
+ * Authors: Siggy Hinds, Jiaqi Luo, Christopher Monk, Tristan de Nijs,
+ *          Simone Talla Silatchom, Carson Volker, Anton Zipper
+ *
+ * This file is part of uLabCapstone, distributed under the MIT
+ * open source license. For full terms see the LICENSE.md file
+ * included in the root of this project.
+ *******************************************************************/
 
 /*  Grid  Component*/
-.Grid {
+.LayoutGrid {
+  max-height: 100vh;
 
 }
 
 
+/* ROW -- FringeVocabRow */
+.FringeVocabRow {
+  padding-top: 10px;
 
-/*  Column Component  */
+  display: flex;
+  flex-flow: row nowrap;
+
+  max-height: 90vh;
+
+}
+
+.VocabContainer {   /* orange border */
+
+  display: flex;
+  flex-flow: row nowrap;
+
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  /*overflow: scroll;*/
+  overflow-x: auto;  /* allow horizontal scrolling */
+  overflow-y: auto;
+
+  max-height: 88vh;
+}
+
+/*  COLUMN COMPONENT  */
+
 .Column {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 10px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
 
-  /*adds shadow to the columns*/
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  flex-basis: content;
 }
 
 .ColumnTitle {
-  /*margin: 5px 5px ;*/
+  align-self: center;
 }
 
 
-/*   Word  Component  */
+/*   WORD COMPONENT  */
+
+.WordContainer {
+  display: flex;
+  flex-flow: row wrap;
+
+  max-height: 95vh;
+  width: 200px;
+}
+
+
 .Word {
   margin: auto;
-  width: 100px;
+  /*width: 100px;  old width setting  */
+  width: 33%;  /* hack: a percentage removes vertical scrolling */
 
-  min-height: 50px;
+
+  /*min-height: 50px;*/
 
   /*use flexbox to center img &  word text*/
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   justify-content: center;
-
-}
-
-.Word:hover {
-  background-color: #F5f5fa;
-  color: red;
 }
 
 .Word img {
   max-width: 100%;
+  display: inline-flex;
+  justify-content: center;
+
+  order: 2;
 }
 
 .WordText {
   padding-top: 5px;
-  font-size: 1.2em;
+  font-size: 1.1em;
 
+  display: inline-flex;
+  justify-content: center;
+
+  order: 1;
 }
 
+/* button when deleting a word */
 .DeleteButton {
-  height: 10px;
-  width: 10px;
-  background-color: red;
+  height: 20px;
+  width: 20px;
+
+  display: inline-flex;
+  justify-content: center;
 }

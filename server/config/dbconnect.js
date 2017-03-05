@@ -9,20 +9,15 @@
  * included in the root of this project.
  *******************************************************************/
 
-body {
-  background-image: url(../../public/bkg.png);
-  background-repeat: repeat;
-  margin: auto;
-}
+//============================================
+// Setup DB connection
+//============================================
 
-.App {
+const promise = require('bluebird');
+const options = { promiseLib: promise};
+const pgp = require('pg-promise')(options);
+const dbc = require('./.dbconfig');
+const connectionString = 'postgres://' + dbc.user + ':' + dbc.password + '@' + dbc.hostname + ':' + dbc.port +'/' + dbc.dbname;
+const db = pgp(connectionString);
 
-  padding: 5px 5px;
-  text-align: center;
-}
-
-.modal-dialog {
-  padding-top: 5%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
+module.exports = db;

@@ -9,20 +9,14 @@
  * included in the root of this project.
  *******************************************************************/
 
-body {
-  background-image: url(../../public/bkg.png);
-  background-repeat: repeat;
-  margin: auto;
+// TODO: There should be a way to set up settings for development and production
+// and using NODE_ENV to determine if in production or development
+// But this will do for now.
+const dbconfig = {
+  hostname: "localhost",
+  port    : "5432", // this could be different if you changed default
+  dbname  :"ulabdb",
+  user    : "", // this is likely postgres
+  password: ""
 }
-
-.App {
-
-  padding: 5px 5px;
-  text-align: center;
-}
-
-.modal-dialog {
-  padding-top: 5%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
+module.exports = dbconfig;

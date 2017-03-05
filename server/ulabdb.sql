@@ -1,10 +1,21 @@
+/*******************************************************************
+ * Copyright (c) 2016 Portland State University CS Capstone Team
+ *
+ * Authors: Siggy Hinds, Jiaqi Luo, Christopher Monk, Tristan de Nijs,
+ *          Simone Talla Silatchom, Carson Volker, Anton Zipper
+ *
+ * This file is part of uLabCapstone, distributed under the MIT
+ * open source license. For full terms see the LICENSE.md file
+ * included in the root of this project.
+ *******************************************************************/
+
 /**
  * sql file to initialize the ulabdb
- * version 1.2
+ * version 1.3
  * christopher monk
  *
 **/
- 
+
 DROP DATABASE IF EXISTS ulabdb;
 CREATE DATABASE ulabdb;
 
@@ -14,12 +25,12 @@ CREATE DATABASE ulabdb;
 /* Create tables */
 CREATE TABLE Grids (
   grid_id SERIAL PRIMARY KEY,
-  grid_title VARCHAR 
+  grid_title VARCHAR
 );
 
 CREATE TABLE Lists (
   list_id SERIAL PRIMARY KEY,
-  list_title VARCHAR 
+  list_title VARCHAR
 );
 
 CREATE TABLE GridLists (
@@ -51,20 +62,24 @@ CREATE TABLE ListWords (
 
 -- add title for core-vocabulary grid
 INSERT INTO Grids(grid_title)
-  VALUES ('core vocabulary');  
-  
+  VALUES ('core vocabulary');
+
+-- add title for fringe-vocabulary grid
+INSERT INTO Grids(grid_title)
+  VALUES ('fringe vocabulary');
+
 -- add title for adjective list
 INSERT INTO Lists (list_title)
-  VALUES ('adjective');  
+  VALUES ('adjective');
 
 -- add adjective list to core vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
   VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'core vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'adjective'));
 
--- add symbols for adjectives 
+-- add symbols for adjectives
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
-  VALUES ('bad','img/bad.png','bad symbol'),      ('funny','img/funny.png','funny symbol'), 
-         ('good','img/good.png','good symbol'),   ('happy','img/happy.png','happy symbol'), 
+  VALUES ('bad','img/bad.png','bad symbol'),      ('funny','img/funny.png','funny symbol'),
+         ('good','img/good.png','good symbol'),   ('happy','img/happy.png','happy symbol'),
 	 ('sad','img/sad.png','sad symbol'),      ('scary','img/scary.png','scary symbol'),
 	 ('silly','img/silly.png','silly symbol');
 
@@ -73,14 +88,14 @@ INSERT INTO Words (word, symbol_id)
   VALUES ('bad',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'bad')),
          ('funny', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'funny')),
 	 ('good',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'good')),
-	 ('happy', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'happy')), 
+	 ('happy', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'happy')),
 	 ('sad',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'sad')),
 	 ('scary', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'scary')),
 	 ('silly', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'silly'));
 
 -- add words to adjective list
 INSERT INTO ListWords (word_id, list_id)
-  VALUES 
+  VALUES
    ((SELECT W.word_id from Words W WHERE word = 'bad'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'adjective')),
    ((SELECT W.word_id from Words W WHERE word = 'funny'), (SELECT L.list_id from Lists L WHERE L.list_title = 'adjective')),
    ((SELECT W.word_id from Words W WHERE word = 'good'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'adjective')),
@@ -92,17 +107,17 @@ INSERT INTO ListWords (word_id, list_id)
 
 -- add title for adverb list
 INSERT INTO Lists (list_title)
-  VALUES ('adverb');  
+  VALUES ('adverb');
 
 -- add adverb list to core vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
   VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'core vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'adverb'));
 
--- add symbols for adverbs 
+-- add symbols for adverbs
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
-  VALUES ('here','img/here.png','here symbol'),   ('how','img/how.png','how symbol'), 
-         ('more','img/more.png','more symbol'),   ('not','img/not.png','not symbol'), 
-	 ('off','','off symbol'),                 ('when','img/when.png','when symbol'),
+  VALUES ('here','img/here.png','here symbol'),   ('how','img/how.png','how symbol'),
+         ('more','img/more.png','more symbol'),   ('not','img/not.png','not symbol'),
+	 ('off','img/blank.png','off symbol'),                 ('when','img/when.png','when symbol'),
 	 ('where','img/where.png','where symbol'),('who','img/who.png','who symbol'),
 	 ('why','img/why.png','why symbol');
 
@@ -111,16 +126,16 @@ INSERT INTO Words (word, symbol_id)
   VALUES ('here',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'here')),
          ('how',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'how')),
 	 ('more',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'more')),
-	 ('not',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'not')), 
+	 ('not',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'not')),
 	 ('off',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'off')),
 	 ('when',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'when')),
 	 ('where', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'where')),
 	 ('who',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'who')),
 	 ('why',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'why'));
- 
+
 -- add words to adverbs list
 INSERT INTO ListWords (word_id, list_id)
-  VALUES 
+  VALUES
    ((SELECT W.word_id from Words W WHERE word = 'here'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb')),
    ((SELECT W.word_id from Words W WHERE word = 'how'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb')),
    ((SELECT W.word_id from Words W WHERE word = 'more'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb')),
@@ -133,7 +148,7 @@ INSERT INTO ListWords (word_id, list_id)
 
 -- add title for exclamation list
 INSERT INTO Lists (list_title)
-  VALUES ('exclamation');  
+  VALUES ('exclamation');
 
 -- add adverb list to core vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
@@ -141,7 +156,7 @@ INSERT INTO GridLists (grid_id, list_id)
 
 -- add symbols for exclamation
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
-  VALUES ('uh oh','','uh oh symbol');   
+  VALUES ('uh oh','img/blank.png','uh oh symbol');
 
 -- add words for exclamation list
 INSERT INTO Words (word, symbol_id)
@@ -149,13 +164,13 @@ INSERT INTO Words (word, symbol_id)
 
 -- add words to exclamation list
 INSERT INTO ListWords (word_id, list_id)
-  VALUES 
+  VALUES
    ((SELECT W.word_id from Words W WHERE word = 'uh oh'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'exclamation'));
 
-   
+
 -- add title for noun list
 INSERT INTO Lists (list_title)
-  VALUES ('noun');  
+  VALUES ('noun');
 
 -- add noun list to core vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
@@ -163,7 +178,7 @@ INSERT INTO GridLists (grid_id, list_id)
 
 -- add symbols for nouns
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
-  VALUES ('color','img/colors.png','color symbol'), ('word','img/word.png','word symbol');   
+  VALUES ('color','img/colors.png','color symbol'), ('word','img/word.png','word symbol');
 
 -- add words for nouns list
 INSERT INTO Words (word, symbol_id)
@@ -172,14 +187,14 @@ INSERT INTO Words (word, symbol_id)
 
 -- add words to noun list
 INSERT INTO ListWords (word_id, list_id)
-  VALUES 
+  VALUES
    ((SELECT W.word_id from Words W WHERE word = 'color'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'noun')),
    ((SELECT W.word_id from Words W WHERE word = 'word'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'noun'));
-   
-   
+
+
 -- add title for preposition list
 INSERT INTO Lists (list_title)
-  VALUES ('preposition');  
+  VALUES ('preposition');
 
 -- add preposition list to core vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
@@ -187,7 +202,7 @@ INSERT INTO GridLists (grid_id, list_id)
 
 -- add symbols for prepositions
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
-  VALUES ('in','img/in.png','in symbol'), ('on','','on Symbol'), ('out','img/out.png','out symbol');   
+  VALUES ('in','img/in.png','in symbol'), ('on','img/blank.png','on Symbol'), ('out','img/out.png','out symbol');
 
 -- add words for prepositions list
 INSERT INTO Words (word, symbol_id)
@@ -195,9 +210,9 @@ INSERT INTO Words (word, symbol_id)
          ('on',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'on')),
          ('out', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'out'));
 
--- add words to preposition list  
+-- add words to preposition list
 INSERT INTO ListWords (word_id, list_id)
-  VALUES 
+  VALUES
    ((SELECT W.word_id from Words W WHERE word = 'in'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'preposition')),
    ((SELECT W.word_id from Words W WHERE word = 'on'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'preposition')),
    ((SELECT W.word_id from Words W WHERE word = 'out'), (SELECT L.list_id from Lists L WHERE L.list_title = 'preposition'));
@@ -205,7 +220,7 @@ INSERT INTO ListWords (word_id, list_id)
 
 -- add title for pronoun list
 INSERT INTO Lists (list_title)
-  VALUES ('pronoun');  
+  VALUES ('pronoun');
 
 -- add pronoun list to core vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
@@ -213,8 +228,8 @@ INSERT INTO GridLists (grid_id, list_id)
 
 -- add symbols for pronouns
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
-  VALUES ('I','img/I.png','I symbol'),          ('it','img/it.png','it symbol'), 
-         ('that','img/that.png','that symbol'), ('they','img/they.png','they symbol'), 
+  VALUES ('I','img/I.png','I symbol'),          ('it','img/it.png','it symbol'),
+         ('that','img/that.png','that symbol'), ('they','img/they.png','they symbol'),
          ('what','img/what.png','what symbol'), ('you','img/you.png','you symbol');
 
 -- add words for pronouns list
@@ -222,44 +237,44 @@ INSERT INTO Words (word, symbol_id)
   VALUES ('I',    (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'I')),
          ('it',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'it')),
 	 ('that', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'that')),
-	 ('they', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'they')), 
+	 ('they', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'they')),
 	 ('what', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'what')),
 	 ('you',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'you'));
-  
---add words to pronoun list  
+
+--add words to pronoun list
 INSERT INTO ListWords (word_id, list_id)
-  VALUES 
+  VALUES
    ((SELECT W.word_id from Words W WHERE word = 'I'),    (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun')),
    ((SELECT W.word_id from Words W WHERE word = 'it'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun')),
    ((SELECT W.word_id from Words W WHERE word = 'that'), (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun')),
    ((SELECT W.word_id from Words W WHERE word = 'they'), (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun')),
    ((SELECT W.word_id from Words W WHERE word = 'what'), (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun')),
-   ((SELECT W.word_id from Words W WHERE word = 'you'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun')); 
+   ((SELECT W.word_id from Words W WHERE word = 'you'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun'));
 
 
 -- add title for verb list
 INSERT INTO Lists (list_title)
-  VALUES ('verb');  
+  VALUES ('verb');
 
 -- add verb list to core vocabulary grid
 INSERT INTO GridLists (grid_id, list_id)
   VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'core vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'verb'));
 
--- add symbols for verbs 
+-- add symbols for verbs
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
-  VALUES ('all done','','all done symbol'),     ('do','','do symbol'), 
-         ('feel','','feel symbol'),             ('go','img/go.png','go symbol'), 
-	 ('is','','is symbol'),                 ('like','','like symbol'),
+  VALUES ('all done','img/blank.png','all done symbol'),     ('do','img/blank.png','do symbol'),
+         ('feel','img/blank.png','feel symbol'),             ('go','img/go.png','go symbol'),
+	 ('is','img/blank.png','is symbol'),                 ('like','img/blank.png','like symbol'),
 	 ('read','img/read.png','read symbol'), ('said','img/said.png','said symbol'),
 	 ('see','img/see.png','see symbol'),    ('think','img/think.png','think symbol'),
-	 ('turn','img/turn.png','turn symbol'), ('want','','want symbol');
+	 ('turn','img/turn.png','turn symbol'), ('want','img/blank.png','want symbol');
 
 -- add words for verbs list
 INSERT INTO Words (word, symbol_id)
   VALUES ('all done',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'all done')),
          ('do',        (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'do')),
          ('feel',      (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'feel')),
-         ('go',        (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'go')), 
+         ('go',        (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'go')),
 	 ('is',        (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'is')),
 	 ('like',      (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'like')),
 	 ('read',      (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'read')),
@@ -268,16 +283,16 @@ INSERT INTO Words (word, symbol_id)
 	 ('think',     (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'think')),
 	 ('turn',      (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'turn')),
 	 ('want',      (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'want'));
-  
---add words to verb list  
+
+--add words to verb list
 INSERT INTO ListWords (word_id, list_id)
-  VALUES 
+  VALUES
    ((SELECT W.word_id from Words W WHERE word = 'all done'), (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
    ((SELECT W.word_id from Words W WHERE word = 'do'),       (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
    ((SELECT W.word_id from Words W WHERE word = 'feel'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
    ((SELECT W.word_id from Words W WHERE word = 'go'),       (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
    ((SELECT W.word_id from Words W WHERE word = 'is'),       (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
-   ((SELECT W.word_id from Words W WHERE word = 'like'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),  
+   ((SELECT W.word_id from Words W WHERE word = 'like'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
    ((SELECT W.word_id from Words W WHERE word = 'read'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
    ((SELECT W.word_id from Words W WHERE word = 'said'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
    ((SELECT W.word_id from Words W WHERE word = 'see'),      (SELECT L.list_id from Lists L WHERE L.list_title = 'verb')),
@@ -286,4 +301,37 @@ INSERT INTO ListWords (word_id, list_id)
    ((SELECT W.word_id from Words W WHERE word = 'want'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'verb'));
 
 
+-- add title for goodnight moon list
+INSERT INTO Lists (list_title)
+  VALUES ('goodnight moon');
 
+-- add goodnight moon list to fringe vocabulary grid
+INSERT INTO GridLists (grid_id, list_id)
+  VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'fringe vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'goodnight moon'));
+
+-- add symbols for goodnight moon list
+INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
+  VALUES ('bears','img/gnm_bears.png','bears symbol'), ('cow','img/gnm_cow.png','cow symbol'),
+         ('goodnight moon','img/gnm_goodnight_moon.png','goodnight moon symbol'), ('kittens','img/gnm_kittens.png','kittens symbol'),
+  	     ('mittens','img/gnm_mittens.png','mittens symbol'), ('moon','img/gnm_moon.png','moon symbol'),
+  	     ('room','img/gnm_room.png','room symbol');
+
+-- add words for goodnight moon list
+INSERT INTO Words (word, symbol_id)
+  VALUES ('bears', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'bears')),
+         ('cow', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'cow')),
+   	     ('goodnight moon', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'goodnight moon')),
+  	     ('kittens', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'kittens')),
+  	     ('mittens', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'mittens')),
+  	     ('moon', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'moon')),
+  	     ('room', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'room'));
+
+--add words to verb list
+INSERT INTO ListWords (word_id, list_id)
+  VALUES ((SELECT W.word_id from Words W WHERE word = 'bears'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'cow'),       (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'goodnight moon'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'kittens'),       (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'mittens'),       (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'moon'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon')),
+         ((SELECT W.word_id from Words W WHERE word = 'room'),     (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight moon'));

@@ -1,4 +1,16 @@
+/*******************************************************************
+ * Copyright (c) 2016 Portland State University CS Capstone Team
+ *
+ * Authors: Siggy Hinds, Jiaqi Luo, Christopher Monk, Tristan de Nijs,
+ *          Simone Talla Silatchom, Carson Volker, Anton Zipper
+ *
+ * This file is part of uLabCapstone, distributed under the MIT
+ * open source license. For full terms see the LICENSE.md file
+ * included in the root of this project.
+ *******************************************************************/
+
 import React, {Component} from 'react';
+import { Glyphicon } from 'react-bootstrap';
 
 class Word extends Component {
 
@@ -39,10 +51,14 @@ class Word extends Component {
     speechSynthesis.speak(spokenWord);
   }
 
+  // <Glyphicon glyph="glyphicon glyphicon-remove-sign" aria-label="Clear Message Button"/>
+
   render() {
       // Only show the delete button on a word if editorToggle is true
       let deleteButton = this.props.editorToggle ?
-          <div className="DeleteButton" onClick={() => this.props.removeFromGrid(this.props.text, this.props.column)}></div>
+          <div className="DeleteButton" onClick={() => this.props.removeFromGrid(this.props.text, this.props.id, this.props.col_id)}>
+            <Glyphicon glyph="glyphicon glyphicon-remove-sign" aria-label="delete word"/>
+          </div>
           : null;
 
       return (
@@ -66,7 +82,7 @@ Word.propTypes = {
 Word.defaultProps = {
   id: "1",
   word: "love",
-  src: "",
+  src: "img/blank.png",
   alt: ""
 };
 

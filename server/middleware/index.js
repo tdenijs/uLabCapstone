@@ -9,20 +9,6 @@
  * included in the root of this project.
  *******************************************************************/
 
-body {
-  background-image: url(../../public/bkg.png);
-  background-repeat: repeat;
-  margin: auto;
-}
-
-.App {
-
-  padding: 5px 5px;
-  text-align: center;
-}
-
-.modal-dialog {
-  padding-top: 5%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
+require('./words');
+require('./lists');
+require('./grids');

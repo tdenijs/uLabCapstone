@@ -155,7 +155,7 @@ class WordEditor extends Component {
                 <Col xs={12}>
                   <input type="file" name="newfile" className="FileInputButton"
                       onChange={(e) => this._handleImageChange(e)}
-                      accept="image/gif, image/jpeg, image/png, image/jpg"/>
+                      accept="image/jpeg, image/png, image/jpg"/>
                 </Col>
               </Row>
 

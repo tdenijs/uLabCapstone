@@ -47,7 +47,23 @@ class WordEditor extends Component {
     // Create form data for API call
     // TODO: Change file extension based on file type selected by user
     if (fileSelected) {
-      let newFileName = this.state.wordText + '.png';
+      let newFileName = this.state.wordText;
+      switch (this.state.file.type) {
+        case 'image/png':
+          newFileName = newFileName.concat('.png');
+          break;
+        case 'image/jpg':
+          newFileName = newFileName.concat('.jpg');
+          break;
+        case 'image/jpeg':
+          newFileName = newFileName.concat('.jpeg');
+          break;
+        default:
+          console.log('Invalid file type');
+
+      }
+      console.log("file type: " + this.state.file.type)
+      console.log("file name passed: " + newFileName);
       const formData = new FormData();
       formData.append('userfile', $('input[type=file]')[0].files[0], newFileName);
 

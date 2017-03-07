@@ -95,7 +95,7 @@ class App extends Component {
     console.log('Component Mounted:');
     console.log('CoreListTitles: ', this.state.coreListTitles);
   }
-  
+
 
 
   /**
@@ -471,10 +471,11 @@ class App extends Component {
    * {API POST CALL}
    * Callback function passed to the WordEditor Component to add a word through POST api call
    */
-  handleAddNewWord(wordText, selectedTitle, selectedVocabulary, fileSelected) {
+  handleAddNewWord(wordText, newFileName, selectedTitle, selectedVocabulary, fileSelected) {
     var newPath = fileSelected ?
-    'img/' + wordText + '.png'
-      : 'img/blank.png'
+    'img/' + newFileName
+      : 'img/blank.png';
+
     fetch('http://localhost:3001/api/words/', {
       method: 'POST',
       headers: {

@@ -44,26 +44,24 @@ class WordEditor extends Component {
     var fileSelected = this.state.file === '' ?
                        false
                      : true;
-    // Create form data for API call
-    // TODO: Change file extension based on file type selected by user
+    var newFileName = '';
+    // Create new file name base on user text and file type selected
     if (fileSelected) {
-      let newFileName = this.state.wordText;
       switch (this.state.file.type) {
         case 'image/png':
-          newFileName = newFileName.concat('.png');
+          newFileName = this.state.wordText.concat('.png');
           break;
         case 'image/jpg':
-          newFileName = newFileName.concat('.jpg');
+          newFileName = this.state.wordText.concat('.jpg');
           break;
         case 'image/jpeg':
-          newFileName = newFileName.concat('.jpeg');
+          newFileName = this.state.wordText.concat('.jpeg');
           break;
         default:
           console.log('Invalid file type');
 
       }
-      console.log("file type: " + this.state.file.type)
-      console.log("file name passed: " + newFileName);
+      // create from data for API POST call to /imgupload
       const formData = new FormData();
       formData.append('userfile', $('input[type=file]')[0].files[0], newFileName);
 
@@ -88,7 +86,7 @@ class WordEditor extends Component {
     }
     else if (this.state.wordText.length >= 1) {
       console.log('Submit New Word: ');
-      this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle, this.state.selectedVocabulary, fileSelected);
+      this.props.handleAddNewWord(this.state.wordText, newFileName, this.state.selectedTitle, this.state.selectedVocabulary, fileSelected);
 
       this.props.close(); //close modal
     }

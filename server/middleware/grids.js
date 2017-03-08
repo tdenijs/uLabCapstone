@@ -51,7 +51,7 @@ function getAllGrids(req, res, next) {
 // If fail, it will retuurn a 400 error
 function getAllWordsByGridId(req, res, next) {
   var gridId = req.params.grid_id;
-  db.any("SELEET g.grid_id, g.grid_title, l.list_id, l.list_title, " +
+  db.any("SELECT g.grid_id, g.grid_title, l.list_id, l.list_title, " +
                 "w.word_id, w.word, s.symbol_id, s.symbol_name, s.symbol_path, s.symbol_text " +
          "FROM grids g " +
          "INNER JOIN gridlists gl ON g.grid_id=gl.grid_id " +

@@ -16,17 +16,83 @@ import React, {Component} from 'react';
 import Word from './Word'
 import _ from 'lodash';
 
-// style={{height: this.props.maxHeight}}
 
 class Column extends Component {
+  /* Different columns will have different colors depending on the part of speech
+     or their title.
 
+   Blue: Adjectives
+   Green: Verbs
+   Yellow: Pronouns
+   Orange: Nouns
+   White: Conjunctions
+   Pink: Prepositions, social words
+   Purple: Questions
+   Brown: Adverbs
+   All Fringe lists (left side ) list will have grey
+   */
+
+  constructor(props) {
+    super(props);
+
+    this.getBackgroundColor = this.getBackgroundColor.bind(this);
+
+    this.state={
+      colColor: "grey",
+    }
+
+  }
+
+  componentWillMount() {
+    this.getBackgroundColor()
+  }
+
+  getBackgroundColor() {
+    var color = "grey";  // default color
+
+    switch(this.props.title) {
+      case "pronoun":
+        color = "#FFA05B"; // orange
+        break;
+      case "noun":
+        color = "#F0D24C"; // yellow
+        break;
+      case "verb":
+        color = "pink";
+        break;
+      case "adjective":
+        color = "#449EA8 ";
+        break;
+      case "adverb":
+        color = "#449EA8 ";
+        break;
+      case "preposition":
+        color = "#6cbf15";  // bright green
+        break;
+      case "exclamation":
+        color = "#FFA05B"; // orange
+        break;
+      case "questions":
+        color = "#FFA05B"; // orange
+        break;
+      default:
+        break;
+    }
+
+    console.log("COL. COLOR: " + this.props.title + " " + color);
+  
+      return color;
+  }
 
   /**
    * Basic React render function, renders the component.
    */
   render() {
+
+    let colColor = this.getBackgroundColor();
+
     return (
-      <div className="Column" >
+      <div className="Column" style={{'background-color': colColor }}>
         <div className="ColumnTitle">{this.props.title}</div>
         <div className="WordContainer">
           {

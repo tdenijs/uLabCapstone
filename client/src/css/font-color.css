@@ -17,6 +17,7 @@
 /* light-green: #adef67; /*
 /* blue: #449EA8        */
 /* orange: #F98935      */
+/* lite-orng: #FFA05B   */
 /* light-blue: #BEE3DB  */
 /* purple: #9932CC;     */
 /* lt-purple: #89609E  */
@@ -197,7 +198,7 @@
 }
 
 .Column {
-  background-color: #F98935;
+  /*background-color: lightblue;*/
 }
 
 .ColumnTitle {
@@ -205,7 +206,7 @@
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-style: italic;
-  background-color: #F98935;
+  /*background-color: #F98935;*/
   padding-bottom: 5px;
 }
 

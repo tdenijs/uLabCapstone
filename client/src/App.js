@@ -472,7 +472,7 @@ class App extends Component {
    * Callback function passed to the WordEditor Component to add a word through POST api call
    */
   handleAddNewWord(wordText, newFileName, selectedTitle, selectedVocabulary, fileSelected) {
-    var newPath = fileSelected ?
+    var newPath = (fileSelected && newFileName !== '') ?
     'img/' + newFileName
       : 'img/blank.png';
 

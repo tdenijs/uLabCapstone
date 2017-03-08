@@ -18,8 +18,9 @@ const db = require('../config/dbconnect');
 //    [{'word_id': , 'word': , 'symbol_path': , 'symbol_text': }, ]
 // If fail, it will retuurn a 404 error
 function getAllWords(req, res, next) {
-  db.any('select w.word_id, w.word, s.symbol_path, s.symbol_text ' +
-      'from words w inner join symbols s on w.symbol_id = s.symbol_id')
+  db.any('SELECT w.word_id, w.word, s.symbol_path, s.symbol_text ' +
+         'FROM words w '+
+         'INNER JOIN symbols s ON w.symbol_id = s.symbol_id')
     .then(function(data) {
       if (data.length > 0) {
         res.status(200)
@@ -48,9 +49,9 @@ function getAllWords(req, res, next) {
 function getWordByID(req, res, next) {
   var targetWordID = req.params.word_id;
   db.any('SELECT w.word_id, w.word, w.symbol_id, s.symbol_path ' +
-      'FROM words w, symbols s ' +
-      'WHERE w.word_id=' + '\'' + targetWordID + '\' ' +
-      'AND w.symbol_id=s.symbol_id')
+         'FROM words w, symbols s ' +
+         'WHERE w.word_id=$1' +
+         'AND w.symbol_id=s.symbol_id', [targetWordID])
     .then(function(data) {
       if (data.length > 0) {
         res.status(200)
@@ -79,9 +80,9 @@ function getWordByID(req, res, next) {
 function getWordByName(req, res, next) {
   var targetWordName = req.params.word_name;
   db.any('SELECT w.word_id, w.word, w.symbol_id, s.symbol_path ' +
-      'FROM words w, symbols s ' +
-      'WHERE w.word=' + '\'' + targetWordName + '\' ' +
-      'AND w.symbol_id=s.symbol_id')
+         'FROM words w, symbols s ' +
+         'WHERE w.word=$1' +
+         'AND w.symbol_id=s.symbol_id', [targetWordName])
     .then(function(data) {
       if (data.length > 0) {
         res.status(200)
@@ -122,10 +123,10 @@ function createWord(req, res, next) {
   var newWordId;
   // queries DB for the list_id based on the req.body.grid and req.body.list
   var query = 'SELECT l.list_id FROM grids g ' +
-    'INNER JOIN gridlists gl ON g.grid_id=gl.grid_id ' +
-    'INNER JOIN lists l ON gl.list_id=l.list_id ' +
-    'WHERE list_title=' + '\'' + lName + '\'' +
-    ' AND grid_title=' + '\'' + gName + '\';';
+              'INNER JOIN gridlists gl ON g.grid_id=gl.grid_id ' +
+              'INNER JOIN lists l ON gl.list_id=l.list_id ' +
+              'WHERE list_title=' + '\'' + lName + '\'' +
+             ' AND grid_title=' + '\'' + gName + '\';';
   db.task(function(t) {
       return t.one(query)
         .then(function(lId) {

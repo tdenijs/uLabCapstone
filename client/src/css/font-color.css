@@ -182,6 +182,9 @@
   border-radius: 15px;
   background-color: #fff;
 */
+
+
+
   }
 
 .VocabCol {}
@@ -193,10 +196,8 @@
   background-color: #fff;
 }
 
-
 .Column {
   background-color: #F98935;
-
 }
 
 .ColumnTitle {
@@ -209,19 +210,23 @@
 }
 
 .WordContainer {
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 
 /*   WORD COMPONENT  */
 
 .Word {
   color: #000;
-  border: solid 1px #BEE3DB;
+  border: solid 2px #BEE3DB;
+  background-color: #fff;
+
 }
 
 .Word:hover {
-  background-color: #F5f5fa;
+  /*background-color: #F5f5fa;*/
   color: red;
+  border: solid 2px black;
+
 }
 
 /*   Delete Icon in Word Component  */

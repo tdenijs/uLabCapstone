@@ -44,10 +44,24 @@ class WordEditor extends Component {
     var fileSelected = this.state.file === '' ?
                        false
                      : true;
-    // Create form data for API call
-    // TODO: Change file extension based on file type selected by user
+    var newFileName = '';
+    // Create new file name base on user text and file type selected
     if (fileSelected) {
-      let newFileName = this.state.wordText + '.png';
+      switch (this.state.file.type) {
+        case 'image/png':
+          newFileName = this.state.wordText.concat('.png');
+          break;
+        case 'image/jpg':
+          newFileName = this.state.wordText.concat('.jpg');
+          break;
+        case 'image/jpeg':
+          newFileName = this.state.wordText.concat('.jpeg');
+          break;
+        default:
+          console.log('Invalid file type');
+
+      }
+      // create from data for API POST call to /imgupload
       const formData = new FormData();
       formData.append('userfile', $('input[type=file]')[0].files[0], newFileName);
 
@@ -72,7 +86,7 @@ class WordEditor extends Component {
     }
     else if (this.state.wordText.length >= 1) {
       console.log('Submit New Word: ');
-      this.props.handleAddNewWord(this.state.wordText, this.state.selectedTitle, this.state.selectedVocabulary, fileSelected);
+      this.props.handleAddNewWord(this.state.wordText, newFileName, this.state.selectedTitle, this.state.selectedVocabulary, fileSelected);
 
       this.props.close(); //close modal
     }
@@ -155,7 +169,7 @@ class WordEditor extends Component {
                 <Col xs={12}>
                   <input type="file" name="newfile" className="FileInputButton"
                       onChange={(e) => this._handleImageChange(e)}
-                      accept="image/gif, image/jpeg, image/png, image/jpg"/>
+                      accept="image/jpeg, image/png, image/jpg"/>
                 </Col>
               </Row>
 

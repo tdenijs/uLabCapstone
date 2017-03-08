@@ -51,14 +51,15 @@ function getAllGrids(req, res, next) {
 // If fail, it will retuurn a 400 error
 function getAllWordsByGridId(req, res, next) {
   var gridId = req.params.grid_id;
-  db.any("select g.grid_id, g.grid_title, l.list_id, l.list_title, " +
-      "w.word_id, w.word, s.symbol_id, s.symbol_name, s.symbol_path, s.symbol_text " +
-      "from grids g inner join gridlists gl on g.grid_id=gl.grid_id " +
-      "inner join lists l on l.list_id=gl.list_id " +
-      "inner join listwords lw on l.list_id=lw.list_id " +
-      "inner join words w on w.word_id=lw.word_id " +
-      "inner join symbols s on w.symbol_id=s.symbol_id " +
-      "where g.grid_id=" + '\'' + gridId + '\'' + " order by w.word_id")
+  db.any("SELEET g.grid_id, g.grid_title, l.list_id, l.list_title, " +
+                "w.word_id, w.word, s.symbol_id, s.symbol_name, s.symbol_path, s.symbol_text " +
+         "FROM grids g " +
+         "INNER JOIN gridlists gl ON g.grid_id=gl.grid_id " +
+         "INNER JOIN lists l ON l.list_id=gl.list_id " +
+         "INNER JOIN listwords lw ON l.list_id=lw.list_id " +
+         "INNER JOIN words w ON w.word_id=lw.word_id " +
+         "INNER JOIN symbols s ON w.symbol_id=s.symbol_id " +
+         "WHERE g.grid_id=$1 ORDER BY w.word_id", [gridId])
     .then(function(data) {
       if (data.length > 0) {
         res.status(200)
@@ -92,14 +93,15 @@ function getAllWordsByGridId(req, res, next) {
 // If fail, it will retuurn a 400 error
 function getAllWordsByGridName(req, res, next) {
   var gTitle = req.params.grid_title;
-  db.any("select g.grid_id, g.grid_title, l.list_id, l.list_title, " +
-      "w.word_id, w.word, s.symbol_id, s.symbol_name, s.symbol_path, s.symbol_text " +
-      "from grids g inner join gridlists gl on g.grid_id=gl.grid_id " +
-      "inner join lists l on l.list_id=gl.list_id " +
-      "inner join listwords lw on l.list_id=lw.list_id " +
-      "inner join words w on w.word_id=lw.word_id " +
-      "inner join symbols s on w.symbol_id=s.symbol_id " +
-      "where g.grid_title=" + '\'' + gTitle + '\'' + " order by w.word_id")
+  db.any("SELECT g.grid_id, g.grid_title, l.list_id, l.list_title, " +
+                "w.word_id, w.word, s.symbol_id, s.symbol_name, s.symbol_path, s.symbol_text " +
+         "FROM grids g " +
+         "INNER JOIN gridlists gl ON g.grid_id=gl.grid_id " +
+         "INNER JOIN lists l ON l.list_id=gl.list_id " +
+         "INNER JOIN listwords lw ON l.list_id=lw.list_id " +
+         "INNER JOIN words w ON w.word_id=lw.word_id " +
+         "INNER JOIN symbols s ON w.symbol_id=s.symbol_id " +
+         "WHERE g.grid_title=$1 ORDER BY w.word_id", [gTitle])
     .then(function(data) {
       if (data.length > 0) {
         res.status(200)
@@ -130,10 +132,10 @@ function getAllWordsByGridName(req, res, next) {
 function getAllListsByGridID(req, res, next) {
   var targetGridID = req.params.grid_id;
   db.any('SELECT gl.grid_id, gl.list_id, l.list_title ' +
-      'FROM gridlists gl ' +
-      'INNER JOIN lists l ON gl.list_id=l.list_id ' +
-      'WHERE gl.grid_id=' + '\'' + targetGridID + '\' ' +
-      'ORDER BY gl.list_id asc')
+         'FROM gridlists gl ' +
+         'INNER JOIN lists l ON gl.list_id=l.list_id ' +
+         'WHERE gl.grid_id=$1' +
+         'ORDER BY gl.list_id asc', [targetGridID])
     .then(function(data) {
       if (data.length > 0) {
         res.status(200)
@@ -168,14 +170,14 @@ function getAllListsByGridID(req, res, next) {
 function getAllListWordsByListId(req, res, next) {
   var gridId = req.params.grid_id;
   var listId = req.params.list_id;
-  db.any("select g.grid_id, g.grid_title, l.list_id, l.list_title, " +
-      "w.word_id, w.word, s.symbol_id, s.symbol_path, s.symbol_text " +
-      "from grids g inner join gridlists gl on g.grid_id=gl.grid_id " +
-      "inner join lists l on l.list_id = gl.list_id " +
-      "inner join listwords lw on l.list_id = lw.list_id " +
-      "inner join words w on w.word_id = lw.word_id " +
-      "inner join symbols s on w.symbol_id = s.symbol_id " +
-      "where g.grid_id= " + '\'' + gridId + '\'' + " and l.list_id = " + '\'' + listId + '\'')
+  db.any("SELECT g.grid_id, g.grid_title, l.list_id, l.list_title, " +
+                "w.word_id, w.word, s.symbol_id, s.symbol_path, s.symbol_text " +
+         "FROM grids g inner join gridlists gl on g.grid_id=gl.grid_id " +
+         "INNER JOIN lists l ON l.list_id = gl.list_id " +
+         "INNER JOIN listwords lw ON l.list_id = lw.list_id " +
+         "INNER JOIN words w ON w.word_id = lw.word_id " +
+         "INNER JOIN symbols s ON w.symbol_id = s.symbol_id " +
+         "WHERE g.grid_id=$1 AND l.list_id =$2", [gridId, listId])
     .then(function(data) {
       if (data.length > 0) {
         res.status(200)

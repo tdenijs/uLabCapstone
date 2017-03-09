@@ -19,34 +19,18 @@ import _ from 'lodash';
 
 class Column extends Component {
   /* Different columns will have different colors depending on the part of speech
-     or their title.
-
-   Blue: Adjectives
-   Green: Verbs
-   Yellow: Pronouns
-   Orange: Nouns
-   White: Conjunctions
-   Pink: Prepositions, social words
-   Purple: Questions
-   Brown: Adverbs
-   All Fringe lists (left side ) list will have grey
-   */
+     or their title.  */
 
   constructor(props) {
     super(props);
-
     this.getBackgroundColor = this.getBackgroundColor.bind(this);
-
-    this.state={
-      colColor: "grey",
-    }
-
   }
 
-  componentWillMount() {
-    this.getBackgroundColor()
-  }
 
+  /**
+   * getBackgroundColor: returns a hex color dependent on the title
+   * @returns {string}
+   */
   getBackgroundColor() {
     var color = "grey";  // default color
 
@@ -80,9 +64,10 @@ class Column extends Component {
     }
 
     console.log("COL. COLOR: " + this.props.title + " " + color);
-  
-      return color;
+
+    return color;
   }
+
 
   /**
    * Basic React render function, renders the component.

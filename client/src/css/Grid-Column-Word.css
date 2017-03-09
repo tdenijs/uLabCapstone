@@ -45,7 +45,6 @@
   justify-content: flex-start;
   align-items: flex-start;
 
-  /*overflow: scroll;*/
   overflow-x: auto;  /* allow horizontal scrolling */
   overflow-y: auto;
 
@@ -59,13 +58,10 @@
   flex-flow: column wrap;
   align-items: flex-start;
 
-  /*flex-basis: content;*/
-
   flex: 0 0 165px;
   /*  The 160px here should changed for each column to match
       [.Word].length / numberThatFitInAColumnVertically
   */
-
 }
 
 .ColumnTitle {
@@ -78,9 +74,6 @@
 .WordContainer {
   display: flex;
   flex-flow: row wrap;
-
-  /*max-height: 95vh;*/
-  /*width: 200px;*/
 
   width: auto;
   height: 490px;  /* adjust height based on container */

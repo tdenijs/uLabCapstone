@@ -73,44 +73,44 @@ class Column extends Component {
    * based on # of words in the Word Array
    * @returns {string}
    */
-  getColumnWidth() {
-    var width = '82px'  // default width = 1 column
+  getColumnFlex() {
+    var flex = '0 0 82px'  // default width = 1 column
 
     switch (true) {
       case (words.length <= 4):
-          width = '82px';
+          flex = '0 0 82px';
           break;
       case (words.length <= 8):
-          width = '164px';
+          flex = '0 0 164px';
           break;
       case (words.length <= 12):
-          width = '246px';
+          flex = '0 0 246px';
           break;
       case (words.length <= 16):
-          width = '328px';
+          flex = '0 0 328px';
           break;
       case (words.length <= 20):
-          width = '410px';
+          flex = '0 0 410px';
           break;
       case (words.length <= 24):
-          width = '492px';
+          flex = '0 0 492px';
           break;
       case (words.length <= 28):
-          width = '574px';
+          flex = '0 0 74px';
           break;
       case (words.length <= 32):
-          width = '656px';
+          flex = '0 0 656px';
           break;
       case (words.length <= 36):
-          width = '738';
+          flex = '0 0 738';
           break;
       default:
           break;
     }
 
 
-    console.log("COL. WIDTH: " + this.props.title + " " + width);
-    return width;
+    console.log("COL. FLEX: " + this.props.title + " " + flex);
+    return flex;
   }
 
   /**
@@ -119,10 +119,10 @@ class Column extends Component {
   render() {
 
     let colColor = this.getBackgroundColor();
-    let colColor = this.getColumnWidth();
+    let colFlex = this.getColumnFlex();
 
     return (
-      <div className="Column" style={{'background-color': colColor }}>
+      <div className="Column" style={{'background-color': colColor; 'flex': colFlex }}>
         <div className="ColumnTitle">{this.props.title}</div>
         <div className="WordContainer">
           {

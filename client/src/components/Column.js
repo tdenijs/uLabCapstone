@@ -58,21 +58,21 @@ class Column extends Component {
         color = "#F0D24C"; // yellow
         break;
       case "verb":
-        color = "pink";
+        color = "#F98CA6"; // pink
         break;
       case "adjective":
-        color = "#449EA8 ";
+        color = "#449EA8 "; // blue
         break;
       case "adverb":
-        color = "#449EA8 ";
+        color = "#449EA8 "; // blue
         break;
       case "preposition":
-        color = "#6cbf15";  // bright green
+        color = "#87D23B";  // bright green
         break;
       case "exclamation":
         color = "#FFA05B"; // orange
         break;
-      case "questions":
+      case "question":
         color = "#FFA05B"; // orange
         break;
       default:

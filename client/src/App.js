@@ -30,6 +30,9 @@ class App extends Component {
     this.settingsToggle = this.settingsToggle.bind(this);
     this.handleClearMessage = this.handleClearMessage.bind(this);
     this.updateVoice = this.updateVoice.bind(this);
+    this.updateVoiceRate = this.updateVoiceRate.bind(this);
+    this.updateVoicePitch = this.updateVoicePitch.bind(this);
+    this.updateFringeChoice = this.updateFringeChoice.bind(this);
     this.lockToggle = this.lockToggle.bind(this);
     this.enableEditorMode = this.enableEditorMode.bind(this);
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
@@ -55,6 +58,8 @@ class App extends Component {
 
     this.state = {
       selectedVoice: "Default",
+      selectedVoiceRate: "10",
+      selectedVoicePitch: "10",
       settingsBarVisible: false,
       settingsLocked: false,
       editorToggle: false,
@@ -64,6 +69,7 @@ class App extends Component {
       messageArray: [],
       coreListTitles: [],
       fringeListTitles: [],
+      selectedFringe: "",
       showModal: false,
       showDeleteModal: false,
       deleteWordText: "",
@@ -235,6 +241,7 @@ class App extends Component {
       })
 
     this.setState({fringeListTitles: listTitles});
+    this.setState({selectedFringe: listTitles[0]});
   }
 
   /**
@@ -248,7 +255,9 @@ class App extends Component {
   }
 
 
-  // Callback function passed to the SpeechBar back button removed last item in message
+  /**
+   * Callback function passed to the SpeechBar back button removed last item in message
+   */
   handleBackButton() {
     if (this.state.messageArray !== []) {
       this.state.messageArray.splice(this.state.messageArray.length - 1, 1);
@@ -258,7 +267,9 @@ class App extends Component {
   }
 
 
-  // Callback function passed to the SpeechBar clear the speechBarMessage when the clear button is clicked
+  /**
+   * Callback function passed to the SpeechBar clear the speechBarMessage when the clear button is clicked
+   */
   handleClearMessage() {
     this.setState({messageArray: []});
   }
@@ -266,11 +277,39 @@ class App extends Component {
   /**
    * updateVoice(e)
    * Callback function passed to the SettingsBar to update the App's selectedVoice state variable
+   * @param e : The name of the voice we are changing to
    */
   updateVoice(e) {
     this.setState({selectedVoice: e.target.value});
   }
 
+  /**
+   * updateVoiceRate(e)
+   * Callback function passed to the SettingsBar to update the App's selectedVoiceRate state variable
+   * @param e : The value of the rate we are changing to
+   */
+  updateVoiceRate(e) {
+    this.setState({selectedVoiceRate: e.target.value});
+  }
+
+  /**
+   * updateVoicePitchi(e)
+   * Callback function passed to the SettingsBar to update the App's selectedVoicePitch state variable
+   * @param e : The value of the pitch we are changing to
+   */
+  updateVoicePitch(e) {
+    this.setState({selectedVoicePitch: e.target.value});
+  }
+
+  /**
+   * updateFringeChoice(e)
+   * Callback function passed to the SettingsBar to update the App's selectedFringe state variable
+   * @param e : The name of the Fringe we are changing to
+   */
+  updateFringeChoice(e) {
+    this.setState({selectedFringe: e.target.value});
+    console.log(this.state.selectedFringe);
+  }
 
   /**
    * settingsToggle()
@@ -521,6 +560,9 @@ class App extends Component {
   renderSettingsBar() {
     return (
       <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
+                   updateVoiceRate={this.updateVoiceRate} updateVoicePitch={this.updateVoicePitch}
+                   selectedVoiceRate={this.state.selectedVoiceRate} selectedVoicePitch={this.state.selectedVoicePitch}
+                   selectedFringe={this.state.selectedFringe} updateFringeChoice={this.updateFringeChoice}
                    settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
                    editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
                    buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
@@ -556,6 +598,8 @@ class App extends Component {
               message={this.state.messageArray}
               handleClearMessage={this.handleClearMessage}
               selectedVoice={this.state.selectedVoice}
+              selectedVoiceRate={this.state.selectedVoiceRate}
+              selectedVoicePitch={this.state.selectedVoicePitch}
               handleBackButton={this.handleBackButton}
               settingsToggle={this.settingsToggle}/>
 
@@ -568,14 +612,16 @@ class App extends Component {
 
             <Col xs={8} md={4} className="FringeCol">
               <Vocab cols={this.state.fringeColArray} add={this.addWordToSpeechBar}
-                     selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
+                     selectedVoice={this.state.selectedVoice} selectedVoiceRate={this.state.selectedVoiceRate}
+                     selectedVoicePitch={this.state.selectedVoicePitch} editorToggle={this.state.editorToggle}
                      removeFromGrid={this.handleDelete}/>
             </Col>
 
             <Col xs={12} md={8} className="VocabCol">
               <Vocab
                      cols={this.state.colArray} add={this.addWordToSpeechBar}
-                     selectedVoice={this.state.selectedVoice} editorToggle={this.state.editorToggle}
+                     selectedVoice={this.state.selectedVoice} selectedVoiceRate={this.state.selectedVoiceRate}
+                     selectedVoicePitch={this.state.selectedVoicePitch} editorToggle={this.state.editorToggle}
                      removeFromGrid={this.handleDelete}/>
             </Col>
 

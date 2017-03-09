@@ -115,36 +115,55 @@ INSERT INTO GridLists (grid_id, list_id)
 
 -- add symbols for adverbs
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
-  VALUES ('here','img/here.png','here symbol'), ('how','img/how.png','how symbol'),
-         ('more','img/more.png','more symbol'), ('not','img/not.png','not symbol'),
-	       ('off','img/blank.png','off symbol'), ('when','img/when.png','when symbol'),
-	       ('where','img/where.png','where symbol'), ('who','img/who.png','who symbol'),
-	       ('why','img/why.png','why symbol');
+  VALUES ('here','img/here.png','here symbol'), ('more','img/more.png','more symbol'),
+         ('not','img/not.png','not symbol'), ('off','img/blank.png','off symbol');
 
 -- add words for adverbs list
 INSERT INTO Words (word, symbol_id)
   VALUES ('here',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'here')),
-         ('how',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'how')),
 	       ('more',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'more')),
 	       ('not',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'not')),
-	       ('off',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'off')),
-	       ('when',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'when')),
-	       ('where', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'where')),
-	       ('who',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'who')),
-	       ('why',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'why'));
+	       ('off',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'off'));
 
 -- add words to adverbs list
 INSERT INTO ListWords (word_id, list_id)
   VALUES
    ((SELECT W.word_id from Words W WHERE word = 'here'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb')),
-   ((SELECT W.word_id from Words W WHERE word = 'how'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb')),
    ((SELECT W.word_id from Words W WHERE word = 'more'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb')),
    ((SELECT W.word_id from Words W WHERE word = 'not'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb')),
-   ((SELECT W.word_id from Words W WHERE word = 'off'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb')),
-   ((SELECT W.word_id from Words W WHERE word = 'when'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb')),
-   ((SELECT W.word_id from Words W WHERE word = 'where'), (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb')),
-   ((SELECT W.word_id from Words W WHERE word = 'who'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb')),
-   ((SELECT W.word_id from Words W WHERE word = 'why'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb'));
+   ((SELECT W.word_id from Words W WHERE word = 'off'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'adverb'));
+
+-- add title for questions list
+INSERT INTO Lists (list_title)
+  VALUES ('questions');
+
+-- add questions list to core vocabulary grid
+INSERT INTO GridLists (grid_id, list_id)
+  VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'core vocabulary'), (SELECT L.list_id FROM Lists L WHERE L.list_title = 'questions'));
+
+-- add symbols for questions
+INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
+  VALUES ('how','img/how.png','how symbol'),
+         ('when','img/when.png','when symbol'),
+         ('where','img/where.png','where symbol'),
+         ('who','img/who.png','who symbol'),
+         ('why','img/why.png','why symbol');
+
+-- add words for questions list
+INSERT INTO Words (word, symbol_id)
+  VALUES ('how',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'how')),
+         ('when',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'when')),
+         ('where', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'where')),
+         ('who',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'who')),
+         ('why',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'why'));
+
+-- add words to questions list
+INSERT INTO ListWords (word_id, list_id)
+  VALUES ((SELECT W.word_id from Words W WHERE word = 'how'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'questions')),
+         ((SELECT W.word_id from Words W WHERE word = 'when'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'questions')),
+         ((SELECT W.word_id from Words W WHERE word = 'where'), (SELECT L.list_id from Lists L WHERE L.list_title = 'questions')),
+         ((SELECT W.word_id from Words W WHERE word = 'who'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'questions')),
+         ((SELECT W.word_id from Words W WHERE word = 'why'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'questions'));
 
 -- add title for exclamation list
 INSERT INTO Lists (list_title)

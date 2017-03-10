@@ -61,7 +61,7 @@ class Column extends Component {
         break;
     }
 
-    console.log("COL. COLOR: " + this.props.title + " " + color);
+    //console.log("COL. COLOR: " + this.props.title + " " + color);
 
     return color;
   }

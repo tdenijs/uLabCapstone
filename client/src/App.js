@@ -33,6 +33,7 @@ class App extends Component {
     this.updateVoiceRate = this.updateVoiceRate.bind(this);
     this.updateVoicePitch = this.updateVoicePitch.bind(this);
     this.updateFringeChoice = this.updateFringeChoice.bind(this);
+    this.updateFringeChoiceSynch = this.updateFringeChoiceSynch.bind(this); 
     this.lockToggle = this.lockToggle.bind(this);
     this.enableEditorMode = this.enableEditorMode.bind(this);
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
@@ -71,6 +72,7 @@ class App extends Component {
       coreListTitles: [],
       fringeListTitles: [],
       selectedFringe: "",
+      selectedFringeId: "0",
       showModal: false,
       showDeleteModal: false,
       deleteWordText: "",
@@ -161,7 +163,16 @@ class App extends Component {
    * */
   getFringeWords() {
     let fringelist = [];
-    let title = "goodnight moon"
+    console.log(this.state.fringeListTitles);
+    var title;
+    if(this.state.fringeListTitles.length === 0) {
+    	title = "goodnight moon";
+    } else {
+        title = this.state.selectedFringe;
+    }
+
+    console.log(this.state.selectedFringe);
+    console.log(title);
 
     this.setState({fringeColArray: []});  // getWords() will be called when a new word is added,
     // so need to clear the fringeColArray before retrieving words from ap
@@ -316,8 +327,20 @@ class App extends Component {
    * @param e : The name of the Fringe we are changing to
    */
   updateFringeChoice(e) {
-    this.setState({selectedFringe: e.target.value});
+    
+    this.updateFringeChoiceSynch(e).then(() => this.getFringeWords());
     console.log(this.state.selectedFringe);
+    console.log(e.target.value);
+    //this.getFringeWords();
+  }
+
+  updateFringeChoiceSynch(e) { 
+    var a = e.target.value;
+    this.setState({selectedFringe : a});
+    var p = new Promise((resolve, reject) => {
+           resolve('SUCCESS'); 
+    });
+    return p;
   }
 
   /**

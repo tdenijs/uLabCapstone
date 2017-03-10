@@ -82,9 +82,6 @@ class SettingsBar extends Component {
       // Change the text on the delete button depending on whether EditorMode is enabled or not
       let deleteText = this.props.editorToggle ? 'Finish Deleting' : 'Delete a Word';
 
-      // Change the text on the delete button depending on whether EditorMode is enabled or not
-      let deleteText = this.props.editorToggle ? 'Finish Deleting' : 'Delete a Word';
-
     return (
       <div className="SettingsBar">
 

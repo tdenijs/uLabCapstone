@@ -170,7 +170,7 @@ class App extends Component {
         .then((data) => {
           fringelist = {
             order: 1,
-            id: 8,
+            id: 9,
             title: title,
             words: data
           };

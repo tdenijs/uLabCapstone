@@ -190,12 +190,13 @@ class App extends Component {
     let nextCol;
     let titles = [
       {title: 'pronoun', id: "6", order: "1"},
-      {title: 'noun', id: "4", order: "2"},
-      {title: 'verb', id: "7", order: "3"},
-      {title: 'adjective', id: "1", order: "4"},
-      {title: 'adverb', id: "2", order: "5"},
-      {title: 'preposition', id: "5", order: "6"},
-      {title: 'exclamation', id: "3", order: "7"}];
+      {title: 'questions', id: "8", order: "2"},
+      {title: 'noun', id: "4", order: "3"},
+      {title: 'verb', id: "7", order: "4"},
+      {title: 'adjective', id: "1", order: "5"},
+      {title: 'adverb', id: "2", order: "6"},
+      {title: 'preposition', id: "5", order: "7"},
+      {title: 'exclamation', id: "3", order: "8"}];
 
     this.setState({colArray: []});  // getWords() will be called when a new word is added,
                                     // clear the colArray before retrieving words from api

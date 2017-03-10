@@ -22,12 +22,14 @@ it('SettingsBar renders without crashing', () => {
 describe("Test suite for mounted SettingsBar", () => {
     let bar;
     let onChange;
+    let onUpdate;
 
     beforeEach(() => {
         onChange = jest.fn();
+        onUpdate = jest.fn();
         bar = mount(<SettingsBar selectedVoice="Default" updateVoice={onChange}
                     settingsLocked={false} enableEditorMode={onChange} lockToggle={onChange}
-                    buttonSize="5" resizeButton={onChange}/>);
+                    buttonSize="5" resizeButton={onChange} disableEditorIfLocked={onUpdate}/>);
     });
 
     it('SettingsBar calls updateVoice function when the drop down menu changes', () => {

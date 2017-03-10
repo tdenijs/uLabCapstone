@@ -11,12 +11,14 @@
 
 
 /* red: #E4004A         */
+/* pink: #F98CA6        */
 /* yellow: #F0D24C      */
 /* green: #28Ac70       */
-/* bright-green: #6cbf15 */
+/* bright-green: #87D23B */
 /* light-green: #adef67; /*
 /* blue: #449EA8        */
 /* orange: #F98935      */
+/* lite-orng: #FFA05B   */
 /* light-blue: #BEE3DB  */
 /* purple: #9932CC;     */
 /* lt-purple: #89609E  */
@@ -182,21 +184,27 @@
   border-radius: 15px;
   background-color: #fff;
 */
+
+  border: 7px solid #000;  /* black border */
+  border-radius: 15px;
+  color: #fff;
+  background-color: #000;
+
   }
 
-.VocabCol {}
-
-
-.VocabContainer{
+.VocabCol {
   border: 7px solid #F98935;  /* orange border */
   border-radius: 15px;
-  background-color: #fff;
+  background-color: #F98935;
 }
 
 
-.Column {
-  background-color: #F98935;
+.VocabContainer{
 
+}
+
+.Column {
+  /*background-color: lightblue;*/
 }
 
 .ColumnTitle {
@@ -204,24 +212,28 @@
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-style: italic;
-  background-color: #F98935;
+  /*background-color: #F98935;*/
   padding-bottom: 5px;
 }
 
 .WordContainer {
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 
 /*   WORD COMPONENT  */
 
 .Word {
   color: #000;
-  border: solid 1px #BEE3DB;
+  border: solid 2px #BEE3DB;
+  background-color: #fff;
+
 }
 
 .Word:hover {
-  background-color: #F5f5fa;
+  /*background-color: #F5f5fa;*/
   color: red;
+  border: solid 2px black;
+
 }
 
 /*   Delete Icon in Word Component  */

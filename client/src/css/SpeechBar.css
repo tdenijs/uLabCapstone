@@ -11,7 +11,17 @@
 
 /*   SpeechBar  Component  */
 
+.SpeechBar{
+  position: relative;
+  padding-bottom: 5px;
+}
 
+.MsgHook {
+  position: absolute;
+  top: 85px;
+  left: 65%;
+
+}
 /** Small screens **/
 
 @media all and (max-width: 599px) {

@@ -644,20 +644,20 @@ class App extends Component {
 
           <Row className="FringeVocabRow"  >
 
-            <Col className="FringeCol">
+            <div className="FringeCol">
               <Vocab cols={this.state.fringeColArray} add={this.addWordToSpeechBar}
                      selectedVoice={this.state.selectedVoice} selectedVoiceRate={this.state.selectedVoiceRate}
                      selectedVoicePitch={this.state.selectedVoicePitch} editorToggle={this.state.editorToggle}
                      removeFromGrid={this.handleDelete}/>
-            </Col>
+            </div>
 
-            <Col className="VocabCol">
+            <div className="VocabCol">
               <Vocab
                      cols={this.state.colArray} add={this.addWordToSpeechBar}
                      selectedVoice={this.state.selectedVoice} selectedVoiceRate={this.state.selectedVoiceRate}
                      selectedVoicePitch={this.state.selectedVoicePitch} editorToggle={this.state.editorToggle}
                      removeFromGrid={this.handleDelete}/>
-            </Col>
+            </div>
 
             {this.renderRemoveWordModal()}
 

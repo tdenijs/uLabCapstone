@@ -28,14 +28,15 @@
 }
 
 .FringeCol { /* black border */
-  width: 260px;
+  /*width: 260px;*/
+  min-width: 180px;
   flex-grow: 0;
   margin-right: 10px;
 }
 
-. VocabCol {  /* orange border */
-  max-width: 320px;
-  flex-grow: 3;
+.VocabCol {  /* orange border */
+  /*max-width: 320px;*/
+  /*flex-grow: 3;*/
 }
 
 .VocabContainer {

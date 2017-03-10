@@ -13,13 +13,20 @@ import React, {Component} from 'react';
 import { Glyphicon } from 'react-bootstrap';
 
 class Word extends Component {
-
+  /**
+   * Constructor
+   * @param props : The parent (see ../App.js)
+   */
   constructor(props) {
     super(props);
 
     this.speak = this.speak.bind(this);
   }
 
+
+  /**
+   * Speaks this word's text and adds that word to the SpeechBar (See ./SpeechBar.js)
+   */
   speak() {
     // Add text of the Word to speechBar
     var word = {
@@ -53,6 +60,9 @@ class Word extends Component {
 
   // <Glyphicon glyph="glyphicon glyphicon-remove-sign" aria-label="Clear Message Button"/>
 
+  /**
+   * Basic React render function, renders the component.
+   */
   render() {
       // Only show the delete button on a word if editorToggle is true
       let deleteButton = this.props.editorToggle ?

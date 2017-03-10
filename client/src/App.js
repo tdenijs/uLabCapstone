@@ -85,7 +85,10 @@ class App extends Component {
 
 
 
-
+  /**
+   * This function is run before component mounts. 
+   * Gets the vocab and fringe titles.
+   */
   componentWillMount() {
     this.getCoreVocabTitles();
     this.getFringeVocabTitles();
@@ -94,6 +97,10 @@ class App extends Component {
     window.addEventListener("resize", this.updateDimensions());    // add event listener for update dimensions
   }
 
+  /**
+   * This function is run when the component has mounted.
+   * Gets the vocab and fringe words
+   */
   componentDidMount() {
     this.getWords(); // get words for main core vocabulary
     this.getFringeWords(); // get words for fringe vocabulary
@@ -245,8 +252,8 @@ class App extends Component {
   }
 
   /**
-   * appendToCols(nextCol)
    * Adds a new column to the colArray
+   * @param nextCol : the next column to add to the colArray.
    */
   appendToCols(nextCol) {
     return ((prevState) => {
@@ -319,12 +326,16 @@ class App extends Component {
     this.setState({settingsBarVisible: !(this.state.settingsBarVisible)});
   }
 
-  //Enables editorToggle state variable when the Editor Mode button is clicked in SettingsBar
+  /**
+   * Enables editorToggle state variable when the Editor Mode button is clicked in SettingsBar
+   */
   enableEditorMode() {
     this.setState({editorToggle: !(this.state.editorToggle)});
   }
 
-  // Callback function passed to the SettingsBar to update the App's settingsLocked state variable
+  /**
+   * Callback function passed to the SettingsBar to update the App's settingsLocked state variable
+   */
   lockToggle() {
     console.log("settings lockToggle called")
     this.setState({settingsLocked: !(this.state.settingsLocked)});
@@ -336,17 +347,25 @@ class App extends Component {
   //   this.setState({buttonSize: e.target.value});
   // }
 
-  //These following 2 functions are setting modal
+  /**
+   * Closes the modal for delete confirmation
+   */
   close() {
     this.setState({showModal: false});
   }
 
+  /**
+   * Opens the modal for delete confirmation
+   */
   open() {
     this.setState({showModal: true});
   }
 
 
-  // Callback function passed to the Word Component to add a word to the speechBarMessage
+  /**
+   * Callback function passed to the Word Component to add a word to the speechBarMessage
+   * @param word : The word to be passed into the Speech Bar (See components/SpeechBar.js)
+   */
   addWordToSpeechBar(word) {
     let newWord = {
       id: _.uniqueId(),
@@ -385,6 +404,9 @@ class App extends Component {
    * handleDelete(word_text, word_id, col_id)
    * Callback function passed to Word component to remove that word from the grid.
    * Updates state related to the delete confirmation modal and opens the modal.
+   * @param word_text : the text we need to delete
+   * @param word_id : the id of the word we are deleting
+   * @param col_id : the id of the column from which the word is being deleted
    */
   handleDelete(word_text, word_id, col_id) {
     this.setState({deleteWordText: word_text});
@@ -407,6 +429,8 @@ class App extends Component {
   /**
    * removeFromGrid(word_id, col_id)
    * Updates the local state to remove the desired word from the desired column.
+   * @param word_id : the id of the word that we are deleting
+   * @param col_id : the id of the column from which the word is being deleted
    */
   removeFromGrid(word_id, col_id) {
     console.log("wordId: " + word_id + " columnId: " + col_id);
@@ -470,6 +494,7 @@ class App extends Component {
    * handleAddNewImage()
    * {API POST CALL}
    * Callback function passed to the WordEditor Component to add a image through POST api call
+   * @param formData : The data collection that needs to be added into the database
    */
   handleAddNewImage(formData) {
     $.ajax({
@@ -488,6 +513,8 @@ class App extends Component {
    * callDeleteApi(word_id, list_id)
    * {API DELETE CALL}
    * Called by handleDeleteConfirm to remove the specified word from the specified list in the database
+   * @param word_id : the id of the word that we are deleting
+   * @param col_id : the id of the column from which the word is being deleted
    */
   callDeleteApi(word_id, list_id) {
     let address = 'http://localhost:3001/api/words/list_id/' + list_id + '/word_id/' + word_id;
@@ -509,6 +536,10 @@ class App extends Component {
    * handleAddNewWord()
    * {API POST CALL}
    * Callback function passed to the WordEditor Component to add a word through POST api call
+   * @param wordText : The text of the word that is being added
+   * @param selectedTitle : The title of the list that the word is being added to
+   * @param selectedVocabulary : The name of the vocabulary that the word is being added to
+   * @param fileSelected : The image file that is being passed in
    */
   handleAddNewWord(wordText, newFileName, selectedTitle, selectedVocabulary, fileSelected) {
     var newPath = (fileSelected && newFileName !== '') ?
@@ -573,6 +604,9 @@ class App extends Component {
     )
   }
 
+  /**
+   * Basic React render function, renders the component.
+   */
   render() {
 
     //Get the Browser's voices loaded before anything. Allows syncing

@@ -17,6 +17,10 @@ import $ from 'jquery';
 
 
 class WordEditor extends Component {
+  /**
+   * Constructor
+   * @param props : The parent (see ../App.js)
+   */
   constructor(props) {
 
     super(props);
@@ -38,6 +42,11 @@ class WordEditor extends Component {
 
   }
 
+  /**
+   * Handles submitting the Form
+   * Takes care of sending Word Text, Image, Grid Type, List Type
+   * @param e : The event being passed in.
+   */
   _handleSubmit(e) {
     e.preventDefault();
 
@@ -85,6 +94,7 @@ class WordEditor extends Component {
     }
 
     // Check for an empty string and a string with more than 25 characters
+    // If they inputted no words, tell them the text box is empty.
     if(this.state.wordText.length > 25){
       msg.text = "please enter less than 25 characters"
     }
@@ -98,12 +108,16 @@ class WordEditor extends Component {
       msg.text = "The text box is empty."
     }
 
-    window.speechSynthesis.speak(msg);
+    window.speechSynthesis.speak(msg); //Speak the inputted text.
 
-    this.props.close(); //close modal
+    this.props.close(); //close the WordEditor
   }
 
 
+  /**
+   * Handles the image being changed. Sets the image preview
+   * @param e : The event being passed in.
+   */
   _handleImageChange(e) {
     e.preventDefault();
 
@@ -121,6 +135,10 @@ class WordEditor extends Component {
   }
 
 
+  /**
+   * Sets the state for wordText to be the value of the event.
+   * @param e : The event being passed in, value is the text.
+   */
   setWordText(e){
     this.setState({wordText: e.target.value});
   }
@@ -128,7 +146,7 @@ class WordEditor extends Component {
   /**
    * Updates listTitles to either Core's lists or Fringe's lists
    * Then sets the selectedTitle to the first item in the list
-   * @param e : The event's name being passed in, either "core" or "fringe".
+   * @param e : The event being passed in, either "core" or "fringe".
    */
   updateLists(e){
     if(e === "core") {
@@ -142,6 +160,9 @@ class WordEditor extends Component {
   }
 
 
+  /**
+   * Basic React render function, renders the component.
+   */
   render() {
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;

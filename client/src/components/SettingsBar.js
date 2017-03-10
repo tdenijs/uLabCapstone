@@ -7,6 +7,9 @@
  * This file is part of uLabCapstone, distributed under the MIT
  * open source license. For full terms see the LICENSE.md file
  * included in the root of this project.
+ *
+ * This component exists for the purpose of creating clickable
+ * settings options for the user.
  *******************************************************************/
 
 import React, {Component} from 'react';
@@ -16,6 +19,10 @@ import WordEditor from './WordEditor.js';
 
 
 class SettingsBar extends Component {
+  /**
+   * Constructor
+   * @param props : The parent (see ../App.js)
+   */
   constructor(props) {
     super(props);
 
@@ -31,7 +38,10 @@ class SettingsBar extends Component {
     }
   }
 
-
+  /**
+   * Locks the Settings Bar so that all functionality is inaccessible,
+   * with the exception of the lock toggle button itself.
+   */
   renderLock() {
     // Check the checkbox if the settingsLocked prop is true
     // let checked = this.props.settingsLocked ? 'checked' : '';
@@ -57,6 +67,9 @@ class SettingsBar extends Component {
     );
   }
 
+  /**
+   * Basic React render function, renders the component.
+   */
   render() {
     // Disable the dropdown menu if the settingsLocked prop is true
     let disabled = this.props.settingsLocked ? 'disabled' : '';

@@ -14,6 +14,9 @@ import Column from './Column'
 import _ from 'lodash';
 
 class Vocab extends Component {
+  /**
+   * Basic React render function, renders the component.
+   */
   render() {
 
     console.log('from vocab: cols -- ', this.props.cols )

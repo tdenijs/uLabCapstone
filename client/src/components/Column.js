@@ -7,6 +7,9 @@
  * This file is part of uLabCapstone, distributed under the MIT
  * open source license. For full terms see the LICENSE.md file
  * included in the root of this project.
+ *
+ * This component exists for the purpose of creating a column of
+ * Word components.
  *******************************************************************/
 
 import React, {Component} from 'react';
@@ -16,6 +19,11 @@ import _ from 'lodash';
 // style={{height: this.props.maxHeight}}
 
 class Column extends Component {
+
+
+  /**
+   * Basic React render function, renders the component.
+   */
   render() {
     return (
       <div className="Column" >

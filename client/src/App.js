@@ -189,14 +189,14 @@ class App extends Component {
   getWords() {
     let nextCol;
     let titles = [
-      {title: 'pronoun', id: "6", order: "1"},
-      {title: 'questions', id: "8", order: "2"},
-      {title: 'noun', id: "4", order: "3"},
-      {title: 'verb', id: "7", order: "4"},
+      {title: 'pronoun', id: "7", order: "1"},
+      {title: 'questions', id: "3", order: "2"},
+      {title: 'noun', id: "5", order: "3"},
+      {title: 'verb', id: "8", order: "4"},
       {title: 'adjective', id: "1", order: "5"},
       {title: 'adverb', id: "2", order: "6"},
-      {title: 'preposition', id: "5", order: "7"},
-      {title: 'exclamation', id: "3", order: "8"}];
+      {title: 'preposition', id: "6", order: "7"},
+      {title: 'exclamation', id: "4", order: "8"}];
 
     this.setState({colArray: []});  // getWords() will be called when a new word is added,
                                     // clear the colArray before retrieving words from api
@@ -450,7 +450,7 @@ class App extends Component {
     let col = 0;
     let newCols = 0;
 
-    if(col_id > 7) {
+    if(col_id > 8) {
       col = this.state.fringeColArray.filter((el) => {
         return el.id === col_id;
       });
@@ -486,7 +486,7 @@ class App extends Component {
     };
 
     // Update the state and add the updated column back on
-    if(col_id > 7) {
+    if(col_id > 8) {
       this.setState({
         fringeColArray: [
           ...newCols, newCol

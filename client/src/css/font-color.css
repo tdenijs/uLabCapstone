@@ -185,17 +185,22 @@
   background-color: #fff;
 */
 
-
+  border: 7px solid #000;  /* black border */
+  border-radius: 15px;
+  color: #fff;
+  background-color: #000;
 
   }
 
-.VocabCol {}
+.VocabCol {
+  border: 7px solid #F98935;  /* orange border */
+  border-radius: 15px;
+  background-color: #F98935;
+}
 
 
 .VocabContainer{
-  border: 7px solid #F98935;  /* orange border */
-  border-radius: 15px;
-  background-color: #fff;
+
 }
 
 .Column {

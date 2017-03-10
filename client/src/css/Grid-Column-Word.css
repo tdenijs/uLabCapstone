@@ -22,21 +22,23 @@
 
   display: flex;
   flex-flow: row nowrap;
+  justify-content: center;
 
   max-height: 90vh;
 }
 
-.FringeCol { /* grey border */
-  width: 320px;
+.FringeCol { /* black border */
+  width: 260px;
   flex-grow: 0;
+  margin-right: 10px;
 }
 
-. VocabCol {
-  max-width: 260px;
-  flex-grow: 2;
+. VocabCol {  /* orange border */
+  max-width: 320px;
+  flex-grow: 3;
 }
 
-.VocabContainer {   /* orange border */
+.VocabContainer {
 
   display: flex;
   flex-flow: row nowrap;
@@ -57,6 +59,9 @@
   display: flex;
   flex-flow: column wrap;
   align-items: flex-start;
+
+  padding-left: 1px;
+  padding-right: 1px;
 
   flex: 0 0 165px;
   /*  The 160px here should changed for each column to match

@@ -30,7 +30,7 @@ class Column extends Component {
    * @returns {string}
    */
   getBackgroundColor() {
-    var color = "grey";  // default color
+    var color = "black";  // default color
 
     switch(this.props.title) {
       case "pronoun":

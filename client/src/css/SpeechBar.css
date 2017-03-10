@@ -35,15 +35,16 @@
 
   /* word component inside of the message window */
   .MessageWindow .Word {
-    width: 60px;
+    width: 50px;
     border: none;
     float: left;
-    height: 90%;
+    height: 80%;
   }
 
   .MessageWindow .Word:hover {
     background-color: transparent;
     color: inherit;
+    border: none;
   }
 
   .MessageWindow .WordSymbol {
@@ -119,18 +120,18 @@
     overflow-x: auto;
   }
 
-
-
   .MessageWindow .Word { /* word component inside of the message window */
-    width: 60px;
+    width: 50px;
     border: none;
     float: left;
-    height: 90%;
+    height: 50%;
+    font-size: .8em;
   }
 
   .MessageWindow .Word:hover {
     background-color: transparent;
     color: inherit;
+    border: none;
   }
 
   .MessageWindow .WordSymbol {
@@ -141,7 +142,6 @@
   .MessageWindow {
     flex: 1;
     order: 2;
-
   }
 
   .SettingsButton {
@@ -151,9 +151,6 @@
     order: 1;
     justify-content: flex-end;
     margin-left: 10px;
-
-
-
   }
 
   .PlayButton {
@@ -176,12 +173,9 @@
     height: 50px;
     margin-left: 10px;
 
-
     order: 4;
     justify-content: flex-end;
   }
-
-
 
 }
 
@@ -212,7 +206,5 @@
     .ClearButton {
       order: 4;
     }
-
-
 
   }

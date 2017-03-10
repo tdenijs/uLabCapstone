@@ -108,6 +108,7 @@ class SpeechBar extends Component {
           {this.renderMessageWindow()}
           <button className="BackspaceButton"  onClick={this.props.handleBackButton}><Glyphicon glyph="glyphicon glyphicon-step-backward" aria-label="Backspace Button"/> </button>
           <button className="ClearButton" onClick={this.props.handleClearMessage}><Glyphicon glyph="glyphicon glyphicon-remove" aria-label="Clear Message Button"/> </button>
+          <img className="MsgHook" src="img/speech_ptr.png" alt="" />
       </div>
     );
   }

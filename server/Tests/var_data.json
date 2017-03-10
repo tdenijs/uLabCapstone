@@ -6,7 +6,7 @@
     "word_id": 1,
     "word_name": "good",
     "list_id_for_del": 1,
-    "word_id_for_del": 2
+    "word_id_for_del": 3
   },
   {
     "title": "adverb",
@@ -16,56 +16,66 @@
     "word_id": 2,
     "word_name": "bad",
     "list_id_for_del": 2,
-    "word_id_for_del": 8
+    "word_id_for_del": 11
+  },
+  {
+    "title": "questions",
+    "list_id": 3,
+    "grid_title": "core vocabulary",
+    "grid_id": 1,
+    "word_id": 7,
+    "word_name": "silly",
+    "list_id_for_del": 3,
+    "word_id_for_del": 13
   },
   {
     "title": "exclamation",
-    "list_id": 3,
+    "list_id": 4,
     "grid_title": "core vocabulary",
     "grid_id": 1,
     "word_id": 3,
     "word_name": "happy",
-    "list_id_for_del": 2,
-    "word_id_for_del": 9
+    "list_id_for_del": 8,
+    "word_id_for_del": 32
   },
   {
     "title": "noun",
-    "list_id": 4,
+    "list_id": 5,
     "grid_title": "core vocabulary",
     "grid_id": 1,
     "word_id": 4,
     "word_name": "off",
-    "list_id_for_del": 4,
+    "list_id_for_del": 5,
     "word_id_for_del": 18
   },
   {
     "title": "preposition",
-    "list_id": 5,
+    "list_id": 6,
     "grid_title": "core vocabulary",
     "grid_id": 1,
     "word_id": 5,
     "word_name": "not",
-    "list_id_for_del": 5,
+    "list_id_for_del": 6,
     "word_id_for_del": 20
   },
   {
     "title": "pronoun",
-    "list_id": 6,
+    "list_id": 7,
     "grid_title": "core vocabulary",
     "grid_id": 1,
     "word_id": 6,
     "word_name": "why",
-    "list_id_for_del": 6,
-    "word_id_for_del": 23
+    "list_id_for_del": 7,
+    "word_id_for_del": 24
   },
   {
     "title": "verb",
-    "list_id": 7,
+    "list_id": 8,
     "grid_title": "core vocabulary",
     "grid_id": 1,
     "word_id": 7,
     "word_name": "who",
-    "list_id_for_del": 7,
+    "list_id_for_del": 8,
     "word_id_for_del": 29
   }
 ]

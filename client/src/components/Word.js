@@ -38,16 +38,16 @@ class Word extends Component {
 
     this.props.add(word);
 
-    // speechSynthesis.getVoices().forEach(function (voice) {
-    //   console.log(voice.name, voice.default ? voice.default : '');
-    // });
-
     // Speak the text of the Word
     var spokenWord = new SpeechSynthesisUtterance(this.props.text);
 
     var voices = speechSynthesis.getVoices();
     console.log("selected voice: ", this.props.selectedVoice );
     var chosenVoice = this.props.selectedVoice;
+    //Divide the pitch and rate by 10 because we use 1 to 20, but
+    //rate and pitch require 0.1 to 2.0 (easier to visualize 1 to 20)
+    spokenWord.rate = this.props.selectedVoiceRate / 10;
+    spokenWord.pitch = this.props.selectedVoicePitch / 10;
 
     for (var i = 0; i < voices.length; i++) {
       if (voices[i].name === chosenVoice) {

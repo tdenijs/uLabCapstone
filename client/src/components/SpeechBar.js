@@ -57,6 +57,11 @@ class SpeechBar extends Component {
     var voices = speechSynthesis.getVoices();
     var selectedVoice = this.props.selectedVoice;
     var msg = new SpeechSynthesisUtterance();
+
+    //Divide the pitch and rate by 10 because we use 1 to 20, but
+    //rate and pitch require 0.1 to 2.0 (easier to visualize 1 to 20)
+    msg.rate = this.props.selectedVoiceRate / 10;
+    msg.pitch = this.props.selectedVoicePitch / 10;
     for(var i = 0; i < voices.length; i++) {
 	   if(voices[i].name === selectedVoice) {
 		   msg.voice = voices[i];
@@ -114,6 +119,8 @@ SpeechBar.propTypes = {
   handleClearMessage: React.PropTypes.func,
   handleBackButton: React.PropTypes.func,
   selectedVoice: React.PropTypes.string,
+  selectedVoiceRate: React.PropTypes.string,
+  selectedVoicePitch: React.PropTypes.string,
   settingsToggle: React.PropTypes.func,
 };
 

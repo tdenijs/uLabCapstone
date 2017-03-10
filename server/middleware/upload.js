@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
     cb(null, 'client/public/img/');
   },
   filename: function(req, file, cb) {
-    if (!file.originalname.match(/\.(png)$/)) {
+    if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
       var err = new Error();
       err.code = 'filetype';
       return cb(err);
@@ -50,9 +50,9 @@ function createImage(req, res) {
         res.status(400)
           .json({
             success: false,
-            message: 'File type is invalid. Must be .png'
+            message: 'File type is invalid. Must be .png, .jpg or .jpeg'
           });
-        console.log("*** (createImage) ERROR: File type is invalid. Must be .png");
+        console.log("*** (createImage) ERROR: File type is invalid. Must be .png, .jpg or .jpeg");
       } else {
         console.log(err);
         res.status(400)

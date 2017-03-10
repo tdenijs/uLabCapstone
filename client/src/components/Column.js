@@ -34,6 +34,7 @@ class Column extends Component {
               return (
                 <Word key={_.uniqueId()} id={word_id} text={word} src={symbol_path}
                       alt={alt} add={this.props.add} selectedVoice={this.props.selectedVoice}
+	              selectedVoiceRate={this.props.selectedVoiceRate} selectedVoicePitch={this.props.selectedVoicePitch}
                       editorToggle={this.props.editorToggle}
                       col_id={this.props.col_id} removeFromGrid={this.props.removeFromGrid}/>
               );

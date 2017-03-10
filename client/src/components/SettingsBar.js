@@ -32,6 +32,8 @@ class SettingsBar extends Component {
 
     this.state = {
       selectedVoice: voices[0] && voices[0].value,
+      selectedFringe: "",
+      fringeListTitles: this.props.fringeListTitles,
       voices,
     }
   }
@@ -71,6 +73,7 @@ class SettingsBar extends Component {
   render() {
     // Disable the dropdown menu if the settingsLocked prop is true
     let disabled = this.props.settingsLocked ? 'disabled' : '';
+    console.log(this.state.fringeListTitles);
 
     return (
       <div className="SettingsBar">
@@ -89,7 +92,28 @@ class SettingsBar extends Component {
               })
             }
           </select>
+          {/* Voice Speed Slider */}
+          <input type="range" className="VoiceRateSlider" min="1" max="20" 
+                 value={this.props.selectedVoiceRate}
+                 onChange={this.props.updateVoiceRate} disabled={disabled}></input>
+          {/* Voice Pitch Slider */}
+          <input type="range" className="VoicePitchSlider" min="1" max="20"
+                 value={this.props.selectedVoicePitch} 
+                 onChange={this.props.updateVoicePitch} disabled={disabled}></input>
         </form>
+
+	{/* Drop Down for changing which Fringe List we want */}
+        <select className="FringeLists" defaultValue={this.props.selectedFringe}
+                onChange={(e) => {
+                    this.setState({selectedFringe: e.target.value});
+                    this.props.updateFringeChoice(e)
+                }}>
+            {
+               this.state.fringeListTitles.map((title) => {
+               return <option key={title} value={title}>{title}</option>
+             })
+           }
+         </select>
 
         {/* Add Button */}
         <button className={"AddButton" + (this.props.settingsLocked ? '-locked' : '')} onClick={this.props.open} disabled={disabled}>Add New Word</button>
@@ -99,6 +123,8 @@ class SettingsBar extends Component {
           show={this.props.showModal}
           onHide={this.props.close}>
           <WordEditor
+            selectedVoiceRate={this.props.selectedVoiceRate}
+	    selectedVoicePitch={this.props.selectedVoicePitch} 
             coreListTitles={this.props.coreListTitles}
 	    fringeListTitles={this.props.fringeListTitles}
             close={this.props.close}
@@ -124,6 +150,10 @@ class SettingsBar extends Component {
 
 SettingsBar.propTypes = {
   updateVoice: React.PropTypes.func,
+  updateVoiceRate: React.PropTypes.func,
+  updateVoicePitch: React.PropTypes.func,
+  selectedVoiceRate: React.PropTypes.string,
+  selectedVoicePitch: React.PropTypes.string,
   lockToggle: React.PropTypes.func,
   enableEditorMode: React.PropTypes.func,
   open: React.PropTypes.func,
@@ -133,4 +163,7 @@ SettingsBar.propTypes = {
 
 };
 
+SettingsBar.defaultProps = {
+  fringeListTitles: ["Goodnight Moon", "Hello world"],
+};
 export default SettingsBar;

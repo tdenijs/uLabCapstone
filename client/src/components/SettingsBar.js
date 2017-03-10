@@ -29,6 +29,9 @@ class SettingsBar extends Component {
     }
   }
 
+  componentDidUpdate(){
+        this.props.disableEditorIfLocked();
+  }
 
   renderLock() {
     // Check the checkbox if the settingsLocked prop is true
@@ -58,6 +61,9 @@ class SettingsBar extends Component {
   render() {
     // Disable the dropdown menu if the settingsLocked prop is true
     let disabled = this.props.settingsLocked ? 'disabled' : '';
+
+      // Change the text on the delete button depending on whether EditorMode is enabled or not
+      let deleteText = this.props.editorToggle ? 'Finish Deleting' : 'Delete a Word';
 
     return (
       <div className="SettingsBar">
@@ -94,7 +100,8 @@ class SettingsBar extends Component {
         </Modal>
 
         {/* Editor Button, allows you to delete words */}
-        <button className={"EditorButton"+ (this.props.settingsLocked ? '-locked' : '')} onClick={this.props.enableEditorMode} disabled={disabled}>Delete a Word
+        <button className={"EditorButton"+ (this.props.settingsLocked ? '-locked' : '')} onClick={this.props.enableEditorMode} disabled={disabled}>
+            {deleteText}
         </button>
 
           { this.renderLock() }

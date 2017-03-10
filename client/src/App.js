@@ -51,7 +51,8 @@ class App extends Component {
     this.renderRemoveWordModal = this.renderRemoveWordModal.bind(this);
     this.callDeleteApi = this.callDeleteApi.bind(this);
     this.renderSettingsBar = this.renderSettingsBar.bind(this);
-    this.updateDimensions = this.updateDimensions.bind(this)
+    this.updateDimensions = this.updateDimensions.bind(this);
+    this.disableEditorIfLocked = this.disableEditorIfLocked.bind(this);
 
     this.state = {
       selectedVoice: "Default",
@@ -291,6 +292,16 @@ class App extends Component {
     this.setState({settingsLocked: !(this.state.settingsLocked)});
   }
 
+  /**
+   * disableEditorIfLocked()
+   * Callback function used by SettingsBar to run in its componentDidUpdate lifecycle method.
+   * If the settings bar is locked, disable editor mode.
+   */
+  disableEditorIfLocked() {
+    if (this.state.settingsLocked && this.state.editorToggle) {
+      this.enableEditorMode();
+    }
+  }
 
   // // Callback function passed to the SettingsBar to update the App's buttonSize state variable
   // resizeButton(e) {
@@ -522,11 +533,11 @@ class App extends Component {
     return (
       <SettingsBar selectedVoice={this.state.selectedVoice} updateVoice={this.updateVoice}
                    settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
-                   editorToggle={this.state.editorToggled} enableEditorMode={this.enableEditorMode}
+                   editorToggle={this.state.editorToggle} enableEditorMode={this.enableEditorMode}
                    buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
                    open={this.open} close={this.close} showModal={this.state.showModal}
                    coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}
-                   handleAddNewImage={this.handleAddNewImage}
+                   handleAddNewImage={this.handleAddNewImage} disableEditorIfLocked={this.disableEditorIfLocked}
                    fringeListTitles={this.state.fringeListTitles}/>
     )
   }

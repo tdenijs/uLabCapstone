@@ -17,7 +17,7 @@
 @media all and (max-width: 599px) {
 
   .SpeechBar {
-    min-height: 80px;
+    min-height: 90px;
 
     margin-bottom: 0px;
 
@@ -30,7 +30,7 @@
 
   .MessageWindow {
     float: left;
-    min-height: 80px;
+    min-height: 90px;
   }
 
   /* word component inside of the message window */
@@ -39,6 +39,9 @@
     border: none;
     float: left;
     height: 80%;
+
+    font-size: .8em;
+    margin: 0;
   }
 
   .MessageWindow .Word:hover {
@@ -98,7 +101,7 @@
 
 @media all and (min-width: 600px) {
   .SpeechBar {
-    min-height: 80px;
+    min-height: 90px;
 
     display: flex;
     flex-direction: row;
@@ -111,7 +114,7 @@
 
   .MessageWindow {
     float: left;
-    min-height: 80px;
+    min-height: 90px;
 
     margin-right: 10px;
     margin-left: 10px;
@@ -124,8 +127,10 @@
     width: 50px;
     border: none;
     float: left;
-    height: 50%;
+
+    max-height: 65px;
     font-size: .8em;
+    margin: 0;
   }
 
   .MessageWindow .Word:hover {

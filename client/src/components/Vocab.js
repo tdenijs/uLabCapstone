@@ -28,6 +28,7 @@ class Vocab extends Component {
           sortedCols.map(({id, title, words}) => {
             return (<Column key={_.uniqueId()} col_id={id} title={title} words={words} add={this.props.add}
                             selectedVoice={this.props.selectedVoice} editorToggle={this.props.editorToggle}
+                            selectedVoiceRate={this.props.selectedVoiceRate} selectedVoicePitch={this.props.selectedVoicePitch}
                             removeFromGrid={this.props.removeFromGrid}
                             maxHeight={this.props.maxHeight}
             />);

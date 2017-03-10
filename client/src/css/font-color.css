@@ -131,12 +131,18 @@
   background-color: #449EA8;
   font-family:"Courier New";
 }
+
 .VoiceLabel {
   background-color: #F98935; /* orange */
   font-family:"Courier New";
 }
 
-.VoiceLabel-locked {
+.FringeLabel {
+  background-color: #F0D24C; /* yellow */
+  font-family:"Courier New";
+}
+
+.VoiceLabel-locked, .FringeLabel-locked {
   background-color: #449EA8; /* blue */
   font-family:"Courier New";
 }
@@ -151,9 +157,16 @@
   font-family:"Courier New";
 }
 
+.closeSettings {
+  color: #E4004A;
+  font-size: 2em;
+  background-color: #ffffff;
+}
+
 .Locked {
   color: red;
 }
+
 .Lock {
   color: green;
   font-family:"Courier New";

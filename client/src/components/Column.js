@@ -75,33 +75,36 @@ class Column extends Component {
    */
   getColumnFlex() {
     var flex = '0 0 82px'  // default width = 1 column
+    var wordCount = this.props.words.length;
+    console.log(wordCount);
+
 
     switch (true) {
-      case (words.length <= 4):
+      case (wordCount <= 4):
           flex = '0 0 82px';
           break;
-      case (words.length <= 8):
+      case (wordCount <= 8):
           flex = '0 0 164px';
           break;
-      case (words.length <= 12):
+      case (wordCount <= 12):
           flex = '0 0 246px';
           break;
-      case (words.length <= 16):
+      case (wordCount <= 16):
           flex = '0 0 328px';
           break;
-      case (words.length <= 20):
+      case (wordCount <= 20):
           flex = '0 0 410px';
           break;
-      case (words.length <= 24):
+      case (wordCount <= 24):
           flex = '0 0 492px';
           break;
-      case (words.length <= 28):
+      case (wordCount <= 28):
           flex = '0 0 74px';
           break;
-      case (words.length <= 32):
+      case (wordCount <= 32):
           flex = '0 0 656px';
           break;
-      case (words.length <= 36):
+      case (wordCount <= 36):
           flex = '0 0 738';
           break;
       default:
@@ -122,7 +125,7 @@ class Column extends Component {
     let colFlex = this.getColumnFlex();
 
     return (
-      <div className="Column" style={{'background-color': colColor; 'flex': colFlex }}>
+      <div className="Column" style={{'background-color': colColor, 'flex': colFlex }}>
         <div className="ColumnTitle">{this.props.title}</div>
         <div className="WordContainer">
           {

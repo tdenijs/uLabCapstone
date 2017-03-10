@@ -24,6 +24,7 @@
 }
 
 
+
 .AddButton, .AddButton-locked {
   border: none;
   color: black;
@@ -50,22 +51,31 @@
   outline: none;   /* prevents blue outline from appearing on buttons*/
 }
 
-.VoiceLabel, .VoiceLabel-locked {
+.VoiceLabel, .VoiceLabel-locked, .FringeLabel, .FringeLabel-locked {
   padding: 10px 20px;
   margin-right: 5px;
   text-align: center;
   text-decoration: none;
-
-  display: inline-block;
 }
+
+.VoiceMenu, .FringeListsMenu {
+  margin-left: 10px;
+}
+
+.closeSettings {
+  padding: 5px;
+  margin-botton: 10px;
+}
+
 
 .LockSetting, .LockSetting-locked {
   padding: 10px 10px;
 }
 
-/*.Locked {*/
-  /*padding-right: 5px;*/
-/*}*/
+.VoiceControl{
+  padding: 5px 10px;
+  margin-left: 10px;
+}
 
 
 
@@ -82,7 +92,11 @@
     align-content: stretch;
 
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+  }
+
+  .FringeLabel{
+    order: 1;
   }
 
   .VoiceForm {
@@ -90,7 +104,7 @@
     flex-flow: row nowrap;
 
     margin-bottom: 5px;
-    order: 1;
+    order: 2;
   }
 
   .VoiceLabel, .VoiceLabel-locked {}
@@ -131,8 +145,12 @@
     justify-content: space-between;
   }
 
-  .VoiceForm {
+  .FringeLabel{
     order: 1;
+  }
+
+  .VoiceForm {
+    order: 2;
   }
 
   .VoiceLabel, .VoiceLabel-locked {}

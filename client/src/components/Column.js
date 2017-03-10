@@ -18,9 +18,6 @@ import _ from 'lodash';
 
 
 class Column extends Component {
-  /* Different columns will have different colors depending on the part of speech
-     or their title.  */
-
   constructor(props) {
     super(props);
     this.getBackgroundColor = this.getBackgroundColor.bind(this);
@@ -29,6 +26,7 @@ class Column extends Component {
 
   /**
    * getBackgroundColor: returns a hex color dependent on the title
+   * Different columns will have different colors depending on the part of speech or their title.
    * @returns {string}
    */
   getBackgroundColor() {
@@ -68,6 +66,7 @@ class Column extends Component {
     return color;
   }
 
+
 /**
    * getColumnWidth:  flex width in pixels for a .Column class
    * based on # of words in the Word Array
@@ -76,8 +75,6 @@ class Column extends Component {
   getColumnFlex() {
     var flex = '0 0 82px'  // default width = 1 column
     var wordCount = this.props.words.length;
-    console.log(wordCount);
-
 
     switch (true) {
       case (wordCount <= 4):
@@ -111,8 +108,7 @@ class Column extends Component {
           break;
     }
 
-
-    console.log("COL. FLEX: " + this.props.title + " " + flex);
+    // console.log("COL. FLEX: " + this.props.title + " count: " + wordCount + "  " + flex);
     return flex;
   }
 
@@ -144,6 +140,7 @@ class Column extends Component {
     );
   }
 }
+
 
 Column.propTypes = {
   words: React.PropTypes.array,

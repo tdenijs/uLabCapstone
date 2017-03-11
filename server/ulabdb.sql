@@ -146,6 +146,7 @@ INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
   VALUES ('how','img/how.png','how symbol'),
          ('when','img/when.png','when symbol'),
          ('where','img/where.png','where symbol'),
+         ('what','img/what.png','what symbol'),
          ('who','img/who.png','who symbol'),
          ('why','img/why.png','why symbol');
 
@@ -154,6 +155,7 @@ INSERT INTO Words (word, symbol_id)
   VALUES ('how',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'how')),
          ('when',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'when')),
          ('where', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'where')),
+	       ('what',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'what')),
          ('who',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'who')),
          ('why',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'why'));
 
@@ -162,6 +164,7 @@ INSERT INTO ListWords (word_id, list_id)
   VALUES ((SELECT W.word_id from Words W WHERE word = 'how'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'questions')),
          ((SELECT W.word_id from Words W WHERE word = 'when'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'questions')),
          ((SELECT W.word_id from Words W WHERE word = 'where'), (SELECT L.list_id from Lists L WHERE L.list_title = 'questions')),
+         ((SELECT W.word_id from Words W WHERE word = 'what'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'questions')),
          ((SELECT W.word_id from Words W WHERE word = 'who'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'questions')),
          ((SELECT W.word_id from Words W WHERE word = 'why'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'questions'));
 
@@ -247,18 +250,19 @@ INSERT INTO GridLists (grid_id, list_id)
 
 -- add symbols for pronouns
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
-  VALUES ('I','img/I.png','I symbol'),          ('it','img/it.png','it symbol'),
-         ('that','img/that.png','that symbol'), ('they','img/they.png','they symbol'),
-         ('what','img/what.png','what symbol'), ('you','img/you.png','you symbol');
+  VALUES ('I','img/I.png','I symbol'),
+         ('it','img/it.png','it symbol'),
+         ('that','img/that.png','that symbol'),
+         ('they','img/they.png','they symbol'),
+         ('you','img/you.png','you symbol');
 
 -- add words for pronouns list
 INSERT INTO Words (word, symbol_id)
   VALUES ('I',    (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'I')),
          ('it',   (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'it')),
-	 ('that', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'that')),
-	 ('they', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'they')),
-	 ('what', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'what')),
-	 ('you',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'you'));
+	       ('that', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'that')),
+	       ('they', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'they')),
+	       ('you',  (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'you'));
 
 --add words to pronoun list
 INSERT INTO ListWords (word_id, list_id)
@@ -267,7 +271,6 @@ INSERT INTO ListWords (word_id, list_id)
    ((SELECT W.word_id from Words W WHERE word = 'it'),   (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun')),
    ((SELECT W.word_id from Words W WHERE word = 'that'), (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun')),
    ((SELECT W.word_id from Words W WHERE word = 'they'), (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun')),
-   ((SELECT W.word_id from Words W WHERE word = 'what'), (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun')),
    ((SELECT W.word_id from Words W WHERE word = 'you'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'pronoun'));
 
 

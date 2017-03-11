@@ -60,7 +60,6 @@ class Column extends Component {
       default:
         break;
     }
-
     // console.log("COL. COLOR: " + this.props.title + " " + color);
     return color;
   }

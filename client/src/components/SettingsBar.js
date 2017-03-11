@@ -168,6 +168,7 @@ SettingsBar.propTypes = {
   updateVoice: React.PropTypes.func,
   updateVoiceRate: React.PropTypes.func,
   updateVoicePitch: React.PropTypes.func,
+  updateFringeChoice: React.PropTypes.func,
   selectedVoiceRate: React.PropTypes.string,
   selectedVoicePitch: React.PropTypes.string,
   lockToggle: React.PropTypes.func,

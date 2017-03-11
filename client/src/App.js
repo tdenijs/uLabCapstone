@@ -33,6 +33,7 @@ class App extends Component {
     this.updateVoiceRate = this.updateVoiceRate.bind(this);
     this.updateVoicePitch = this.updateVoicePitch.bind(this);
     this.updateFringeChoice = this.updateFringeChoice.bind(this);
+    this.updateFringeChoiceSynch = this.updateFringeChoiceSynch.bind(this); 
     this.lockToggle = this.lockToggle.bind(this);
     this.enableEditorMode = this.enableEditorMode.bind(this);
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
@@ -70,7 +71,9 @@ class App extends Component {
       messageArray: [],
       coreListTitles: [],
       fringeListTitles: [],
+      listIds: [],
       selectedFringe: "",
+      selectedFringeId: "0",
       showModal: false,
       showDeleteModal: false,
       deleteWordText: "",
@@ -161,7 +164,24 @@ class App extends Component {
    * */
   getFringeWords() {
     let fringelist = [];
-    let title = "goodnight moon"
+    console.log(this.state.fringeListTitles);
+    var title;
+    var selectedList;
+    var list_id;
+    if(this.state.fringeListTitles.length === 0) {
+    	title = "goodnight moon";
+        list_id = 9;
+    } else {
+        // Lookup the correct list_id for the given fringe title
+        title = this.state.selectedFringe;
+        selectedList = this.state.listIds.filter((el) => {
+          return el.title === title;
+        });
+        list_id = selectedList[0].id;
+    }
+
+    console.log(this.state.selectedFringe);
+    console.log(title);
 
     this.setState({fringeColArray: []});  // getWords() will be called when a new word is added,
     // so need to clear the fringeColArray before retrieving words from ap
@@ -170,7 +190,7 @@ class App extends Component {
         .then((data) => {
           fringelist = {
             order: 1,
-            id: 9,
+            id: list_id,
             title: title,
             words: data
           };
@@ -241,16 +261,19 @@ class App extends Component {
   getFringeVocabTitles() {
     let fringeVocabId = '2';  // list_id for fringeVocab list
     let listTitles = [];
+    let listIds = [];
 
     $.getJSON('http://localhost:3001/api/grids/id/' + fringeVocabId)
       .then((data) => {
         _.forEach(data, function (value) {
           listTitles.push(value.list_title);
+          listIds.push({title: value.list_title, id: value.list_id});
         });
       })
 
     this.setState({fringeListTitles: listTitles});
     this.setState({selectedFringe: listTitles[0]});
+    this.setState({listIds: listIds});
   }
 
   /**
@@ -316,8 +339,20 @@ class App extends Component {
    * @param e : The name of the Fringe we are changing to
    */
   updateFringeChoice(e) {
-    this.setState({selectedFringe: e.target.value});
+    
+    this.updateFringeChoiceSynch(e).then(() => this.getFringeWords());
     console.log(this.state.selectedFringe);
+    console.log(e.target.value);
+    //this.getFringeWords();
+  }
+
+  updateFringeChoiceSynch(e) { 
+    var a = e.target.value;
+    this.setState({selectedFringe : a});
+    var p = new Promise((resolve, reject) => {
+           resolve('SUCCESS'); 
+    });
+    return p;
   }
 
   /**

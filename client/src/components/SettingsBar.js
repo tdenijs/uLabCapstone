@@ -110,7 +110,7 @@ class SettingsBar extends Component {
         </form>
 
 	{/* Drop Down for changing which Fringe List we want */}
-        <select className="FringeLists" defaultValue={this.props.selectedFringe}
+        <select className="FringeLists" defaultValue={this.props.selectedFringe} disabled={disabled}
                 onChange={(e) => {
                     this.setState({selectedFringe: e.target.value});
                     this.props.updateFringeChoice(e)
@@ -160,6 +160,7 @@ SettingsBar.propTypes = {
   updateVoice: React.PropTypes.func,
   updateVoiceRate: React.PropTypes.func,
   updateVoicePitch: React.PropTypes.func,
+  updateFringeChoice: React.PropTypes.func,
   selectedVoiceRate: React.PropTypes.string,
   selectedVoicePitch: React.PropTypes.string,
   lockToggle: React.PropTypes.func,

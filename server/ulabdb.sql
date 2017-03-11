@@ -612,3 +612,30 @@ INSERT INTO ListWords (word_id, list_id)
          ((SELECT W.word_id from Words W WHERE word = 'lion'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight gorilla')),
          ((SELECT W.word_id from Words W WHERE word = 'zoo keeper'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight gorilla')),
          ((SELECT W.word_id from Words W WHERE word = 'zoo keepers wife'), (SELECT L.list_id from Lists L WHERE L.list_title = 'goodnight gorilla'));
+
+-- add title for list #1 list
+INSERT INTO Lists (list_title)
+  VALUES ('list 1');
+
+-- add list #1 to fringe vocabulary grid
+INSERT INTO GridLists (grid_id, list_id)
+  VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'fringe vocabulary'),
+          (SELECT L.list_id FROM Lists L WHERE L.list_title = 'list 1'));
+
+-- add title for list #2 list
+INSERT INTO Lists (list_title)
+  VALUES ('list 2');
+
+-- add list #2 to fringe vocabulary grid
+INSERT INTO GridLists (grid_id, list_id)
+  VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'fringe vocabulary'),
+          (SELECT L.list_id FROM Lists L WHERE L.list_title = 'list 2'));
+
+-- add title for list #3 list
+INSERT INTO Lists (list_title)
+  VALUES ('list 3');
+
+-- add list #3 to fringe vocabulary grid
+INSERT INTO GridLists (grid_id, list_id)
+  VALUES ((SELECT G.grid_id FROM Grids G WHERE G.grid_title = 'fringe vocabulary'),
+          (SELECT L.list_id FROM Lists L WHERE L.list_title = 'list 3'));

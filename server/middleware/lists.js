@@ -70,12 +70,17 @@ function getAllWordsByListName(req, res, next) {
         console.log("(getAllWordsByListName) SUCCESS: All words for list " +
           '\'' + lTitle + '\'' + " were sent.");
       } else {
-        res.status(404)
-          .json({
-            success: false,
-            message: 'List ' + '\'' + lTitle + '\'' + ' not found'
-          });
-        console.log('*** (getAllWordsByListName) ERROR: List ' + '\'' + lTitle + '\'' + ' not found');
+        if(db.one('SELECT EXISTS (SELECT * FROM Lists WHERE list_title = $1);', [lTitle])) {
+          res.status(200)
+            .json(data);
+        } else {
+          res.status(404)
+            .json({
+              success: false,
+              message: 'List ' + '\'' + lTitle + '\'' + ' not found'
+            });
+            console.log('*** (getAllWordsByListName) ERROR: List ' + '\'' + lTitle + '\'' + ' not found');
+        }
       }
     })
     .catch(function(err) {

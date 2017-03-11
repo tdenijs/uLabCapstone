@@ -28,30 +28,21 @@
 }
 
 .FringeCol { /* black border */
-  /*width: 260px;*/
   min-width: 180px;
   flex-grow: 0;
   margin-right: 10px;
 }
 
-.VocabCol {  /* orange border */
-  /*max-width: 320px;*/
-  /*flex-grow: 3;*/
-}
+.VocabCol {}
 
 .VocabContainer {
-
   display: flex;
   flex-flow: row nowrap;
-
-
   justify-content: flex-start;
   align-items: flex-start;
 
   overflow-x: auto;  /* allow horizontal scrolling */
   overflow-y: auto;
-
-  /*max-height: 88vh;*/
 }
 
 /*  COLUMN COMPONENT  */

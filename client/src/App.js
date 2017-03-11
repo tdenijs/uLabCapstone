@@ -20,7 +20,7 @@ import SettingsBar from './components/SettingsBar';
 import Vocab from './components/Vocab';
 import _ from 'lodash';
 import $ from 'jquery';
-import {Button, Modal, Grid, Row, Col} from 'react-bootstrap';
+import {Button, Modal, Grid, Row} from 'react-bootstrap';
 
 
 class App extends Component {
@@ -87,7 +87,7 @@ class App extends Component {
 
 
   /**
-   * This function is run before component mounts. 
+   * This function is run before component mounts.
    * Gets the vocab and fringe titles.
    */
   componentWillMount() {
@@ -607,6 +607,7 @@ class App extends Component {
                    selectedVoiceRate={this.state.selectedVoiceRate} selectedVoicePitch={this.state.selectedVoicePitch}
                    selectedFringe={this.state.selectedFringe} updateFringeChoice={this.updateFringeChoice}
                    settingsLocked={this.state.settingsLocked} lockToggle={this.lockToggle}
+                   settingsToggle={this.settingsToggle}
                    editorToggle={this.state.editorToggle} enableEditorMode={this.enableEditorMode}
                    buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
                    open={this.open} close={this.close} showModal={this.state.showModal}

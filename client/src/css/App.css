@@ -10,7 +10,7 @@
  *******************************************************************/
 
 body {
-  background-image: url(../../public/bkg.png);
+  background-image: url(../../public/bkg_sm.png);
   background-repeat: repeat;
   margin: auto;
 }

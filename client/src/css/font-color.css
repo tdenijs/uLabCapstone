@@ -20,6 +20,7 @@
 /* orange: #F98935      */
 /* lite-orng: #FFA05B   */
 /* light-blue: #BEE3DB  */
+/* dk-blue:  #117781    */
 /* purple: #9932CC;     */
 /* lt-purple: #89609E  */
 
@@ -123,7 +124,7 @@
 }
 
 .SettingsBar .EditorButton {
-  background-color: #9932CC; /* purple */
+  background-color: #E462DE;  /* purple */
   font-family:"Courier New";
 }
 
@@ -131,6 +132,17 @@
   background-color: #449EA8;
   font-family:"Courier New";
 }
+
+/* SpeechBar button hover & focus */
+.SettingsBar .EditorButton:hover {
+  background-color: violet; /* light-purple */
+}
+
+.SettingsBar .AddButton:hover {
+  background-color: #adef67; /* light-green */
+  /*dk green 71a53a*/
+}
+
 
 .VoiceLabel {
   background-color: #F98935; /* orange */
@@ -152,15 +164,24 @@
   font-family:"Courier New";
 }
 
+.LockSetting:hover {
+  background-color: #F0D24C;
+}
+
 .LockSetting-locked {
   background-color: #F0D24C; /* yellow */
   font-family:"Courier New";
 }
 
 .closeSettings {
-  color: #E4004A;
-  font-size: 2em;
-  background-color: #ffffff;
+  background-color: #ABDDE2;
+  color: #000;
+
+  font-family:"Courier New";
+}
+
+.closeSettings:hover {
+  background-color: #fff;
 }
 
 .Locked {
@@ -173,15 +194,7 @@
   font-size: 1.3em;
 }
 
-/* SpeechBar button hover & focus */
-.SettingsBar .EditorButton:hover {
-  background-color: violet; /* light-purple */
-}
 
-.SettingsBar .AddButton:hover {
-  background-color: #adef67; /* light-green */
-  /*dk green 71a53a*/
-}
 
 
 /* ROW -- FringeVocabRow */

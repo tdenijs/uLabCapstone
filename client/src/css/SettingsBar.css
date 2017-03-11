@@ -62,21 +62,27 @@
   margin-left: 10px;
 }
 
-.closeSettings {
-  padding: 5px;
-  margin-botton: 10px;
-}
-
-
-.LockSetting, .LockSetting-locked {
-  padding: 10px 10px;
-}
 
 .VoiceControl{
   padding: 5px 10px;
   margin-left: 10px;
 }
 
+.LockSetting, .LockSetting-locked {
+  padding: 7px 10px;
+}
+
+.closeSettings {
+  margin-top: 1px;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.closeSettings-glyph {
+  margin-right: 5px;
+  vertical-align: text-top;
+}
 
 
 /** Media Queries **/
@@ -97,27 +103,23 @@
 
   .FringeLabel{
     order: 1;
+    flex-grow: 2;
   }
 
   .VoiceForm {
     display: flex;
     flex-flow: row nowrap;
 
-    margin-bottom: 5px;
     order: 2;
+    flex-grow: 2;
   }
-
-  .VoiceLabel, .VoiceLabel-locked {}
-  .VoiceMenu {}
 
   /* flex items */
   .AddButton, .AddButton-locked {
-    margin-bottom: 5px;
     order: 3;
   }
 
   .EditorButton, .EditorButton-locked {
-    margin-bottom: 5px;
     order: 4;
   }
 
@@ -125,8 +127,9 @@
     order: 5;
   }
 
-
-
+  .closeSettings {
+    order: 6;
+  }
 
 }
 
@@ -139,7 +142,6 @@
     display: flex;
     flex-flow: row wrap;
 
-    align-content: stretch;
 
     align-items: center;
     justify-content: space-between;
@@ -147,28 +149,30 @@
 
   .FringeLabel{
     order: 1;
+    flex-grow: 2;
   }
 
   .VoiceForm {
     order: 2;
+    flex-grow: 2;
   }
 
-  .VoiceLabel, .VoiceLabel-locked {}
-  .VoiceMenu {}
 
   /* flex items */
   .AddButton, .AddButton-locked {
     order: 3;
-
   }
 
   .EditorButton, .EditorButton-locked {
-
     order: 4;
   }
 
   .LockSetting, .LockSetting-locked {
     order: 5;
+  }
+
+  .closeSettings {
+    order: 6;
   }
 
 }

@@ -77,7 +77,6 @@ class SettingsBar extends Component {
 
     return (
       <div className="SettingsBar">
-        <Glyphicon className="closeSettings" glyph="glyphicon glyphicon-remove" aria-label="Close Settings Bar"/>
 
         {/* Voice Form - Options */}
         <form className="VoiceForm">
@@ -152,6 +151,9 @@ class SettingsBar extends Component {
           {deleteText}
         </button>
 
+        <label className="closeSettings" onClick={this.props.settingsToggle}><Glyphicon className="closeSettings-glyph" glyph="glyphicon glyphicon-remove" aria-label="Close Settings Bar"/>
+          Close </label>
+
         { this.renderLock() }
 
 
@@ -176,7 +178,7 @@ SettingsBar.propTypes = {
   close: React.PropTypes.func,
   handleAddNewWord: React.PropTypes.func,
   handleAddNewImage: React.PropTypes.func,
-
+  settingsToggle: React.PropTypes.func,
 };
 
 SettingsBar.defaultProps = {

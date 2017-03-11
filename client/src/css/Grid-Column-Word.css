@@ -89,6 +89,7 @@
   display: inline-flex;
   justify-content: center;
 
+  max-height: 90px;
   order: 2;
 }
 

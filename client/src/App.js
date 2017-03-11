@@ -71,6 +71,7 @@ class App extends Component {
       messageArray: [],
       coreListTitles: [],
       fringeListTitles: [],
+      listIds: [],
       selectedFringe: "",
       selectedFringeId: "0",
       showModal: false,
@@ -165,10 +166,18 @@ class App extends Component {
     let fringelist = [];
     console.log(this.state.fringeListTitles);
     var title;
+    var selectedList;
+    var list_id;
     if(this.state.fringeListTitles.length === 0) {
     	title = "goodnight moon";
+        list_id = 9;
     } else {
+        // Lookup the correct list_id for the given fringe title
         title = this.state.selectedFringe;
+        selectedList = this.state.listIds.filter((el) => {
+          return el.title === title;
+        });
+        list_id = selectedList[0].id;
     }
 
     console.log(this.state.selectedFringe);
@@ -181,7 +190,7 @@ class App extends Component {
         .then((data) => {
           fringelist = {
             order: 1,
-            id: 9,
+            id: list_id,
             title: title,
             words: data
           };
@@ -252,16 +261,19 @@ class App extends Component {
   getFringeVocabTitles() {
     let fringeVocabId = '2';  // list_id for fringeVocab list
     let listTitles = [];
+    let listIds = [];
 
     $.getJSON('http://localhost:3001/api/grids/id/' + fringeVocabId)
       .then((data) => {
         _.forEach(data, function (value) {
           listTitles.push(value.list_title);
+          listIds.push({title: value.list_title, id: value.list_id});
         });
       })
 
     this.setState({fringeListTitles: listTitles});
     this.setState({selectedFringe: listTitles[0]});
+    this.setState({listIds: listIds});
   }
 
   /**

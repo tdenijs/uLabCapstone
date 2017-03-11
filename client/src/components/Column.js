@@ -54,15 +54,13 @@ class Column extends Component {
       case "exclamation":
         color = "#FFA05B"; // orange
         break;
-      case "question":
+      case "questions":
         color = "#FFA05B"; // orange
         break;
       default:
         break;
     }
-
     //console.log("COL. COLOR: " + this.props.title + " " + color);
-
     return color;
   }
 

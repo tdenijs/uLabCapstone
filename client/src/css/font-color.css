@@ -20,6 +20,7 @@
 /* orange: #F98935      */
 /* lite-orng: #FFA05B   */
 /* light-blue: #BEE3DB  */
+/* dk-blue:  #117781    */
 /* purple: #9932CC;     */
 /* lt-purple: #89609E  */
 
@@ -123,41 +124,13 @@
 }
 
 .SettingsBar .EditorButton {
-  background-color: #9932CC; /* purple */
+  background-color: #E462DE;  /* purple */
   font-family:"Courier New";
 }
 
 .SettingsBar .EditorButton-locked {
   background-color: #449EA8;
   font-family:"Courier New";
-}
-.VoiceLabel {
-  background-color: #F98935; /* orange */
-  font-family:"Courier New";
-}
-
-.VoiceLabel-locked {
-  background-color: #449EA8; /* blue */
-  font-family:"Courier New";
-}
-
-.LockSetting {
-  background-color: #BEE3DB;
-  font-family:"Courier New";
-}
-
-.LockSetting-locked {
-  background-color: #F0D24C; /* yellow */
-  font-family:"Courier New";
-}
-
-.Locked {
-  color: red;
-}
-.Lock {
-  color: green;
-  font-family:"Courier New";
-  font-size: 1.3em;
 }
 
 /* SpeechBar button hover & focus */
@@ -169,6 +142,59 @@
   background-color: #adef67; /* light-green */
   /*dk green 71a53a*/
 }
+
+
+.VoiceLabel {
+  background-color: #F98935; /* orange */
+  font-family:"Courier New";
+}
+
+.FringeLabel {
+  background-color: #F0D24C; /* yellow */
+  font-family:"Courier New";
+}
+
+.VoiceLabel-locked, .FringeLabel-locked {
+  background-color: #449EA8; /* blue */
+  font-family:"Courier New";
+}
+
+.LockSetting {
+  background-color: #BEE3DB;
+  font-family:"Courier New";
+}
+
+.LockSetting:hover {
+  background-color: #F0D24C;
+}
+
+.LockSetting-locked {
+  background-color: #F0D24C; /* yellow */
+  font-family:"Courier New";
+}
+
+.closeSettings {
+  background-color: #ABDDE2;
+  color: #000;
+
+  font-family:"Courier New";
+}
+
+.closeSettings:hover {
+  background-color: #fff;
+}
+
+.Locked {
+  color: red;
+}
+
+.Lock {
+  color: green;
+  font-family:"Courier New";
+  font-size: 1.3em;
+}
+
+
 
 
 /* ROW -- FringeVocabRow */

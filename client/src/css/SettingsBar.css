@@ -24,6 +24,7 @@
 }
 
 
+
 .AddButton, .AddButton-locked {
   border: none;
   color: black;
@@ -50,23 +51,38 @@
   outline: none;   /* prevents blue outline from appearing on buttons*/
 }
 
-.VoiceLabel, .VoiceLabel-locked {
+.VoiceLabel, .VoiceLabel-locked, .FringeLabel, .FringeLabel-locked {
   padding: 10px 20px;
   margin-right: 5px;
   text-align: center;
   text-decoration: none;
+}
 
-  display: inline-block;
+.VoiceMenu, .FringeListsMenu {
+  margin-left: 10px;
+}
+
+
+.VoiceControl{
+  padding: 5px 10px;
+  margin-left: 10px;
 }
 
 .LockSetting, .LockSetting-locked {
-  padding: 10px 10px;
+  padding: 7px 10px;
 }
 
-/*.Locked {*/
-  /*padding-right: 5px;*/
-/*}*/
+.closeSettings {
+  margin-top: 1px;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+}
 
+.closeSettings-glyph {
+  margin-right: 5px;
+  vertical-align: text-top;
+}
 
 
 /** Media Queries **/
@@ -82,28 +98,28 @@
     align-content: stretch;
 
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+  }
+
+  .FringeLabel{
+    order: 1;
+    flex-grow: 2;
   }
 
   .VoiceForm {
     display: flex;
     flex-flow: row nowrap;
 
-    margin-bottom: 5px;
-    order: 1;
+    order: 2;
+    flex-grow: 2;
   }
-
-  .VoiceLabel, .VoiceLabel-locked {}
-  .VoiceMenu {}
 
   /* flex items */
   .AddButton, .AddButton-locked {
-    margin-bottom: 5px;
     order: 3;
   }
 
   .EditorButton, .EditorButton-locked {
-    margin-bottom: 5px;
     order: 4;
   }
 
@@ -111,8 +127,9 @@
     order: 5;
   }
 
-
-
+  .closeSettings {
+    order: 6;
+  }
 
 }
 
@@ -125,32 +142,37 @@
     display: flex;
     flex-flow: row wrap;
 
-    align-content: stretch;
 
     align-items: center;
     justify-content: space-between;
   }
 
-  .VoiceForm {
+  .FringeLabel{
     order: 1;
+    flex-grow: 2;
   }
 
-  .VoiceLabel, .VoiceLabel-locked {}
-  .VoiceMenu {}
+  .VoiceForm {
+    order: 2;
+    flex-grow: 2;
+  }
+
 
   /* flex items */
   .AddButton, .AddButton-locked {
     order: 3;
-
   }
 
   .EditorButton, .EditorButton-locked {
-
     order: 4;
   }
 
   .LockSetting, .LockSetting-locked {
     order: 5;
+  }
+
+  .closeSettings {
+    order: 6;
   }
 
 }

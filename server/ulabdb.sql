@@ -493,7 +493,7 @@ INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
 
 -- add words for the brown bear list
 INSERT INTO Words (word, symbol_id)
-  VALUES ('brown bear book', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'brown bear book')),
+  VALUES ('brown bear', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'brown bear book')),
          ('bear', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'bb bear')),
          ('blue horse', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'bb blue horse')),
   	     ('green frog', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'bb green frog')),
@@ -507,7 +507,7 @@ INSERT INTO Words (word, symbol_id)
 
 --add words to the brown bear list
 INSERT INTO ListWords (word_id, list_id)
-  VALUES ((SELECT W.word_id from Words W WHERE word = 'brown bear book'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'brown bear')),
+  VALUES ((SELECT W.word_id from Words W WHERE word = 'brown bear'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'brown bear')),
          ((SELECT W.word_id from Words W WHERE word = 'bear'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'brown bear')),
          ((SELECT W.word_id from Words W WHERE word = 'blue horse'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'brown bear')),
          ((SELECT W.word_id from Words W WHERE word = 'green frog'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'brown bear')),

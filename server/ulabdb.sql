@@ -418,7 +418,7 @@ INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
   VALUES ('gruffalo book','img/gruffalo_book.png','the gruffalo book symbol'),
          ('gruffalo back','img/gruffalo_back.png','back symbol'),
          ('gruffalo claws','img/gruffalo_claws.png','claws symbol'),
-         ('gruffalo fox','img/gruffallo_fox.png','fox symbol'),
+         ('gruffalo fox','img/gruffalo_fox.png','fox symbol'),
          ('gruffalo jaws','img/gruffalo_jaws.png','jaws symbol'),
          ('gruffalo knees','img/gruffalo_knees.png','knees symbol'),
          ('gruffalo lake','img/gruffalo_lake.png','lake symbol'),
@@ -429,7 +429,7 @@ INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
          ('gruffalo the gruffalo', 'img/gruffalo_the_gruffalo.png', 'the gruffalo symbol'),
          ('gruffalo the wood', 'img/gruffalo_the_wood.png', 'the wood symbol'),
          ('gruffalo toes', 'img/gruffalo_toes.png', 'toes symbol'),
-         ('gruffalo tongue', 'img/gruffalo_tonque.png', 'tongue symbol'),
+         ('gruffalo tongue', 'img/gruffalo_tongue.png', 'tongue symbol'),
          ('gruffalo tusks', 'img/gruffalo_tusks.png', 'tusks symbol');
 
 -- add words for the gruffalo list
@@ -482,7 +482,7 @@ INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
   VALUES ('brown bear book',' img/brown_bear_book.png','brown bear book symbol'),
          ('bb bear', 'img/bb_bear.png','bear symbol'),
          ('bb blue horse', 'img/bb_blue_horse.png','blue horse symbol'),
-         ('bb green frog', 'img/gbb_green_frog.png','green frog symbol'),
+         ('bb green frog', 'img/bb_green_frog.png','green frog symbol'),
          ('bb orange fish', 'img/bb_orange_fish.png','orange fish symbol'),
          ('bb purple cat', 'img/bb_purple_cat.png','purple cat symbol'),
          ('bb red bird', 'img/bb_red_bird.png','red bird symbol'),
@@ -493,7 +493,7 @@ INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
 
 -- add words for the brown bear list
 INSERT INTO Words (word, symbol_id)
-  VALUES ('brown bear book', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'brown bear book')),
+  VALUES ('brown bear', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'brown bear book')),
          ('bear', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'bb bear')),
          ('blue horse', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'bb blue horse')),
   	     ('green frog', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'bb green frog')),
@@ -507,7 +507,7 @@ INSERT INTO Words (word, symbol_id)
 
 --add words to the brown bear list
 INSERT INTO ListWords (word_id, list_id)
-  VALUES ((SELECT W.word_id from Words W WHERE word = 'brown bear book'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'brown bear')),
+  VALUES ((SELECT W.word_id from Words W WHERE word = 'brown bear'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'brown bear')),
          ((SELECT W.word_id from Words W WHERE word = 'bear'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'brown bear')),
          ((SELECT W.word_id from Words W WHERE word = 'blue horse'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'brown bear')),
          ((SELECT W.word_id from Words W WHERE word = 'green frog'),  (SELECT L.list_id from Lists L WHERE L.list_title = 'brown bear')),
@@ -530,11 +530,11 @@ INSERT INTO GridLists (grid_id, list_id)
 -- add symbols for the good dog carl list
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
   VALUES ('gdc baby', 'img/gdc_baby.png', 'baby symbol'),
-         ('gdc carl', 'img/gdc_carl.png', 'carl symbol'),
-         ('gdc dance', 'img/gdc_dance.png', 'dance symbol'),
-         ('gdc dress up', 'img/gdc_dress_up.png', 'dress up symbol'),
-         ('gdc fish tank', 'img/gdc_fish_tank.png', 'fish tank symbol'),
-         ('gdc laundry shoot', 'img/gdc_laundry_shoot.png', 'laundry shoot symbol'),
+         ('gdc carl', 'img/gdc_carl.jpeg', 'carl symbol'),
+         ('gdc dance', 'img/gdc_dance.jpeg', 'dance symbol'),
+         ('gdc dress up', 'img/gdc_dress_up.jpeg', 'dress up symbol'),
+         ('gdc fish tank', 'img/gdc_fish_tank.jpeg', 'fish tank symbol'),
+         ('gdc laundry shoot', 'img/gdc_laundry_shoot.jpeg', 'laundry shoot symbol'),
          ('gdc mom', 'img/gdc_mom.png', 'mom symbol'),
          ('gdc ride', 'img/gdc_ride.png', 'ride symbol'),
          ('good dog carl book', 'img/good_dog_carl_book.png', 'good dog carl book symbol');
@@ -573,7 +573,7 @@ INSERT INTO GridLists (grid_id, list_id)
 
 -- add symbols for the goodnight gorilla list
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
-  VALUES ('good night gorilla book', 'img/good_night_gorilla_book.jpeg', 'good night gorilla book symbol'),
+  VALUES ('goodnight gorilla', 'img/goodnight_gorilla_book.jpeg', 'goodnight gorilla book symbol'),
          ('gng armadillo', 'img/gng_armadillo.jpeg', 'armadillo symbol'),
          ('gng cage', 'img/gng_cage.jpeg', 'cage symbol'),
          ('gng elephant', 'img/gng_elephant.jpeg', 'elephant symbol'),
@@ -587,7 +587,7 @@ INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
 
 -- add words for the goodnight gorilla list
 INSERT INTO Words (word, symbol_id)
-  VALUES ('goodnight gorilla book', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'good night gorilla book')),
+  VALUES ('goodnight gorilla book', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'goodnight gorilla book')),
          ('armadillo', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'gng armadillo')),
          ('cage', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'gng cage')),
          ('elephant', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'gng elephant')),

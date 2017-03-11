@@ -429,7 +429,7 @@ INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
          ('gruffalo the gruffalo', 'img/gruffalo_the_gruffalo.png', 'the gruffalo symbol'),
          ('gruffalo the wood', 'img/gruffalo_the_wood.png', 'the wood symbol'),
          ('gruffalo toes', 'img/gruffalo_toes.png', 'toes symbol'),
-         ('gruffalo tongue', 'img/gruffalo_tonque.png', 'tongue symbol'),
+         ('gruffalo tongue', 'img/gruffalo_tongue.png', 'tongue symbol'),
          ('gruffalo tusks', 'img/gruffalo_tusks.png', 'tusks symbol');
 
 -- add words for the gruffalo list
@@ -573,7 +573,7 @@ INSERT INTO GridLists (grid_id, list_id)
 
 -- add symbols for the goodnight gorilla list
 INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
-  VALUES ('good night gorilla book', 'img/good_night_gorilla_book.jpeg', 'good night gorilla book symbol'),
+  VALUES ('goodnight gorilla', 'img/goodnight_gorilla_book.jpeg', 'goodnight gorilla book symbol'),
          ('gng armadillo', 'img/gng_armadillo.jpeg', 'armadillo symbol'),
          ('gng cage', 'img/gng_cage.jpeg', 'cage symbol'),
          ('gng elephant', 'img/gng_elephant.jpeg', 'elephant symbol'),
@@ -587,7 +587,7 @@ INSERT INTO Symbols (symbol_name, symbol_path, symbol_text)
 
 -- add words for the goodnight gorilla list
 INSERT INTO Words (word, symbol_id)
-  VALUES ('goodnight gorilla book', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'good night gorilla book')),
+  VALUES ('goodnight gorilla book', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'goodnight gorilla book')),
          ('armadillo', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'gng armadillo')),
          ('cage', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'gng cage')),
          ('elephant', (SELECT S.symbol_id FROM Symbols S WHERE symbol_name = 'gng elephant')),

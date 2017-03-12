@@ -33,7 +33,7 @@ class App extends Component {
     this.updateVoiceRate = this.updateVoiceRate.bind(this);
     this.updateVoicePitch = this.updateVoicePitch.bind(this);
     this.updateFringeChoice = this.updateFringeChoice.bind(this);
-    this.updateFringeChoiceSynch = this.updateFringeChoiceSynch.bind(this); 
+    this.updateFringeChoiceSynch = this.updateFringeChoiceSynch.bind(this);
     this.lockToggle = this.lockToggle.bind(this);
     this.enableEditorMode = this.enableEditorMode.bind(this);
     this.addWordToSpeechBar = this.addWordToSpeechBar.bind(this);
@@ -79,6 +79,7 @@ class App extends Component {
       deleteWordText: "",
       deleteWordId: "0",
       deleteColId: "0",
+      hostname: "localhost:3001",
 
       // maxWidth: 768,        // arbitrary default maxWidth for update dimensions function
       // maxHeight: 920,
@@ -186,7 +187,7 @@ class App extends Component {
     this.setState({fringeColArray: []});  // getWords() will be called when a new word is added,
     // so need to clear the fringeColArray before retrieving words from ap
 
-      $.getJSON('http://localhost:3001/api/lists/title/' + title)
+      $.getJSON('http://'+ this.state.hostname + '/api/lists/title/' + title)
         .then((data) => {
           fringelist = {
             order: 1,
@@ -222,7 +223,7 @@ class App extends Component {
                                     // clear the colArray before retrieving words from api
 
     titles.forEach(({title, id, order}) => {
-      $.getJSON('http://localhost:3001/api/lists/title/' + title)
+      $.getJSON('http://'+ this.state.hostname + '/api/lists/title/' + title)
         .then((data) => {
           nextCol = {
             order: order,
@@ -244,7 +245,7 @@ class App extends Component {
     let coreVocabId = '1';  // list_id for coreVocab list
     let listTitles = [];
 
-    $.getJSON('http://localhost:3001/api/grids/id/' + coreVocabId)
+    $.getJSON('http://'+ this.state.hostname + '/api/grids/id/' + coreVocabId)
       .then((data) => {
         _.forEach(data, function (value) {
           listTitles.push(value.list_title);
@@ -263,7 +264,7 @@ class App extends Component {
     let listTitles = [];
     let listIds = [];
 
-    $.getJSON('http://localhost:3001/api/grids/id/' + fringeVocabId)
+    $.getJSON('http://'+ this.state.hostname + '/api/grids/id/' + fringeVocabId)
       .then((data) => {
         _.forEach(data, function (value) {
           listTitles.push(value.list_title);
@@ -339,18 +340,18 @@ class App extends Component {
    * @param e : The name of the Fringe we are changing to
    */
   updateFringeChoice(e) {
-    
+
     this.updateFringeChoiceSynch(e).then(() => this.getFringeWords());
     console.log(this.state.selectedFringe);
     console.log(e.target.value);
     //this.getFringeWords();
   }
 
-  updateFringeChoiceSynch(e) { 
+  updateFringeChoiceSynch(e) {
     var a = e.target.value;
     this.setState({selectedFringe : a});
     var p = new Promise((resolve, reject) => {
-           resolve('SUCCESS'); 
+           resolve('SUCCESS');
     });
     return p;
   }
@@ -548,7 +549,7 @@ class App extends Component {
       contentType: false,
       processData: false,
       method: 'POST',
-      url: 'http://localhost:3001/api/imgupload',
+      url: 'http://'+ this.state.hostname + '/api/imgupload',
       data: formData
     })
   }
@@ -564,7 +565,7 @@ class App extends Component {
    * @param col_id : the id of the column from which the word is being deleted
    */
   callDeleteApi(word_id, list_id) {
-    let address = 'http://localhost:3001/api/words/list_id/' + list_id + '/word_id/' + word_id;
+    let address = 'http://'+ this.state.hostname + '/api/words/list_id/' + list_id + '/word_id/' + word_id;
     fetch(address, {
       method: 'DELETE',
       headers: {
@@ -593,7 +594,7 @@ class App extends Component {
     'img/' + newFileName
       : 'img/blank.png';
 
-    fetch('http://localhost:3001/api/words/', {
+    fetch('http://'+ this.state.hostname + '/api/words/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

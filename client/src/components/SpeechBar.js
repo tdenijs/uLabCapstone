@@ -15,6 +15,10 @@ import Word from './Word'
 import _ from 'lodash'
 
 class SpeechBar extends Component {
+  /**
+   * Constructor
+   * @param props : The parent (see ../App.js)
+   */
   constructor(props) {
     super(props);
 
@@ -29,7 +33,9 @@ class SpeechBar extends Component {
   }
 
 
-  //reduces the message array into one string (improves interpretation of speech)
+  /**
+   * Reduces the message array into one string (improves interpretation of speech)
+   */
   messageString() {
     if (this.props.message.length >= 1) {
       var text = ""
@@ -41,11 +47,21 @@ class SpeechBar extends Component {
   }
 
 
+  /**
+   * Makes the message window speak all words that are currently inside of it.
+   * Says that the window is empty if the window is empty.
+   * @param e : The event being passed in
+   */
   speakMessage(e) {
     e.preventDefault();
     var voices = speechSynthesis.getVoices();
     var selectedVoice = this.props.selectedVoice;
     var msg = new SpeechSynthesisUtterance();
+
+    //Divide the pitch and rate by 10 because we use 1 to 20, but
+    //rate and pitch require 0.1 to 2.0 (easier to visualize 1 to 20)
+    msg.rate = this.props.selectedVoiceRate / 10;
+    msg.pitch = this.props.selectedVoicePitch / 10;
     for(var i = 0; i < voices.length; i++) {
 	   if(voices[i].name === selectedVoice) {
 		   msg.voice = voices[i];
@@ -64,9 +80,12 @@ class SpeechBar extends Component {
   }
 
 
+  /**
+   * Wrapper Function for rendering the message window
+   */
   renderMessageWindow() {
     return (
-      <div className="MessageWindow" >
+      <div className="MessageWindow" onClick={this.speakMessage}>
         {
           this.props.message.map(({id, word, src, alt}) => {
               return ( <Word key={_.uniqueId()} id={id} text={word} src={src} alt={alt}/> );
@@ -77,6 +96,9 @@ class SpeechBar extends Component {
   }
 
 
+  /**
+   * Basic React render function, renders the component.
+   */
   render() {
 
     return (
@@ -86,6 +108,7 @@ class SpeechBar extends Component {
           {this.renderMessageWindow()}
           <button className="BackspaceButton"  onClick={this.props.handleBackButton}><Glyphicon glyph="glyphicon glyphicon-step-backward" aria-label="Backspace Button"/> </button>
           <button className="ClearButton" onClick={this.props.handleClearMessage}><Glyphicon glyph="glyphicon glyphicon-remove" aria-label="Clear Message Button"/> </button>
+          <img className="MsgHook" src="img/speech_ptr.png" alt="" />
       </div>
     );
   }
@@ -97,6 +120,8 @@ SpeechBar.propTypes = {
   handleClearMessage: React.PropTypes.func,
   handleBackButton: React.PropTypes.func,
   selectedVoice: React.PropTypes.string,
+  selectedVoiceRate: React.PropTypes.string,
+  selectedVoicePitch: React.PropTypes.string,
   settingsToggle: React.PropTypes.func,
 };
 

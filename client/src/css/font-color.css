@@ -11,13 +11,16 @@
 
 
 /* red: #E4004A         */
+/* pink: #F98CA6        */
 /* yellow: #F0D24C      */
 /* green: #28Ac70       */
-/* bright-green: #6cbf15 */
+/* bright-green: #87D23B */
 /* light-green: #adef67; /*
 /* blue: #449EA8        */
 /* orange: #F98935      */
+/* lite-orng: #FFA05B   */
 /* light-blue: #BEE3DB  */
+/* dk-blue:  #117781    */
 /* purple: #9932CC;     */
 /* lt-purple: #89609E  */
 
@@ -121,41 +124,13 @@
 }
 
 .SettingsBar .EditorButton {
-  background-color: #9932CC; /* purple */
+  background-color: #E462DE;  /* purple */
   font-family:"Courier New";
 }
 
 .SettingsBar .EditorButton-locked {
   background-color: #449EA8;
   font-family:"Courier New";
-}
-.VoiceLabel {
-  background-color: #F98935; /* orange */
-  font-family:"Courier New";
-}
-
-.VoiceLabel-locked {
-  background-color: #449EA8; /* blue */
-  font-family:"Courier New";
-}
-
-.LockSetting {
-  background-color: #BEE3DB;
-  font-family:"Courier New";
-}
-
-.LockSetting-locked {
-  background-color: #F0D24C; /* yellow */
-  font-family:"Courier New";
-}
-
-.Locked {
-  color: red;
-}
-.Lock {
-  color: green;
-  font-family:"Courier New";
-  font-size: 1.3em;
 }
 
 /* SpeechBar button hover & focus */
@@ -167,6 +142,59 @@
   background-color: #adef67; /* light-green */
   /*dk green 71a53a*/
 }
+
+
+.VoiceLabel {
+  background-color: #F98935; /* orange */
+  font-family:"Courier New";
+}
+
+.FringeLabel {
+  background-color: #F0D24C; /* yellow */
+  font-family:"Courier New";
+}
+
+.VoiceLabel-locked, .FringeLabel-locked {
+  background-color: #449EA8; /* blue */
+  font-family:"Courier New";
+}
+
+.LockSetting {
+  background-color: #BEE3DB;
+  font-family:"Courier New";
+}
+
+.LockSetting:hover {
+  background-color: #F0D24C;
+}
+
+.LockSetting-locked {
+  background-color: #F0D24C; /* yellow */
+  font-family:"Courier New";
+}
+
+.closeSettings {
+  background-color: #ABDDE2;
+  color: #000;
+
+  font-family:"Courier New";
+}
+
+.closeSettings:hover {
+  background-color: #fff;
+}
+
+.Locked {
+  color: red;
+}
+
+.Lock {
+  color: green;
+  font-family:"Courier New";
+  font-size: 1.3em;
+}
+
+
 
 
 /* ROW -- FringeVocabRow */
@@ -182,21 +210,27 @@
   border-radius: 15px;
   background-color: #fff;
 */
+
+  border: 7px solid #000;  /* black border */
+  border-radius: 15px;
+  color: #fff;
+  background-color: #000;
+
   }
 
-.VocabCol {}
-
-
-.VocabContainer{
+.VocabCol {
   border: 7px solid #F98935;  /* orange border */
   border-radius: 15px;
-  background-color: #fff;
+  background-color: #F98935;
 }
 
 
-.Column {
-  background-color: #F98935;
+.VocabContainer{
 
+}
+
+.Column {
+  /*background-color: lightblue;*/
 }
 
 .ColumnTitle {
@@ -204,24 +238,28 @@
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   font-style: italic;
-  background-color: #F98935;
+  /*background-color: #F98935;*/
   padding-bottom: 5px;
 }
 
 .WordContainer {
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 
 /*   WORD COMPONENT  */
 
 .Word {
   color: #000;
-  border: solid 1px #BEE3DB;
+  border: solid 2px #BEE3DB;
+  background-color: #fff;
+
 }
 
 .Word:hover {
-  background-color: #F5f5fa;
+  /*background-color: #F5f5fa;*/
   color: red;
+  border: solid 2px black;
+
 }
 
 /*   Delete Icon in Word Component  */

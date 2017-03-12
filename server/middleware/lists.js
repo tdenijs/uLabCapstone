@@ -22,11 +22,11 @@ const db = require('../config/dbconnect');
 // If fail, it will retuurn a 404 error
 function getAllWordsByListId(req, res, next) {
   var id = req.params.id;
-  db.any("select l.list_id, l.list_title, lw.word_id, w.word, w.symbol_id, s.symbol_path, s.symbol_text " +
-      "from lists l inner join listwords lw on l.list_id=lw.list_id " +
-      "inner join words w on lw.word_id=w.word_id " +
-      "inner join symbols s on w.symbol_id=s.symbol_id " +
-      "where l.list_id=" + '\'' + id + '\'')
+  db.any("SELECT l.list_id, l.list_title, lw.word_id, w.word, w.symbol_id, s.symbol_path, s.symbol_text " +
+      "FROM lists l inner join listwords lw on l.list_id=lw.list_id " +
+      "INNER JOIN words w on lw.word_id=w.word_id " +
+      "INNER JOIN symbols s on w.symbol_id=s.symbol_id " +
+      "WHERE l.list_id=$1", [id])
     .then(function(data) {
       if (data.length > 0) {
         res.status(200)
@@ -58,11 +58,11 @@ function getAllWordsByListId(req, res, next) {
 // If fail, it will retuurn a 404 error
 function getAllWordsByListName(req, res, next) {
   var lTitle = req.params.title;
-  db.any("select l.list_id, l.list_title, lw.word_id, w.word, w.symbol_id, s.symbol_path, s.symbol_text " +
-      "from lists l inner join listwords lw on l.list_id=lw.list_id " +
-      "inner join words w on lw.word_id=w.word_id " +
-      "inner join symbols s on w.symbol_id=s.symbol_id " +
-      "where l.list_title=" + '\'' + lTitle + '\'')
+  db.any("SELECT l.list_id, l.list_title, lw.word_id, w.word, w.symbol_id, s.symbol_path, s.symbol_text " +
+         "FROM lists l inner join listwords lw on l.list_id=lw.list_id " +
+         "INNER JOIN words w ON lw.word_id=w.word_id " +
+         "INNER JOIN symbols s ON w.symbol_id=s.symbol_id " +
+         "WHERE l.list_title=$1", [lTitle])
     .then(function(data) {
       if (data.length > 0) {
         res.status(200)
@@ -70,12 +70,17 @@ function getAllWordsByListName(req, res, next) {
         console.log("(getAllWordsByListName) SUCCESS: All words for list " +
           '\'' + lTitle + '\'' + " were sent.");
       } else {
-        res.status(404)
-          .json({
-            success: false,
-            message: 'List ' + '\'' + lTitle + '\'' + ' not found'
-          });
-        console.log('*** (getAllWordsByListName) ERROR: List ' + '\'' + lTitle + '\'' + ' not found');
+        if(db.one('SELECT EXISTS (SELECT * FROM Lists WHERE list_title = $1);', [lTitle])) {
+          res.status(200)
+            .json(data);
+        } else {
+          res.status(404)
+            .json({
+              success: false,
+              message: 'List ' + '\'' + lTitle + '\'' + ' not found'
+            });
+            console.log('*** (getAllWordsByListName) ERROR: List ' + '\'' + lTitle + '\'' + ' not found');
+        }
       }
     })
     .catch(function(err) {
@@ -92,12 +97,13 @@ function getAllWordsByListName(req, res, next) {
 function deleteWordByID(req, res, next) {
   var targetListID = parseInt(req.params.list_id);
   var targetWordID = parseInt(req.params.word_id);
-  var query = 'select * from listwords where list_id=' + targetListID +
-    ' and word_id=' + targetWordID;
+  var query = 'SELECT * FROM listwords '+
+              'WHERE list_id=' + targetListID +
+             ' AND word_id=' + targetWordID;
   db.any(query)
     .then(function(data) {
       if (data.length === 1) {
-        db.result('delete from listwords where list_id=$1 AND word_id=$2', [targetListID, targetWordID])
+        db.result('DELETE FROM listwords WHERE list_id=$1 AND word_id=$2', [targetListID, targetWordID])
           .then(function(result) {
             if (result.rowCount === 1) {
               console.log("(deleteWordByID) SUCCESS: word is removed from list");
@@ -140,7 +146,7 @@ function createList(req, res, next) {
   var newListTitle = req.body.title;
 
   db.one('INSERT INTO Lists (list_title)' +
-      ' VALUES ($1) RETURNING list_id;', [newListTitle])
+        ' VALUES ($1) RETURNING list_id;', [newListTitle])
     .then(function(data) {
       if (db.one('SELECT EXISTS (SELECT * FROM Lists WHERE list_title = $1 AND list_id = $2);', [newListTitle, data.list_id])) {
         res.status(201)

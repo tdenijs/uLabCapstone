@@ -200,4 +200,43 @@ describe('Test suite for mounted App', () => {
     // Expect the word to be deleted
     expect(app.state().colArray[0].words).toEqual([{word_id: "1", word:"love", symbol_path:"", alt:""}]);
   });
+
+  it("If EditorMode is enabled and the SettingsBar becomes locked, EditorMode becomes disabled", () => {
+      // Enable EditorMode
+      const settingsButton = app.find('.SettingsButton').first();
+      settingsButton.simulate('click');
+      const editorModeButton = app.find('.EditorButton').first();
+      editorModeButton.simulate('click');
+
+      // Expect EditorMode to be enabled
+      expect(app.state().editorToggle).toEqual(true);
+
+      // Lock the SettingsBar
+      const lockSetting = app.find('.LockSetting').first();
+      lockSetting.simulate('click');
+
+      // Expect EditorMode to be disabled
+      expect(app.state().editorToggle).toEqual(false);
+  });
+
+  it("If EditorMode is disabled, the EditorButton's text is 'Delete a Word'", () => {
+      // Open the SettingsBar
+      const settingsButton = app.find('.SettingsButton').first();
+      settingsButton.simulate('click');
+
+      // Expect the text on the EditorButton to be appropriate
+      const editorModeButton = app.find('.EditorButton').first();
+      expect(editorModeButton.text()).toBe('Delete a Word');
+  });
+
+  it("If EditorMode is enabled, the EditorButton's text is 'Finish Deleting'", () => {
+      // Enable EditorMode
+      const settingsButton = app.find('.SettingsButton').first();
+      settingsButton.simulate('click');
+      const editorModeButton = app.find('.EditorButton').first();
+      editorModeButton.simulate('click');
+
+      // Expect the text on the EditorButton to be appropriate
+      expect(editorModeButton.text()).toBe('Finish Deleting');
+  });
 });

@@ -11,13 +11,23 @@
 
 /*   SpeechBar  Component  */
 
+.SpeechBar{
+  position: relative;
+  padding-bottom: 5px;
+}
 
+.MsgHook {
+  position: absolute;
+  top: 85px;
+  left: 65%;
+
+}
 /** Small screens **/
 
 @media all and (max-width: 599px) {
 
   .SpeechBar {
-    min-height: 80px;
+    min-height: 90px;
 
     margin-bottom: 0px;
 
@@ -30,20 +40,24 @@
 
   .MessageWindow {
     float: left;
-    min-height: 80px;
+    min-height: 90px;
   }
 
   /* word component inside of the message window */
   .MessageWindow .Word {
-    width: 60px;
+    width: 50px;
     border: none;
     float: left;
-    height: 90%;
+    height: 80%;
+
+    font-size: .8em;
+    margin: 0;
   }
 
   .MessageWindow .Word:hover {
     background-color: transparent;
     color: inherit;
+    border: none;
   }
 
   .MessageWindow .WordSymbol {
@@ -97,7 +111,7 @@
 
 @media all and (min-width: 600px) {
   .SpeechBar {
-    min-height: 80px;
+    min-height: 90px;
 
     display: flex;
     flex-direction: row;
@@ -110,7 +124,7 @@
 
   .MessageWindow {
     float: left;
-    min-height: 80px;
+    min-height: 90px;
 
     margin-right: 10px;
     margin-left: 10px;
@@ -119,18 +133,20 @@
     overflow-x: auto;
   }
 
-
-
   .MessageWindow .Word { /* word component inside of the message window */
-    width: 60px;
+    width: 50px;
     border: none;
     float: left;
-    height: 90%;
+
+    max-height: 65px;
+    font-size: .8em;
+    margin: 0;
   }
 
   .MessageWindow .Word:hover {
     background-color: transparent;
     color: inherit;
+    border: none;
   }
 
   .MessageWindow .WordSymbol {
@@ -141,7 +157,6 @@
   .MessageWindow {
     flex: 1;
     order: 2;
-
   }
 
   .SettingsButton {
@@ -151,9 +166,6 @@
     order: 1;
     justify-content: flex-end;
     margin-left: 10px;
-
-
-
   }
 
   .PlayButton {
@@ -176,12 +188,9 @@
     height: 50px;
     margin-left: 10px;
 
-
     order: 4;
     justify-content: flex-end;
   }
-
-
 
 }
 
@@ -212,7 +221,5 @@
     .ClearButton {
       order: 4;
     }
-
-
 
   }

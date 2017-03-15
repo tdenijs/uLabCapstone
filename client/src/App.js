@@ -566,13 +566,10 @@ class App extends Component {
    */
   callDeleteApi(word_id, list_id) {
     let address = 'http://'+ this.state.hostname + '/api/words/list_id/' + list_id + '/word_id/' + word_id;
-    fetch(address, {
+    $.ajax({
       method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+      url: address,
+      data: JSON.stringify({
         word_id: word_id,
         list_id: list_id,
       })

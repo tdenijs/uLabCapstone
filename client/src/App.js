@@ -566,13 +566,10 @@ class App extends Component {
    */
   callDeleteApi(word_id, list_id) {
     let address = 'http://'+ this.state.hostname + '/api/words/list_id/' + list_id + '/word_id/' + word_id;
-    fetch(address, {
+    $.ajax({
       method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+      url: address,
+      data: JSON.stringify({
         word_id: word_id,
         list_id: list_id,
       })
@@ -591,24 +588,26 @@ class App extends Component {
    */
   handleAddNewWord(wordText, newFileName, selectedTitle, selectedVocabulary, fileSelected) {
     var newPath = (fileSelected && newFileName !== '') ?
-    'img/' + newFileName
-      : 'img/blank.png';
+                  'img/' + newFileName
+                : 'img/blank.png';
+    var apiCall = 'http://'+ this.state.hostname + '/api/words/';
+    var newWordText = wordText + 'symbol';
+    var newGrid = selectedVocabulary + ' vocabulary';
 
-    fetch('http://'+ this.state.hostname + '/api/words/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      //ContentType:
-      body: JSON.stringify({
+    $.ajax({
+      type: 'POST',
+      url:apiCall,
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify({
         name: wordText,
         path: newPath,
-        text: wordText + 'symbol',
+        text: newWordText,
         list: selectedTitle,
-        grid: selectedVocabulary + ' vocabulary'
+        grid: newGrid
       })
-    }).then(() => {this.getWords(); this.getFringeWords()});
+    })
+    .then(() => {this.getWords(); this.getFringeWords()});
     //then... call getWords() to reload words
   }
 

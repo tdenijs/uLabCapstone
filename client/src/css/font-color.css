@@ -45,6 +45,9 @@
   border: 7px solid #E4004A;
   border-radius: 15px;
 }
+.MessageWindow:hover{
+  border: 7px solid #F98935;
+}
 
 .MessageWindow .Word { /* word component inside of the message window */
   color: #3a33d1;
@@ -56,14 +59,18 @@
   /*background-color: #449EA8;*/
   background-color: transparent;
   color: #449EA8;
-  font-size: 2.8em;
+  /*font-size: 2.8em;*/
+  font-size: 3.8em;
 
   border: 1px solid transparent;
   border-radius: 50%;
+  padding-right: 80px;
+  margin-top: -15px;
 }
 
 
 .PlayButton {
+  display: none;
   background-color: #E4004A;
   color: #fff;
   font-size: 1.6em;
@@ -79,6 +86,7 @@
 
   border: 1px solid #28Ac70;
   border-radius: 50%;
+  margin-top: -3px;
 }
 
 .ClearButton {
@@ -88,6 +96,7 @@
 
   border: 1px solid #28Ac70;
   border-radius: 50%;
+  margin-top: -3px;
 }
 
 /* SpeechBar button hover & focus */

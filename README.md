@@ -184,6 +184,42 @@ Change `client/public/img/` to `client/build/img`.
 #### Deploy
 Run `npm run deploy` in root to set environment variables to production and start the app.
 
+#### Details of our deployment
+
+The application for demo purposes was deployed on a virtual machine running Ubuntu Server 16.04 LTS.
+We added a service user account to the server to host and manage the application and database.
+
+We installed NGINX webserver for port forwarding and basic authentication.
+
+We used port forwarding to route the application requests and responses from port 3001 to port 80 (the standard system http port).
+
+We installed the apache2-utils package which provides the htpasswd and basic authentication support to NGINX.
+
+After installing NGINX and apache2-utils via the apt package manager we edited the configuration file /etc/nginx/sites-available/default , with the following congiguration:
+
+server {
+    # sets port 80 to listen for http requests and responses
+    listen 80;
+
+    # sets the http root folder to be the production build folder of the app
+    root /home/app-user/client/build/;
+
+    # defines the fully qualified domain name of the server
+    server_name hostname.com;
+
+    location / {
+               # sets up basic authentication at the designated root
+               auth_basic "Authorized Users Only";
+               auth_basic_user_file /etc/nginx/.htpasswd;
+
+               # sets up port forwarding from port 3001 to port 80
+               proxy_set_header X-Forwarded-For $remote_addr;
+               proxy_set_header Host $http_host;
+               proxy_pass       "http://hostname.com:3001";
+        }
+
+}
+
 ## Known Issues
 1. Uploading an image via taking a picture on iPad not working
 2. Notifications to the user when an error occurs is lacking. For example if an image upload fails the user will not be notified that a failure occurred or why it happened.

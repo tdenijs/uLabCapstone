@@ -1,6 +1,6 @@
 # uLabCapstone
 
-Fall 2016 to Winter 2017 CS Capstone Project with the Universal Design Lab
+Fall 2016 to Winter 2017 CS Capstone Project with the Universal Design Lab at Portland State University.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app), please visit [their README](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md) for additional information.
 
@@ -10,48 +10,37 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Make sure you have **Node** installed (v6.9.2 or later):
+Make sure you have **Node v6.9.2 or later** installed :
 
 `node -v`
 
 If you do not have Node installed you should do that now.
 
-You also need **PostgreSQL v9.3.15** installed to use a local version of the DB
+You also need **PostgreSQL v9.3.15** installed to use a local version of the DB.
+
+There is an `.editorconfig` file in the root of the project to maintain some indentation consistency across text editors. Some editors will read the file automatically while others will require a plugin to be installed, visit [editorconfig.org](editorconfig.org) for a complete list.
 
 ### Install Dependencies
 
-In the root of the directory install dependencies for the API server
+Install dependencies for the API and client server by running `npm install` in the **root and client** directories.
 
-`npm install`
-
-Install dependencies for the client server
-
-```
-cd client
-npm install
-```
 
 ### Starting the servers
 
-#### Option 1: `npm start`
+#### Option 1: Start both servers
 
-Run it from the **root directory** to start the client and API server together.
+Run `npm start` from the **root directory** to start the client and API server together. The client server will auto-restart when any of it's code is changed but the API server will not.
 
-Run it from the **client directory** to just run the UI.
+#### Option 2: Run servers independently
 
-Note: the client server will auto-restart when changes are made but the API server will not.
+Run `npm run api` from the **root directory** to just run the API server. The server will auto-restart when any of it's code is changed.
 
-#### Option 2: `npm run api`
+Run `npm start` from the **client directory** to just run the client server.
 
-Run it from the **root directory** to work with just the API server in development with the auto-restart functionality.
-
-#### Observation:
-
-You can view the client server at `localhost:3000` and the API server at `localhost:3001` in your browser.
 
 ## Directory Structure
 
-Below is the directory structure. Everything in the client folder is the front-end UI from create-react-app. The additional files outside of the client folder are the back-end REST API Server. The client and the API server have their own `package.json` file where they define their specific dependencies, therefore they can be broken apart and ran as separate apps.
+Below is the directory structure. Everything in the client folder is the front-end UI from create-react-app. The additional files outside of the client folder are for the API Server. The client and the API server have their own `package.json` file where they define their specific dependencies, therefore they can be broken apart and ran as separate apps.
 
 ```
 |_client
@@ -62,52 +51,38 @@ Below is the directory structure. Everything in the client folder is the front-e
     |-start-client.js
 |_server
     |-config
-    |    |-.dbconfig-sample.js
-    |    |-dbconnect.js
     |-moddleware
-    |    |-grids.js
-    |    |-index.js
-    |    |-lists.js
-    |    |-upload.js
-    |    |-words.js
     |-routes
-    |    |-index.js
     |-Tests
-    |    |-development.postman_environment.json
-    |    |-uLab.postman_collection.json
-    |    |-var_data.json
     |-server.js
     |-swagger.json
     |-ulabdb.sql
-|_package.json
-|README.md
-
+|-package.json
 ... and a few other things
 ```
 
 ## Client-API communication
 
-[This](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/) tutorial was followed to create and connect the API server. Requests from the client are proxied to the API server. There is some info at [this point](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#the-apps-react-components) of the tutorial about making calls to the API from the client
+[This](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/) tutorial was followed to create and connect the API server. Requests from the client are proxied to the API server.
 
 ## Using a DB in development
 
-### Step 1
+The `ulabdb.sql` file can be used to create a local Postgres database for development.
 
-The `ulabdb.sql` file can be used to create a local database for development.
-
+#### Step 1: Create a local DB
 Create a local database by running the following from the **root directory**.
 
 ```
 psql -U <username> -f server/ulabdb.sql
 ```
 
-For our team the username should be `postgres`.
+If you just installed Postgres they default username is usually `postgres`.
 
-### Step 2
+#### Step 2: Connect
 
-Insdie the **config directory**, copy `.dbconfig-sample.js` and save it as `.dbconfig.js`,then set your values for connecting to the database in `.dbconfig.js` for Postgres.
+In the **server/config directory**, copy `.dbconfig-sample.js` and save it as `.dbconfig.js`, then insert your Postgres `user` and `password`.
 
-Note: This file will be ignored so that your credentials will not be pushed to the repo.
+**Note:** This file will be ignored so that your credentials will not be pushed to the repo.
 
 ```javascript
 const dbconfig = {
@@ -127,7 +102,7 @@ If you meet wired connection issues, remove the quotation around number `5432` a
 
 This section describes what tests are available and how to run them.
 
-### Running Client tests
+#### Running Client tests
 
 Front end testing is ran with [Jest](https://facebook.github.io/jest/) using tests written with a combination of Jest and [Enzyme](http://airbnb.io/enzyme/). All tests are in the `client\__tests__` folder, which Jest automatically looks in. Mock functions are in `client\src\mocks.js`.
 
@@ -141,7 +116,7 @@ Run `npm test` in the **client** folder to execute the tests.
 
 Run `npm test -- --coverage` to include information about test coverage.
 
-### Running API test
+#### Running API test
 
 API testing is ran with [newman](https://www.npmjs.com/package/newman), which executes tests written in [Postman](https://www.getpostman.com/). All testing files exported from Postman are in the **/server/Tests** folder. Data files used to assert variables should be placed in this folder.
 
@@ -151,40 +126,96 @@ Update the `"test"` script in `package.json` to use the desired variable data fi
 "test": "newman run <collectionFile> -e <environmentFile> -n <numIterations> -d <variableDataFile>",
 ```
 
-We currently only have one collection and one environment set up so those are already filled in for the script.
+Currently there is only one collection and one environment set up so those are already filled in for the script.
 
-Run `npm run api` to start the API server then in a new session run `npm run test` to execute the tests.
+Run `npm run api` to start the API server, then in a new session run `npm run test` to execute the tests.
 
-**IMPORTANT: re-build your database (before and) after running the tests** because the testing will add and delete data during the testing process. 
+**IMPORTANT: re-build your database (before and) after running the tests** because the testing will add and delete data during the testing process.
+
+The easiest way to create or update tests is to import the `uLab.postman_collection.json` into the Postman GUI, create or update your tests, then export the file back into the **Tests directory**.
 
 <!-- - ## Deployment Add additional notes about how to deploy this on a live system -->
+## Deployment
 
- ## Built With
+Deployment requirements will very depending on the hosting platform, but the following steps are required for all cases.
+
+#### Update Proxy Port
+Update the desired port for the proxy in `client/package.json`
+```json
+  "proxy": "http://localhost:3001/",
+```
+On current VM we are using port `8080`.
+
+#### Update hostname
+Update the `hostname` in `client/src/App.js`.
+```javascript
+  hostname: "localhost:3001",
+```
+The app is currently hosted at `ulabcapstone.cs.pdx.edu`.
+
+#### Configure the DB
+Create the `.dbconfig.js` file from `.dbconfig-sample.js` in the `server/config` directory.
+```javascript
+const dbconfig = {
+  hostname: "",
+  port    : "5432",
+  dbname  : "",
+  user    : "",
+  password: ""
+}
+```
+#### Install Dependencies
+Install dependencies in the **root and client** directories.
+
+#### Create Build
+Run `npm run build` in the client to build a static version of client. This will be served up from the API server.
+
+#### Update image upload API
+Update the file path for saving uploaded images to use the new build folder in production.
+```javascript
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'client/public/img/');
+  }
+```
+
+Change `client/public/img/` to `client/build/img`.
+
+#### Deploy
+Run `npm run deploy` in root to set environment variables to production and start the app.
+
+## Known Issues
+1. Uploading an image via taking a picture on iPad not working
+2. Notifications to the user when an error occurs is lacking. For example if an image upload fails the user will not be notified that a failure occurred or why it happened.
+3. The file name for a new image upload is dependent on the text the user enters. Currently the app allows user to not enter any text which results in a image being saved with no name, just an extention (ex. '.png')
+4. If a user adds a word that already exists, it will result in duplicate file names for the image associated with the word. This could result in unexpected behavior for which image will display.
+5. There are some responsive issues across devices and browsers for the UI
+
+## Built With
 
 - [React.js](https://facebook.github.io/react/) - UI framework
 - [Express.js](http://expressjs.com/) - Web API framework for Node.js
 - [PostgreSQL](https://www.postgresql.org/about/) - DBMS
 
-## Authors
+## Portland State University CS Capstone Team:
 
-Portland State University CS Capstone Team:
+#### UI Development Team:
+- **Siggy Hinds** - _Team Lead/Developer_
+- **Tristan deNijs** - _Developer_
+- **Simone Talla** - _Product Owner/Developer_
+- **Anton Zipper** - _QA Lead/Developer_
 
-- **Siggy Hinds** - _Team Lead/Front-End Developer_
-- **Jiaqi Luo** - _GitHub Repo Admin/Back-End Developer_
-- **Christopher Monk** - _GitHub Repo Admin/Back-End Developer_
-- **Tristan deNijs** - _Front-End Developer_
-- **Simone Talla** - _Front-End Developer_
-- **Carson Volker** - _GitHub Repo Admin/Back-End Developer_
-- **Anton Zipper** - _Front-End Developer_
-
+#### API Development Team:
+- **Jiaqi Luo** - _Repo Admin/Developer_
+- **Christopher Monk** - _Team Lead/Repo Admin/Developer_
+- **Carson Volker** - _Repo Admin/Developer_
 ## Sponsors
 
-- **Samuel Sennott** - (uLab) samuel.sennott@gmail.com 954-980-5778
+- **Samuel Sennott** - (uLab) samuel.sennott@gmail.com (954)980-5778
 - **Juan Fernandez** - (7/Apps) juan@7apps.com (407)342-1202
 - [Jason Brown](http://browniefed.com/) - browniefed@gmail.com
 
 ## License
 
 This project is licensed under the MIT License - see the
-
-<license.md> file for details</license.md>
+[LICENSE.md](LICENSE.md) file for details.

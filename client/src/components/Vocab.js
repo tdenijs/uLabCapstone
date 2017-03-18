@@ -7,7 +7,12 @@
  * This file is part of uLabCapstone, distributed under the MIT
  * open source license. For full terms see the LICENSE.md file
  * included in the root of this project.
+ *******************************************************************
+ * This is the Vocab component. It acts as a container class for the
+ * Column components. Each Vocab can have multiple Columns, and 
+ * puts the columns in the order specified.
  *******************************************************************/
+
 
 import React, {Component} from 'react';
 import Column from './Column'

@@ -7,7 +7,15 @@
  * This file is part of uLabCapstone, distributed under the MIT
  * open source license. For full terms see the LICENSE.md file
  * included in the root of this project.
+ *******************************************************************
+ * This is the SpeechBar component. It handles the most important 
+ * part of the speechSynthesis for this application, which is to 
+ * hold the user's inputted message, and allow them a sort of work
+ * bench to work on. Users can add, backspace, or clear the words in
+ * the SpeechBar, as well as make the SpeechBar speak all the words
+ * that are currently inside.
  *******************************************************************/
+
 
 import React, {Component} from 'react';
 import {Glyphicon } from 'react-bootstrap';
@@ -34,6 +42,7 @@ class SpeechBar extends Component {
 
 
   /**
+   * messageString()
    * Reduces the message array into one string (improves interpretation of speech)
    */
   messageString() {
@@ -48,6 +57,7 @@ class SpeechBar extends Component {
 
 
   /**
+   * speakMessage(e)
    * Makes the message window speak all words that are currently inside of it.
    * Says that the window is empty if the window is empty.
    * @param e : The event being passed in
@@ -81,6 +91,7 @@ class SpeechBar extends Component {
 
 
   /**
+   * renderMessageWindow()
    * Wrapper Function for rendering the message window
    */
   renderMessageWindow() {

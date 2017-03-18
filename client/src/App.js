@@ -7,7 +7,13 @@
  * This file is part of uLabCapstone, distributed under the MIT
  * open source license. For full terms see the LICENSE.md file
  * included in the root of this project.
+ *******************************************************************
+ * This is the App component. App is the master component of the
+ * entire application, and handles message passing, holding values,
+ * and is the parent class for all minor components. It is the back-
+ * bone of this application, and therefore the most important.
  *******************************************************************/
+
 
 import React, {Component} from 'react';
 import './css/App.css';
@@ -91,6 +97,7 @@ class App extends Component {
 
 
   /**
+   * componentWillMount()
    * This function is run before component mounts.
    * Gets the vocab and fringe titles.
    */
@@ -103,6 +110,7 @@ class App extends Component {
   }
 
   /**
+   * componentDidMount()
    * This function is run when the component has mounted.
    * Gets the vocab and fringe words
    */
@@ -117,6 +125,7 @@ class App extends Component {
 
 
   /**
+   * updateDimensions()
    * Calculate & Update state of new dimensions
    *
    * Some important device dimensions
@@ -238,7 +247,8 @@ class App extends Component {
 
 
   /**
-   * getCoreVocabTitles()   Retrieves the titles of the core vocabulary from the database
+   * getCoreVocabTitles() 
+   * Retrieves the titles of the core vocabulary from the database
    * and updates the state variable "coreListTitles"
    */
   getCoreVocabTitles() {
@@ -256,7 +266,8 @@ class App extends Component {
   }
 
   /**
-   * getFringeVocabTitles()   Retrieves the titles of the fringe vocabulary from the database
+   * getFringeVocabTitles() 
+   *  Retrieves the titles of the fringe vocabulary from the database
    * and updates the state variable "fringeListTitles"
    */
   getFringeVocabTitles() {
@@ -278,6 +289,7 @@ class App extends Component {
   }
 
   /**
+   * appendToCols(nextCol)
    * Adds a new column to the colArray
    * @param nextCol : the next column to add to the colArray.
    */
@@ -289,6 +301,7 @@ class App extends Component {
 
 
   /**
+   * handleBackButton()
    * Callback function passed to the SpeechBar back button removed last item in message
    */
   handleBackButton() {
@@ -301,6 +314,7 @@ class App extends Component {
 
 
   /**
+   * handleClearMessage()
    * Callback function passed to the SpeechBar clear the speechBarMessage when the clear button is clicked
    */
   handleClearMessage() {
@@ -347,6 +361,12 @@ class App extends Component {
     //this.getFringeWords();
   }
 
+  /**
+   * updateFringeChoiceSynch(e)
+   * Function called by updateFringe(e) to fix an asynchronous problem
+   * @param e : The name of the Fringe we are changing to
+   * @return p : Returns a promise that always promises a success
+   */
   updateFringeChoiceSynch(e) {
     var a = e.target.value;
     this.setState({selectedFringe : a});
@@ -370,6 +390,7 @@ class App extends Component {
   }
 
   /**
+   * enableEditorMode()
    * Toggles editorToggle state variable when the Editor Mode button is clicked in SettingsBar
    */
   enableEditorMode() {
@@ -377,6 +398,7 @@ class App extends Component {
   }
 
   /**
+   * lockToggle()
    * Callback function passed to the SettingsBar to update the App's settingsLocked state variable
    */
   lockToggle() {
@@ -401,6 +423,7 @@ class App extends Component {
   // }
 
   /**
+   * close()
    * Closes the modal for adding a word
    */
   close() {
@@ -408,6 +431,7 @@ class App extends Component {
   }
 
   /**
+   * open()
    * Opens the modal for adding a word
    */
   open() {
@@ -421,6 +445,7 @@ class App extends Component {
 
 
   /**
+   * addWordToSpeechBar(word)
    * Callback function passed to the Word Component to add a word to the speechBarMessage
    * @param word : The word to be passed into the Speech Bar (See components/SpeechBar.js)
    */

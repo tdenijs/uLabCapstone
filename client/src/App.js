@@ -211,11 +211,11 @@ class App extends Component {
     let nextCol;
     let titles = [
       {title: 'pronoun', id: "7", order: "1"},
-      {title: 'questions', id: "3", order: "2"},
-      {title: 'noun', id: "5", order: "3"},
-      {title: 'verb', id: "8", order: "4"},
-      {title: 'adjective', id: "1", order: "5"},
-      {title: 'adverb', id: "2", order: "6"},
+      {title: 'noun', id: "5", order: "2"},
+      {title: 'verb', id: "8", order: "3"},
+      {title: 'adjective', id: "1", order: "4"},
+      {title: 'adverb', id: "2", order: "5"},
+      {title: 'questions', id: "3", order: "6"},
       {title: 'preposition', id: "6", order: "7"},
       {title: 'exclamation', id: "4", order: "8"}];
 
@@ -361,11 +361,16 @@ class App extends Component {
    * Toggles the settingsBarVisible state variable when the settingsButton is clicked
    */
   settingsToggle() {
+    // If the settings bar is going to close and editor mode is enabled, disable it
+    if (this.state.settingsBarVisible && this.state.editorToggle) {
+      this.enableEditorMode();
+    }
+
     this.setState({settingsBarVisible: !(this.state.settingsBarVisible)});
   }
 
   /**
-   * Enables editorToggle state variable when the Editor Mode button is clicked in SettingsBar
+   * Toggles editorToggle state variable when the Editor Mode button is clicked in SettingsBar
    */
   enableEditorMode() {
     this.setState({editorToggle: !(this.state.editorToggle)});
@@ -396,17 +401,22 @@ class App extends Component {
   // }
 
   /**
-   * Closes the modal for delete confirmation
+   * Closes the modal for adding a word
    */
   close() {
     this.setState({showModal: false});
   }
 
   /**
-   * Opens the modal for delete confirmation
+   * Opens the modal for adding a word
    */
   open() {
     this.setState({showModal: true});
+
+    // If editor mode is enabled, disable it
+    if (this.state.editorToggle) {
+      this.enableEditorMode();
+    }
   }
 
 
@@ -433,16 +443,16 @@ class App extends Component {
   }
 
   /**
-   * settingsToggle()
-   * Toggles the settingsBarVisible state variable when the settingsButton is clicked
+   * openDeleteModal()
+   * Opens the modal for delete confirmation
    */
   openDeleteModal() {
     this.setState({showDeleteModal: true});
   }
 
   /**
-   * settingsToggle()
-   * Toggles the settingsBarVisible state variable when the settingsButton is clicked
+   * closeDeleteModal()
+   * Closes the modal for delete confirmation
    */
   closeDeleteModal() {
     this.setState({showDeleteModal: false});
@@ -566,13 +576,10 @@ class App extends Component {
    */
   callDeleteApi(word_id, list_id) {
     let address = 'http://'+ this.state.hostname + '/api/words/list_id/' + list_id + '/word_id/' + word_id;
-    fetch(address, {
+    $.ajax({
       method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+      url: address,
+      data: JSON.stringify({
         word_id: word_id,
         list_id: list_id,
       })
@@ -591,24 +598,26 @@ class App extends Component {
    */
   handleAddNewWord(wordText, newFileName, selectedTitle, selectedVocabulary, fileSelected) {
     var newPath = (fileSelected && newFileName !== '') ?
-    'img/' + newFileName
-      : 'img/blank.png';
+                  'img/' + newFileName
+                : 'img/blank.png';
+    var apiCall = 'http://'+ this.state.hostname + '/api/words/';
+    var newWordText = wordText + 'symbol';
+    var newGrid = selectedVocabulary + ' vocabulary';
 
-    fetch('http://'+ this.state.hostname + '/api/words/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      //ContentType:
-      body: JSON.stringify({
+    $.ajax({
+      type: 'POST',
+      url:apiCall,
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify({
         name: wordText,
         path: newPath,
-        text: wordText + 'symbol',
+        text: newWordText,
         list: selectedTitle,
-        grid: selectedVocabulary + ' vocabulary'
+        grid: newGrid
       })
-    }).then(() => {this.getWords(); this.getFringeWords()});
+    })
+    .then(() => {this.getWords(); this.getFringeWords()});
     //then... call getWords() to reload words
   }
 

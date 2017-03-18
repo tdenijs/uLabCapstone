@@ -211,11 +211,11 @@ class App extends Component {
     let nextCol;
     let titles = [
       {title: 'pronoun', id: "7", order: "1"},
-      {title: 'questions', id: "3", order: "2"},
-      {title: 'noun', id: "5", order: "3"},
-      {title: 'verb', id: "8", order: "4"},
-      {title: 'adjective', id: "1", order: "5"},
-      {title: 'adverb', id: "2", order: "6"},
+      {title: 'noun', id: "5", order: "2"},
+      {title: 'verb', id: "8", order: "3"},
+      {title: 'adjective', id: "1", order: "4"},
+      {title: 'adverb', id: "2", order: "5"},
+      {title: 'questions', id: "3", order: "6"},
       {title: 'preposition', id: "6", order: "7"},
       {title: 'exclamation', id: "4", order: "8"}];
 

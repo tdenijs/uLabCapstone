@@ -197,7 +197,8 @@ We installed the apache2-utils package which provides the htpasswd and basic aut
 
 After installing NGINX and apache2-utils via the apt package manager we edited the configuration file /etc/nginx/sites-available/default , with the following:
 
-`server {
+```nginx
+server {
     # sets port 80 to listen for http requests and responses
     listen 80;
 
@@ -218,8 +219,8 @@ After installing NGINX and apache2-utils via the apt package manager we edited t
                proxy_pass       "http://hostname.com:3001";
         }
 
-}`
-
+}
+```
 ## Known Issues
 1. Uploading an image via taking a picture on iPad not working
 2. Notifications to the user when an error occurs is lacking. For example if an image upload fails the user will not be notified that a failure occurred or why it happened.

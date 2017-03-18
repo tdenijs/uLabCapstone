@@ -195,9 +195,9 @@ We used port forwarding to route the application requests and responses from por
 
 We installed the apache2-utils package which provides the htpasswd and basic authentication support to NGINX.
 
-After installing NGINX and apache2-utils via the apt package manager we edited the configuration file /etc/nginx/sites-available/default , with the following congiguration:
+After installing NGINX and apache2-utils via the apt package manager we edited the configuration file /etc/nginx/sites-available/default , with the following:
 
-server {
+`server {
     # sets port 80 to listen for http requests and responses
     listen 80;
 
@@ -218,7 +218,7 @@ server {
                proxy_pass       "http://hostname.com:3001";
         }
 
-}
+}`
 
 ## Known Issues
 1. Uploading an image via taking a picture on iPad not working

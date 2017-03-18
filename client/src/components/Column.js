@@ -8,8 +8,6 @@
  * open source license. For full terms see the LICENSE.md file
  * included in the root of this project.
  *
- * This component exists for the purpose of creating a column of
- * Word components.
  *******************************************************************
  * This is the Column component. It holds a number of Word components
  * based on their category. It is capable of changing size as well

@@ -8,8 +8,6 @@
  * open source license. For full terms see the LICENSE.md file
  * included in the root of this project.
  *
- * This component exists for the purpose of creating clickable
- * settings options for the user.
  *******************************************************************
  * This is the SettingsBar component. It handles all of the user's
  * settings, including the voice they choose, the rate and pitch,

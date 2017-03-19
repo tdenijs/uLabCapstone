@@ -4,6 +4,17 @@ Fall 2016 to Winter 2017 CS Capstone Project with the Universal Design Lab at Po
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app), please visit [their README](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md) for additional information.
 
+## Contents
+- [Getting Started](#getting-started)
+- [Directory Structure](#directory-structure)
+- [Client-API Communication](#client-api-communication)
+- [Using a DB in Development](#using-a-db-in-development)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Known Issues](#known-issues)
+- [Authors](#portland-state-university-cs-capstone-team)
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -137,7 +148,7 @@ The easiest way to create or update tests is to import the `uLab.postman_collect
 <!-- - ## Deployment Add additional notes about how to deploy this on a live system -->
 ## Deployment
 
-Deployment requirements will very depending on the hosting platform, but the following steps are required for all cases.
+Deployment requirements will vary depending on the hosting platform, but the following steps are required for all cases.
 
 #### Update Proxy Port
 Update the desired port for the proxy in `client/package.json`
@@ -183,6 +194,8 @@ Change `client/public/img/` to `client/build/img`.
 
 #### Deploy
 Run `npm run deploy` in root to set environment variables to production and start the app.
+
+You can also use `node server/server.js` to start the app.
 
 #### Details of our deployment
 

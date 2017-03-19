@@ -7,7 +7,15 @@
  * This file is part of uLabCapstone, distributed under the MIT
  * open source license. For full terms see the LICENSE.md file
  * included in the root of this project.
+ *******************************************************************
+ * This is the WordEditor component. It is called from SettingsBar.
+ * This component handles adding new buttons into the Vocabularies.
+ * Images can be uploaded and previewed. Once the user chooses the
+ * proper image, image text, and where to place it, the application
+ * will handle putting all of this into the database so that the
+ * new image can be seen in the right Vocabulary.
  *******************************************************************/
+
 
 import React, {Component} from 'react';
 import {Row, Col} from 'react-bootstrap';
@@ -43,6 +51,7 @@ class WordEditor extends Component {
   }
 
   /**
+   * _handleSubmit(e)
    * Handles submitting the Form
    * Takes care of sending Word Text, Image, Grid Type, List Type
    * @param e : The event being passed in.
@@ -115,14 +124,15 @@ class WordEditor extends Component {
 
 
   /**
+   * _handleImageChange(e)
    * Handles the image being changed. Sets the image preview
    * @param e : The event being passed in.
    */
   _handleImageChange(e) {
     e.preventDefault();
 
-    let reader = new FileReader();
-    let file = e.target.files[0];
+    let reader = new FileReader(); //Create a new file reader
+    let file = e.target.files[0]; //Read the file they submitted
 
     reader.onloadend = () => {
       this.setState({
@@ -131,11 +141,12 @@ class WordEditor extends Component {
       });
     }
 
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(file) //Reads the file they uploaded
   }
 
 
   /**
+   * setWordText(e)
    * Sets the state for wordText to be the value of the event.
    * @param e : The event being passed in, value is the text.
    */
@@ -144,6 +155,7 @@ class WordEditor extends Component {
   }
 
   /**
+   * updateLists(e)
    * Updates listTitles to either Core's lists or Fringe's lists
    * Then sets the selectedTitle to the first item in the list
    * @param e : The event being passed in, either "core" or "fringe".
@@ -164,12 +176,12 @@ class WordEditor extends Component {
    * Basic React render function, renders the component.
    */
   render() {
-    let {imagePreviewUrl} = this.state;
+    let {imagePreviewUrl} = this.state; //Set image preview
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} role="presentation"/>);
-    } else {
-      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+      $imagePreview = (<img src={imagePreviewUrl} role="presentation"/>); //If we have a preview, show it
+    } else { 
+      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>); //If not, put text there instead
     }
 
 
@@ -198,6 +210,7 @@ class WordEditor extends Component {
                 </Col>
               </Row>
 
+	      {/** Add to Vocabulary Drop Down */}
 	      <Row>
 	      <label>Add to Vocabulary: </label>
 	      <select className="VocabTitles" defaultValue={this.state.selectedVocabulary}
@@ -210,6 +223,7 @@ class WordEditor extends Component {
 
               <label>Add to List: </label>
 
+	      {/** Add to List Drop Down */}
               <select className="ListTitles" defaultValue={this.state.selectedTitle}
                       onChange={(e) => {
                         this.setState({selectedTitle: e.target.value})

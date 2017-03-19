@@ -8,9 +8,17 @@
  * open source license. For full terms see the LICENSE.md file
  * included in the root of this project.
  *
- * This component exists for the purpose of creating clickable
- * settings options for the user.
+ *******************************************************************
+ * This is the SettingsBar component. It handles all of the user's
+ * settings, including the voice they choose, the rate and pitch,
+ * which fringe vocabulary they have selected, as well as enabling
+ * the EditorMode in the application (for deleting words), and
+ * an AddNewWord button, which opens the WordEditor component and
+ * allows the user to add a new Word. There is also a Lock button,
+ * which disables all functionality in the SettingsBar so that a user
+ * cannot accidentally change a bunch of settings.
  *******************************************************************/
+
 
 import React, {Component} from 'react';
 import {Modal, Glyphicon} from 'react-bootstrap';
@@ -37,12 +45,17 @@ class SettingsBar extends Component {
     }
   }
 
+  /**
+   * componentDidUpdate()
+   * Runs when the component successfully updated
+   */
   componentDidUpdate() {
     this.props.disableEditorIfLocked();
   }
 
 
   /**
+   * renderLock()
    * Locks the Settings Bar so that all functionality is inaccessible,
    * with the exception of the lock toggle button itself.
    */

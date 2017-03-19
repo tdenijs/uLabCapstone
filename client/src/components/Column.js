@@ -8,9 +8,13 @@
  * open source license. For full terms see the LICENSE.md file
  * included in the root of this project.
  *
- * This component exists for the purpose of creating a column of
- * Word components.
+ *******************************************************************
+ * This is the Column component. It holds a number of Word components
+ * based on their category. It is capable of changing size as well
+ * as changing color in order to better categorize the words within.
+ * Otherwise, it functions just as a container for Words.
  *******************************************************************/
+
 
 import React, {Component} from 'react';
 import Word from './Word'
@@ -25,9 +29,10 @@ class Column extends Component {
 
 
   /**
-   * getBackgroundColor: returns a hex color dependent on the title
+   * getBackgroundColor
+   * returns a hex color dependent on the title
    * Different columns will have different colors depending on the part of speech or their title.
-   * @returns {string}
+   * @returns String color : Returns the color code as a String
    */
   getBackgroundColor() {
     var color = "black";  // default color
@@ -65,10 +70,11 @@ class Column extends Component {
   }
 
 
-/**
-   * getColumnWidth:  flex width in pixels for a .Column class
+  /**
+   * getColumnFlex
+   * flex width in pixels for a .Column class
    * based on # of words in the Word Array
-   * @returns {string}
+   * @returns String flex : The width we are returning in String form
    */
   getColumnFlex() {
     var flex = '0 0 82px'  // default width = 1 column

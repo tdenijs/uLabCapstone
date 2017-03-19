@@ -7,7 +7,16 @@
  * This file is part of uLabCapstone, distributed under the MIT
  * open source license. For full terms see the LICENSE.md file
  * included in the root of this project.
+ *******************************************************************
+ * This is the Word component. It functions as a button for the rest
+ * of the application. It has a picture and text. Upon being clicked,
+ * the SpeechSynthesis will speak the text and the App will place the
+ * word and picture into the SpeechBar component.
+ * Words also get a deletion button if EditorMode is enabled in the
+ * parent application, which allows them to delete the Word from it's
+ * respective list, as well as the database.
  *******************************************************************/
+
 
 import React, {Component} from 'react';
 import { Glyphicon } from 'react-bootstrap';
@@ -25,6 +34,7 @@ class Word extends Component {
 
 
   /**
+   * speak()
    * Speaks this word's text and adds that word to the SpeechBar (See ./SpeechBar.js)
    */
   speak() {
